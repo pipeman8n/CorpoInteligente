@@ -165,7 +165,7 @@ export default function App() {
   return (
     <div className="app">
       <header className="header">
-        <h1>💪 Body And Health</h1>
+        <h1>Body <span>&</span> Health</h1>
         <p className="subtitle">Raio X Corporal com IA</p>
       </header>
 
