@@ -1,0 +1,22 @@
+# dependências e build
+node_modules/
+dist/
+.next/
+out/
+
+# segredos — NUNCA subir
+.env
+.env.local
+.env*.local
+*.pem
+*-service-account*.json
+serviceAccount*.json
+firebase-adminsdk*.json
+
+# logs e sistema
+*.log
+.DS_Store
+*.tsbuildinfo
+
+# referências do projeto (contém dados de clientes — não subir pro repo público)
+referencias/

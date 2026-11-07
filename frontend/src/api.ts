@@ -1,0 +1,63 @@
+// Cliente da Edge Function "calculations" do Supabase (substitui o server action antigo).
+const EDGE_URL =
+  import.meta.env.VITE_EDGE_URL ??
+  'https://ylmwwwtnqhqjtufqmctf.supabase.co/functions/v1/calculations'
+
+// Chave ANON (pública — pode ir no frontend). NUNCA a service_role aqui.
+const ANON =
+  import.meta.env.VITE_SUPABASE_ANON_KEY ??
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlsbXd3d3RucWhxanR1ZnFtY3RmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYwNTA2MjUsImV4cCI6MjA5MTYyNjYyNX0.qEFf4OBdLG4yq6TgQ7F5vSTuuSQVbTCrITiPV6ZLghE'
+
+export interface Calculation {
+  id: string
+  userId: string
+  calculationCode: string
+  name: string
+  age: number
+  gender: string
+  weight: number
+  height: number
+  bodyFat: number | null
+  bodyFatEstimationMethod: string | null
+  goal: string
+  activityLevel: string
+  strategy: unknown
+  trainingProgram: unknown
+  results: unknown
+  savedAt: string
+}
+
+async function a1(action: string, params: Record<string, unknown>): Promise<any> {
+  const res = await fetch(EDGE_URL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${ANON}`,
+      apikey: ANON,
+    },
+    body: JSON.stringify({ action, ...params }),
+  })
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({ error: 'Request failed' }))
+    throw new Error(err.error || `HTTP ${res.status}`)
+  }
+  return res.json()
+}
+
+export function getUserId(): string {
+  let id = localStorage.getItem('bh-userId')
+  if (!id) {
+    id = 'bh-user-' + crypto.randomUUID()
+    localStorage.setItem('bh-userId', id)
+  }
+  return id
+}
+
+export const saveCalculation = (data: Record<string, unknown>) =>
+  a1('save_new_calculation', { data })
+
+export const getCalculations = (userId: string): Promise<Calculation[]> =>
+  a1('get_user_calculations', { userId })
+
+export const deleteCalculation = (calculationId: string) =>
+  a1('delete_calculation', { calculationId })
