@@ -47,7 +47,7 @@ function renderMarkdown(md: string): string {
       tableHtml = tableHtml.slice(0, idx) + `<tr>${lastCells.map((c) => `<${lastTag}>${inline(c)}</${lastTag}>`).join('')}</tr>`
     } else {
       if (inTable) { html += tableHtml + '</table>'; inTable = false; tableHtml = ''; lastCells = [] }
-      if (t) html += `<p>${inline(t)}</p>`
+      if (t && !t.includes('|')) html += `<p>${inline(t)}</p>`
     }
   }
   if (inTable) html += tableHtml + '</table>'
