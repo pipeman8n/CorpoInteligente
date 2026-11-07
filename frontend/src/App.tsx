@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 import {
   calculate,
   activityLabel,
+  estimateBodyFatByImc,
+  estimateBodyFatBySkinfold,
   type ClientData,
   type RaioXResult,
   type ActivityLevel,
@@ -50,6 +52,7 @@ const emptyForm: ClientData = {
   weight: 0,
   height: 0,
   bodyFat: undefined,
+  bodyFatEstimationMethod: '',
   activityLevel: '',
   goal: '',
   restrictions: '',
@@ -68,6 +71,9 @@ export default function App() {
   const [savedMsg, setSavedMsg] = useState('')
   const [aiContent, setAiContent] = useState('')
   const [aiLoading, setAiLoading] = useState(false)
+  const [knowsBodyFat, setKnowsBodyFat] = useState<'' | 'sim' | 'nao'>('')
+  const [effectiveBodyFat, setEffectiveBodyFat] = useState<number | null>(null)
+  const [skinfolds, setSkinfolds] = useState<{ a?: number; b?: number; c?: number }>({})
   const [history, setHistory] = useState<Calculation[]>([])
   const [loadingHistory, setLoadingHistory] = useState(false)
   const [error, setError] = useState('')
@@ -106,8 +112,18 @@ export default function App() {
       setError('Preencha todos os campos obrigatórios: nome, idade, sexo, peso, altura, nível de atividade e objetivo.')
       return
     }
+    // Estima o % de gordura quando o cliente não informa diretamente
+    let bf = form.bodyFat ?? null
+    if (bf == null && form.bodyFatEstimationMethod === 'deurenberg') {
+      const imc = form.weight / Math.pow(form.height / 100, 2)
+      bf = estimateBodyFatByImc(imc, form.age, form.gender)
+    } else if (bf == null && form.bodyFatEstimationMethod === 'pollock3') {
+      const sum = (skinfolds.a ?? 0) + (skinfolds.b ?? 0) + (skinfolds.c ?? 0)
+      if (sum > 0) bf = estimateBodyFatBySkinfold(sum, form.age, form.gender)
+    }
+    setEffectiveBodyFat(bf)
     setCalcCode(genCode())
-    setResult(calculate(form))
+    setResult(calculate({ ...form, bodyFat: bf ?? undefined }))
   }
 
   const onSave = async () => {
@@ -118,7 +134,7 @@ export default function App() {
     try {
       await saveCalculation({
         ...form,
-        bodyFat: form.bodyFat ?? null,
+        bodyFat: effectiveBodyFat ?? form.bodyFat ?? null,
         userId,
         calculationCode: calcCode,
         savedAt: new Date().toISOString(),
@@ -141,7 +157,7 @@ export default function App() {
     try {
       const res = await generateRaioX({
         ...form,
-        bodyFat: form.bodyFat ?? null,
+        bodyFat: effectiveBodyFat ?? form.bodyFat ?? null,
         calculationCode: calcCode,
         results: result,
       })
@@ -213,13 +229,83 @@ export default function App() {
               </div>
             </div>
 
-            <label>% Gordura Corporal (opcional)</label>
-            <input
-              type="number"
-              value={form.bodyFat ?? ''}
-              onChange={(e) => set('bodyFat', e.target.value === '' ? undefined : Number(e.target.value))}
-              placeholder="ex.: 18"
-            />
+            <label>Você sabe qual é seu % de gordura?</label>
+            <div className="radio-group">
+              <label className="radio">
+                <input type="radio" name="knowsFat" checked={knowsBodyFat === 'sim'} onChange={() => setKnowsBodyFat('sim')} /> Sim
+              </label>
+              <label className="radio">
+                <input type="radio" name="knowsFat" checked={knowsBodyFat === 'nao'} onChange={() => setKnowsBodyFat('nao')} /> Não
+              </label>
+            </div>
+
+            {knowsBodyFat === 'sim' && (
+              <>
+                <label>% Gordura Corporal</label>
+                <input
+                  type="number"
+                  value={form.bodyFat ?? ''}
+                  onChange={(e) => set('bodyFat', e.target.value === '' ? undefined : Number(e.target.value))}
+                  placeholder="ex.: 18"
+                />
+              </>
+            )}
+
+            {knowsBodyFat === 'nao' && (
+              <>
+                <label>Como gostaria de estimar seu % de gordura?</label>
+                <div className="radio-group">
+                  <label className="radio">
+                    <input
+                      type="radio"
+                      name="method"
+                      checked={form.bodyFatEstimationMethod === 'deurenberg'}
+                      onChange={() => set('bodyFatEstimationMethod', 'deurenberg')}
+                    /> Estimar pelo meu IMC
+                  </label>
+                  <label className="radio">
+                    <input
+                      type="radio"
+                      name="method"
+                      checked={form.bodyFatEstimationMethod === 'pollock3'}
+                      onChange={() => set('bodyFatEstimationMethod', 'pollock3')}
+                    /> Dobras Cutâneas
+                  </label>
+                </div>
+
+                {form.bodyFatEstimationMethod === 'pollock3' && (
+                  <div className="row">
+                    <div>
+                      <label>{form.gender === 'female' ? 'Tríceps (mm)' : 'Peitoral (mm)'}</label>
+                      <input
+                        type="number"
+                        value={skinfolds.a ?? ''}
+                        onChange={(e) => setSkinfolds((s) => ({ ...s, a: e.target.value === '' ? undefined : Number(e.target.value) }))}
+                        placeholder="10"
+                      />
+                    </div>
+                    <div>
+                      <label>{form.gender === 'female' ? 'Suprailíaca (mm)' : 'Abdominal (mm)'}</label>
+                      <input
+                        type="number"
+                        value={skinfolds.b ?? ''}
+                        onChange={(e) => setSkinfolds((s) => ({ ...s, b: e.target.value === '' ? undefined : Number(e.target.value) }))}
+                        placeholder="20"
+                      />
+                    </div>
+                    <div>
+                      <label>Coxa (mm)</label>
+                      <input
+                        type="number"
+                        value={skinfolds.c ?? ''}
+                        onChange={(e) => setSkinfolds((s) => ({ ...s, c: e.target.value === '' ? undefined : Number(e.target.value) }))}
+                        placeholder="15"
+                      />
+                    </div>
+                  </div>
+                )}
+              </>
+            )}
 
             <label>Nível de Atividade</label>
             <select value={form.activityLevel} onChange={(e) => set('activityLevel', e.target.value as ActivityLevel)}>

@@ -9,6 +9,7 @@ export interface ClientData {
   weight: number
   height: number
   bodyFat?: number
+  bodyFatEstimationMethod?: string
   activityLevel: ActivityLevel
   goal: Goal
   restrictions?: string
@@ -62,6 +63,20 @@ export function imcClass(imc: number): string {
   if (imc < 35) return 'Obesidade grau I'
   if (imc < 40) return 'Obesidade grau II'
   return 'Obesidade grau III'
+}
+
+// Estimativa de % gordura pelo IMC (fórmula de Deurenberg)
+export function estimateBodyFatByImc(bmi: number, age: number, gender: Gender): number {
+  const sex = gender === 'male' ? 1 : 0
+  return Math.max(3, 1.2 * bmi + 0.23 * age - 10.8 * sex - 5.4)
+}
+
+// Estimativa de % gordura por dobras cutâneas (Pollock 3 dobras + Siri)
+export function estimateBodyFatBySkinfold(sum: number, age: number, gender: Gender): number {
+  const d = gender === 'male'
+    ? 1.10938 - 0.0008267 * sum + 0.0000016 * sum * sum - 0.0002574 * age
+    : 1.0994921 - 0.0009929 * sum + 0.0000023 * sum * sum - 0.0001392 * age
+  return Math.max(3, (4.95 / d - 4.5) * 100)
 }
 
 export function calculate(d: ClientData): RaioXResult {
