@@ -57,6 +57,8 @@ const emptyForm: ClientData = {
   activityLevel: '',
   goal: '',
   restrictions: '',
+  prazoMeses: undefined,
+  metaKg: undefined,
 }
 
 function genCode(): string {
@@ -110,9 +112,10 @@ export default function App() {
       form.height <= 0 ||
       !form.gender ||
       !form.activityLevel ||
-      !form.goal
+      !form.goal ||
+      ((form.goal === 'emagrecimento' || form.goal === 'hipertrofia') && (!form.prazoMeses || !form.metaKg))
     ) {
-      setError('Preencha todos os campos obrigatórios: nome, idade, sexo, peso, altura, nível de atividade e objetivo.')
+      setError('Preencha todos os campos obrigatórios, incluindo prazo e meta.')
       return
     }
     // Estima o % de gordura quando o cliente não informa diretamente
@@ -346,6 +349,34 @@ export default function App() {
               <option value="hipertrofia">Hipertrofia (ganhar massa)</option>
               <option value="saude">Saúde (manter peso)</option>
             </select>
+
+            {(form.goal === 'emagrecimento' || form.goal === 'hipertrofia') && (
+              <>
+                <label>Prazo</label>
+                <select
+                  value={form.prazoMeses ?? ''}
+                  onChange={(e) => set('prazoMeses', e.target.value === '' ? undefined : Number(e.target.value))}
+                >
+                  <option value="">Selecione o prazo</option>
+                  <option value="3">3 meses</option>
+                  <option value="5">5 meses</option>
+                  <option value="7">7 meses</option>
+                  <option value="9">9 meses</option>
+                </select>
+
+                <label>
+                  {form.goal === 'hipertrofia'
+                    ? 'Quantos quilos de massa magra você deseja ganhar?'
+                    : 'Quantos quilos no total você deseja perder?'}
+                </label>
+                <input
+                  type="number"
+                  value={form.metaKg ?? ''}
+                  onChange={(e) => set('metaKg', e.target.value === '' ? undefined : Number(e.target.value))}
+                  placeholder="ex.: 5"
+                />
+              </>
+            )}
 
             <label>Restrições / Alergias (opcional)</label>
             <input value={form.restrictions} onChange={(e) => set('restrictions', e.target.value)} placeholder="ex.: diabetes, lactose, glúten..." />

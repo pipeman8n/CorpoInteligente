@@ -13,6 +13,8 @@ export interface ClientData {
   activityLevel: ActivityLevel
   goal: Goal
   restrictions?: string
+  prazoMeses?: number
+  metaKg?: number
 }
 
 export interface RaioXResult {
