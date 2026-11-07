@@ -61,3 +61,6 @@ export const getCalculations = (userId: string): Promise<Calculation[]> =>
 
 export const deleteCalculation = (calculationId: string) =>
   a1('delete_calculation', { calculationId })
+
+export const generateRaioX = (data: Record<string, unknown>): Promise<{ content: string }> =>
+  a1('generate_raio_x', { data })

@@ -58,6 +58,21 @@ input:focus, select:focus { outline: none; border-color: var(--accent); }
 }
 .primary:disabled { opacity: 0.6; cursor: not-allowed; }
 
+.ai {
+  width: 100%; margin-top: 10px; padding: 12px; border: 1px solid var(--accent-2);
+  border-radius: 8px; background: transparent; color: var(--accent-2);
+  font-size: 1rem; font-weight: 600; cursor: pointer;
+}
+.ai:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.ai-result { margin-top: 16px; }
+.ai-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin: 8px 0; }
+.ai-table th, .ai-table td {
+  padding: 8px; border: 1px solid var(--border); text-align: left; vertical-align: top;
+}
+.ai-table th { background: #1f2430; color: var(--text); }
+.ai-result p { color: var(--text); font-size: 0.9rem; }
+
 .danger {
   padding: 6px 12px; border: 1px solid var(--danger); border-radius: 6px;
   background: transparent; color: var(--danger); cursor: pointer;

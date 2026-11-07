@@ -12,8 +12,36 @@ import {
   saveCalculation,
   getCalculations,
   deleteCalculation,
+  generateRaioX,
   type Calculation,
 } from './api'
+
+// Renderizador mínimo de markdown (tabela + negrito) para a saída da IA
+function inline(s: string): string {
+  return s.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+}
+
+function renderMarkdown(md: string): string {
+  const lines = md.split('\n')
+  let html = ''
+  let inTable = false
+  let tableHtml = ''
+  for (const line of lines) {
+    const t = line.trim()
+    if (t.startsWith('|')) {
+      const cells = t.split('|').slice(1, -1).map((c) => c.trim())
+      if (cells.every((c) => /^-+$/.test(c))) continue // linha separadora
+      if (!inTable) { inTable = true; tableHtml = '<table class="ai-table">' }
+      const tag = tableHtml.endsWith('</tr>') ? 'td' : 'th'
+      tableHtml += `<tr>${cells.map((c) => `<${tag}>${inline(c)}</${tag}>`).join('')}</tr>`
+    } else {
+      if (inTable) { html += tableHtml + '</table>'; inTable = false; tableHtml = '' }
+      if (t) html += `<p>${inline(t)}</p>`
+    }
+  }
+  if (inTable) html += tableHtml + '</table>'
+  return html
+}
 
 const emptyForm: ClientData = {
   name: '',
@@ -38,6 +66,8 @@ export default function App() {
   const [calcCode, setCalcCode] = useState(genCode())
   const [saving, setSaving] = useState(false)
   const [savedMsg, setSavedMsg] = useState('')
+  const [aiContent, setAiContent] = useState('')
+  const [aiLoading, setAiLoading] = useState(false)
   const [history, setHistory] = useState<Calculation[]>([])
   const [loadingHistory, setLoadingHistory] = useState(false)
   const [error, setError] = useState('')
@@ -92,6 +122,26 @@ export default function App() {
       setError((e as Error).message)
     } finally {
       setSaving(false)
+    }
+  }
+
+  const onGenerateAI = async () => {
+    if (!result) return
+    setAiLoading(true)
+    setAiContent('')
+    setError('')
+    try {
+      const res = await generateRaioX({
+        ...form,
+        bodyFat: form.bodyFat ?? null,
+        calculationCode: calcCode,
+        results: result,
+      })
+      setAiContent(res.content)
+    } catch (e) {
+      setError((e as Error).message)
+    } finally {
+      setAiLoading(false)
     }
   }
 
@@ -260,6 +310,12 @@ export default function App() {
                 <button className="primary" onClick={onSave} disabled={saving}>
                   {saving ? 'Salvando...' : 'Salvar Cálculo'}
                 </button>
+                <button className="ai" onClick={onGenerateAI} disabled={aiLoading}>
+                  {aiLoading ? 'Gerando análise com IA...' : '🤖 Gerar Análise Completa (IA)'}
+                </button>
+                {aiContent && (
+                  <div className="ai-result" dangerouslySetInnerHTML={{ __html: renderMarkdown(aiContent) }} />
+                )}
                 <p className="legal">
                   * Resultados gerados a partir de fórmulas padrão. Consulte um nutricionista ou médico antes de iniciar qualquer dieta.
                 </p>
