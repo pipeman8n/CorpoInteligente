@@ -15,6 +15,7 @@ import {
   getCalculations,
   deleteCalculation,
   generateRaioX,
+  generateStrategy,
   type Calculation,
 } from './api'
 
@@ -71,6 +72,8 @@ export default function App() {
   const [savedMsg, setSavedMsg] = useState('')
   const [aiContent, setAiContent] = useState('')
   const [aiLoading, setAiLoading] = useState(false)
+  const [strategyContent, setStrategyContent] = useState('')
+  const [strategyLoading, setStrategyLoading] = useState(false)
   const [knowsBodyFat, setKnowsBodyFat] = useState<'' | 'sim' | 'nao'>('')
   const [effectiveBodyFat, setEffectiveBodyFat] = useState<number | null>(null)
   const [skinfolds, setSkinfolds] = useState<{ a?: number; b?: number; c?: number }>({})
@@ -166,6 +169,26 @@ export default function App() {
       setError((e as Error).message)
     } finally {
       setAiLoading(false)
+    }
+  }
+
+  const onGenerateStrategy = async () => {
+    if (!result) return
+    setStrategyLoading(true)
+    setStrategyContent('')
+    setError('')
+    try {
+      const res = await generateStrategy({
+        ...form,
+        bodyFat: effectiveBodyFat ?? form.bodyFat ?? null,
+        calculationCode: calcCode,
+        results: result,
+      })
+      setStrategyContent(res.content)
+    } catch (e) {
+      setError((e as Error).message)
+    } finally {
+      setStrategyLoading(false)
     }
   }
 
@@ -412,6 +435,12 @@ export default function App() {
                 </button>
                 {aiContent && (
                   <div className="ai-result" dangerouslySetInnerHTML={{ __html: renderMarkdown(aiContent) }} />
+                )}
+                <button className="ai" onClick={onGenerateStrategy} disabled={strategyLoading}>
+                  {strategyLoading ? 'Gerando estratégia...' : '📋 Gerar Estratégia Macro (16 semanas)'}
+                </button>
+                {strategyContent && (
+                  <div className="ai-result" dangerouslySetInnerHTML={{ __html: renderMarkdown(strategyContent) }} />
                 )}
                 <p className="legal">
                   * Resultados gerados a partir de fórmulas padrão. Consulte um nutricionista ou médico antes de iniciar qualquer dieta.

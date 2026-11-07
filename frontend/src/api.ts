@@ -64,3 +64,6 @@ export const deleteCalculation = (calculationId: string) =>
 
 export const generateRaioX = (data: Record<string, unknown>): Promise<{ content: string }> =>
   a1('generate_raio_x', { data })
+
+export const generateStrategy = (data: Record<string, unknown>): Promise<{ content: string }> =>
+  a1('generate_strategy', { data })
