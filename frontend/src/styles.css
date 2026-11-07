@@ -103,3 +103,6 @@ input:focus, select:focus { outline: none; border-color: var(--accent); }
 
 .legal { color: var(--muted); font-size: 0.75rem; margin-top: 12px; }
 .footer { text-align: center; color: var(--muted); font-size: 0.8rem; padding: 24px 0; }
+.footer p { margin: 6px 0; }
+.footer a { color: var(--accent); text-decoration: none; }
+.footer a:hover { text-decoration: underline; }

@@ -45,13 +45,13 @@ function renderMarkdown(md: string): string {
 
 const emptyForm: ClientData = {
   name: '',
-  age: 30,
-  gender: 'male',
-  weight: 80,
-  height: 175,
+  age: 0,
+  gender: '',
+  weight: 0,
+  height: 0,
   bodyFat: undefined,
-  activityLevel: 'moderate',
-  goal: 'saude',
+  activityLevel: '',
+  goal: '',
   restrictions: '',
 }
 
@@ -94,8 +94,16 @@ export default function App() {
 
   const onCalculate = () => {
     setError('')
-    if (!form.name.trim() || form.age <= 0 || form.weight <= 0 || form.height <= 0) {
-      setError('Preencha nome, idade, peso e altura (valores válidos).')
+    if (
+      !form.name.trim() ||
+      form.age <= 0 ||
+      form.weight <= 0 ||
+      form.height <= 0 ||
+      !form.gender ||
+      !form.activityLevel ||
+      !form.goal
+    ) {
+      setError('Preencha todos os campos obrigatórios: nome, idade, sexo, peso, altura, nível de atividade e objetivo.')
       return
     }
     setCalcCode(genCode())
@@ -182,11 +190,12 @@ export default function App() {
             <div className="row">
               <div>
                 <label>Idade (anos)</label>
-                <input type="number" value={form.age} onChange={(e) => set('age', Number(e.target.value))} />
+                <input type="number" value={form.age === 0 ? '' : form.age} onChange={(e) => set('age', Number(e.target.value))} />
               </div>
               <div>
                 <label>Sexo</label>
                 <select value={form.gender} onChange={(e) => set('gender', e.target.value)}>
+                  <option value="">Selecione...</option>
                   <option value="male">Masculino</option>
                   <option value="female">Feminino</option>
                 </select>
@@ -196,11 +205,11 @@ export default function App() {
             <div className="row">
               <div>
                 <label>Peso (kg)</label>
-                <input type="number" value={form.weight} onChange={(e) => set('weight', Number(e.target.value))} />
+                <input type="number" value={form.weight === 0 ? '' : form.weight} onChange={(e) => set('weight', Number(e.target.value))} />
               </div>
               <div>
                 <label>Altura (cm)</label>
-                <input type="number" value={form.height} onChange={(e) => set('height', Number(e.target.value))} />
+                <input type="number" value={form.height === 0 ? '' : form.height} onChange={(e) => set('height', Number(e.target.value))} />
               </div>
             </div>
 
@@ -214,6 +223,7 @@ export default function App() {
 
             <label>Nível de Atividade</label>
             <select value={form.activityLevel} onChange={(e) => set('activityLevel', e.target.value as ActivityLevel)}>
+              <option value="">Selecione...</option>
               <option value="sedentary">Sedentário</option>
               <option value="light">Leve (1-3x/semana)</option>
               <option value="moderate">Moderado (3-5x/semana)</option>
@@ -222,6 +232,7 @@ export default function App() {
 
             <label>Objetivo Principal</label>
             <select value={form.goal} onChange={(e) => set('goal', e.target.value as Goal)}>
+              <option value="">Selecione...</option>
               <option value="emagrecimento">Emagrecimento (perder gordura)</option>
               <option value="hipertrofia">Hipertrofia (ganhar massa)</option>
               <option value="saude">Saúde (manter peso)</option>
@@ -357,7 +368,21 @@ export default function App() {
       )}
 
       <footer className="footer">
-        Recomendações geradas por fórmulas e IA — não substituem avaliação profissional.
+        <p>© 2026 Body And Health. Todos os direitos reservados.</p>
+        <p>
+          Criado por{' '}
+          <a href="https://www.linkedin.com/in/uebersonlsousa" target="_blank" rel="noopener noreferrer">
+            Ueberson Sousa
+          </a>{' '}
+          ·{' '}
+          <a href="https://www.linkedin.com/in/uebersonlsousa" target="_blank" rel="noopener noreferrer">
+            LinkedIn
+          </a>
+        </p>
+        <p className="legal">As recomendações são geradas por IA e não substituem o conselho médico profissional.</p>
+        <p className="legal">
+          Estratégias de dieta e treino são sugestões e devem ser adaptadas individualmente, preferencialmente com acompanhamento profissional.
+        </p>
       </footer>
     </div>
   )

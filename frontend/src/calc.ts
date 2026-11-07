@@ -1,6 +1,6 @@
-export type Gender = 'male' | 'female'
-export type ActivityLevel = 'sedentary' | 'light' | 'moderate' | 'active'
-export type Goal = 'emagrecimento' | 'hipertrofia' | 'saude'
+export type Gender = 'male' | 'female' | ''
+export type ActivityLevel = 'sedentary' | 'light' | 'moderate' | 'active' | ''
+export type Goal = 'emagrecimento' | 'hipertrofia' | 'saude' | ''
 
 export interface ClientData {
   name: string
@@ -34,6 +34,7 @@ const PAL: Record<ActivityLevel, number> = {
   light: 1.375,
   moderate: 1.55,
   active: 1.725,
+  '': 1.2,
 }
 
 const ACTIVITY_LABEL: Record<ActivityLevel, string> = {
@@ -41,6 +42,7 @@ const ACTIVITY_LABEL: Record<ActivityLevel, string> = {
   light: 'Leve (1-3x/semana)',
   moderate: 'Moderado (3-5x/semana)',
   active: 'Ativo (6-7x/semana)',
+  '': '',
 }
 
 export function activityLabel(a: ActivityLevel): string {
