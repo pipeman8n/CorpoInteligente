@@ -29,16 +29,24 @@ function renderMarkdown(md: string): string {
   let html = ''
   let inTable = false
   let tableHtml = ''
+  let lastCells: string[] = []
+  let lastTag = 'td'
   for (const line of lines) {
     const t = line.trim()
     if (t.startsWith('|')) {
       const cells = t.split('|').slice(1, -1).map((c) => c.trim())
       if (cells.every((c) => /^-+$/.test(c))) continue // linha separadora
       if (!inTable) { inTable = true; tableHtml = '<table class="ai-table">' }
-      const tag = tableHtml.endsWith('</tr>') ? 'td' : 'th'
-      tableHtml += `<tr>${cells.map((c) => `<${tag}>${inline(c)}</${tag}>`).join('')}</tr>`
+      lastTag = tableHtml.endsWith('</tr>') ? 'td' : 'th'
+      lastCells = cells
+      tableHtml += `<tr>${cells.map((c) => `<${lastTag}>${inline(c)}</${lastTag}>`).join('')}</tr>`
+    } else if (inTable && t) {
+      // linha de continuação dentro de uma célula (a IA às vezes quebra linha): junta na última célula
+      lastCells[lastCells.length - 1] += ' ' + t
+      const idx = tableHtml.lastIndexOf('<tr>')
+      tableHtml = tableHtml.slice(0, idx) + `<tr>${lastCells.map((c) => `<${lastTag}>${inline(c)}</${lastTag}>`).join('')}</tr>`
     } else {
-      if (inTable) { html += tableHtml + '</table>'; inTable = false; tableHtml = '' }
+      if (inTable) { html += tableHtml + '</table>'; inTable = false; tableHtml = ''; lastCells = [] }
       if (t) html += `<p>${inline(t)}</p>`
     }
   }

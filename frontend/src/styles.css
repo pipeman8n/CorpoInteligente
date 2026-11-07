@@ -80,8 +80,8 @@ input:focus, select:focus { outline: none; border-color: var(--accent); }
 }
 .ai:disabled { opacity: 0.6; cursor: not-allowed; }
 
-.ai-result { margin-top: 16px; }
-.ai-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin: 8px 0; }
+.ai-result { margin-top: 16px; overflow-x: auto; }
+.ai-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin: 8px 0; min-width: 680px; }
 .ai-table th, .ai-table td {
   padding: 8px; border: 1px solid var(--border); text-align: left; vertical-align: top;
 }
