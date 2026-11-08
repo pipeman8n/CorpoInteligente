@@ -1,3 +1,11 @@
+@font-face {
+  font-family: 'Sora';
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url('/fonts/sora.woff2') format('woff2');
+}
+
 :root {
   --bg: #f5f7fb;
   --surface: #ffffff;
@@ -62,7 +70,13 @@ body {
 .card {
   background: var(--surface); border: 1px solid var(--border);
   border-radius: var(--radius-card); padding: 26px; box-shadow: var(--shadow);
+  animation: fadeIn 0.25s ease;
 }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) { .card { animation: none; } }
 .card h1 { margin: 0 0 4px; font-size: 1.35rem; font-weight: 800; letter-spacing: -0.3px; }
 .lede { margin: 0 0 20px; color: var(--muted); font-size: 0.92rem; }
 
@@ -194,6 +208,25 @@ table.result td small { color: var(--muted); font-size: 0.8rem; }
 .ex-video { width: 100%; border-radius: 12px; margin: 12px 0; background: #000; aspect-ratio: 4/3; object-fit: cover; }
 .ex-instructions { color: var(--text); font-size: 0.86rem; line-height: 1.55; margin: 4px 0 0; }
 
+/* Skeleton loaders */
+.skeleton {
+  background: linear-gradient(90deg, #e9edf4 25%, #dde3ee 37%, #e9edf4 63%);
+  background-size: 400% 100%;
+  animation: shimmer 1.4s ease infinite;
+  border-radius: 8px;
+}
+.skeleton-row { height: 52px; margin: 10px 0; border-radius: 12px; }
+@keyframes shimmer { 0% { background-position: 100% 0; } 100% { background-position: -100% 0; } }
+
+/* Accordion dos dias de treino */
+.tday-head {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  width: 100%; padding: 12px 0; border: none; background: transparent; cursor: pointer;
+  font-family: inherit; text-align: left; border-bottom: 1px solid var(--border);
+}
+.tday-head h3 { margin: 0; font-size: 0.92rem; font-weight: 700; color: var(--text); }
+.tday-toggle { color: var(--muted); font-size: 0.9rem; line-height: 1; }
+
 /* Responsivo (iOS Safari / Android) */
 @media (max-width: 560px) {
   .topbar { padding: 4px 0 16px; }
@@ -212,4 +245,31 @@ table.result td small { color: var(--muted); font-size: 0.8rem; }
   table.result { font-size: 0.82rem; }
   table.result th, table.result td { padding: 9px 8px; }
   .ai-table { min-width: 560px; }
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f1419;
+    --surface: #161c24;
+    --border: #2a323c;
+    --text: #e6ebf2;
+    --muted: #8b95a5;
+    --accent: #3b82f6;
+    --accent-strong: #60a5fa;
+    --accent-soft: #1c2940;
+    --ok: #2ecc71;
+    --ok-soft: #14301f;
+    --danger: #f06a6a;
+    --danger-soft: #2d1616;
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  }
+  input, select { background: #1a2129; }
+  input:focus, select:focus { background: #161b22; }
+  .btn-secondary:hover:not(:disabled) { background: #24344d; }
+  .btn-view:hover { background: #24344d; }
+  .skeleton {
+    background: linear-gradient(90deg, #232b35 25%, #2c3540 37%, #232b35 63%);
+    background-size: 400% 100%;
+  }
 }

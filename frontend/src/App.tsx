@@ -99,7 +99,7 @@ interface CatalogExercise {
 
 export default function App() {
   const [view, setView] = useState<'app' | 'meus'>('app')
-  const [step, setStep] = useState<1 | 2 | 3>(1)
+  const [step, setStep] = useState<1 | 2 | 3 | 4>(1)
   const [form, setForm] = useState<ClientData>(emptyForm)
   const [result, setResult] = useState<RaioXResult | null>(null)
   const [calcCode, setCalcCode] = useState(genCode())
@@ -119,6 +119,7 @@ export default function App() {
   const [trainingLoading, setTrainingLoading] = useState(false)
   const [catalog, setCatalog] = useState<Map<string, CatalogExercise>>(new Map())
   const [viewing, setViewing] = useState<CatalogExercise | null>(null)
+  const [openDay, setOpenDay] = useState<number | null>(0)
 
   const userId = getUserId()
 
@@ -149,7 +150,7 @@ export default function App() {
 
   const set = (k: keyof ClientData, v: unknown) => setForm((f) => ({ ...f, [k]: v }))
 
-  const goToStep = (n: 1 | 2 | 3) => {
+  const goToStep = (n: 1 | 2 | 3 | 4) => {
     setError('')
     setStep(n)
     window.scrollTo({ top: 0 })
@@ -342,9 +343,14 @@ export default function App() {
               <div className="step-label">Objetivo</div>
             </div>
             <div className={`line ${step > 2 ? 'fill' : ''}`} />
-            <div className={`step ${step === 3 ? 'now' : ''}`}>
+            <div className={`step ${step === 3 ? 'now' : step > 3 ? 'done' : ''}`}>
               <div className="dot">3</div>
               <div className="step-label">Resultado</div>
+            </div>
+            <div className={`line ${step > 3 ? 'fill' : ''}`} />
+            <div className={`step ${step === 4 ? 'now' : ''}`}>
+              <div className="dot">4</div>
+              <div className="step-label">Treino</div>
             </div>
           </div>
 
@@ -531,7 +537,7 @@ export default function App() {
               <h1>Raio X Corporal</h1>
               <div className="client-meta">
                 <span className="chip">{calcCode}</span>
-                <span>{form.name} · {form.age} anos · {form.gender === 'male' ? 'Masculino' : 'Feminino'}</span>
+                <span>{form.name}, {form.age} anos, {form.gender === 'male' ? 'Masculino' : 'Feminino'}</span>
               </div>
 
               <table className="result">
@@ -581,7 +587,7 @@ export default function App() {
                   </tr>
                   <tr>
                     <td>Macros</td>
-                    <td><strong>P {result.protein}g · C {result.carbs}g · G {result.fat}g</strong></td>
+                    <td><strong>P {result.protein}g / C {result.carbs}g / G {result.fat}g</strong></td>
                     <td><small>Proteína {(result.protein / form.weight).toFixed(1)} g/kg</small></td>
                   </tr>
                   <tr>
@@ -611,50 +617,83 @@ export default function App() {
               {aiContent && <div className="ai-result" dangerouslySetInnerHTML={{ __html: renderMarkdown(aiContent) }} />}
               {strategyContent && <div className="ai-result" dangerouslySetInnerHTML={{ __html: renderMarkdown(strategyContent) }} />}
 
-              <div className="actions secondary">
-                <button className="btn btn-secondary" onClick={onGenerateTraining} disabled={trainingLoading}>
-                  {trainingLoading ? 'Gerando...' : 'Gerar treino semanal'}
-                </button>
+              <div className="actions">
+                <button className="btn btn-ghost" onClick={() => goToStep(2)}>Voltar</button>
+                <button className="btn btn-primary" onClick={() => goToStep(4)}>Treino</button>
               </div>
+
+              <p className="legal">
+                * Resultados gerados a partir de fórmulas padrão. Consulte um nutricionista ou médico antes de iniciar qualquer dieta.
+              </p>
+            </div>
+          )}
+
+          {step === 4 && (
+            <div className="card">
+              <h1>Divisão de Treino</h1>
+              <p className="lede">Seu plano semanal de treino, exercício a exercício.</p>
+
+              {!training && !trainingLoading && (
+                <div className="actions">
+                  <button className="btn btn-primary" onClick={onGenerateTraining} disabled={trainingLoading}>
+                    Gerar treino semanal
+                  </button>
+                </div>
+              )}
+
+              {trainingLoading && (
+                <div className="training">
+                  <div className="skeleton" style={{ height: 16, width: '50%', marginBottom: 14 }} />
+                  <div className="skeleton" style={{ height: 64, marginBottom: 10 }} />
+                  <div className="skeleton" style={{ height: 64, marginBottom: 10 }} />
+                  <div className="skeleton" style={{ height: 64 }} />
+                </div>
+              )}
 
               {training && (
                 <div className="training">
                   {training.split && <h2 className="training-split">{training.split}</h2>}
                   {training.days.map((day, di) => (
                     <div className="tday" key={di}>
-                      <h3>{day.name}</h3>
-                      <ul className="tlist">
-                        {day.exercises.map((ex, ei) => {
-                          const cat = lookup(ex.name)
-                          return (
-                            <li key={ei}>
-                              <div>
-                                <strong>{ex.name}</strong>
-                                <span className="tmeta">
-                                  {ex.sets} séries · {ex.reps} reps{ex.rest ? ` · descanso ${ex.rest}` : ''}
-                                </span>
-                              </div>
-                              {cat && (
-                                <button className="btn-view" onClick={() => setViewing(cat)}>
-                                  Ver
-                                </button>
-                              )}
-                            </li>
-                          )
-                        })}
-                      </ul>
+                      <button
+                        type="button"
+                        className="tday-head"
+                        aria-expanded={openDay === di}
+                        onClick={() => setOpenDay(openDay === di ? null : di)}
+                      >
+                        <h3>{day.name}</h3>
+                        <span className="tday-toggle">{openDay === di ? '▾' : '▸'}</span>
+                      </button>
+                      {openDay === di && (
+                        <ul className="tlist">
+                          {day.exercises.map((ex, ei) => {
+                            const cat = lookup(ex.name)
+                            return (
+                              <li key={ei}>
+                                <div>
+                                  <strong>{ex.name}</strong>
+                                  <span className="tmeta">
+                                    {ex.sets} séries de {ex.reps} reps{ex.rest ? `, descanso ${ex.rest}` : ''}
+                                  </span>
+                                </div>
+                                {cat && (
+                                  <button className="btn-view" onClick={() => setViewing(cat)}>
+                                    Ver
+                                  </button>
+                                )}
+                              </li>
+                            )
+                          })}
+                        </ul>
+                      )}
                     </div>
                   ))}
                 </div>
               )}
 
               <div className="actions">
-                <button className="btn btn-ghost" onClick={() => goToStep(2)}>Voltar</button>
+                <button className="btn btn-ghost" onClick={() => goToStep(3)}>Voltar</button>
               </div>
-
-              <p className="legal">
-                * Resultados gerados a partir de fórmulas padrão. Consulte um nutricionista ou médico antes de iniciar qualquer dieta.
-              </p>
             </div>
           )}
         </>
@@ -665,7 +704,11 @@ export default function App() {
           <h1>Meus Cálculos</h1>
           <p className="lede">Clientes que você já avaliou.</p>
           {loadingHistory ? (
-            <p className="placeholder">Carregando...</p>
+            <>
+              <div className="skeleton skeleton-row" />
+              <div className="skeleton skeleton-row" />
+              <div className="skeleton skeleton-row" />
+            </>
           ) : history.length === 0 ? (
             <p className="placeholder">Nenhum cálculo salvo ainda.</p>
           ) : (
@@ -675,7 +718,7 @@ export default function App() {
                   <h3>{c.name}</h3>
                   <div className="meta">
                     {c.goal === 'emagrecimento' ? 'Emagrecimento' : c.goal === 'hipertrofia' ? 'Hipertrofia' : 'Saúde'}
-                    {' · '}{c.age} anos · {c.weight}kg / {c.height}cm · {new Date(c.savedAt).toLocaleDateString('pt-BR')}
+                    {', '}{c.age} anos, {c.weight}kg/{c.height}cm, {new Date(c.savedAt).toLocaleDateString('pt-BR')}
                   </div>
                 </div>
                 <button className="btn-del" onClick={() => onDelete(c.id)}>Apagar</button>
