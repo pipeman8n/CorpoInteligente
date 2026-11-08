@@ -153,6 +153,47 @@ table.result td small { color: var(--muted); font-size: 0.8rem; }
 .footer a { color: var(--accent); text-decoration: none; }
 .footer a:hover { text-decoration: underline; }
 
+/* Treino semanal */
+.training { margin-top: 18px; border-top: 1px solid var(--border); padding-top: 16px; }
+.training-split { font-size: 1.02rem; font-weight: 800; margin: 0 0 12px; color: var(--accent); }
+.tday { margin-bottom: 14px; }
+.tday h3 { margin: 0 0 6px; font-size: 0.92rem; font-weight: 700; }
+.tlist { list-style: none; margin: 0; padding: 0; }
+.tlist li {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  padding: 10px 0; border-bottom: 1px solid var(--border);
+}
+.tlist li:last-child { border-bottom: none; }
+.tlist strong { display: block; font-size: 0.9rem; }
+.tmeta { color: var(--muted); font-size: 0.78rem; display: block; }
+.btn-view {
+  padding: 6px 14px; border-radius: 999px; border: 1px solid var(--accent);
+  background: var(--accent-soft); color: var(--accent); font-weight: 700;
+  cursor: pointer; font-family: inherit; font-size: 0.8rem; white-space: nowrap; flex-shrink: 0;
+}
+.btn-view:hover { background: #dfe8fe; }
+
+/* Modal de exercício */
+.modal-overlay {
+  position: fixed; inset: 0; z-index: 100; background: rgba(11, 18, 32, 0.55);
+  display: flex; align-items: center; justify-content: center; padding: 18px;
+  -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px);
+}
+.modal {
+  position: relative; background: var(--surface); border-radius: var(--radius-card);
+  padding: 22px; width: 100%; max-width: 460px; max-height: 88vh; overflow-y: auto;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.25);
+}
+.modal h3 { margin: 0 30px 2px 0; font-size: 1.05rem; font-weight: 800; }
+.modal-close {
+  position: absolute; top: 12px; right: 14px; width: 32px; height: 32px;
+  border-radius: 999px; border: 1px solid var(--border); background: var(--surface);
+  color: var(--muted); font-size: 1.2rem; line-height: 1; cursor: pointer; font-family: inherit;
+}
+.modal-close:hover { background: var(--accent-soft); color: var(--text); }
+.ex-video { width: 100%; border-radius: 12px; margin: 12px 0; background: #000; aspect-ratio: 4/3; object-fit: cover; }
+.ex-instructions { color: var(--text); font-size: 0.86rem; line-height: 1.55; margin: 4px 0 0; }
+
 /* Responsivo (iOS Safari / Android) */
 @media (max-width: 560px) {
   .topbar { padding: 4px 0 16px; }

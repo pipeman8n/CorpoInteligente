@@ -16,7 +16,9 @@ import {
   deleteCalculation,
   generateRaioX,
   generateStrategy,
+  generateTraining,
   type Calculation,
+  type TrainingProgram,
 } from './api'
 
 // Renderizador mínimo de markdown (tabela + negrito) para a saída da IA
@@ -86,6 +88,15 @@ function bodyFatClass(bf: number, gender: string): string {
   return 'Elevado'
 }
 
+interface CatalogExercise {
+  name: string
+  muscle: string
+  equipment: string
+  video: string
+  thumb: string
+  instructions: string
+}
+
 export default function App() {
   const [view, setView] = useState<'app' | 'meus'>('app')
   const [step, setStep] = useState<1 | 2 | 3>(1)
@@ -104,6 +115,10 @@ export default function App() {
   const [history, setHistory] = useState<Calculation[]>([])
   const [loadingHistory, setLoadingHistory] = useState(false)
   const [error, setError] = useState('')
+  const [training, setTraining] = useState<TrainingProgram | null>(null)
+  const [trainingLoading, setTrainingLoading] = useState(false)
+  const [catalog, setCatalog] = useState<Map<string, CatalogExercise>>(new Map())
+  const [viewing, setViewing] = useState<CatalogExercise | null>(null)
 
   const userId = getUserId()
 
@@ -121,6 +136,15 @@ export default function App() {
   useEffect(() => {
     loadHistory()
     // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  useEffect(() => {
+    fetch('/exercises_catalog.json')
+      .then((r) => r.json())
+      .then((list: CatalogExercise[]) => {
+        setCatalog(new Map(list.map((e) => [e.name.toLowerCase(), e])))
+      })
+      .catch(() => {})
   }, [])
 
   const set = (k: keyof ClientData, v: unknown) => setForm((f) => ({ ...f, [k]: v }))
@@ -256,6 +280,35 @@ export default function App() {
     } catch (e) {
       setError((e as Error).message)
     }
+  }
+
+  const onGenerateTraining = async () => {
+    if (!result) return
+    setTrainingLoading(true)
+    setTraining(null)
+    setError('')
+    try {
+      const res = await generateTraining({
+        ...form,
+        bodyFat: effectiveBodyFat ?? form.bodyFat ?? null,
+        calculationCode: calcCode,
+        results: result,
+      })
+      setTraining(res.program)
+    } catch (e) {
+      setError((e as Error).message)
+    } finally {
+      setTrainingLoading(false)
+    }
+  }
+
+  const lookup = (name: string): CatalogExercise | undefined => {
+    const key = name.trim().toLowerCase()
+    if (catalog.has(key)) return catalog.get(key)
+    for (const [k, v] of catalog) {
+      if (key.includes(k) || k.includes(key)) return v
+    }
+    return undefined
   }
 
   const leanPct = result && form.weight > 0 ? Math.round((result.leanMass / form.weight) * 100) : null
@@ -558,6 +611,43 @@ export default function App() {
               {aiContent && <div className="ai-result" dangerouslySetInnerHTML={{ __html: renderMarkdown(aiContent) }} />}
               {strategyContent && <div className="ai-result" dangerouslySetInnerHTML={{ __html: renderMarkdown(strategyContent) }} />}
 
+              <div className="actions secondary">
+                <button className="btn btn-secondary" onClick={onGenerateTraining} disabled={trainingLoading}>
+                  {trainingLoading ? 'Gerando...' : 'Gerar treino semanal'}
+                </button>
+              </div>
+
+              {training && (
+                <div className="training">
+                  {training.split && <h2 className="training-split">{training.split}</h2>}
+                  {training.days.map((day, di) => (
+                    <div className="tday" key={di}>
+                      <h3>{day.name}</h3>
+                      <ul className="tlist">
+                        {day.exercises.map((ex, ei) => {
+                          const cat = lookup(ex.name)
+                          return (
+                            <li key={ei}>
+                              <div>
+                                <strong>{ex.name}</strong>
+                                <span className="tmeta">
+                                  {ex.sets} séries · {ex.reps} reps{ex.rest ? ` · descanso ${ex.rest}` : ''}
+                                </span>
+                              </div>
+                              {cat && (
+                                <button className="btn-view" onClick={() => setViewing(cat)}>
+                                  Ver
+                                </button>
+                              )}
+                            </li>
+                          )
+                        })}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              )}
+
               <div className="actions">
                 <button className="btn btn-ghost" onClick={() => goToStep(2)}>Voltar</button>
               </div>
@@ -610,6 +700,18 @@ export default function App() {
         <p>As recomendações são geradas por IA e não substituem o conselho médico profissional.</p>
         <p>Estratégias de dieta e treino são sugestões e devem ser adaptadas individualmente, preferencialmente com acompanhamento profissional.</p>
       </footer>
+
+      {viewing && (
+        <div className="modal-overlay" onClick={() => setViewing(null)}>
+          <div className="modal" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close" onClick={() => setViewing(null)} aria-label="Fechar">×</button>
+            <h3>{viewing.name}</h3>
+            <p className="tmeta">{viewing.muscle} · {viewing.equipment}</p>
+            <video className="ex-video" src={viewing.video} poster={viewing.thumb} controls autoPlay loop muted playsInline />
+            {viewing.instructions && <p className="ex-instructions">{viewing.instructions}</p>}
+          </div>
+        </div>
+      )}
     </div>
   )
 }

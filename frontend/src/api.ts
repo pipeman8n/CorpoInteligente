@@ -67,3 +67,21 @@ export const generateRaioX = (data: Record<string, unknown>): Promise<{ content:
 
 export const generateStrategy = (data: Record<string, unknown>): Promise<{ content: string }> =>
   a1('generate_strategy', { data })
+
+export interface TrainingExercise {
+  name: string
+  sets: number
+  reps: string
+  rest?: string
+}
+export interface TrainingDay {
+  name: string
+  exercises: TrainingExercise[]
+}
+export interface TrainingProgram {
+  split?: string
+  days: TrainingDay[]
+}
+
+export const generateTraining = (data: Record<string, unknown>): Promise<{ program: TrainingProgram }> =>
+  a1('generate_training', { data })
