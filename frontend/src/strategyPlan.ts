@@ -1,6 +1,14 @@
 import type { RaioXResult } from './calc'
 
-const PHASES = ['Adaptação', 'Otimização', 'Força', 'Definição', 'Consolidação', 'Peaking', 'Manutenção', 'Reavaliação', 'Especialização']
+function phaseNames(n: number): string[] {
+  if (n === 3) return ['Adaptação', 'Otimização', 'Definição']
+  if (n === 4) return ['Adaptação', 'Otimização', 'Força', 'Definição']
+  const middle = ['Otimização', 'Força', 'Consolidação', 'Peaking', 'Manutenção', 'Reavaliação']
+  const names = ['Adaptação']
+  for (let i = 0; i < n - 2; i++) names.push(middle[i % middle.length])
+  names.push('Definição')
+  return names
+}
 
 function trainingSplit(activityLevel: string): string {
   const days = activityLevel === 'active' ? 5 : activityLevel === 'moderate' ? 4 : 3
@@ -78,8 +86,9 @@ export function buildStrategy(
   const sep = '|---|---|---|---|---|---|---|---|'
   const rows: string[] = []
 
+  const names = phaseNames(numPhases)
   for (let i = 0; i < numPhases; i++) {
-    const phase = PHASES[i] ?? 'Fase ' + (i + 1)
+    const phase = names[i] ?? 'Fase ' + (i + 1)
     const semIni = i * weeksPerPhase + 1
     const semFim = Math.min((i + 1) * weeksPerPhase, semanas)
     const kcal = phaseKcal(goal, results.calorieTarget, i)
