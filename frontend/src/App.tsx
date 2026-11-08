@@ -16,7 +16,6 @@ import {
   deleteCalculation,
   generateRaioX,
   generateStrategy,
-  generateTraining,
   saveProfile,
   getProfile,
   type Calculation,
@@ -24,6 +23,7 @@ import {
   type Profile,
 } from './api'
 import { EXERCISE_CATALOG, type CatalogExercise } from './exerciseCatalog'
+import { buildTrainingProgram } from './trainingPlan'
 import { supabase } from './supabase'
 
 // Renderizador mínimo de markdown (tabela + negrito) para a saída da IA
@@ -114,7 +114,6 @@ export default function App() {
   const [loadingHistory, setLoadingHistory] = useState(false)
   const [error, setError] = useState('')
   const [training, setTraining] = useState<TrainingProgram | null>(null)
-  const [trainingLoading, setTrainingLoading] = useState(false)
   const [viewing, setViewing] = useState<CatalogExercise | null>(null)
   const [openDay, setOpenDay] = useState<number | null>(0)
   const [user, setUser] = useState<{ id: string; email?: string } | null>(null)
@@ -435,24 +434,10 @@ export default function App() {
     }
   }
 
-  const onGenerateTraining = async () => {
+  const onGenerateTraining = () => {
     if (!result) return
-    setTrainingLoading(true)
-    setTraining(null)
     setError('')
-    try {
-      const res = await generateTraining({
-        ...form,
-        bodyFat: effectiveBodyFat ?? form.bodyFat ?? null,
-        calculationCode: calcCode,
-        results: result,
-      })
-      setTraining(res.program)
-    } catch (e) {
-      setError((e as Error).message)
-    } finally {
-      setTrainingLoading(false)
-    }
+    setTraining(buildTrainingProgram(form.goal, form.activityLevel))
   }
 
   const lookup = (name: string): CatalogExercise | undefined => {
@@ -792,20 +777,11 @@ export default function App() {
               <h1>Divisão de Treino</h1>
               <p className="lede">Seu plano semanal de treino, exercício a exercício.</p>
 
-              {!training && !trainingLoading && (
+              {!training && (
                 <div className="actions">
-                  <button className="btn btn-primary" onClick={onGenerateTraining} disabled={trainingLoading}>
+                  <button className="btn btn-primary" onClick={onGenerateTraining}>
                     Gerar treino semanal
                   </button>
-                </div>
-              )}
-
-              {trainingLoading && (
-                <div className="training">
-                  <div className="skeleton" style={{ height: 16, width: '50%', marginBottom: 14 }} />
-                  <div className="skeleton" style={{ height: 64, marginBottom: 10 }} />
-                  <div className="skeleton" style={{ height: 64, marginBottom: 10 }} />
-                  <div className="skeleton" style={{ height: 64 }} />
                 </div>
               )}
 
