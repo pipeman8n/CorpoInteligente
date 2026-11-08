@@ -738,8 +738,18 @@ export default function App() {
                 </button>
               </div>
 
-              {aiContent && <div className="ai-result" dangerouslySetInnerHTML={{ __html: renderMarkdown(aiContent) }} />}
-              {strategyContent && <div className="ai-result" dangerouslySetInnerHTML={{ __html: renderMarkdown(strategyContent) }} />}
+              {aiContent && (
+                <div className="ai-result">
+                  <h3 className="ai-title">Análise Completa</h3>
+                  <div dangerouslySetInnerHTML={{ __html: renderMarkdown(aiContent) }} />
+                </div>
+              )}
+              {strategyContent && (
+                <div className="ai-result">
+                  <h3 className="ai-title">Estratégia para Meta</h3>
+                  <div dangerouslySetInnerHTML={{ __html: renderMarkdown(strategyContent) }} />
+                </div>
+              )}
 
               <div className="actions">
                 <button className="btn btn-ghost" onClick={() => goToStep(2)}>Voltar</button>

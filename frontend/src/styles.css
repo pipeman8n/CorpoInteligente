@@ -140,6 +140,7 @@ table.result td small { color: var(--muted); font-size: 0.8rem; }
 
 /* Saída da IA */
 .ai-result { margin-top: 16px; overflow-x: auto; }
+.ai-title { margin: 0 0 10px; font-size: 1rem; font-weight: 800; color: var(--accent); }
 .ai-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin: 8px 0; min-width: 680px; }
 .ai-table th, .ai-table td {
   padding: 8px; border: 1px solid var(--border); text-align: left; vertical-align: top;
