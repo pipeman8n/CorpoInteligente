@@ -231,7 +231,7 @@ table.result td small { color: var(--muted); font-size: 0.8rem; }
 .btn-social svg { flex-shrink: 0; }
 .auth-divider {
   display: flex; align-items: center; gap: 12px; margin: 18px 0 14px;
-  color: var(--muted); font-size: 0.8rem; text-transform: uppercase;
+  color: var(--muted); font-size: 0.8rem;
 }
 .auth-divider::before, .auth-divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
 .ex-video { width: 100%; border-radius: 12px; margin: 12px 0; background: #000; aspect-ratio: 4/3; object-fit: cover; }
