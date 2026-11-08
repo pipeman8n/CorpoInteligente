@@ -20,6 +20,7 @@ import {
   type Calculation,
   type TrainingProgram,
 } from './api'
+import { EXERCISE_CATALOG, type CatalogExercise } from './exerciseCatalog'
 
 // Renderizador mínimo de markdown (tabela + negrito) para a saída da IA
 function inline(s: string): string {
@@ -88,14 +89,7 @@ function bodyFatClass(bf: number, gender: string): string {
   return 'Elevado'
 }
 
-interface CatalogExercise {
-  name: string
-  muscle: string
-  equipment: string
-  video: string
-  thumb: string
-  instructions: string
-}
+const CATALOG_MAP = new Map(EXERCISE_CATALOG.map((e) => [e.name.toLowerCase(), e]))
 
 export default function App() {
   const [view, setView] = useState<'app' | 'meus'>('app')
@@ -117,7 +111,6 @@ export default function App() {
   const [error, setError] = useState('')
   const [training, setTraining] = useState<TrainingProgram | null>(null)
   const [trainingLoading, setTrainingLoading] = useState(false)
-  const [catalog, setCatalog] = useState<Map<string, CatalogExercise>>(new Map())
   const [viewing, setViewing] = useState<CatalogExercise | null>(null)
   const [openDay, setOpenDay] = useState<number | null>(0)
 
@@ -137,15 +130,6 @@ export default function App() {
   useEffect(() => {
     loadHistory()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
-  useEffect(() => {
-    fetch('/exercises_catalog.json')
-      .then((r) => r.json())
-      .then((list: CatalogExercise[]) => {
-        setCatalog(new Map(list.map((e) => [e.name.toLowerCase(), e])))
-      })
-      .catch(() => {})
   }, [])
 
   const set = (k: keyof ClientData, v: unknown) => setForm((f) => ({ ...f, [k]: v }))
@@ -305,8 +289,8 @@ export default function App() {
 
   const lookup = (name: string): CatalogExercise | undefined => {
     const key = name.trim().toLowerCase()
-    if (catalog.has(key)) return catalog.get(key)
-    for (const [k, v] of catalog) {
+    if (CATALOG_MAP.has(key)) return CATALOG_MAP.get(key)
+    for (const [k, v] of CATALOG_MAP) {
       if (key.includes(k) || k.includes(key)) return v
     }
     return undefined

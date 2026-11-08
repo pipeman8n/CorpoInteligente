@@ -1,9 +1,17 @@
-[
+export interface CatalogExercise {
+  name: string
+  muscle: string
+  equipment: string
+  video: string
+  thumb: string
+  instructions: string
+}
+
+export const EXERCISE_CATALOG: CatalogExercise[] = [
  {
   "name": "Supino reto com barra",
   "muscle": "Peito",
   "equipment": "barra",
-  "difficulty": "intermediate",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/barbell-bench-press.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/barbell-bench-press.jpg",
   "instructions": "Lie flat on a bench with your feet flat on the ground and your back pressed against the bench. Grasp the barbell with an overhand grip slightly wider than shoulder-width apart. Lift the barbell off the rack and hold it directly above your chest with your arms fully extended. Lower the barbell slowly towards your chest, keeping your elbows tucked in. Pause for a moment when the barbell touches your chest. Push the barbell back up to the starting position by extending your arms. Repeat for the des"
@@ -12,7 +20,6 @@
   "name": "Supino declinado com barra",
   "muscle": "Peito",
   "equipment": "barra",
-  "difficulty": "intermediate",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/barbell-decline-bench-press.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/barbell-decline-bench-press.jpg",
   "instructions": "Lie on a decline bench with your feet secured and your head lower than your hips. Grasp the barbell with an overhand grip slightly wider than shoulder-width apart. Unrack the barbell and lower it slowly towards your chest, keeping your elbows tucked in. Pause for a moment at the bottom, then push the barbell back up to the starting position. Repeat for the desired number of repetitions."
@@ -21,7 +28,6 @@
   "name": "Supino inclinado com barra",
   "muscle": "Peito",
   "equipment": "barra",
-  "difficulty": "intermediate",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/barbell-incline-bench-press.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/barbell-incline-bench-press.jpg",
   "instructions": "Set up an incline bench at a 45-degree angle. Lie down on the bench with your feet flat on the ground. Grasp the barbell with an overhand grip, slightly wider than shoulder-width apart. Unrack the barbell and lower it slowly towards your chest, keeping your elbows at a 45-degree angle. Pause for a moment at the bottom, then push the barbell back up to the starting position. Repeat for the desired number of repetitions."
@@ -30,7 +36,6 @@
   "name": "Supino declinado com halteres",
   "muscle": "Peito",
   "equipment": "halteres",
-  "difficulty": "intermediate",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/decline-dumbbell-bench-press-45-degree.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/decline-dumbbell-bench-press-45-degree.jpg",
   "instructions": "Secure your feet in the decline bench and lie back holding a dumbbell in each hand at chest level. Press the weights up until arms are extended, then lower them until elbows are at about 90 degrees."
@@ -39,7 +44,6 @@
   "name": "Crucifixo declinado com halteres",
   "muscle": "Peito",
   "equipment": "halteres",
-  "difficulty": "intermediate",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-decline-fly-45-degree-1.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-decline-fly-45-degree-1.jpg",
   "instructions": "Lay back on a 45-degree decline bench holding a dumbbell in each hand above chest. Lower the weights in an arc to sides until a stretch is felt, then bring them back together, squeezing the chest."
@@ -48,7 +52,6 @@
   "name": "Crucifixo reto com halteres",
   "muscle": "Peito",
   "equipment": "halteres",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-fly.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-fly.jpg",
   "instructions": "Lie flat on a bench with a dumbbell in each hand, palms facing each other. Extend your arms straight up over your chest, with a slight bend in your elbows. Keeping a slight bend in your elbows, lower your arms out to the sides in a wide arc until you feel a stretch in your chest. Pause for a moment, then reverse the movement and bring the dumbbells back up to the starting position. Repeat for the desired number of repetitions."
@@ -57,7 +60,6 @@
   "name": "Supino inclinado com halteres",
   "muscle": "Peito",
   "equipment": "halteres",
-  "difficulty": "intermediate",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-incline-bench-press.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-incline-bench-press.jpg",
   "instructions": "Set up an incline bench at a 45-degree angle. Sit on the bench with your feet flat on the ground and your back pressed firmly against the bench. Hold a dumbbell in each hand, palms facing forward, and lift them to shoulder height. Slowly lower the dumbbells to the sides of your chest, keeping your elbows at a 90-degree angle. Push the dumbbells back up to the starting position, fully extending your arms. Repeat for the desired number of repetitions."
@@ -66,7 +68,6 @@
   "name": "Crucifixo inclinado com halteres",
   "muscle": "Peito",
   "equipment": "halteres",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-incline-fly.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-incline-fly.jpg",
   "instructions": "Set an incline bench to a 45-degree angle. Sit on the bench with a dumbbell in each hand, palms facing each other. Lie back on the bench and press the dumbbells up to the starting position, directly above your chest. Lower the dumbbells out to the sides in a wide arc until you feel a stretch in your chest. Pause for a moment, then squeeze your chest muscles to bring the dumbbells back up to the starting position. Repeat for the desired number of repetitions."
@@ -75,7 +76,6 @@
   "name": "Supino inclinado neutro com halteres",
   "muscle": "Peito",
   "equipment": "halteres",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-incline-hammer-press.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-incline-hammer-press.jpg",
   "instructions": "Set an incline bench to a 45-degree angle and sit on it with a dumbbell in each hand, resting on your thighs. Lie back on the bench and position the dumbbells at shoulder level with your palms facing each other. Press the dumbbells up and away from your body until your arms are fully extended. Pause for a moment at the top, then slowly lower the dumbbells back down to the starting position. Repeat for the desired number of repetitions."
@@ -84,7 +84,6 @@
   "name": "Supino reto neutro com halteres",
   "muscle": "Peito",
   "equipment": "halteres",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-lying-hammer-press.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-lying-hammer-press.jpg",
   "instructions": "Lie flat on a bench with a dumbbell in each hand, palms facing each other and arms extended straight up. Lower the dumbbells to the sides of your chest, keeping your elbows at a 90-degree angle. Press the dumbbells back up to the starting position, fully extending your arms. Repeat for the desired number of repetitions."
@@ -93,7 +92,6 @@
   "name": "Crucifixo no cabo",
   "muscle": "Peito",
   "equipment": "cabo",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/cable-standing-fly-crossover-fly.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/cable-standing-fly-crossover-fly.jpg",
   "instructions": "Stand between two cable stacks, grab the D-handles, and take a step forward. With a slight bend in elbows, bring the handles together in front of the chest, then slowly return to the starting position."
@@ -102,7 +100,6 @@
   "name": "Crucifixo no cabo deitado",
   "muscle": "Peito",
   "equipment": "cabo",
-  "difficulty": "intermediate",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/cable-lying-fly-flat-bench-cable-fly.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/cable-lying-fly-flat-bench-cable-fly.jpg",
   "instructions": "Lie on a flat bench positioned between two low cable pulleys. Grab the handles with arms extended and a slight bend in the elbows, then bring your hands together in a wide arc before returning to the start position."
@@ -111,7 +108,6 @@
   "name": "Supino inclinado na máquina",
   "muscle": "Peito",
   "equipment": "máquina",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/lever-incline-hammer-chest-press.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/lever-incline-hammer-chest-press.jpg",
   "instructions": "Adjust the seat so the handles are level with your upper chest when seated. Grip the handles firmly and press them up and slightly forward, focusing on squeezing your upper chest. Return to the starting position under control after a brief pause."
@@ -120,7 +116,6 @@
   "name": "Supino reto na máquina",
   "muscle": "Peito",
   "equipment": "máquina",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/lever-lying-chest-press.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/lever-lying-chest-press.jpg",
   "instructions": "Lie back on the lever chest press machine, gripping the handles just outside shoulder-width. Press the levers forward and upward by extending your arms fully, focusing on squeezing your chest, then return with control to the starting position."
@@ -129,7 +124,6 @@
   "name": "Encolhimento com barra",
   "muscle": "Costas",
   "equipment": "barra",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/barbell-shrug.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/barbell-shrug.jpg",
   "instructions": "Stand with your feet shoulder-width apart and hold a barbell in front of you with an overhand grip. Keep your arms straight and your back straight throughout the exercise. Lift your shoulders up towards your ears as high as possible, squeezing your traps at the top. Hold for a moment, then slowly lower your shoulders back down to the starting position. Repeat for the desired number of repetitions."
@@ -138,7 +132,6 @@
   "name": "Remada curvada supinada com barra",
   "muscle": "Costas",
   "equipment": "barra",
-  "difficulty": "intermediate",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/barbell-underhand-bent-over-row.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/barbell-underhand-bent-over-row.jpg",
   "instructions": "Stand with feet hip-width apart, grasp the barbell with a supinated (underhand) grip. Bend forward at the hips keeping your back flat, bar hanging from extended arms. Pull the bar towards your lower ribs, squeezing shoulder blades, then lower it until arms are straight."
@@ -147,7 +140,6 @@
   "name": "Remada deitado com barra curva",
   "muscle": "Costas",
   "equipment": "barra",
-  "difficulty": "intermediate",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/cambered-bar-lying-row.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/cambered-bar-lying-row.jpg",
   "instructions": "Set up a barbell on the floor and lie face down on a bench with your chest just off the edge. Reach down and grab the barbell with an overhand grip, slightly wider than shoulder-width apart. With your legs straight and feet on the ground, lift the barbell off the floor by extending your arms. Pull the barbell towards your chest, squeezing your shoulder blades together. Lower the barbell back down to the starting position and repeat for the desired number of repetitions."
@@ -156,7 +148,6 @@
   "name": "Remada curvada com halteres",
   "muscle": "Costas",
   "equipment": "halteres",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-bent-over-row.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-bent-over-row.jpg",
   "instructions": "Hold a dumbbell in each hand with feet shoulder-width apart, hinge at the hips while keeping your back flat. Row the weights to your sides by pulling elbows back, then lower the weights slowly."
@@ -165,7 +156,6 @@
   "name": "Remada inclinada neutra com halteres",
   "muscle": "Costas",
   "equipment": "halteres",
-  "difficulty": "intermediate",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-hammer-grip-incline-bench-row.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-hammer-grip-incline-bench-row.jpg",
   "instructions": "Lie face down on an incline bench with a dumbbell in each hand, neutral grip. Row the weights up toward your hips, squeezing your lats, then lower with control."
@@ -174,7 +164,6 @@
   "name": "Remada inclinada com halteres",
   "muscle": "Costas",
   "equipment": "halteres",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-incline-row.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-incline-row.jpg",
   "instructions": "Set up an incline bench at a 45-degree angle. Grab a dumbbell in each hand and sit on the bench with your chest against the incline. Extend your arms fully, allowing the dumbbells to hang straight down from your shoulders. Pull the dumbbells up towards your chest, squeezing your shoulder blades together. Pause for a moment at the top, then slowly lower the dumbbells back to the starting position. Repeat for the desired number of repetitions."
@@ -183,7 +172,6 @@
   "name": "Encolhimento inclinado com halteres",
   "muscle": "Costas",
   "equipment": "halteres",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-incline-shrug.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-incline-shrug.jpg",
   "instructions": "Set an incline bench to a 45-degree angle and sit on it with a dumbbell in each hand. Place your feet flat on the ground and let your arms hang straight down with your palms facing your body. Keeping your arms straight, shrug your shoulders up towards your ears as high as possible. Hold the contraction for a moment, then slowly lower your shoulders back down to the starting position. Repeat for the desired number of repetitions."
@@ -192,7 +180,6 @@
   "name": "Remada deitado para deltoide posterior",
   "muscle": "Costas",
   "equipment": "halteres",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-lying-rear-delt-row.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-lying-rear-delt-row.jpg",
   "instructions": "Lie face down on a flat bench with a dumbbell in each hand, palms facing inwards. Extend your arms straight down towards the floor, keeping a slight bend in your elbows. Engaging your back muscles, lift the dumbbells up towards your chest, squeezing your shoulder blades together. Pause for a moment at the top, then slowly lower the dumbbells back down to the starting position. Repeat for the desired number of repetitions."
@@ -201,7 +188,6 @@
   "name": "Encolhimento com halteres",
   "muscle": "Costas",
   "equipment": "halteres",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-shrug.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-shrug.jpg",
   "instructions": "Stand with your feet shoulder-width apart and hold a dumbbell in each hand with your palms facing your body. Keep your arms straight and let the dumbbells hang by your sides. Raise your shoulders as high as possible, as if you are trying to touch your ears with your shoulders. Hold the contraction for a second, then slowly lower your shoulders back down to the starting position. Repeat for the desired number of repetitions."
@@ -210,7 +196,6 @@
   "name": "Extensão lombar 45°",
   "muscle": "Costas",
   "equipment": "máquina",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/45-degree-hyperextension.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/45-degree-hyperextension.jpg",
   "instructions": "Set up on a 45-degree hyperextension bench with hips supported and ankles secured. Cross arms over the chest or place hands behind the head. Hinge at the hips, lower your torso toward the floor, then contract lower back and glutes to return to start."
@@ -219,7 +204,6 @@
   "name": "Puxada frente pegada fechada",
   "muscle": "Costas",
   "equipment": "cabo",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/cable-close-grip-front-lat-pulldown.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/cable-close-grip-front-lat-pulldown.jpg",
   "instructions": "Sit at a lat pulldown machine with a close (V-bar) handle attached. Grasp the handles with palms facing in, keep your torso upright, and pull the handle down to your chest by squeezing your back and bringing elbows down and back, then return the handle under control."
@@ -228,7 +212,6 @@
   "name": "Puxada unilateral no cabo",
   "muscle": "Costas",
   "equipment": "cabo",
-  "difficulty": "intermediate",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/cable-one-arm-lateral-pulldown.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/cable-one-arm-lateral-pulldown.jpg",
   "instructions": "Sit or stand at a cable station, grasp the single handle with one hand overhead. Pull the handle down to shoulder level, pausing briefly, then control the return."
@@ -237,7 +220,6 @@
   "name": "Remada sentado unilateral com rotação",
   "muscle": "Costas",
   "equipment": "cabo",
-  "difficulty": "intermediate",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/cable-one-arm-twisting-seated-row.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/cable-one-arm-twisting-seated-row.jpg",
   "instructions": "Sit at a cable row station and grasp the handle with one hand. As you row the handle towards your torso, rotate your upper body toward the working side, then reverse the rotation as you extend your arm forward."
@@ -246,7 +228,6 @@
   "name": "Puxada frente no cabo",
   "muscle": "Costas",
   "equipment": "cabo",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/cable-pulldown.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/cable-pulldown.jpg",
   "instructions": "Adjust the cable pulldown machine so that the seat is at a comfortable height and the knee pad is secured. Sit on the seat with your back straight and your feet flat on the ground. Grasp the cable bar with an overhand grip, slightly wider than shoulder-width apart. Lean back slightly and engage your core. Pull the cable bar down towards your chest, squeezing your shoulder blades together. Pause for a moment at the bottom of the movement, then slowly release the bar back to the starting position."
@@ -255,7 +236,6 @@
   "name": "Elevação frontal com barra",
   "muscle": "Ombros",
   "equipment": "barra",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/barbell-front-raise.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/barbell-front-raise.jpg",
   "instructions": "Stand with your feet shoulder-width apart and hold a barbell in front of your thighs with an overhand grip. Keep your arms straight and lift the barbell forward and upward until it reaches shoulder level. Pause for a moment at the top, then slowly lower the barbell back down to the starting position. Repeat for the desired number of repetitions."
@@ -264,7 +244,6 @@
   "name": "Elevação posterior com barra",
   "muscle": "Ombros",
   "equipment": "barra",
-  "difficulty": "intermediate",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/barbell-rear-delt-raise.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/barbell-rear-delt-raise.jpg",
   "instructions": "Stand with your feet shoulder-width apart and hold a barbell with an overhand grip, palms facing down. Bend your knees slightly and hinge forward at the hips, keeping your back straight. Raise the barbell out to the sides, keeping your arms straight, until they are parallel to the ground. Pause for a moment at the top, then slowly lower the barbell back to the starting position. Repeat for the desired number of repetitions."
@@ -273,7 +252,6 @@
   "name": "Desenvolvimento nuca com barra",
   "muscle": "Ombros",
   "equipment": "barra",
-  "difficulty": "advanced",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/barbell-seated-behind-head-military-press.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/barbell-seated-behind-head-military-press.jpg",
   "instructions": "Sit on a bench with back support and grip the barbell with hands wider than shoulder-width. Lower the barbell slowly behind your head to just below ear level, then press upward until arms are fully extended. Use a spotter and maintain upright posture."
@@ -282,7 +260,6 @@
   "name": "Remada alta com barra",
   "muscle": "Ombros",
   "equipment": "barra",
-  "difficulty": "intermediate",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/barbell-upright-row-wide-grip.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/barbell-upright-row-wide-grip.jpg",
   "instructions": "Stand with feet shoulder-width apart, holding a barbell with a wide grip resting in front of your thighs. Pull the bar straight up toward your chest, lifting elbows high, then lower slowly."
@@ -291,7 +268,6 @@
   "name": "Desenvolvimento militar",
   "muscle": "Ombros",
   "equipment": "barra",
-  "difficulty": "intermediate",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/military-press.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/military-press.jpg",
   "instructions": "Stand with feet hip-width apart, holding a barbell at shoulder height with an overhand grip. Press the bar overhead by extending your arms fully, keeping your core tight and avoiding excessive lower back arch. Lower the bar to the starting position under control."
@@ -300,7 +276,6 @@
   "name": "Desenvolvimento alternado com halteres",
   "muscle": "Ombros",
   "equipment": "halteres",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-alternate-shoulder-press.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-alternate-shoulder-press.jpg",
   "instructions": "Sit or stand with a dumbbell in each hand at shoulder height. Press one dumbbell overhead while keeping the other stationary, then alternate arms for each repetition."
@@ -309,7 +284,6 @@
   "name": "Desenvolvimento Arnold",
   "muscle": "Ombros",
   "equipment": "halteres",
-  "difficulty": "intermediate",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-arnold-press.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-arnold-press.jpg",
   "instructions": "Sit on a bench with back support and hold a dumbbell in each hand at shoulder level, palms facing your body and elbows bent. Press the dumbbells upward until your arms are fully extended and your palms are facing forward. Rotate your wrists as you lift, so that your palms are facing forward at the top of the movement. Pause for a moment at the top, then slowly lower the dumbbells back to the starting position. Repeat for the desired number of repetitions."
@@ -318,7 +292,6 @@
   "name": "Elevação frontal com halteres",
   "muscle": "Ombros",
   "equipment": "halteres",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-front-raise.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-front-raise.jpg",
   "instructions": "Stand with your feet shoulder-width apart, holding a dumbbell in each hand with your palms facing your thighs. Keeping your arms straight, exhale and lift the dumbbells in front of you until they are at shoulder level. Pause for a moment at the top, then inhale and slowly lower the dumbbells back down to the starting position. Repeat for the desired number of repetitions."
@@ -327,7 +300,6 @@
   "name": "Elevação lateral posterior inclinada",
   "muscle": "Ombros",
   "equipment": "halteres",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-incline-rear-lateral-raise.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-incline-rear-lateral-raise.jpg",
   "instructions": "Set up an incline bench at a 45-degree angle. Sit on the bench with your chest against the backrest and hold a dumbbell in each hand. Extend your arms straight down with your palms facing each other. Keeping a slight bend in your elbows, raise your arms out to the sides until they are parallel to the ground. Pause for a moment at the top, then slowly lower your arms back down to the starting position. Repeat for the desired number of repetitions."
@@ -336,7 +308,6 @@
   "name": "Elevação lateral com halteres",
   "muscle": "Ombros",
   "equipment": "halteres",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-lateral-raise.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-lateral-raise.jpg",
   "instructions": "Stand with your feet shoulder-width apart and hold a dumbbell in each hand, palms facing your body. Keep your back straight and engage your core. Raise your arms out to the sides until they are parallel to the floor, keeping a slight bend in your elbows. Pause for a moment at the top, then slowly lower your arms back down to the starting position. Repeat for the desired number of repetitions."
@@ -345,7 +316,6 @@
   "name": "Elevação lateral unilateral",
   "muscle": "Ombros",
   "equipment": "halteres",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-one-arm-lateral-raise.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-one-arm-lateral-raise.jpg",
   "instructions": "Stand with your feet shoulder-width apart, holding a dumbbell in one hand with your palm facing your body. Keep your back straight and your core engaged throughout the exercise. Raise the dumbbell to the side, keeping your arm straight and your palm facing down. Continue lifting until your arm is parallel to the ground. Pause for a moment at the top, then slowly lower the dumbbell back to the starting position. Repeat for the desired number of repetitions, then switch to the other arm."
@@ -354,7 +324,6 @@
   "name": "Remada para deltoide posterior",
   "muscle": "Ombros",
   "equipment": "halteres",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-rear-delt-row.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-rear-delt-row.jpg",
   "instructions": "Stand with your feet shoulder-width apart and knees slightly bent. Hold a dumbbell in each hand with your palms facing your body. Bend forward at the waist, keeping your back straight and your core engaged. Extend your arms straight down towards the floor, with a slight bend in your elbows. Raise the dumbbells out to the sides, squeezing your shoulder blades together. Pause for a moment at the top, then slowly lower the dumbbells back to the starting position. Repeat for the desired number of re"
@@ -363,7 +332,6 @@
   "name": "Elevação frontal sentado",
   "muscle": "Ombros",
   "equipment": "halteres",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-seated-front-raise.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-seated-front-raise.jpg",
   "instructions": "Sit on a bench with your feet flat on the ground and a dumbbell in each hand, resting on your thighs. Keep your back straight and core engaged. Raise the dumbbells in front of you, with your palms facing down, until they are at shoulder level. Pause for a moment at the top, then slowly lower the dumbbells back down to the starting position. Repeat for the desired number of repetitions."
@@ -372,7 +340,6 @@
   "name": "Elevação lateral sentado",
   "muscle": "Ombros",
   "equipment": "halteres",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-seated-lateral-raise.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-seated-lateral-raise.jpg",
   "instructions": "Sit on a bench with your feet flat on the ground and a dumbbell in each hand, resting on your thighs. Keep your back straight and core engaged. Raise the dumbbells to your sides with a slight bend in your elbows, until your arms are parallel to the ground. Pause for a moment at the top, then slowly lower the dumbbells back down to the starting position. Repeat for the desired number of repetitions."
@@ -381,7 +348,6 @@
   "name": "Rosca direta com barra",
   "muscle": "Bíceps",
   "equipment": "barra",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/barbell-curl.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/barbell-curl.jpg",
   "instructions": "Stand up straight with your feet shoulder-width apart and hold a barbell with an underhand grip, palms facing forward. Keep your elbows close to your torso and exhale as you curl the weights while contracting your biceps. Continue to raise the bar until your biceps are fully contracted and the bar is at shoulder level. Hold the contracted position for a brief pause as you squeeze your biceps. Inhale as you slowly begin to lower the bar back to the starting position. Repeat for the desired number"
@@ -390,7 +356,6 @@
   "name": "Rosca arrastada com barra",
   "muscle": "Bíceps",
   "equipment": "barra",
-  "difficulty": "intermediate",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/barbell-drag-curl.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/barbell-drag-curl.jpg",
   "instructions": "Stand with your feet shoulder-width apart and hold a barbell with an underhand grip, palms facing up. Let the barbell hang at arm's length in front of your thighs. Keeping your upper arms stationary, curl the barbell up towards your chest by contracting your biceps. Pause for a moment at the top, then slowly lower the barbell back down to the starting position. Repeat for the desired number of repetitions."
@@ -399,7 +364,6 @@
   "name": "Rosca inclinada pronada",
   "muscle": "Bíceps",
   "equipment": "barra",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/barbell-prone-incline-curl.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/barbell-prone-incline-curl.jpg",
   "instructions": "Set up an incline bench at a 45-degree angle. Lie face down on the bench with your chest and stomach resting against it. Hold a barbell with an underhand grip, shoulder-width apart. Extend your arms fully, allowing the barbell to hang down towards the floor. Keeping your upper arms stationary, exhale and curl the weights while contracting your biceps. Continue to raise the barbell until your biceps are fully contracted and the bar is at shoulder level. Hold the contracted position for a brief pa"
@@ -408,7 +372,6 @@
   "name": "Rosca alternada com halteres",
   "muscle": "Bíceps",
   "equipment": "halteres",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-biceps-curl.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-biceps-curl.jpg",
   "instructions": "Stand up straight with a dumbbell in each hand, palms facing forward and arms fully extended. Keeping your upper arms stationary, exhale and curl the weights while contracting your biceps. Continue to raise the weights until your biceps are fully contracted and the dumbbells are at shoulder level. Hold the contracted position for a brief pause as you squeeze your biceps. Inhale and slowly begin to lower the dumbbells back to the starting position. Repeat for the desired number of repetitions."
@@ -417,7 +380,6 @@
   "name": "Rosca concentrada",
   "muscle": "Bíceps",
   "equipment": "halteres",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-concentration-curl.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-concentration-curl.jpg",
   "instructions": "Sit on a bench with your legs spread apart and a dumbbell in one hand, resting your elbow on the inside of your thigh. Fully extend your arm and hold the dumbbell with an underhand grip. Keeping your upper arm stationary, exhale and curl the weight up towards your shoulder while contracting your biceps. Continue to raise the dumbbell until your biceps are fully contracted and the dumbbell is at shoulder level. Hold the contracted position for a brief pause as you squeeze your biceps. Inhale and "
@@ -426,7 +388,6 @@
   "name": "Rosca martelo cruzada",
   "muscle": "Bíceps",
   "equipment": "halteres",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-cross-body-hammer-curl.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-cross-body-hammer-curl.jpg",
   "instructions": "Stand up straight with a dumbbell in each hand, palms facing your body. Keep your elbows close to your torso and your upper arms stationary. Exhale and curl the weights while contracting your biceps, bringing the dumbbells across your body towards your opposite shoulder. Continue to raise the dumbbells until your biceps are fully contracted and the dumbbells are at shoulder level. Hold the contracted position for a brief pause as you squeeze your biceps. Inhale and slowly begin to lower the dumb"
@@ -435,7 +396,6 @@
   "name": "Rosca inclinada com halteres",
   "muscle": "Bíceps",
   "equipment": "halteres",
-  "difficulty": "intermediate",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-incline-biceps-curl.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-incline-biceps-curl.jpg",
   "instructions": "Sit back against an incline bench, holding a dumbbell in each hand with arms hanging straight down. Keeping your upper arms stationary, curl the weights up while contracting your biceps, then lower back to the start."
@@ -444,7 +404,6 @@
   "name": "Rosca inclinada",
   "muscle": "Bíceps",
   "equipment": "halteres",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-incline-curl.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-incline-curl.jpg",
   "instructions": "Set an incline bench to a 45-degree angle and sit on it with a dumbbell in each hand, palms facing forward. Rest your upper arms on the incline bench and let your elbows hang down, fully extending your arms. Keeping your upper arms stationary, exhale and curl the weights while contracting your biceps. Continue to raise the dumbbells until your biceps are fully contracted and the dumbbells are at shoulder level. Hold the contracted position for a brief pause as you squeeze your biceps. Inhale and"
@@ -453,7 +412,6 @@
   "name": "Rosca martelo inclinada",
   "muscle": "Bíceps",
   "equipment": "halteres",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-incline-hammer-curl.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-incline-hammer-curl.jpg",
   "instructions": "Sit on an incline bench with a dumbbell in each hand, palms facing your torso and arms fully extended. Keep your back against the bench and your feet flat on the floor. While keeping your upper arms stationary, exhale and curl the weights while contracting your biceps. Continue to raise the weights until your biceps are fully contracted and the dumbbells are at shoulder level. Hold the contracted position for a brief pause as you squeeze your biceps. Inhale and slowly begin to lower the dumbbell"
@@ -462,7 +420,6 @@
   "name": "Rosca Zottman unilateral no banco",
   "muscle": "Bíceps",
   "equipment": "halteres",
-  "difficulty": "intermediate",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-one-arm-zottman-preacher-curl.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-one-arm-zottman-preacher-curl.jpg",
   "instructions": "Sit on a preacher curl bench and hold a dumbbell in one hand with an underhand grip. Rest your upper arm on the preacher bench pad, allowing your arm to fully extend. Curl the dumbbell up towards your shoulder, keeping your upper arm stationary. At the top of the curl, rotate your wrist so that your palm faces up. Slowly lower the dumbbell back down to the starting position, rotating your wrist back to the starting position. Repeat for the desired number of repetitions, then switch arms."
@@ -471,7 +428,6 @@
   "name": "Rosca inclinada pronada com halteres",
   "muscle": "Bíceps",
   "equipment": "halteres",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-prone-incline-curl.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-prone-incline-curl.jpg",
   "instructions": "Adjust the bench to a 45-degree incline. Lie face down on the bench with your chest and stomach resting against it. Hold a dumbbell in each hand with your palms facing down and your arms fully extended. Keeping your upper arms stationary, exhale and curl the weights while contracting your biceps. Continue to raise the weights until your biceps are fully contracted and the dumbbells are at shoulder level. Hold the contracted position for a brief pause as you squeeze your biceps. Inhale and slowly"
@@ -480,7 +436,6 @@
   "name": "Rosca de punho neutra sentado",
   "muscle": "Bíceps",
   "equipment": "halteres",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-seated-neutral-wrist-curl.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-seated-neutral-wrist-curl.jpg",
   "instructions": "Sit on a bench with your feet flat on the ground and hold a dumbbell in each hand, palms facing each other. Rest your forearms on your thighs, allowing the dumbbells to hang down. Keeping your wrists in a neutral position, curl the dumbbells up towards your shoulders. Pause for a moment at the top, then slowly lower the dumbbells back down to the starting position. Repeat for the desired number of repetitions."
@@ -489,7 +444,6 @@
   "name": "Rosca scott com halteres",
   "muscle": "Bíceps",
   "equipment": "halteres",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-seated-preacher-curl.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-seated-preacher-curl.jpg",
   "instructions": "Sit on a preacher curl bench with your feet flat on the floor. Hold a dumbbell in one hand with an underhand grip, resting your upper arm against the preacher pad. Keeping your upper arm stationary, exhale and curl the dumbbell up towards your shoulder. Pause for a moment at the top, then inhale and slowly lower the dumbbell back down to the starting position. Repeat for the desired number of repetitions, then switch arms."
@@ -498,7 +452,6 @@
   "name": "Rosca alternada sentado",
   "muscle": "Bíceps",
   "equipment": "halteres",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-alternate-seated-biceps-curl.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-alternate-seated-biceps-curl.jpg",
   "instructions": "Sit on a bench with back support holding a dumbbell in each hand at your sides. Curl one dumbbell by flexing the elbow, then lower it and repeat with the opposite arm, keeping your torso stable."
@@ -507,7 +460,6 @@
   "name": "Supino fechado com barra",
   "muscle": "Tríceps",
   "equipment": "barra",
-  "difficulty": "intermediate",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/barbell-close-grip-bench-press.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/barbell-close-grip-bench-press.jpg",
   "instructions": "Lie on a bench with feet flat, grip the barbell with hands about shoulder-width apart or slightly narrower. Lower the bar to your lower chest while keeping elbows tucked. Press the bar back up, focusing on extending through your triceps."
@@ -516,7 +468,6 @@
   "name": "Supino fechado com halteres",
   "muscle": "Tríceps",
   "equipment": "halteres",
-  "difficulty": "intermediate",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-close-grip-press.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-close-grip-press.jpg",
   "instructions": "Lie on a bench holding dumbbells together above your chest, palms facing each other. Lower the weights while keeping elbows close to your sides, then press back up by extending the arms."
@@ -525,7 +476,6 @@
   "name": "Extensão de tríceps inclinada",
   "muscle": "Tríceps",
   "equipment": "halteres",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-incline-triceps-extension.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-incline-triceps-extension.jpg",
   "instructions": "Sit on an incline bench with a dumbbell in each hand, palms facing inwards. Extend your arms fully overhead, keeping your elbows close to your head. Lower the dumbbells behind your head by bending your elbows, keeping your upper arms stationary. Pause for a moment, then raise the dumbbells back to the starting position by extending your arms. Repeat for the desired number of repetitions."
@@ -534,7 +484,6 @@
   "name": "Coice com halteres",
   "muscle": "Tríceps",
   "equipment": "halteres",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-kickback.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-kickback.jpg",
   "instructions": "Stand with your feet shoulder-width apart and hold a dumbbell in each hand. Bend your knees slightly and hinge forward at the hips, keeping your back straight. Bring your upper arms close to your sides, with your elbows bent at a 90-degree angle. Extend your arms straight back, squeezing your triceps at the top of the movement. Pause for a moment, then slowly lower the dumbbells back to the starting position. Repeat for the desired number of repetitions."
@@ -543,7 +492,6 @@
   "name": "Extensão de tríceps deitado alternado",
   "muscle": "Tríceps",
   "equipment": "halteres",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-lying-alternate-extension.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-lying-alternate-extension.jpg",
   "instructions": "Lie flat on a bench with a dumbbell in each hand, palms facing each other. Extend your arms straight up over your chest, keeping a slight bend in your elbows. Lower one dumbbell down towards your head, bending at the elbow, while keeping the other arm extended. Pause for a moment at the bottom, then raise the dumbbell back up to the starting position. Repeat with the other arm, alternating sides for the desired number of repetitions."
@@ -552,7 +500,6 @@
   "name": "Extensão de tríceps deitado",
   "muscle": "Tríceps",
   "equipment": "halteres",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-lying-triceps-extension.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-lying-triceps-extension.jpg",
   "instructions": "Lie flat on a bench with a dumbbell in each hand, palms facing each other. Extend your arms straight up over your chest, keeping your elbows close to your body. Lower the dumbbells down towards your forehead, bending your elbows. Pause for a moment, then extend your arms back up to the starting position. Repeat for the desired number of repetitions."
@@ -561,7 +508,6 @@
   "name": "Extensão de tríceps unilateral",
   "muscle": "Tríceps",
   "equipment": "halteres",
-  "difficulty": "intermediate",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-one-arm-triceps-extension.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-one-arm-triceps-extension.jpg",
   "instructions": "Stand or sit holding a dumbbell overhead with one arm fully extended. Lower the dumbbell by bending the elbow, then extend the arm back up to starting position, keeping upper arm still."
@@ -570,7 +516,6 @@
   "name": "Extensão de tríceps pronada",
   "muscle": "Tríceps",
   "equipment": "halteres",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-pronate-grip-triceps-extension.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-pronate-grip-triceps-extension.jpg",
   "instructions": "Sit on a bench or chair with your back straight and feet flat on the ground. Hold a dumbbell with both hands, palms facing down, and extend your arms straight up overhead. Keeping your upper arms close to your head and elbows pointing forward, slowly lower the dumbbell behind your head by bending your elbows. Pause for a moment, then extend your arms back up to the starting position. Repeat for the desired number of repetitions."
@@ -579,7 +524,6 @@
   "name": "Coice sentado",
   "muscle": "Tríceps",
   "equipment": "halteres",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-seated-kickback.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-seated-kickback.jpg",
   "instructions": "Sit on a bench with your feet flat on the ground and hold a dumbbell in each hand. Bend your knees slightly and lean forward from your hips, keeping your back straight. Bring your upper arms close to your sides and keep your elbows bent at a 90-degree angle. Extend your arms straight back, squeezing your triceps at the top of the movement. Pause for a moment, then slowly lower the dumbbells back to the starting position. Repeat for the desired number of repetitions."
@@ -588,7 +532,6 @@
   "name": "Extensão de tríceps sentado",
   "muscle": "Tríceps",
   "equipment": "halteres",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-seated-triceps-extension.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-seated-triceps-extension.jpg",
   "instructions": "Sit on a bench with your back straight and feet flat on the ground. Hold a dumbbell with both hands and extend your arms straight up overhead. Bend your elbows and lower the dumbbell behind your head, keeping your upper arms close to your ears. Pause for a moment, then straighten your arms and return to the starting position. Repeat for the desired number of repetitions."
@@ -597,7 +540,6 @@
   "name": "Extensão de tríceps deitado no cabo",
   "muscle": "Tríceps",
   "equipment": "cabo",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/cable-lying-triceps-extension.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/cable-lying-triceps-extension.jpg",
   "instructions": "Attach a rope handle to a low pulley cable machine. Lie down on a flat bench facing up, with your head towards the cable machine. Grasp the rope handle with both hands, palms facing each other, and extend your arms straight up over your chest. Keeping your upper arms stationary, slowly lower the rope handle towards your forehead by bending your elbows. Pause for a moment at the bottom, then extend your arms back up to the starting position. Repeat for the desired number of repetitions."
@@ -606,7 +548,6 @@
   "name": "Extensão de tríceps com corda",
   "muscle": "Tríceps",
   "equipment": "cabo",
-  "difficulty": "intermediate",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/cable-rope-high-pulley-overhead-triceps-extension.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/cable-rope-high-pulley-overhead-triceps-extension.jpg",
   "instructions": "Stand or kneel with your back to the high pulley, grasping the rope with both hands. Lean forward slightly, extend your elbows to press the rope forward/upward, then return to start under control."
@@ -615,7 +556,6 @@
   "name": "Tríceps na corda",
   "muscle": "Tríceps",
   "equipment": "cabo",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/cable-pushdown-rope-attachment.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/cable-pushdown-rope-attachment.jpg",
   "instructions": "Stand facing a cable stack with a rope attached to the high pulley. Grasp the rope with both hands, elbows at your sides, and push the rope downward by extending your arms. Control the movement back to the starting position for each rep."
@@ -624,7 +564,6 @@
   "name": "Tríceps unilateral no cabo",
   "muscle": "Tríceps",
   "equipment": "cabo",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/cable-standing-one-arm-triceps-extension.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/cable-standing-one-arm-triceps-extension.jpg",
   "instructions": "Stand with your feet shoulder-width apart, facing the cable machine. Hold the cable handle with your right hand, palm facing down, and position your arm so that it is fully extended and parallel to the ground. Keep your elbow stationary and close to your body. Slowly bend your elbow, lowering the cable handle towards the back of your head. Pause for a moment at the bottom of the movement, then extend your arm back to the starting position. Repeat for the desired number of repetitions, then switc"
@@ -633,7 +572,6 @@
   "name": "Agachamento livre",
   "muscle": "Quadríceps",
   "equipment": "barra",
-  "difficulty": "intermediate",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/classic-barbell-squat.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/classic-barbell-squat.jpg",
   "instructions": "Stand with barbell placed across upper back, feet shoulder-width apart. Lower into a squat by hinging hips and bending knees until your thighs are parallel to the floor. Press through your heels to stand back up, keeping your chest up and back straight."
@@ -642,7 +580,6 @@
   "name": "Arremesso e desenvolvimento",
   "muscle": "Quadríceps",
   "equipment": "barra",
-  "difficulty": "advanced",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/barbell-clean-and-press.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/barbell-clean-and-press.jpg",
   "instructions": "Stand with your feet shoulder-width apart and the barbell on the floor in front of you. Bend your knees and hinge at the hips to lower down and grip the barbell with an overhand grip, hands slightly wider than shoulder-width apart. Drive through your heels and extend your hips and knees to lift the barbell off the floor, keeping it close to your body. As the barbell reaches your thighs, explosively extend your hips, shrug your shoulders, and pull the barbell up towards your chest. As the barbell"
@@ -651,7 +588,6 @@
   "name": "Agachamento frontal",
   "muscle": "Quadríceps",
   "equipment": "barra",
-  "difficulty": "intermediate",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/barbell-front-chest-squat.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/barbell-front-chest-squat.jpg",
   "instructions": "Stand upright, barbell resting across front shoulders, elbows high. Descend into a squat while keeping torso upright and elbows elevated. Push through your heels to return to standing, maintaining bar balance throughout."
@@ -660,7 +596,6 @@
   "name": "Agachamento goblet",
   "muscle": "Quadríceps",
   "equipment": "halteres",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-goblet-squat.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-goblet-squat.jpg",
   "instructions": "Stand with your feet shoulder-width apart, holding a dumbbell vertically against your chest with both hands. Keeping your chest up and core engaged, lower your body down into a squat position by pushing your hips back and bending your knees. Continue lowering until your thighs are parallel to the ground, or as low as you can comfortably go. Pause for a moment at the bottom, then push through your heels to return to the starting position. Repeat for the desired number of repetitions."
@@ -669,7 +604,6 @@
   "name": "Leg press pés juntos",
   "muscle": "Quadríceps",
   "equipment": "máquina",
-  "difficulty": "intermediate",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/close-feet-leg-press.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/close-feet-leg-press.jpg",
   "instructions": "Sit in a leg press machine and place your feet hip-width or closer at the center of the platform. Press the platform away by extending your knees while keeping your back flat, then lower under control."
@@ -678,7 +612,6 @@
   "name": "Leg press horizontal",
   "muscle": "Quadríceps",
   "equipment": "máquina",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/lever-horizontal-leg-press.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/lever-horizontal-leg-press.jpg",
   "instructions": "Sit on the leg press machine with your feet hip-width apart on the platform. Press the platform away by extending your legs, but avoid locking your knees, then lower slowly back to the starting position."
@@ -687,7 +620,6 @@
   "name": "Cadeira extensora",
   "muscle": "Quadríceps",
   "equipment": "máquina",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/lever-leg-extension.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/lever-leg-extension.jpg",
   "instructions": "Adjust the seat height and backrest of the machine to fit your body. Sit on the machine with your back against the backrest and your feet on the footpad. Grasp the handles or sidebars for stability. Extend your legs forward by straightening your knees, lifting the weight. Pause for a moment at the top, then slowly lower the weight back to the starting position. Repeat for the desired number of repetitions."
@@ -696,7 +628,6 @@
   "name": "Leg press 45° aberto",
   "muscle": "Quadríceps",
   "equipment": "máquina",
-  "difficulty": "intermediate",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/sled-45-degree-leg-wide-press.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/sled-45-degree-leg-wide-press.jpg",
   "instructions": "Sit on a 45-degree leg press machine with feet placed wider than hip-width on the platform. Push the platform up to release the safety handles and slowly lower it toward your chest, then drive through your heels to press the weight back up."
@@ -705,7 +636,6 @@
   "name": "Agachamento no smith",
   "muscle": "Quadríceps",
   "equipment": "smith",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/smith-chair-squat.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/smith-chair-squat.jpg",
   "instructions": "Adjust the height of the smith machine bar to a comfortable position. Stand with your feet shoulder-width apart, toes slightly turned out. Place the barbell across your upper back, resting it on your traps. Engage your core and keep your chest up as you slowly lower your body by bending your knees and hips. Continue lowering until your thighs are parallel to the ground, or as low as you can comfortably go. Pause for a moment, then push through your heels to return to the starting position. Repea"
@@ -714,7 +644,6 @@
   "name": "Leg press no smith",
   "muscle": "Quadríceps",
   "equipment": "smith",
-  "difficulty": "intermediate",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/smith-leg-press.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/smith-leg-press.jpg",
   "instructions": "Lie on the floor or bench under a Smith machine with feet placed on the bar wider than shoulder-width. Unlock the bar and press upwards with your legs, lowering until your knees reach a 90-degree angle before pressing back to the start."
@@ -723,7 +652,6 @@
   "name": "Agachamento sissy com peso",
   "muscle": "Quadríceps",
   "equipment": "com peso",
-  "difficulty": "advanced",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/weighted-sissy-squat.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/weighted-sissy-squat.jpg",
   "instructions": "Stand with your feet shoulder-width apart and your toes pointing slightly outward. Hold a weight in front of your chest with both hands, or place a barbell across your upper back. Keeping your chest up and your core engaged, slowly lower your body down by bending at the knees and hips. Continue lowering until your thighs are parallel to the ground or as low as you can comfortably go. Pause for a moment at the bottom, then push through your heels to return to the starting position. Repeat for the"
@@ -732,7 +660,6 @@
   "name": "Subida no banco com salto",
   "muscle": "Quadríceps",
   "equipment": "peso corporal",
-  "difficulty": "intermediate",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/jump-step-up.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/jump-step-up.jpg",
   "instructions": "Stand in front of a box or platform. Step onto the box with one foot, then explosively jump up, driving through the working leg. Land softly and return to the starting position, alternating legs if desired."
@@ -741,7 +668,6 @@
   "name": "Agachamento",
   "muscle": "Quadríceps",
   "equipment": "peso corporal",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/squat.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/squat.jpg",
   "instructions": "Stand with feet shoulder-width apart and toes slightly turned out. Lower your hips back and down as if sitting into a chair, keeping your chest upright, then drive through your heels to stand back up."
@@ -750,7 +676,6 @@
   "name": "Stiff com barra",
   "muscle": "Posterior",
   "equipment": "barra",
-  "difficulty": "intermediate",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/barbell-straight-leg-deadlift.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/barbell-straight-leg-deadlift.jpg",
   "instructions": "Stand with your feet shoulder-width apart and your toes pointing forward. Hold the barbell with an overhand grip, hands slightly wider than shoulder-width apart. Bend at your hips and lower the barbell towards the ground, keeping your back straight and your knees slightly bent. Lower the barbell until you feel a stretch in your hamstrings. Engage your hamstrings and glutes to lift the barbell back up to the starting position. Repeat for the desired number of repetitions."
@@ -759,7 +684,6 @@
   "name": "Flexora com halteres",
   "muscle": "Posterior",
   "equipment": "halteres",
-  "difficulty": "intermediate",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-lying-femoral.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-lying-femoral.jpg",
   "instructions": "Lie face down on a flat bench with a dumbbell held securely between your feet. Flex your knees to bring the dumbbell up toward your glutes, then lower with control."
@@ -768,7 +692,6 @@
   "name": "Stiff unilateral com halteres",
   "muscle": "Posterior",
   "equipment": "halteres",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/single-dumbbell-stiff-leg-deadlift.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/single-dumbbell-stiff-leg-deadlift.jpg",
   "instructions": "Stand holding a dumbbell with both hands in front of your thighs. With a slight bend at the knees, hinge at the hips to lower the dumbbell until you feel a stretch in your hamstrings and then return to the starting position."
@@ -777,7 +700,6 @@
   "name": "Flexora ajoelhado",
   "muscle": "Posterior",
   "equipment": "máquina",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/lever-kneeling-leg-curl.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/lever-kneeling-leg-curl.jpg",
   "instructions": "Adjust the machine to fit your body and select the desired weight. Kneel on the machine facing downwards, with your knees resting on the pad and your feet secured under the footpads. Grasp the handles or the sides of the machine for stability. Keeping your upper body stationary, exhale and curl your legs up towards your glutes by flexing your knees. Pause for a moment at the top of the movement, squeezing your hamstrings. Inhale and slowly lower your legs back to the starting position, fully ext"
@@ -786,7 +708,6 @@
   "name": "Flexora deitado",
   "muscle": "Posterior",
   "equipment": "máquina",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/lever-lying-leg-curl.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/lever-lying-leg-curl.jpg",
   "instructions": "Adjust the machine to fit your body and select the desired weight. Lie face down on the machine with your legs straight and your heels against the padded lever. Grasp the handles or the sides of the machine for stability. Keeping your upper body stationary, exhale and curl your legs up as far as possible without lifting your hips off the pad. Hold the contracted position for a brief pause as you squeeze your hamstrings. Inhale and slowly lower the lever back to the starting position. Repeat for "
@@ -795,7 +716,6 @@
   "name": "Flexora sentado",
   "muscle": "Posterior",
   "equipment": "máquina",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/lever-seated-leg-curl.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/lever-seated-leg-curl.jpg",
   "instructions": "Adjust the machine to fit your body and sit on it with your back against the backrest. Place your lower legs under the padded lever, just above your ankles. Grasp the handles on the sides of the machine for support. Keeping your upper legs stationary, exhale and curl your legs up as far as possible. Hold the contracted position for a brief pause as you squeeze your hamstrings. Inhale and slowly lower the lever back to the starting position. Repeat for the desired number of repetitions."
@@ -804,7 +724,6 @@
   "name": "Afundo com barra",
   "muscle": "Glúteos",
   "equipment": "barra",
-  "difficulty": "intermediate",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/barbell-lunge.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/barbell-lunge.jpg",
   "instructions": "Start by standing with your feet shoulder-width apart and a barbell resting on your upper back. Take a step forward with your right foot, keeping your torso upright. Lower your body by bending your right knee until your thigh is parallel to the ground. Push through your right heel to return to the starting position. Repeat with your left leg, alternating legs for the desired number of repetitions."
@@ -813,7 +732,6 @@
   "name": "Levantamento terra com halteres",
   "muscle": "Glúteos",
   "equipment": "halteres",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-deadlift.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-deadlift.jpg",
   "instructions": "Stand with your feet shoulder-width apart, toes pointing forward. Hold a dumbbell in each hand, palms facing your body, arms extended downwards. Bend at your hips and knees, lowering the dumbbells towards the ground while keeping your back straight. Push through your heels and extend your hips and knees, lifting the dumbbells back up to the starting position. Repeat for the desired number of repetitions."
@@ -822,7 +740,6 @@
   "name": "Afundo com halteres",
   "muscle": "Glúteos",
   "equipment": "halteres",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-lunge.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-lunge.jpg",
   "instructions": "Stand with your feet shoulder-width apart, holding a dumbbell in each hand. Take a step forward with your right foot, lowering your body into a lunge position. Keep your back straight and your chest up as you lower your body. Push through your right heel to return to the starting position. Repeat with your left leg. Alternate legs for the desired number of repetitions."
@@ -831,7 +748,6 @@
   "name": "Agachamento unilateral com halteres",
   "muscle": "Glúteos",
   "equipment": "halteres",
-  "difficulty": "advanced",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-single-leg-squat.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-single-leg-squat.jpg",
   "instructions": "Stand with your feet shoulder-width apart, holding a dumbbell in each hand. Extend one leg forward and keep it off the ground throughout the exercise. Bend your standing leg and lower your body down as if sitting back into a chair. Keep your chest up and your back straight. Pause for a moment at the bottom, then push through your heel to return to the starting position. Repeat for the desired number of repetitions, then switch legs."
@@ -840,7 +756,6 @@
   "name": "Agachamento com halteres",
   "muscle": "Glúteos",
   "equipment": "halteres",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-squat.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-squat.jpg",
   "instructions": "Stand with your feet shoulder-width apart, holding a dumbbell in each hand at your sides. Keeping your chest up and core engaged, lower your body down by bending at the knees and hips, as if sitting back into a chair. Continue lowering until your thighs are parallel to the ground, or as low as you can comfortably go. Pause for a moment at the bottom, then push through your heels to return to the starting position. Repeat for the desired number of repetitions."
@@ -849,7 +764,6 @@
   "name": "Stiff com halteres",
   "muscle": "Glúteos",
   "equipment": "halteres",
-  "difficulty": "intermediate",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-stiff-leg-deadlift.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-stiff-leg-deadlift.jpg",
   "instructions": "Stand with your feet shoulder-width apart, holding a dumbbell in each hand with an overhand grip. Keeping your back straight and your core engaged, hinge at the hips and lower the dumbbells towards the ground, allowing a slight bend in your knees. Lower the dumbbells until you feel a stretch in your hamstrings, then squeeze your glutes and push through your heels to return to the starting position. Repeat for the desired number of repetitions."
@@ -858,7 +772,6 @@
   "name": "Agachamento sumô com halteres",
   "muscle": "Glúteos",
   "equipment": "halteres",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-bar-grip-sumo-squat.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-bar-grip-sumo-squat.jpg",
   "instructions": "Stand with feet wider than shoulder-width, toes pointed out, holding a dumbbell vertically with both hands. Squat down by pushing hips back and knees out, then return to standing."
@@ -867,7 +780,6 @@
   "name": "Hiperextensão reversa na máquina",
   "muscle": "Glúteos",
   "equipment": "máquina",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/lever-reverse-hyperextension.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/lever-reverse-hyperextension.jpg",
   "instructions": "Adjust the leverage machine to fit your body and secure your feet in the foot pads. Lie face down on the machine with your upper body hanging off the edge and your hips resting on the pad. Cross your arms over your chest or place them behind your head. Engage your glutes and hamstrings to lift your legs upward until they are parallel to the ground. Pause for a moment at the top, then slowly lower your legs back down to the starting position. Repeat for the desired number of repetitions."
@@ -876,7 +788,6 @@
   "name": "Abdutora na máquina",
   "muscle": "Glúteos",
   "equipment": "máquina",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/lever-seated-hip-abduction.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/lever-seated-hip-abduction.jpg",
   "instructions": "Adjust the seat height so that your knees are at a 90-degree angle. Sit on the machine with your back against the backrest and your feet on the footrests. Place your hands on the side handles for stability. Engage your abductors and slowly push your legs apart, away from the midline of your body. Pause for a moment at the end of the movement, then slowly bring your legs back together to the starting position. Repeat for the desired number of repetitions."
@@ -885,7 +796,6 @@
   "name": "Adutora na máquina",
   "muscle": "Glúteos",
   "equipment": "máquina",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/lever-seated-hip-adduction.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/lever-seated-hip-adduction.jpg",
   "instructions": "Adjust the seat height and position yourself on the machine with your back against the backrest. Place your feet on the footrests and grasp the handles for stability. Engage your adductor muscles and slowly bring your legs together, squeezing your inner thighs. Pause for a moment at the peak contraction, then slowly return to the starting position. Repeat for the desired number of repetitions."
@@ -894,7 +804,6 @@
   "name": "Extensão de quadril na máquina",
   "muscle": "Glúteos",
   "equipment": "máquina",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/lever-standing-hip-extension.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/lever-standing-hip-extension.jpg",
   "instructions": "Position yourself on the standing hip extension machine so one foot is on the lever platform. Brace your core and press the platform straight back using your heel, extending your hip fully. Lower under control and repeat for reps before switching legs."
@@ -903,7 +812,6 @@
   "name": "Chute para trás na máquina",
   "muscle": "Glúteos",
   "equipment": "máquina",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/lever-standing-rear-kick.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/lever-standing-rear-kick.jpg",
   "instructions": "Set up at the rear kick lever machine with your working foot on the platform and your chest against the pad. Push the lever backward by extending your hip, squeezing your glutes at the top, then return to the starting position."
@@ -912,7 +820,6 @@
   "name": "Elevação de pernas deitado",
   "muscle": "Glúteos",
   "equipment": "peso corporal",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/lying-straight-leg-raise.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/lying-straight-leg-raise.jpg",
   "instructions": "Lie flat on your back with legs extended and arms at your sides. Keeping legs straight and together, lift them to about 90 degrees, then lower under control without letting heels touch the ground."
@@ -921,7 +828,6 @@
   "name": "Ponte declinada",
   "muscle": "Glúteos",
   "equipment": "peso corporal",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/rear-decline-bridge.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/rear-decline-bridge.jpg",
   "instructions": "Lie on your back with your feet flat on the ground and your knees bent. Place your arms by your sides with your palms facing down. Engage your glutes and hamstrings, and lift your hips off the ground until your body forms a straight line from your knees to your shoulders. Hold this position for a few seconds, then slowly lower your hips back down to the starting position. Repeat for the desired number of repetitions."
@@ -930,7 +836,6 @@
   "name": "Panturrilha sentado com halteres",
   "muscle": "Panturrilha",
   "equipment": "halteres",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-seated-calf-raise.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-seated-calf-raise.jpg",
   "instructions": "Sit on a bench or chair with your feet flat on the ground and a dumbbell resting on your thighs. Place the balls of your feet on a raised surface such as a step or block, with your heels hanging off the edge. Hold onto the dumbbell for stability. Raise your heels as high as possible, lifting your body weight onto the balls of your feet. Pause for a moment at the top, then slowly lower your heels back down to the starting position. Repeat for the desired number of repetitions."
@@ -939,7 +844,6 @@
   "name": "Panturrilha unilateral com halteres",
   "muscle": "Panturrilha",
   "equipment": "halteres",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-single-leg-calf-raise.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-single-leg-calf-raise.jpg",
   "instructions": "Stand on the edge of a step or platform with your heels hanging off and your toes on the step. Hold a dumbbell in one hand and place your other hand on a wall or railing for support. Raise your heel as high as possible, lifting your body up onto your toes. Pause for a moment at the top, then slowly lower your heel back down below the step. Repeat for the desired number of repetitions, then switch to the other leg."
@@ -948,7 +852,6 @@
   "name": "Panturrilha em pé com halteres",
   "muscle": "Panturrilha",
   "equipment": "halteres",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-standing-calf-raise.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-standing-calf-raise.jpg",
   "instructions": "Stand with your feet shoulder-width apart, holding a dumbbell in each hand. Raise your heels off the ground as high as possible, using your calves. Pause for a moment at the top, then slowly lower your heels back down to the starting position. Repeat for the desired number of repetitions."
@@ -957,7 +860,6 @@
   "name": "Panturrilha sentado na máquina",
   "muscle": "Panturrilha",
   "equipment": "máquina",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/lever-seated-calf-raise.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/lever-seated-calf-raise.jpg",
   "instructions": "Adjust the seat height so that your knees are slightly bent and your feet are flat on the footplate. Place your toes on the footplate with your heels hanging off the edge. Grasp the handles or the sides of the seat for stability. Push through the balls of your feet to raise your heels as high as possible. Pause for a moment at the top, then slowly lower your heels back down to the starting position. Repeat for the desired number of repetitions."
@@ -966,7 +868,6 @@
   "name": "Panturrilha em pé na máquina",
   "muscle": "Panturrilha",
   "equipment": "máquina",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/lever-standing-calf-raise.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/lever-standing-calf-raise.jpg",
   "instructions": "Adjust the machine to your height and stand with your feet shoulder-width apart. Place your shoulders under the pads and hold onto the handles for stability. Raise your heels as high as possible by extending your ankles. Pause for a moment at the top, then slowly lower your heels back down to the starting position. Repeat for the desired number of repetitions."
@@ -975,7 +876,6 @@
   "name": "Panturrilha no smith",
   "muscle": "Panturrilha",
   "equipment": "smith",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/smith-calf-raise.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/smith-calf-raise.jpg",
   "instructions": "Stand upright under the Smith machine bar, with the bar resting across your upper traps and feet shoulder-width apart. Raise your heels to stand on your toes, contract your calves, and slowly lower back to the ground."
@@ -984,7 +884,6 @@
   "name": "Panturrilha burrinho",
   "muscle": "Panturrilha",
   "equipment": "peso corporal",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/donkey-calf-raise.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/donkey-calf-raise.jpg",
   "instructions": "Stand with your toes on an elevated surface, such as a step or block. Place your hands on a stable support, such as a wall or railing, for balance. Raise your heels as high as possible, lifting your body weight onto the balls of your feet. Pause for a moment at the top, then slowly lower your heels back down to the starting position. Repeat for the desired number of repetitions."
@@ -993,7 +892,6 @@
   "name": "Flexão lateral com halteres",
   "muscle": "Core",
   "equipment": "halteres",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-side-bend.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-side-bend.jpg",
   "instructions": "Stand up straight with your feet shoulder-width apart and hold a dumbbell in one hand, letting it hang down by your side. Keeping your back straight and your core engaged, slowly bend sideways at the waist towards the opposite side of the dumbbell, lowering the weight as far as you comfortably can. Pause for a moment, then slowly return to the starting position. Repeat for the desired number of repetitions, then switch sides and repeat."
@@ -1002,7 +900,6 @@
   "name": "Abdominal ajoelhado no cabo",
   "muscle": "Core",
   "equipment": "cabo",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/cable-kneeling-crunch.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/cable-kneeling-crunch.jpg",
   "instructions": "Attach a rope handle to a high pulley and kneel down facing away from the machine. Hold the rope handle with both hands and place it behind your head, keeping your elbows out to the sides. Keeping your hips stationary, flex your waist and crunch your torso down towards your thighs. Pause for a moment at the bottom, then slowly return to the starting position. Repeat for the desired number of repetitions."
@@ -1011,7 +908,6 @@
   "name": "Abdominal em pé no cabo",
   "muscle": "Core",
   "equipment": "cabo",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/cable-standing-crunch.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/cable-standing-crunch.jpg",
   "instructions": "Attach a cable handle to a high pulley and stand facing away from the machine. Hold the handle with both hands and place it behind your head, keeping your elbows bent. Stand with your feet shoulder-width apart and your knees slightly bent. Keeping your abs engaged, exhale and crunch your torso down towards your knees, bringing your elbows towards your thighs. Pause for a moment at the bottom of the movement, then slowly return to the starting position. Repeat for the desired number of repetition"
@@ -1020,7 +916,6 @@
   "name": "Elevação em pé no cabo",
   "muscle": "Core",
   "equipment": "cabo",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/cable-standing-lift.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/cable-standing-lift.jpg",
   "instructions": "Stand facing the cable machine with your feet shoulder-width apart. Hold the cable handle with both hands and position it at waist height. Engage your core and maintain a straight back throughout the exercise. Keeping your arms straight, exhale and lift the cable handle up towards your opposite shoulder, rotating your torso. Pause for a moment at the top, then inhale and slowly lower the cable handle back to the starting position. Repeat for the desired number of repetitions, then switch sides."
@@ -1029,7 +924,6 @@
   "name": "Torção no cabo",
   "muscle": "Core",
   "equipment": "cabo",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/cable-twist-up-down.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/cable-twist-up-down.jpg",
   "instructions": "Stand with your feet shoulder-width apart, facing the cable machine. Hold the cable handle with both hands in front of your chest, keeping your arms slightly bent. Engage your core and slowly rotate your torso to one side, keeping your hips and legs stable. Pause for a moment at the end of the rotation, then slowly return to the starting position. Repeat the rotation to the opposite side. Continue alternating sides for the desired number of repetitions."
@@ -1038,7 +932,6 @@
   "name": "Extensão lombar na máquina",
   "muscle": "Core",
   "equipment": "máquina",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/lever-back-extension.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/lever-back-extension.jpg",
   "instructions": "Adjust the machine to fit your body size and range of motion. Sit on the machine with your back against the pad and your feet secured. Place your hands on the handles or grip bars. Engage your core and slowly lean forward, allowing your back to round slightly. Pause for a moment at the bottom position, feeling a stretch in your lower back. Using your back muscles, slowly raise your torso back to the starting position. Repeat for the desired number of repetitions."
@@ -1047,7 +940,6 @@
   "name": "Abdominal sentado na máquina",
   "muscle": "Core",
   "equipment": "máquina",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/lever-seated-crunch-1.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/lever-seated-crunch-1.jpg",
   "instructions": "Sit in the lever crunch machine and grasp the handles or position yourself according to machine design. Contract your abs to flex your spine forward, bringing your chest toward your knees, then return slowly to the starting position."
@@ -1056,7 +948,6 @@
   "name": "Abdominal com peso e pernas estendidas",
   "muscle": "Core",
   "equipment": "com peso",
-  "difficulty": "intermediate",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/weighted-leg-extension-crunch.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/weighted-leg-extension-crunch.jpg",
   "instructions": "Lie on your back holding a weight at your chest, legs lifted and knees bent. Extend your legs out as you crunch upward, then return to the start position."
@@ -1065,7 +956,6 @@
   "name": "Abdominal bicicleta 45°",
   "muscle": "Core",
   "equipment": "peso corporal",
-  "difficulty": "intermediate",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/45-degree-bycicle-twisting-crunch.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/45-degree-bycicle-twisting-crunch.jpg",
   "instructions": "Lie flat on your back with hands behind your head and legs raised at a 45-degree angle. Bring your right elbow toward your left knee while extending the opposite leg, then alternate sides in a pedaling motion."
@@ -1074,7 +964,6 @@
   "name": "Abdominal no banco",
   "muscle": "Core",
   "equipment": "peso corporal",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/crunch-on-bench.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/crunch-on-bench.jpg",
   "instructions": "Lie back on a bench with your knees bent and feet on the bench or floor. Cross your arms over your chest or place hands lightly behind your head, engage your abs, and lift your shoulders off the bench before lowering them down under control."
@@ -1083,7 +972,6 @@
   "name": "Elevação de pernas na barra",
   "muscle": "Core",
   "equipment": "peso corporal",
-  "difficulty": "intermediate",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/hanging-leg-hip-raise.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/hanging-leg-hip-raise.jpg",
   "instructions": "Hang from a pull-up bar with your arms fully extended and your palms facing away from you. Engage your core and lift your legs up by flexing your hips and knees until your thighs are parallel to the ground. Pause for a moment at the top, then slowly lower your legs back down to the starting position. Repeat for the desired number of repetitions."
@@ -1092,7 +980,6 @@
   "name": "Elevação de pernas estendidas na barra",
   "muscle": "Core",
   "equipment": "peso corporal",
-  "difficulty": "intermediate",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/hanging-straight-leg-raise.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/hanging-straight-leg-raise.jpg",
   "instructions": "Hang from a pull-up bar with an overhand grip, keeping your body steady. Contract your core and raise your legs, keeping them straight, until they're parallel to the ground or higher. Lower your legs with control and repeat."
@@ -1101,7 +988,6 @@
   "name": "Elevação de pernas inclinado",
   "muscle": "Core",
   "equipment": "peso corporal",
-  "difficulty": "intermediate",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/incline-leg-hip-raise.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/incline-leg-hip-raise.jpg",
   "instructions": "Lie on your back on an incline bench and hold the handles or bench for stability. Keeping legs straight, lift them until your hips come off the bench, then lower slowly."
@@ -1110,7 +996,6 @@
   "name": "Elevação de pernas deitado",
   "muscle": "Core",
   "equipment": "peso corporal",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/lying-floor-leg-raise.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/lying-floor-leg-raise.jpg",
   "instructions": "Lie flat on your back with your legs extended and arms at your sides or under your hips for support. Keeping legs straight, raise them toward the ceiling until your hips lift slightly off the floor, then lower them back down without touching the ground."
@@ -1119,7 +1004,6 @@
   "name": "Rosca de punho invertida com barra",
   "muscle": "Antebraço",
   "equipment": "barra",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/barbell-reverse-wrist-curl-over-grip.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/barbell-reverse-wrist-curl-over-grip.jpg",
   "instructions": "Sit on a bench holding a barbell with an overhand grip, forearms resting on your thighs, and wrists hanging over the edge. Extend your wrists upward, lifting the bar, then lower under control."
@@ -1128,7 +1012,6 @@
   "name": "Rosca de punho invertida em pé",
   "muscle": "Antebraço",
   "equipment": "barra",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/barbell-standing-back-wrist-curl.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/barbell-standing-back-wrist-curl.jpg",
   "instructions": "Stand up straight with your feet shoulder-width apart and hold a barbell with an overhand grip. Rest the barbell on the back of your hands with your palms facing down and your fingers pointing towards your body. Keeping your upper arms stationary, exhale and curl your wrists upwards as far as possible. Hold the contracted position for a brief pause, then inhale and slowly lower the barbell back to the starting position. Repeat for the desired number of repetitions."
@@ -1137,7 +1020,6 @@
   "name": "Rosca de punho atrás das costas",
   "muscle": "Antebraço",
   "equipment": "halteres",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-behind-back-wrist-curl.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-behind-back-wrist-curl.jpg",
   "instructions": "Stand holding a dumbbell behind your back with your palm facing back. Curl the dumbbell by flexing your wrist, then return to the starting position under control."
@@ -1146,7 +1028,6 @@
   "name": "Rosca de punho no banco",
   "muscle": "Antebraço",
   "equipment": "halteres",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-over-bench-wrist-curl.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-over-bench-wrist-curl.jpg",
   "instructions": "Sit on a bench with your forearms resting on the bench and your palms facing up, holding a dumbbell in each hand. Allow your wrists to hang over the edge of the bench. Slowly curl your wrists upward, squeezing your forearms at the top of the movement. Pause for a moment, then slowly lower your wrists back down to the starting position. Repeat for the desired number of repetitions."
@@ -1155,7 +1036,6 @@
   "name": "Elíptico",
   "muscle": "Cardio",
   "equipment": "máquina",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/elliptical.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/elliptical.jpg",
   "instructions": "Step onto the elliptical machine and grasp the moving handles. Begin moving feet in an elliptical motion, engaging both the lower and upper body by pushing and pulling the handles as you stride."
@@ -1164,7 +1044,6 @@
   "name": "Bicicleta ergométrica",
   "muscle": "Cardio",
   "equipment": "máquina",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/stationary-bike.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/stationary-bike.jpg",
   "instructions": "Adjust the seat height and handlebar position for comfort and knee alignment. Pedal continuously at your desired intensity, maintaining good posture throughout the workout."
@@ -1173,7 +1052,6 @@
   "name": "Esteira (corrida)",
   "muscle": "Cardio",
   "equipment": "máquina",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/treadmill-running.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/treadmill-running.jpg",
   "instructions": "Set your desired speed and incline on the treadmill. Start jogging or running, ensuring good posture with a natural stride. Adjust settings as needed for intensity and duration."
@@ -1182,7 +1060,6 @@
   "name": "Burpee",
   "muscle": "Cardio",
   "equipment": "peso corporal",
-  "difficulty": "intermediate",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/burpee.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/burpee.jpg",
   "instructions": "Start in a standing position with your feet shoulder-width apart. Lower your body into a squat position by bending your knees and placing your hands on the floor in front of you. Kick your feet back into a push-up position. Perform a push-up, keeping your body in a straight line. Jump your feet back into the squat position. Jump up explosively, reaching your arms overhead. Land softly and immediately lower back into a squat position to begin the next repetition."
@@ -1191,7 +1068,6 @@
   "name": "Exercício cardiovascular",
   "muscle": "Cardio",
   "equipment": "peso corporal",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/cardio-exercises.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/cardio-exercises.jpg",
   "instructions": "Choose a form of movement such as jogging, jumping jacks, or burpees. Perform continuously at a moderate to vigorous intensity for the desired time or repetitions, maintaining proper posture and consistent breathing."
@@ -1200,7 +1076,6 @@
   "name": "Polichinelo",
   "muscle": "Cardio",
   "equipment": "peso corporal",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/jumping-jack.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/jumping-jack.jpg",
   "instructions": "Begin standing with feet together and arms at sides. Jump feet outward while raising arms overhead, then reverse to starting position in a single fluid motion."
@@ -1209,7 +1084,6 @@
   "name": "Corrida",
   "muscle": "Cardio",
   "equipment": "peso corporal",
-  "difficulty": "beginner",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/running.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/running.jpg",
   "instructions": "Begin at a comfortable pace, maintaining upright posture and relaxed shoulders. Land lightly on your feet and use a natural arm swing for balance, adjusting speed and distance as fitness improves."
