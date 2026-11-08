@@ -4,7 +4,7 @@ const EDGE_URL =
   'https://ylmwwwtnqhqjtufqmctf.supabase.co/functions/v1/calculations'
 
 // Chave ANON (pública — pode ir no frontend). NUNCA a service_role aqui.
-const ANON =
+export const ANON =
   import.meta.env.VITE_SUPABASE_ANON_KEY ??
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlsbXd3d3RucWhxanR1ZnFtY3RmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYwNTA2MjUsImV4cCI6MjA5MTYyNjYyNX0.qEFf4OBdLG4yq6TgQ7F5vSTuuSQVbTCrITiPV6ZLghE'
 
@@ -85,3 +85,22 @@ export interface TrainingProgram {
 
 export const generateTraining = (data: Record<string, unknown>): Promise<{ program: TrainingProgram }> =>
   a1('generate_training', { data })
+
+export interface Profile {
+  id: string
+  fullName: string
+  address: string
+  cep: string
+  neighborhood: string
+  city: string
+  uf: string
+  cpf: string
+  whatsapp: string
+  termsAccepted: boolean
+}
+
+export const saveProfile = (data: Record<string, unknown>): Promise<Profile> =>
+  a1('save_profile', { data })
+
+export const getProfile = (id: string): Promise<Profile | null> =>
+  a1('get_profile', { id })

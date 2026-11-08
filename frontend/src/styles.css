@@ -209,6 +209,9 @@ table.result td small { color: var(--muted); font-size: 0.8rem; }
 .ex-video { width: 100%; border-radius: 12px; margin: 12px 0; background: #000; aspect-ratio: 4/3; object-fit: cover; }
 .ex-instructions { color: var(--text); font-size: 0.86rem; line-height: 1.55; margin: 4px 0 0; }
 
+/* Div oculto para gerar o PDF (html2canvas precisa do elemento renderizado) */
+.pdf-hidden { position: absolute; left: -10000px; top: 0; width: 800px; background: #fff; pointer-events: none; }
+
 /* Skeleton loaders */
 .skeleton {
   background: linear-gradient(90deg, #e9edf4 25%, #dde3ee 37%, #e9edf4 63%);

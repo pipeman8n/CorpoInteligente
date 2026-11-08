@@ -17,10 +17,14 @@ import {
   generateRaioX,
   generateStrategy,
   generateTraining,
+  saveProfile,
+  getProfile,
   type Calculation,
   type TrainingProgram,
+  type Profile,
 } from './api'
 import { EXERCISE_CATALOG, type CatalogExercise } from './exerciseCatalog'
+import { supabase } from './supabase'
 
 // Renderizador mínimo de markdown (tabela + negrito) para a saída da IA
 function inline(s: string): string {
@@ -113,13 +117,22 @@ export default function App() {
   const [trainingLoading, setTrainingLoading] = useState(false)
   const [viewing, setViewing] = useState<CatalogExercise | null>(null)
   const [openDay, setOpenDay] = useState<number | null>(0)
+  const [user, setUser] = useState<{ id: string; email?: string } | null>(null)
+  const [profile, setProfile] = useState<Profile | null>(null)
+  const [authMode, setAuthMode] = useState<'login' | 'register' | null>(null)
+  const [profileMode, setProfileMode] = useState(false)
+  const [infoPopup, setInfoPopup] = useState('')
+  const [pdfLoading, setPdfLoading] = useState(false)
+  const [authEmail, setAuthEmail] = useState('')
+  const [authPassword, setAuthPassword] = useState('')
+  const [pf, setPf] = useState({ fullName: '', address: '', cep: '', neighborhood: '', city: '', uf: '', cpf: '', whatsapp: '', termsAccepted: false })
 
   const userId = getUserId()
 
-  const loadHistory = async () => {
+  const loadHistory = async (uid?: string) => {
     setLoadingHistory(true)
     try {
-      setHistory(await getCalculations(userId))
+      setHistory(await getCalculations(uid ?? userId))
     } catch (e) {
       setError((e as Error).message)
     } finally {
@@ -127,8 +140,41 @@ export default function App() {
     }
   }
 
+  const loadProfile = async (id: string) => {
+    try {
+      const p = await getProfile(id)
+      setProfile(p)
+      if (p) {
+        setPf({ fullName: p.fullName || '', address: p.address || '', cep: p.cep || '', neighborhood: p.neighborhood || '', city: p.city || '', uf: p.uf || '', cpf: p.cpf || '', whatsapp: p.whatsapp || '', termsAccepted: p.termsAccepted })
+      }
+    } catch {
+      setProfile(null)
+    }
+  }
+
   useEffect(() => {
     loadHistory()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data }) => {
+      const u = data.session?.user
+      setUser(u ? { id: u.id, email: u.email } : null)
+      if (u) loadProfile(u.id)
+    })
+    const { data: sub } = supabase.auth.onAuthStateChange((_e, session) => {
+      const u = session?.user
+      setUser(u ? { id: u.id, email: u.email } : null)
+      if (u) {
+        loadProfile(u.id)
+        loadHistory(u.id)
+      } else {
+        setProfile(null)
+        loadHistory()
+      }
+    })
+    return () => sub.subscription.unsubscribe()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -197,6 +243,16 @@ export default function App() {
 
   const onSave = async () => {
     if (!result) return
+    if (!user) {
+      setInfoPopup('Para salvar sua análise, crie um login ou entre com sua conta.')
+      setAuthMode('login')
+      return
+    }
+    if (!profile) {
+      setInfoPopup('Complete seu cadastro para salvar.')
+      setProfileMode(true)
+      return
+    }
     setSaving(true)
     setSavedMsg('')
     setError('')
@@ -204,17 +260,121 @@ export default function App() {
       await saveCalculation({
         ...form,
         bodyFat: effectiveBodyFat ?? form.bodyFat ?? null,
-        userId,
+        userId: user.id,
         calculationCode: calcCode,
         savedAt: new Date().toISOString(),
         results: result,
       })
-      setSavedMsg('Cálculo salvo!')
-      await loadHistory()
+      setSavedMsg('Análise salva!')
+      await loadHistory(user.id)
+      await downloadPdf()
     } catch (e) {
       setError((e as Error).message)
     } finally {
       setSaving(false)
+    }
+  }
+
+  const downloadPdf = async () => {
+    const el = document.getElementById('pdf-content')
+    if (!el) return
+    setPdfLoading(true)
+    try {
+      const [{ jsPDF }, html2canvasMod] = await Promise.all([import('jspdf'), import('html2canvas')])
+      const html2canvas = html2canvasMod.default
+      const canvas = await html2canvas(el, { scale: 2, backgroundColor: '#ffffff' })
+      const img = canvas.toDataURL('image/png')
+      const pdf = new jsPDF('p', 'mm', 'a4')
+      const w = pdf.internal.pageSize.getWidth()
+      const h = (canvas.height * w) / canvas.width
+      pdf.addImage(img, 'PNG', 0, 0, w, h)
+      pdf.save(`analise-${calcCode}.pdf`)
+    } catch {
+      setError('Falha ao gerar o PDF.')
+    } finally {
+      setPdfLoading(false)
+    }
+  }
+
+  const onLogin = async () => {
+    setError('')
+    if (!authEmail || !authPassword) {
+      setError('Informe e-mail e senha.')
+      return
+    }
+    const { error } = await supabase.auth.signInWithPassword({ email: authEmail, password: authPassword })
+    if (error) {
+      setError(error.message)
+    } else {
+      setAuthMode(null)
+      setAuthEmail('')
+      setAuthPassword('')
+    }
+  }
+
+  const onRegister = async () => {
+    setError('')
+    if (!authEmail || !authPassword) {
+      setError('Informe e-mail e senha.')
+      return
+    }
+    const { data, error } = await supabase.auth.signUp({ email: authEmail, password: authPassword, options: { emailRedirectTo: window.location.origin } })
+    if (error) {
+      setError(error.message)
+      return
+    }
+    if (data.user && !data.session) {
+      setInfoPopup('Enviamos um link de ativação para seu e-mail. Clique no link para ativar sua conta e depois entre.')
+    }
+    setAuthMode(null)
+    setAuthEmail('')
+    setAuthPassword('')
+  }
+
+  const onGoogle = async () => {
+    await supabase.auth.signInWithOAuth({ provider: 'google', options: { redirectTo: window.location.origin } })
+  }
+
+  const onLogout = async () => {
+    await supabase.auth.signOut()
+  }
+
+  const onCepChange = async (cep: string) => {
+    setPf((p) => ({ ...p, cep }))
+    const c = cep.replace(/\D/g, '')
+    if (c.length === 8) {
+      try {
+        const res = await fetch(`https://viacep.com.br/ws/${c}/json/`)
+        const d = await res.json()
+        if (d && !d.erro) {
+          setPf((p) => ({ ...p, address: d.logradouro || p.address, neighborhood: d.bairro || p.neighborhood, city: d.localidade || p.city, uf: d.uf || p.uf }))
+        } else {
+          setInfoPopup('CEP não encontrado. Verifique o número.')
+        }
+      } catch {
+        /* ignore */
+      }
+    }
+  }
+
+  const onSaveProfile = async () => {
+    setError('')
+    if (!user) return
+    if (!pf.fullName || !pf.address || !pf.cep || !pf.neighborhood || !pf.city || !pf.cpf || !pf.whatsapp) {
+      setError('Preencha todos os campos do cadastro.')
+      return
+    }
+    if (!pf.termsAccepted) {
+      setError('Você precisa aceitar os termos de uso.')
+      return
+    }
+    try {
+      const saved = await saveProfile({ id: user.id, ...pf })
+      setProfile(saved)
+      setProfileMode(false)
+      setInfoPopup('Cadastro concluído!')
+    } catch (e) {
+      setError((e as Error).message)
     }
   }
 
@@ -317,6 +477,15 @@ export default function App() {
           <button className={view === 'meus' ? 'navlink active' : 'navlink'} onClick={() => setView('meus')}>
             Meus Cálculos <span className="badge">{history.length}</span>
           </button>
+          {user ? (
+            <button className="navlink" onClick={onLogout} title={user.email}>
+              Sair
+            </button>
+          ) : (
+            <button className="navlink" onClick={() => setAuthMode('login')}>
+              Entrar
+            </button>
+          )}
         </div>
       </div>
 
@@ -590,19 +759,12 @@ export default function App() {
                 </tbody>
               </table>
 
-              {savedMsg && <div className="ok">{savedMsg}</div>}
-
-              <div className="actions">
-                <button className="btn btn-primary" onClick={onSave} disabled={saving}>
-                  {saving ? 'Salvando...' : 'Salvar cálculo'}
-                </button>
-              </div>
               <div className="actions secondary">
                 <button className="btn btn-secondary" onClick={onGenerateAI} disabled={aiLoading}>
-                  {aiLoading ? 'Gerando...' : 'Gerar Análise Corporal Completa'}
+                  {aiLoading ? 'Gerando...' : '1 Gerar Análise Corporal Completa'}
                 </button>
                 <button className="btn btn-secondary" onClick={onGenerateStrategy} disabled={strategyLoading}>
-                  {strategyLoading ? 'Gerando...' : 'Gerar Estratégia para Meta'}
+                  {strategyLoading ? 'Gerando...' : '2 Gerar Estratégia para Meta'}
                 </button>
               </div>
 
@@ -612,7 +774,7 @@ export default function App() {
               <div className="actions">
                 <button className="btn btn-ghost" onClick={() => goToStep(2)}>Voltar</button>
                 <button className="btn btn-primary" onClick={onGoToTraining} disabled={!strategyContent}>
-                  Criar roteiro de treinos
+                  3 Criar roteiro de treinos
                 </button>
               </div>
               {!strategyContent && (
@@ -689,6 +851,13 @@ export default function App() {
               )}
 
               <div className="actions">
+                <button className="btn btn-primary" onClick={onSave} disabled={saving || pdfLoading}>
+                  {pdfLoading ? 'Gerando PDF...' : saving ? 'Salvando...' : 'Salvar Minha Análise'}
+                </button>
+              </div>
+              {savedMsg && <div className="ok">{savedMsg}</div>}
+
+              <div className="actions">
                 <button className="btn btn-ghost" onClick={() => goToStep(3)}>Voltar</button>
               </div>
             </div>
@@ -755,6 +924,112 @@ export default function App() {
           </div>
         </div>
       )}
+
+      {authMode && (
+        <div className="modal-overlay" onClick={() => setAuthMode(null)}>
+          <div className="modal" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close" onClick={() => setAuthMode(null)} aria-label="Fechar">×</button>
+            <h3>{authMode === 'login' ? 'Entrar' : 'Criar conta'}</h3>
+            <label>E-mail</label>
+            <input type="email" value={authEmail} onChange={(e) => setAuthEmail(e.target.value)} placeholder="seu@email.com" />
+            <label>Senha</label>
+            <input type="password" value={authPassword} onChange={(e) => setAuthPassword(e.target.value)} placeholder="••••••" />
+            <div className="actions">
+              {authMode === 'login' ? (
+                <button className="btn btn-primary" onClick={onLogin}>Entrar</button>
+              ) : (
+                <button className="btn btn-primary" onClick={onRegister}>Criar conta</button>
+              )}
+            </div>
+            <div className="actions secondary">
+              <button className="btn btn-secondary" onClick={onGoogle}>Entrar com Google</button>
+            </div>
+            <p className="hint" style={{ textAlign: 'center', cursor: 'pointer' }} onClick={() => setAuthMode(authMode === 'login' ? 'register' : 'login')}>
+              {authMode === 'login' ? 'Não tem conta? Criar conta' : 'Já tem conta? Entrar'}
+            </p>
+            {authMode === 'register' && (
+              <p className="hint">Você receberá um e-mail com um link para ativar sua conta.</p>
+            )}
+          </div>
+        </div>
+      )}
+
+      {profileMode && (
+        <div className="modal-overlay" onClick={() => setProfileMode(false)}>
+          <div className="modal" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close" onClick={() => setProfileMode(false)} aria-label="Fechar">×</button>
+            <h3>Complete seu cadastro</h3>
+            <label>Nome completo</label>
+            <input value={pf.fullName} onChange={(e) => setPf((p) => ({ ...p, fullName: e.target.value }))} placeholder="Seu nome completo" />
+            <label>CEP</label>
+            <input value={pf.cep} onChange={(e) => onCepChange(e.target.value)} placeholder="00000-000" />
+            <label>Endereço</label>
+            <input value={pf.address} onChange={(e) => setPf((p) => ({ ...p, address: e.target.value }))} placeholder="Rua, número" />
+            <div className="row">
+              <div>
+                <label>Bairro</label>
+                <input value={pf.neighborhood} onChange={(e) => setPf((p) => ({ ...p, neighborhood: e.target.value }))} />
+              </div>
+              <div>
+                <label>Cidade</label>
+                <input value={pf.city} onChange={(e) => setPf((p) => ({ ...p, city: e.target.value }))} />
+              </div>
+            </div>
+            <label>CPF</label>
+            <input value={pf.cpf} onChange={(e) => setPf((p) => ({ ...p, cpf: e.target.value }))} placeholder="000.000.000-00" />
+            <label>Contato (WhatsApp)</label>
+            <input value={pf.whatsapp} onChange={(e) => setPf((p) => ({ ...p, whatsapp: e.target.value }))} placeholder="(11) 90000-0000" />
+            <label className="radio" style={{ marginTop: 14 }}>
+              <input type="checkbox" checked={pf.termsAccepted} onChange={(e) => setPf((p) => ({ ...p, termsAccepted: e.target.checked }))} />
+              Aceito os termos de uso
+            </label>
+            <p className="hint">Ao usar o Body & Health você concorda com os termos de uso e a política de privacidade.</p>
+            <div className="actions">
+              <button className="btn btn-primary" onClick={onSaveProfile}>Concluir cadastro</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {infoPopup && (
+        <div className="modal-overlay" onClick={() => setInfoPopup('')}>
+          <div className="modal" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close" onClick={() => setInfoPopup('')} aria-label="Fechar">×</button>
+            <h3>Aviso</h3>
+            <p>{infoPopup}</p>
+            <div className="actions">
+              <button className="btn btn-primary" onClick={() => setInfoPopup('')}>Entendi</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <div id="pdf-content" className="pdf-hidden">
+        <div style={{ fontFamily: 'Sora, sans-serif', color: '#111', fontSize: 13 }}>
+          <h1 style={{ fontSize: 22, margin: '0 0 4px' }}>Body & Health</h1>
+          <p style={{ color: '#555', margin: '0 0 16px' }}>Análise Corporal - {form.name}, {calcCode}, {new Date().toLocaleDateString('pt-BR')}</p>
+          {result && (
+            <>
+              <h2 style={{ fontSize: 16, borderBottom: '1px solid #ccc', paddingBottom: 4 }}>Raio X Corporal</h2>
+              <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+                <tbody>
+                  <tr><td style={{ padding: '4px 8px 4px 0', fontWeight: 700, width: 160 }}>IMC</td><td style={{ padding: '4px 0' }}>{result.imc} ({result.imcClass})</td></tr>
+                  <tr><td style={{ padding: '4px 8px 4px 0', fontWeight: 700 }}>Massa magra</td><td style={{ padding: '4px 0' }}>{result.leanMass} kg</td></tr>
+                  {result.bodyFatPct != null && <tr><td style={{ padding: '4px 8px 4px 0', fontWeight: 700 }}>% gordura</td><td style={{ padding: '4px 0' }}>{result.bodyFatPct}%</td></tr>}
+                  <tr><td style={{ padding: '4px 8px 4px 0', fontWeight: 700 }}>TMB</td><td style={{ padding: '4px 0' }}>{result.tmb} kcal</td></tr>
+                  <tr><td style={{ padding: '4px 8px 4px 0', fontWeight: 700 }}>GCT</td><td style={{ padding: '4px 0' }}>{result.gct} kcal</td></tr>
+                  <tr><td style={{ padding: '4px 8px 4px 0', fontWeight: 700 }}>Meta calórica</td><td style={{ padding: '4px 0' }}>{result.calorieTarget} kcal</td></tr>
+                  <tr><td style={{ padding: '4px 8px 4px 0', fontWeight: 700 }}>Macros</td><td style={{ padding: '4px 0' }}>P {result.protein}g / C {result.carbs}g / G {result.fat}g</td></tr>
+                  <tr><td style={{ padding: '4px 8px 4px 0', fontWeight: 700 }}>Água</td><td style={{ padding: '4px 0' }}>{result.water} L/dia</td></tr>
+                </tbody>
+              </table>
+            </>
+          )}
+          {aiContent && <><h2 style={{ fontSize: 16, borderBottom: '1px solid #ccc', paddingBottom: 4, marginTop: 16 }}>Análise Corporal Completa</h2><div style={{ fontSize: 12 }} dangerouslySetInnerHTML={{ __html: renderMarkdown(aiContent) }} /></>}
+          {strategyContent && <><h2 style={{ fontSize: 16, borderBottom: '1px solid #ccc', paddingBottom: 4, marginTop: 16 }}>Estratégia para Meta</h2><div style={{ fontSize: 12 }} dangerouslySetInnerHTML={{ __html: renderMarkdown(strategyContent) }} /></>}
+          {training && <><h2 style={{ fontSize: 16, borderBottom: '1px solid #ccc', paddingBottom: 4, marginTop: 16 }}>Roteiro de Treinos</h2>{training.days.map((d, i) => <div key={i} style={{ marginTop: 10 }}><h3 style={{ fontSize: 14, margin: '0 0 4px' }}>{d.name}</h3><ul style={{ margin: '0 0 0 18px', padding: 0 }}>{d.exercises.map((e, j) => <li key={j} style={{ margin: '2px 0' }}>{e.name} - {e.sets} séries de {e.reps}{e.rest ? `, descanso ${e.rest}` : ''}</li>)}</ul></div>)}</>}
+        </div>
+      </div>
     </div>
   )
 }
