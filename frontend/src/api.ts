@@ -21,9 +21,14 @@ export interface Calculation {
   bodyFatEstimationMethod: string | null
   goal: string
   activityLevel: string
-  strategy: unknown
-  trainingProgram: unknown
-  results: unknown
+  restrictions: string | null
+  prazo_meses: number | null
+  meta_kg: number | null
+  frequencia_treino: string | null
+  duracao_treino: string | null
+  strategy: string | null
+  trainingProgram: TrainingProgram | null
+  results: any
   savedAt: string
 }
 

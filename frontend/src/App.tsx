@@ -256,7 +256,7 @@ export default function App() {
   const onSave = async () => {
     if (!result) return
     if (!user) {
-      setInfoPopup('Para salvar sua análise, crie um login ou entre com sua conta.')
+      setInfoPopup('Para salvar seu roteiro, crie um login ou entre com sua conta.')
       setAuthMode('login')
       return
     }
@@ -265,19 +265,30 @@ export default function App() {
       setProfileMode(true)
       return
     }
+    if (!strategyContent || !training) {
+      setInfoPopup('Gere a Estratégia para Meta e o treino antes de salvar o roteiro.')
+      return
+    }
     setSaving(true)
     setSavedMsg('')
     setError('')
     try {
+      const { prazoMeses, metaKg, frequenciaOverride, duracaoTreino, ...restForm } = form
       await saveCalculation({
-        ...form,
+        ...restForm,
+        prazo_meses: prazoMeses ?? null,
+        meta_kg: metaKg ?? null,
+        frequencia_treino: frequenciaOverride || null,
+        duracao_treino: duracaoTreino || null,
         bodyFat: effectiveBodyFat ?? form.bodyFat ?? null,
         userId: user.id,
         calculationCode: calcCode,
         savedAt: new Date().toISOString(),
         results: result,
+        strategy: strategyContent,
+        trainingProgram: training,
       })
-      setSavedMsg('Análise salva!')
+      setSavedMsg('Roteiro salvo!')
       await loadHistory(user.id)
       await downloadPdf()
     } catch (e) {
@@ -300,7 +311,7 @@ export default function App() {
       const w = pdf.internal.pageSize.getWidth()
       const h = (canvas.height * w) / canvas.width
       pdf.addImage(img, 'PNG', 0, 0, w, h)
-      pdf.save(`analise-${calcCode}.pdf`)
+      pdf.save(`roteiro-${calcCode}.pdf`)
     } catch {
       setError('Falha ao gerar o PDF.')
     } finally {
@@ -431,6 +442,38 @@ export default function App() {
     } catch (e) {
       setError((e as Error).message)
     }
+  }
+
+  const onLoadCalc = (c: Calculation) => {
+    if (!c.results) {
+      setError('Este roteiro não tem dados de Raio X.')
+      return
+    }
+    setForm({
+      name: c.name,
+      age: c.age,
+      gender: c.gender as any,
+      weight: c.weight,
+      height: c.height,
+      bodyFat: c.bodyFat ?? undefined,
+      bodyFatEstimationMethod: c.bodyFatEstimationMethod ?? '',
+      activityLevel: c.activityLevel as any,
+      goal: c.goal as any,
+      restrictions: c.restrictions ?? '',
+      prazoMeses: c.prazo_meses ?? undefined,
+      metaKg: c.meta_kg ?? undefined,
+      frequenciaOverride: c.frequencia_treino || '',
+      duracaoTreino: c.duracao_treino || '',
+    })
+    setCalcCode(c.calculationCode)
+    setEffectiveBodyFat(c.bodyFat ?? null)
+    setResult(c.results as RaioXResult)
+    setStrategyContent(typeof c.strategy === 'string' ? c.strategy : '')
+    setTraining(c.trainingProgram)
+    setAiContent('')
+    setView('app')
+    setStep(3)
+    setError('')
   }
 
   const onGenerateTraining = () => {
@@ -885,7 +928,7 @@ export default function App() {
 
               <div className="actions">
                 <button className="btn btn-primary" onClick={onSave} disabled={saving || pdfLoading}>
-                  {pdfLoading ? 'Gerando PDF...' : saving ? 'Salvando...' : 'Salvar Minha Análise'}
+                  {pdfLoading ? 'Gerando PDF...' : saving ? 'Salvando...' : 'Salvar Roteiro'}
                 </button>
               </div>
               {savedMsg && <div className="ok">{savedMsg}</div>}
@@ -920,7 +963,10 @@ export default function App() {
                     {', '}{c.age} anos, {c.weight}kg/{c.height}cm, {new Date(c.savedAt).toLocaleDateString('pt-BR')}
                   </div>
                 </div>
-                <button className="btn-del" onClick={() => onDelete(c.id)}>Apagar</button>
+                <div className="hist-actions">
+                  <button className="btn-view" onClick={() => onLoadCalc(c)}>Ver roteiro</button>
+                  <button className="btn-del" onClick={() => onDelete(c.id)}>Apagar</button>
+                </div>
               </div>
             ))
           )}

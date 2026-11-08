@@ -167,6 +167,7 @@ table.result td small { color: var(--muted); font-size: 0.8rem; }
   background: transparent; color: var(--danger); font-weight: 600; cursor: pointer; font-family: inherit; font-size: 0.84rem;
 }
 .btn-del:hover { background: var(--danger-soft); border-color: var(--danger); }
+.hist-actions { display: flex; gap: 8px; align-items: center; flex-shrink: 0; }
 
 .legal { color: var(--muted); font-size: 0.75rem; margin-top: 12px; }
 .footer { text-align: center; color: var(--muted); font-size: 0.78rem; padding: 28px 0 0; }
