@@ -165,7 +165,7 @@ export default function App() {
     let cancelled = false
     supabase.rpc('increment_visit').then(({ data, error }) => {
       if (!cancelled && !error && typeof data === 'number') setVisits(data)
-    }).catch(() => {})
+    })
     return () => { cancelled = true }
   }, [])
 
