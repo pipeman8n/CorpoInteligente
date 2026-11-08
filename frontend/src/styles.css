@@ -164,6 +164,7 @@ table.result td small { color: var(--muted); font-size: 0.8rem; }
 .legal { color: var(--muted); font-size: 0.75rem; margin-top: 12px; }
 .footer { text-align: center; color: var(--muted); font-size: 0.78rem; padding: 28px 0 0; }
 .footer p { margin: 5px 0; }
+.version { font-size: 0.72rem; opacity: 0.75; }
 .footer a { color: var(--accent); text-decoration: none; }
 .footer a:hover { text-decoration: underline; }
 

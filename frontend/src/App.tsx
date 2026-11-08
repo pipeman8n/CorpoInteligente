@@ -726,6 +726,9 @@ export default function App() {
         </p>
         <p>As recomendações são geradas por IA e não substituem o conselho médico profissional.</p>
         <p>Estratégias de dieta e treino são sugestões e devem ser adaptadas individualmente, preferencialmente com acompanhamento profissional.</p>
+        <p className="version">
+          v{__APP_COMMIT__} · {new Date(__APP_BUILD_TIME__).toLocaleString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' })}
+        </p>
       </footer>
 
       {viewing && (
