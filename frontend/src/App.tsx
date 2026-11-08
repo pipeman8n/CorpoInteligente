@@ -15,7 +15,6 @@ import {
   getCalculations,
   deleteCalculation,
   generateRaioX,
-  generateStrategy,
   saveProfile,
   getProfile,
   type Calculation,
@@ -24,6 +23,7 @@ import {
 } from './api'
 import { EXERCISE_CATALOG, type CatalogExercise } from './exerciseCatalog'
 import { buildTrainingProgram } from './trainingPlan'
+import { buildStrategy } from './strategyPlan'
 import { supabase } from './supabase'
 
 // Renderizador mínimo de markdown (tabela + negrito) para a saída da IA
@@ -106,7 +106,6 @@ export default function App() {
   const [aiContent, setAiContent] = useState('')
   const [aiLoading, setAiLoading] = useState(false)
   const [strategyContent, setStrategyContent] = useState('')
-  const [strategyLoading, setStrategyLoading] = useState(false)
   const [knowsBodyFat, setKnowsBodyFat] = useState<'' | 'sim' | 'nao'>('')
   const [effectiveBodyFat, setEffectiveBodyFat] = useState<number | null>(null)
   const [skinfolds, setSkinfolds] = useState<{ a?: number; b?: number; c?: number }>({})
@@ -397,24 +396,10 @@ export default function App() {
     }
   }
 
-  const onGenerateStrategy = async () => {
+  const onGenerateStrategy = () => {
     if (!result) return
-    setStrategyLoading(true)
-    setStrategyContent('')
     setError('')
-    try {
-      const res = await generateStrategy({
-        ...form,
-        bodyFat: effectiveBodyFat ?? form.bodyFat ?? null,
-        calculationCode: calcCode,
-        results: result,
-      })
-      setStrategyContent(res.content)
-    } catch (e) {
-      setError((e as Error).message)
-    } finally {
-      setStrategyLoading(false)
-    }
+    setStrategyContent(buildStrategy(form.goal, form.activityLevel, form.prazoMeses, form.weight, result))
   }
 
   const onGoToTraining = () => {
@@ -748,8 +733,8 @@ export default function App() {
                 <button className="btn btn-secondary" onClick={onGenerateAI} disabled={aiLoading}>
                   {aiLoading ? 'Gerando...' : '1 Gerar Análise Corporal Completa'}
                 </button>
-                <button className="btn btn-secondary" onClick={onGenerateStrategy} disabled={strategyLoading}>
-                  {strategyLoading ? 'Gerando...' : '2 Gerar Estratégia para Meta'}
+                <button className="btn btn-secondary" onClick={onGenerateStrategy}>
+                  2 Gerar Estratégia para Meta
                 </button>
               </div>
 
