@@ -665,56 +665,6 @@ export default function App() {
                 <option value="moderate">Moderado (3-5x/semana)</option>
                 <option value="active">Ativo (6-7x/semana)</option>
               </select>
-              {form.activityLevel && (
-                <p className="hint">
-                  Frequência de treino calculada: <strong>{trainingDays(form.activityLevel, form.frequenciaOverride)}x/semana</strong>
-                </p>
-              )}
-
-              <button type="button" className="btn-toggle" onClick={() => setShowFrequency((v) => !v)}>
-                {showFrequency ? '▾' : '▸'} Incluir nova frequência
-              </button>
-              {showFrequency && (
-                <div className="pill-group">
-                  {([
-                    ['1-3', '1 a 3x'],
-                    ['3-5', '3 a 5x'],
-                    ['6-7', '6 a 7x'],
-                  ] as const).map(([v, label]) => (
-                    <button
-                      key={v}
-                      type="button"
-                      className={`pill ${form.frequenciaOverride === v ? 'active' : ''}`}
-                      onClick={() => set('frequenciaOverride', form.frequenciaOverride === v ? '' : v)}
-                    >
-                      {label}
-                    </button>
-                  ))}
-                </div>
-              )}
-
-              <button type="button" className="btn-toggle" onClick={() => setShowDuration((v) => !v)}>
-                {showDuration ? '▾' : '▸'} Duração de treino
-              </button>
-              {showDuration && (
-                <>
-                  <div className="pill-group">
-                    {['30', '45', '60', '90'].map((d) => (
-                      <button
-                        key={d}
-                        type="button"
-                        className={`pill ${form.duracaoTreino === d ? 'active' : ''}`}
-                        onClick={() => set('duracaoTreino', form.duracaoTreino === d ? '' : d)}
-                      >
-                        {d} min
-                      </button>
-                    ))}
-                  </div>
-                  <p className="hint">
-                    Recomendação (literatura): 45-60 min é o ideal para hipertrofia. Sessões acima de 60-90 min elevam o cortisol e reduzem o retorno.
-                  </p>
-                </>
-              )}
 
               <label>Restrições / alergias</label>
               <input value={form.restrictions} onChange={(e) => set('restrictions', e.target.value)} placeholder="ex.: lactose, glúten" />
@@ -836,13 +786,60 @@ export default function App() {
               <h1>Divisão de Treino</h1>
               <p className="lede">Seu plano semanal de treino, exercício a exercício.</p>
 
-              {!training && (
-                <div className="actions">
-                  <button className="btn btn-primary" onClick={onGenerateTraining}>
-                    Gerar treino semanal
-                  </button>
+              <p className="hint">
+                Frequência de treino calculada: <strong>{trainingDays(form.activityLevel, form.frequenciaOverride)}x/semana</strong>
+              </p>
+
+              <button type="button" className="btn-toggle" onClick={() => setShowFrequency((v) => !v)}>
+                {showFrequency ? '▾' : '▸'} Incluir nova frequência
+              </button>
+              {showFrequency && (
+                <div className="pill-group">
+                  {([
+                    ['1-3', '1 a 3x'],
+                    ['3-5', '3 a 5x'],
+                    ['6-7', '6 a 7x'],
+                  ] as const).map(([v, label]) => (
+                    <button
+                      key={v}
+                      type="button"
+                      className={`pill ${form.frequenciaOverride === v ? 'active' : ''}`}
+                      onClick={() => set('frequenciaOverride', form.frequenciaOverride === v ? '' : v)}
+                    >
+                      {label}
+                    </button>
+                  ))}
                 </div>
               )}
+
+              <button type="button" className="btn-toggle" onClick={() => setShowDuration((v) => !v)}>
+                {showDuration ? '▾' : '▸'} Duração de treino
+              </button>
+              {showDuration && (
+                <>
+                  <div className="pill-group">
+                    {['30', '45', '60', '90'].map((d) => (
+                      <button
+                        key={d}
+                        type="button"
+                        className={`pill ${form.duracaoTreino === d ? 'active' : ''}`}
+                        onClick={() => set('duracaoTreino', form.duracaoTreino === d ? '' : d)}
+                      >
+                        {d} min
+                      </button>
+                    ))}
+                  </div>
+                  <p className="hint">
+                    Recomendação (literatura): 45-60 min é o ideal para hipertrofia. Sessões acima de 60-90 min elevam o cortisol e reduzem o retorno.
+                  </p>
+                </>
+              )}
+
+              <div className="actions">
+                <button className="btn btn-primary" onClick={onGenerateTraining}>
+                  {training ? 'Regenerar treino semanal' : 'Gerar treino semanal'}
+                </button>
+              </div>
 
               {training && (
                 <div className="training">
