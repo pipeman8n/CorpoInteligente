@@ -258,6 +258,14 @@ export default function App() {
     }
   }
 
+  const onGoToTraining = () => {
+    if (!strategyContent) {
+      setError('Gere a Estratégia para Meta antes de criar o roteiro de treinos.')
+      return
+    }
+    goToStep(4)
+  }
+
   const onDelete = async (id: string) => {
     try {
       await deleteCalculation(id)
@@ -591,10 +599,10 @@ export default function App() {
               </div>
               <div className="actions secondary">
                 <button className="btn btn-secondary" onClick={onGenerateAI} disabled={aiLoading}>
-                  {aiLoading ? 'Gerando...' : 'Gerar análise completa'}
+                  {aiLoading ? 'Gerando...' : 'Gerar Análise Corporal Completa'}
                 </button>
                 <button className="btn btn-secondary" onClick={onGenerateStrategy} disabled={strategyLoading}>
-                  {strategyLoading ? 'Gerando...' : 'Gerar estratégia macro'}
+                  {strategyLoading ? 'Gerando...' : 'Gerar Estratégia para Meta'}
                 </button>
               </div>
 
@@ -603,8 +611,13 @@ export default function App() {
 
               <div className="actions">
                 <button className="btn btn-ghost" onClick={() => goToStep(2)}>Voltar</button>
-                <button className="btn btn-primary" onClick={() => goToStep(4)}>Treino</button>
+                <button className="btn btn-primary" onClick={onGoToTraining} disabled={!strategyContent}>
+                  Criar roteiro de treinos
+                </button>
               </div>
+              {!strategyContent && (
+                <p className="hint">Gere a Estratégia para Meta para liberar o roteiro de treinos.</p>
+              )}
 
               <p className="legal">
                 * Resultados gerados a partir de fórmulas padrão. Consulte um nutricionista ou médico antes de iniciar qualquer dieta.
