@@ -120,6 +120,7 @@ export default function App() {
   const [openDay, setOpenDay] = useState<number | null>(0)
   const [showFrequency, setShowFrequency] = useState(false)
   const [showDuration, setShowDuration] = useState(false)
+  const [visits, setVisits] = useState<number | null>(null)
   const [user, setUser] = useState<{ id: string; email?: string } | null>(null)
   const [profile, setProfile] = useState<Profile | null>(null)
   const [authMode, setAuthMode] = useState<'login' | 'register' | null>(null)
@@ -158,6 +159,14 @@ export default function App() {
   useEffect(() => {
     loadHistory()
     // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  useEffect(() => {
+    let cancelled = false
+    supabase.rpc('increment_visit').then(({ data, error }) => {
+      if (!cancelled && !error && typeof data === 'number') setVisits(data)
+    }).catch(() => {})
+    return () => { cancelled = true }
   }, [])
 
   useEffect(() => {
@@ -938,6 +947,9 @@ export default function App() {
         <p className="version">
           v{__APP_COMMIT__} · {new Date(__APP_BUILD_TIME__).toLocaleString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' })}
         </p>
+        {visits != null && (
+          <p className="version">Acessos: {visits.toLocaleString('pt-BR')}</p>
+        )}
       </footer>
 
       {viewing && (
