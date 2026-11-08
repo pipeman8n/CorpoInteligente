@@ -42,9 +42,9 @@ const PAL: Record<ActivityLevel, number> = {
 
 const ACTIVITY_LABEL: Record<ActivityLevel, string> = {
   sedentary: 'Sedentário',
-  light: 'Leve (1-3x/semana)',
-  moderate: 'Moderado (3-5x/semana)',
-  active: 'Ativo (6-7x/semana)',
+  light: 'Leve',
+  moderate: 'Moderado',
+  active: 'Ativo',
   '': '',
 }
 
@@ -109,7 +109,7 @@ export function calculate(d: ClientData): RaioXResult {
     imc: round1(imc),
     imcClass: imcClass(imc),
     leanMass: round1(leanMass),
-    bodyFatPct: d.bodyFat ?? null,
+    bodyFatPct: d.bodyFat != null ? round1(d.bodyFat) : null,
     tmb: Math.round(tmb),
     gct: Math.round(gct),
     calorieTarget: Math.round(calorieTarget),
