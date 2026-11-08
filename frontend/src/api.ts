@@ -95,12 +95,14 @@ export interface Profile {
   id: string
   fullName: string
   address: string
+  numero: string
   cep: string
   neighborhood: string
   city: string
   uf: string
   cpf: string
   whatsapp: string
+  instagram: string
   termsAccepted: boolean
 }
 

@@ -99,7 +99,7 @@ function bodyFatClass(bf: number, gender: string): string {
 const CATALOG_MAP = new Map(EXERCISE_CATALOG.map((e) => [e.name.toLowerCase(), e]))
 
 export default function App() {
-  const [view, setView] = useState<'app' | 'meus'>('app')
+  const [view, setView] = useState<'app' | 'meus' | 'cadastro'>('app')
   const [step, setStep] = useState<1 | 2 | 3 | 4>(1)
   const [form, setForm] = useState<ClientData>(emptyForm)
   const [result, setResult] = useState<RaioXResult | null>(null)
@@ -129,7 +129,7 @@ export default function App() {
   const [pdfLoading, setPdfLoading] = useState(false)
   const [authEmail, setAuthEmail] = useState('')
   const [authPassword, setAuthPassword] = useState('')
-  const [pf, setPf] = useState({ fullName: '', address: '', cep: '', neighborhood: '', city: '', uf: '', cpf: '', whatsapp: '', termsAccepted: false })
+  const [pf, setPf] = useState({ fullName: '', address: '', numero: '', cep: '', neighborhood: '', city: '', uf: '', cpf: '', whatsapp: '', instagram: '', termsAccepted: false })
 
   const userId = getUserId()
 
@@ -149,7 +149,7 @@ export default function App() {
       const p = await getProfile(id)
       setProfile(p)
       if (p) {
-        setPf({ fullName: p.fullName || '', address: p.address || '', cep: p.cep || '', neighborhood: p.neighborhood || '', city: p.city || '', uf: p.uf || '', cpf: p.cpf || '', whatsapp: p.whatsapp || '', termsAccepted: p.termsAccepted })
+        setPf({ fullName: p.fullName || '', address: p.address || '', numero: p.numero || '', cep: p.cep || '', neighborhood: p.neighborhood || '', city: p.city || '', uf: p.uf || '', cpf: p.cpf || '', whatsapp: p.whatsapp || '', instagram: p.instagram || '', termsAccepted: p.termsAccepted })
       }
     } catch {
       setProfile(null)
@@ -393,7 +393,7 @@ export default function App() {
   const onSaveProfile = async () => {
     setError('')
     if (!user) return
-    if (!pf.fullName || !pf.address || !pf.cep || !pf.neighborhood || !pf.city || !pf.cpf || !pf.whatsapp) {
+    if (!pf.fullName || !pf.address || !pf.numero || !pf.cep || !pf.neighborhood || !pf.city || !pf.cpf || !pf.whatsapp) {
       setError('Preencha todos os campos do cadastro.')
       return
     }
@@ -516,7 +516,7 @@ export default function App() {
           </button>
           {user ? (
             <>
-              <button className="navlink user-chip" onClick={() => setProfileMode(true)} title="Ver meus dados">
+              <button className="navlink user-chip" onClick={() => { if (profile) setView('cadastro'); else setProfileMode(true) }} title="Meu Cadastro">
                 {profile?.fullName || user.email}
               </button>
               <button className="navlink" onClick={onLogout}>
@@ -988,6 +988,37 @@ export default function App() {
         </div>
       )}
 
+      {view === 'cadastro' && (
+        <div className="card">
+          <h1>Meu Cadastro</h1>
+          {profile ? (
+            <>
+              <p className="lede">Seus dados cadastrais.</p>
+              <div className="profile-view">
+                <p><strong>Nome:</strong> {profile.fullName}</p>
+                <p><strong>Endereço:</strong> {profile.address}{profile.numero ? `, ${profile.numero}` : ''}</p>
+                <p><strong>CEP:</strong> {profile.cep}</p>
+                <p><strong>Bairro:</strong> {profile.neighborhood}</p>
+                <p><strong>Cidade:</strong> {profile.city}{profile.uf ? ` - ${profile.uf}` : ''}</p>
+                <p><strong>CPF:</strong> {profile.cpf}</p>
+                <p><strong>WhatsApp:</strong> {profile.whatsapp}</p>
+                {profile.instagram && <p><strong>Instagram:</strong> @{profile.instagram.replace(/^@/, '')}</p>}
+              </div>
+              <div className="actions">
+                <button className="btn btn-primary" onClick={() => setProfileMode(true)}>Editar cadastro</button>
+              </div>
+            </>
+          ) : (
+            <>
+              <p className="lede">Você ainda não completou seu cadastro.</p>
+              <div className="actions">
+                <button className="btn btn-primary" onClick={() => setProfileMode(true)}>Completar cadastro</button>
+              </div>
+            </>
+          )}
+        </div>
+      )}
+
       <footer className="footer">
         <p>© 2026 Body And Health. Todos os direitos reservados.</p>
         <p>
@@ -1069,7 +1100,9 @@ export default function App() {
             <label>CEP</label>
             <input value={pf.cep} onChange={(e) => onCepChange(e.target.value)} placeholder="00000-000" />
             <label>Endereço</label>
-            <input value={pf.address} onChange={(e) => setPf((p) => ({ ...p, address: e.target.value }))} placeholder="Rua, número" />
+            <input value={pf.address} onChange={(e) => setPf((p) => ({ ...p, address: e.target.value }))} placeholder="Rua" />
+            <label>Número</label>
+            <input value={pf.numero} onChange={(e) => setPf((p) => ({ ...p, numero: e.target.value }))} placeholder="123" />
             <div className="row">
               <div>
                 <label>Bairro</label>
@@ -1084,6 +1117,8 @@ export default function App() {
             <input value={pf.cpf} onChange={(e) => setPf((p) => ({ ...p, cpf: e.target.value }))} placeholder="000.000.000-00" />
             <label>Contato (WhatsApp)</label>
             <input value={pf.whatsapp} onChange={(e) => setPf((p) => ({ ...p, whatsapp: e.target.value }))} placeholder="(11) 90000-0000" />
+            <label>Instagram</label>
+            <input value={pf.instagram} onChange={(e) => setPf((p) => ({ ...p, instagram: e.target.value }))} placeholder="@seu.perfil" />
             <label className="radio" style={{ marginTop: 14 }}>
               <input type="checkbox" checked={pf.termsAccepted} onChange={(e) => setPf((p) => ({ ...p, termsAccepted: e.target.checked }))} />
               Aceito os termos de uso
