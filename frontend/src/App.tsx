@@ -175,12 +175,16 @@ export default function App() {
       setUser(u ? { id: u.id, email: u.email } : null)
       if (u) loadProfile(u.id)
     })
-    const { data: sub } = supabase.auth.onAuthStateChange((_e, session) => {
+    const { data: sub } = supabase.auth.onAuthStateChange((evt, session) => {
       const u = session?.user
       setUser(u ? { id: u.id, email: u.email } : null)
       if (u) {
         loadProfile(u.id)
         loadHistory(u.id)
+        if (evt === 'SIGNED_IN') {
+          setAuthMode(null)
+          setInfoPopup(`Você entrou com ${u.email}.`)
+        }
       } else {
         setProfile(null)
         loadHistory()
@@ -505,9 +509,14 @@ export default function App() {
             Meus Cálculos <span className="badge">{history.length}</span>
           </button>
           {user ? (
-            <button className="navlink" onClick={onLogout} title={user.email}>
-              Sair
-            </button>
+            <>
+              <button className="navlink user-chip" onClick={() => setProfileMode(true)} title="Ver meus dados">
+                {profile?.fullName || user.email}
+              </button>
+              <button className="navlink" onClick={onLogout}>
+                Sair
+              </button>
+            </>
           ) : (
             <button className="navlink" onClick={() => setAuthMode('login')}>
               Entrar
@@ -1048,7 +1057,7 @@ export default function App() {
         <div className="modal-overlay" onClick={() => setProfileMode(false)}>
           <div className="modal" onClick={(e) => e.stopPropagation()}>
             <button className="modal-close" onClick={() => setProfileMode(false)} aria-label="Fechar">×</button>
-            <h3>Complete seu cadastro</h3>
+            <h3>{profile ? 'Meus dados' : 'Complete seu cadastro'}</h3>
             <label>Nome completo</label>
             <input value={pf.fullName} onChange={(e) => setPf((p) => ({ ...p, fullName: e.target.value }))} placeholder="Seu nome completo" />
             <label>CEP</label>
@@ -1075,7 +1084,7 @@ export default function App() {
             </label>
             <p className="hint">Ao usar o Body & Health você concorda com os termos de uso e a política de privacidade.</p>
             <div className="actions">
-              <button className="btn btn-primary" onClick={onSaveProfile}>Concluir cadastro</button>
+              <button className="btn btn-primary" onClick={onSaveProfile}>{profile ? 'Salvar alterações' : 'Concluir cadastro'}</button>
             </div>
           </div>
         </div>
