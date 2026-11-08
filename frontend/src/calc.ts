@@ -15,6 +15,8 @@ export interface ClientData {
   restrictions?: string
   prazoMeses?: number
   metaKg?: number
+  frequenciaOverride?: string
+  duracaoTreino?: string
 }
 
 export interface RaioXResult {
@@ -50,6 +52,14 @@ const ACTIVITY_LABEL: Record<ActivityLevel, string> = {
 
 export function activityLabel(a: ActivityLevel): string {
   return ACTIVITY_LABEL[a]
+}
+
+// Dias de treino efetivos: override de frequência ou padrão por nível de atividade
+export function trainingDays(activityLevel: string, frequenciaOverride?: string): number {
+  if (frequenciaOverride === '1-3') return 3
+  if (frequenciaOverride === '3-5') return 4
+  if (frequenciaOverride === '6-7') return 6
+  return activityLevel === 'active' ? 5 : activityLevel === 'moderate' ? 4 : 3
 }
 
 // TMB — Harris-Benedict (fórmula usada pelo prompt do "Nutrólogo Esportivo")

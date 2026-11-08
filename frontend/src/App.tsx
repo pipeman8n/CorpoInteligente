@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import {
   calculate,
   activityLabel,
+  trainingDays,
   estimateBodyFatByImc,
   estimateBodyFatBySkinfold,
   type ClientData,
@@ -74,6 +75,8 @@ const emptyForm: ClientData = {
   restrictions: '',
   prazoMeses: undefined,
   metaKg: undefined,
+  frequenciaOverride: '',
+  duracaoTreino: '',
 }
 
 function genCode(): string {
@@ -115,6 +118,8 @@ export default function App() {
   const [training, setTraining] = useState<TrainingProgram | null>(null)
   const [viewing, setViewing] = useState<CatalogExercise | null>(null)
   const [openDay, setOpenDay] = useState<number | null>(0)
+  const [showFrequency, setShowFrequency] = useState(false)
+  const [showDuration, setShowDuration] = useState(false)
   const [user, setUser] = useState<{ id: string; email?: string } | null>(null)
   const [profile, setProfile] = useState<Profile | null>(null)
   const [authMode, setAuthMode] = useState<'login' | 'register' | null>(null)
@@ -399,7 +404,7 @@ export default function App() {
   const onGenerateStrategy = () => {
     if (!result) return
     setError('')
-    setStrategyContent(buildStrategy(form.goal, form.activityLevel, form.prazoMeses, form.weight, result))
+    setStrategyContent(buildStrategy(form.goal, form.activityLevel, form.prazoMeses, form.weight, result, form.frequenciaOverride))
   }
 
   const onGoToTraining = () => {
@@ -422,7 +427,7 @@ export default function App() {
   const onGenerateTraining = () => {
     if (!result) return
     setError('')
-    setTraining(buildTrainingProgram(form.goal, form.activityLevel))
+    setTraining(buildTrainingProgram(form.goal, form.activityLevel, form.frequenciaOverride))
   }
 
   const lookup = (name: string): CatalogExercise | undefined => {
@@ -651,6 +656,56 @@ export default function App() {
                 <option value="moderate">Moderado (3-5x/semana)</option>
                 <option value="active">Ativo (6-7x/semana)</option>
               </select>
+              {form.activityLevel && (
+                <p className="hint">
+                  Frequência de treino calculada: <strong>{trainingDays(form.activityLevel, form.frequenciaOverride)}x/semana</strong>
+                </p>
+              )}
+
+              <button type="button" className="btn-toggle" onClick={() => setShowFrequency((v) => !v)}>
+                {showFrequency ? '▾' : '▸'} Incluir nova frequência
+              </button>
+              {showFrequency && (
+                <div className="pill-group">
+                  {([
+                    ['1-3', '1 a 3x'],
+                    ['3-5', '3 a 5x'],
+                    ['6-7', '6 a 7x'],
+                  ] as const).map(([v, label]) => (
+                    <button
+                      key={v}
+                      type="button"
+                      className={`pill ${form.frequenciaOverride === v ? 'active' : ''}`}
+                      onClick={() => set('frequenciaOverride', form.frequenciaOverride === v ? '' : v)}
+                    >
+                      {label}
+                    </button>
+                  ))}
+                </div>
+              )}
+
+              <button type="button" className="btn-toggle" onClick={() => setShowDuration((v) => !v)}>
+                {showDuration ? '▾' : '▸'} Duração de treino
+              </button>
+              {showDuration && (
+                <>
+                  <div className="pill-group">
+                    {['30', '45', '60', '90'].map((d) => (
+                      <button
+                        key={d}
+                        type="button"
+                        className={`pill ${form.duracaoTreino === d ? 'active' : ''}`}
+                        onClick={() => set('duracaoTreino', form.duracaoTreino === d ? '' : d)}
+                      >
+                        {d} min
+                      </button>
+                    ))}
+                  </div>
+                  <p className="hint">
+                    Recomendação (literatura): 45-60 min é o ideal para hipertrofia. Sessões acima de 60-90 min elevam o cortisol e reduzem o retorno.
+                  </p>
+                </>
+              )}
 
               <label>Restrições / alergias</label>
               <input value={form.restrictions} onChange={(e) => set('restrictions', e.target.value)} placeholder="ex.: lactose, glúten" />
@@ -783,6 +838,7 @@ export default function App() {
               {training && (
                 <div className="training">
                   {training.split && <h2 className="training-split">{training.split}</h2>}
+                  {form.duracaoTreino && <p className="tduration">Duração sugerida: {form.duracaoTreino} min por sessão</p>}
                   {training.days.map((day, di) => (
                     <div className="tday" key={di}>
                       <button
@@ -998,7 +1054,7 @@ export default function App() {
           )}
           {aiContent && <><h2 style={{ fontSize: 16, borderBottom: '1px solid #ccc', paddingBottom: 4, marginTop: 16 }}>Análise Corporal Completa</h2><div style={{ fontSize: 12 }} dangerouslySetInnerHTML={{ __html: renderMarkdown(aiContent) }} /></>}
           {strategyContent && <><h2 style={{ fontSize: 16, borderBottom: '1px solid #ccc', paddingBottom: 4, marginTop: 16 }}>Estratégia para Meta</h2><div style={{ fontSize: 12 }} dangerouslySetInnerHTML={{ __html: renderMarkdown(strategyContent) }} /></>}
-          {training && <><h2 style={{ fontSize: 16, borderBottom: '1px solid #ccc', paddingBottom: 4, marginTop: 16 }}>Roteiro de Treinos</h2>{training.days.map((d, i) => <div key={i} style={{ marginTop: 10 }}><h3 style={{ fontSize: 14, margin: '0 0 4px' }}>{d.name}</h3><ul style={{ margin: '0 0 0 18px', padding: 0 }}>{d.exercises.map((e, j) => <li key={j} style={{ margin: '2px 0' }}>{e.name} - {e.sets} séries de {e.reps}{e.rest ? `, descanso ${e.rest}` : ''}</li>)}</ul></div>)}</>}
+          {training && <><h2 style={{ fontSize: 16, borderBottom: '1px solid #ccc', paddingBottom: 4, marginTop: 16 }}>Roteiro de Treinos</h2>{form.duracaoTreino && <p>Duração: {form.duracaoTreino} min por sessão</p>}{training.days.map((d, i) => <div key={i} style={{ marginTop: 10 }}><h3 style={{ fontSize: 14, margin: '0 0 4px' }}>{d.name}</h3><ul style={{ margin: '0 0 0 18px', padding: 0 }}>{d.exercises.map((e, j) => <li key={j} style={{ margin: '2px 0' }}>{e.name} - {e.sets} séries de {e.reps}{e.rest ? `, descanso ${e.rest}` : ''}</li>)}</ul></div>)}</>}
         </div>
       </div>
     </div>

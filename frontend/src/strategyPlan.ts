@@ -1,4 +1,4 @@
-import type { RaioXResult } from './calc'
+import { trainingDays, type RaioXResult } from './calc'
 
 function phaseNames(n: number): string[] {
   if (n === 3) return ['Adaptação', 'Otimização', 'Definição']
@@ -10,9 +10,12 @@ function phaseNames(n: number): string[] {
   return names
 }
 
-function trainingSplit(activityLevel: string): string {
-  const days = activityLevel === 'active' ? 5 : activityLevel === 'moderate' ? 4 : 3
-  return days === 3 ? 'Push/Pull/Legs 3x' : days === 4 ? 'Superiores/Inferiores 4x' : 'Push/Pull/Legs + Superiores/Inferiores 5x'
+function trainingSplit(activityLevel: string, frequenciaOverride?: string): string {
+  const days = trainingDays(activityLevel, frequenciaOverride)
+  if (days === 3) return 'Push/Pull/Legs 3x'
+  if (days === 4) return 'Superiores/Inferiores 4x'
+  if (days === 6) return 'Push/Pull/Legs 6x (A/B)'
+  return 'Push/Pull/Legs + Superiores/Inferiores 5x'
 }
 
 function objetivo(phase: string): string {
@@ -75,12 +78,13 @@ export function buildStrategy(
   prazoMeses: number | undefined,
   weight: number,
   results: RaioXResult,
+  frequenciaOverride?: string,
 ): string {
   const prazo = prazoMeses ? Number(prazoMeses) : 0
   const semanas = prazo > 0 ? prazo * 4 : 16
   const numPhases = Math.max(3, Math.round(semanas / 4))
   const weeksPerPhase = Math.max(3, Math.round(semanas / numPhases))
-  const split = trainingSplit(activityLevel)
+  const split = trainingSplit(activityLevel, frequenciaOverride)
 
   const header = '| Fase | Semanas | Dieta (kcal, proteínas, gorduras, carbs) | Divisão Treino | Recomendação | Objetivo | Monitoramento | Observação |'
   const sep = '|---|---|---|---|---|---|---|---|'

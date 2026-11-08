@@ -1,5 +1,6 @@
 import { EXERCISE_CATALOG, type CatalogExercise } from './exerciseCatalog'
 import type { TrainingProgram, TrainingDay, TrainingExercise } from './api'
+import { trainingDays } from './calc'
 
 type Goal = 'hipertrofia' | 'emagrecimento' | 'saude' | ''
 
@@ -46,8 +47,8 @@ function buildDay(name: string, muscles: Muscles, goal: Goal, offset: number): T
   return { name, exercises }
 }
 
-export function buildTrainingProgram(goal: Goal, activityLevel: string): TrainingProgram {
-  const daysCount = activityLevel === 'active' ? 5 : activityLevel === 'moderate' ? 4 : 3
+export function buildTrainingProgram(goal: Goal, activityLevel: string, frequenciaOverride?: string): TrainingProgram {
+  const daysCount = trainingDays(activityLevel, frequenciaOverride)
   const g: Goal = goal === 'hipertrofia' || goal === 'emagrecimento' || goal === 'saude' ? goal : 'saude'
 
   if (daysCount === 3) {
@@ -69,6 +70,20 @@ export function buildTrainingProgram(goal: Goal, activityLevel: string): Trainin
         buildDay('Dia 2 - Inferiores A', [['Quadríceps', 2], ['Posterior', 1], ['Glúteos', 1], ['Panturrilha', 1]], g, 0),
         buildDay('Dia 3 - Superiores B', [['Peito', 2], ['Costas', 2], ['Ombros', 1], ['Bíceps', 1], ['Tríceps', 1]], g, 2),
         buildDay('Dia 4 - Inferiores B', [['Quadríceps', 2], ['Posterior', 1], ['Glúteos', 1], ['Panturrilha', 1]], g, 2),
+      ],
+    }
+  }
+
+  if (daysCount === 6) {
+    return {
+      split: 'Push/Pull/Legs 6x (A/B)',
+      days: [
+        buildDay('Dia 1 - Push A', [['Peito', 2], ['Ombros', 2], ['Tríceps', 2]], g, 0),
+        buildDay('Dia 2 - Pull A', [['Costas', 3], ['Bíceps', 2], ['Core', 1]], g, 0),
+        buildDay('Dia 3 - Legs A', [['Quadríceps', 2], ['Posterior', 1], ['Glúteos', 1], ['Panturrilha', 1]], g, 0),
+        buildDay('Dia 4 - Push B', [['Peito', 2], ['Ombros', 2], ['Tríceps', 2]], g, 2),
+        buildDay('Dia 5 - Pull B', [['Costas', 3], ['Bíceps', 2], ['Core', 1]], g, 2),
+        buildDay('Dia 6 - Legs B', [['Quadríceps', 2], ['Posterior', 1], ['Glúteos', 1], ['Panturrilha', 1]], g, 2),
       ],
     }
   }
