@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Body &amp; Health — Protótipo Redesign</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #f5f7fb;
+    --surface: #ffffff;
+    --border: #e4e9f2;
+    --text: #0b1220;
+    --muted: #5a6b85;
+    --accent: #2563eb;
+    --accent-strong: #1d4ed8;
+    --accent-soft: #ecf1fe;
+    --ok: #16a34a;
+    --ok-soft: #e8f7ee;
+    --danger: #dc2626;
+    --danger-soft: #fdecec;
+    --radius-card: 16px;
+    --radius-ctl: 10px;
+    --shadow: 0 10px 30px rgba(15, 40, 90, 0.06);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: 'Sora', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 20px 16px 48px; }
+
+  /* Top bar */
+  .topbar {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 4px 0 20px;
+  }
+  .brand { font-size: 1.15rem; font-weight: 800; letter-spacing: -0.3px; }
+  .brand b { color: var(--accent); }
+  .navlink {
+    display: inline-flex; align-items: center; gap: 7px;
+    padding: 8px 14px; border-radius: 999px; border: 1px solid var(--border);
+    background: var(--surface); color: var(--muted); font-weight: 600; font-size: 0.86rem;
+    cursor: pointer; font-family: inherit;
+  }
+  .navlink.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .badge {
+    background: var(--accent-soft); color: var(--accent);
+    border-radius: 999px; padding: 0 8px; font-size: 0.75rem; font-weight: 700; line-height: 1.6;
+  }
+  .navlink.active .badge { background: rgba(255,255,255,.22); color: #fff; }
+
+  /* Stepper */
+  .stepper { display: flex; align-items: center; margin: 4px 0 24px; }
+  .step { display: flex; align-items: center; gap: 10px; }
+  .dot {
+    width: 30px; height: 30px; border-radius: 999px; display: grid; place-items: center;
+    font-size: 0.82rem; font-weight: 700; border: 2px solid var(--border);
+    background: var(--surface); color: var(--muted);
+  }
+  .step.done .dot { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .step.now .dot { background: var(--accent-strong); border-color: var(--accent-strong); color: #fff; box-shadow: 0 0 0 4px var(--accent-soft); }
+  .step-label { font-size: 0.86rem; font-weight: 600; color: var(--muted); }
+  .step.now .step-label { color: var(--text); }
+  .line { flex: 1; height: 2px; background: var(--border); margin: 0 12px; }
+  .line.fill { background: var(--accent); }
+
+  /* Card */
+  .card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-card); padding: 26px; box-shadow: var(--shadow);
+  }
+  .card h1 { margin: 0 0 4px; font-size: 1.35rem; font-weight: 800; letter-spacing: -0.3px; }
+  .card .lede { margin: 0 0 20px; color: var(--muted); font-size: 0.92rem; }
+
+  label { display: block; margin: 16px 0 6px; color: var(--text); font-size: 0.85rem; font-weight: 600; }
+  input, select {
+    width: 100%; padding: 12px 13px; border-radius: var(--radius-ctl);
+    border: 1.5px solid var(--border); background: #fbfcfe; color: var(--text);
+    font-size: 0.98rem; font-family: inherit;
+  }
+  input:focus, select:focus { outline: none; border-color: var(--accent); background: #fff; box-shadow: 0 0 0 3px var(--accent-soft); }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .hint { margin: 6px 0 0; color: var(--muted); font-size: 0.78rem; }
+
+  .radio-group { display: flex; gap: 14px; margin: 8px 0 0; flex-wrap: wrap; }
+  .radio { display: flex; align-items: center; gap: 7px; cursor: pointer; font-weight: 600; font-size: 0.9rem; color: var(--text); margin: 0; }
+  .radio input { width: auto; accent-color: var(--accent); }
+
+  .actions { display: flex; gap: 10px; margin-top: 26px; }
+  .btn {
+    flex: 1; padding: 14px; border: none; border-radius: 999px; cursor: pointer;
+    font-size: 0.98rem; font-weight: 700; font-family: inherit;
+  }
+  .btn-primary { background: var(--accent); color: #fff; }
+  .btn-primary:hover { background: var(--accent-strong); }
+  .btn-ghost { background: transparent; color: var(--muted); border: 1.5px solid var(--border); }
+  .btn-ghost:hover { border-color: var(--muted); color: var(--text); }
+
+  /* Result step */
+  .client-meta { display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: 0.85rem; margin: 2px 0 18px; }
+  .chip { background: var(--accent-soft); color: var(--accent); border-radius: 999px; padding: 3px 10px; font-size: 0.75rem; font-weight: 700; }
+  table.result { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+  table.result th { text-align: left; color: var(--muted); font-weight: 600; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.03em; padding: 8px 10px; border-bottom: 1px solid var(--border); }
+  table.result td { padding: 11px 10px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  table.result tr:last-child td { border-bottom: none; }
+  table.result td strong { display: block; }
+  table.result td small { color: var(--muted); font-size: 0.8rem; }
+  .ok-pill { background: var(--ok-soft); color: var(--ok); border-radius: 999px; padding: 2px 9px; font-size: 0.75rem; font-weight: 700; white-space: nowrap; }
+
+  .btn-secondary {
+    flex: 1; padding: 13px; border-radius: 999px; cursor: pointer; font-weight: 700; font-size: 0.95rem; font-family: inherit;
+    background: var(--accent-soft); color: var(--accent); border: none;
+  }
+  .btn-secondary:hover { background: #dfe8fe; }
+
+  /* History */
+  .hist-item {
+    display: flex; align-items: center; justify-content: space-between; gap: 14px;
+    padding: 16px 0; border-bottom: 1px solid var(--border);
+  }
+  .hist-item:last-child { border-bottom: none; }
+  .hist-item h3 { margin: 0 0 3px; font-size: 1rem; font-weight: 700; }
+  .hist-item .meta { color: var(--muted); font-size: 0.82rem; }
+  .btn-del { padding: 8px 14px; border-radius: 999px; border: 1px solid var(--border); background: transparent; color: var(--danger); font-weight: 600; cursor: pointer; font-family: inherit; font-size: 0.84rem; }
+  .btn-del:hover { background: var(--danger-soft); border-color: var(--danger); }
+
+  .footer { text-align: center; color: var(--muted); font-size: 0.78rem; padding: 28px 0 0; }
+  .footer a { color: var(--accent); text-decoration: none; }
+
+  .hidden { display: none; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- Top bar -->
+  <div class="topbar">
+    <div class="brand">Body <b>&amp;</b> Health</div>
+    <div>
+      <button class="navlink" id="navApp">Calculadora</button>
+      <button class="navlink" id="navHist">Meus Cálculos <span class="badge">3</span></button>
+    </div>
+  </div>
+
+  <!-- ===== APP / WIZARD ===== -->
+  <div id="viewApp">
+
+    <!-- Stepper -->
+    <div class="stepper" id="stepper">
+      <div class="step now" id="s1">
+        <div class="dot">1</div><div class="step-label">Perfil</div>
+      </div>
+      <div class="line" id="l1"></div>
+      <div class="step" id="s2">
+        <div class="dot">2</div><div class="step-label">Objetivo</div>
+      </div>
+      <div class="line" id="l2"></div>
+      <div class="step" id="s3">
+        <div class="dot">3</div><div class="step-label">Resultado</div>
+      </div>
+    </div>
+
+    <!-- STEP 1 -->
+    <div class="card" id="step1">
+      <h1>Vamos começar</h1>
+      <p class="lede">Conte um pouco sobre o cliente para calcular o Raio X Corporal.</p>
+
+      <label>Nome</label>
+      <input placeholder="Nome do cliente" />
+
+      <div class="row">
+        <div>
+          <label>Idade</label>
+          <input type="number" placeholder="ex.: 30" />
+        </div>
+        <div>
+          <label>Sexo</label>
+          <select><option>Selecione</option><option>Masculino</option><option>Feminino</option></select>
+        </div>
+      </div>
+
+      <div class="row">
+        <div>
+          <label>Peso (kg)</label>
+          <input type="number" placeholder="ex.: 80" />
+        </div>
+        <div>
+          <label>Altura (cm)</label>
+          <input type="number" placeholder="ex.: 175" />
+        </div>
+      </div>
+
+      <label>Você sabe o % de gordura?</label>
+      <div class="radio-group">
+        <label class="radio"><input type="radio" name="fat" /> Sim, sei o valor</label>
+        <label class="radio"><input type="radio" name="fat" checked /> Estimar pra mim</label>
+      </div>
+      <p class="hint">Estimamos por IMC ou por dobras cutâneas na próxima etapa.</p>
+
+      <div class="actions">
+        <button class="btn btn-primary" onclick="go(2)">Continuar</button>
+      </div>
+    </div>
+
+    <!-- STEP 2 -->
+    <div class="card hidden" id="step2">
+      <h1>Seu objetivo</h1>
+      <p class="lede">Isso define o déficit ou superávit calórico e a duração do plano.</p>
+
+      <label>Objetivo principal</label>
+      <select onchange="toggleGoal(this.value)">
+        <option>Selecione</option>
+        <option value="hipertrofia">Hipertrofia (ganhar massa)</option>
+        <option value="emagrecimento">Emagrecimento (perder gordura)</option>
+        <option value="saude">Saúde (manter peso)</option>
+      </select>
+
+      <div id="goalExtra" class="hidden">
+        <div class="row">
+          <div>
+            <label>Prazo</label>
+            <select><option>Selecione</option><option>3 meses</option><option>5 meses</option><option>7 meses</option><option>9 meses</option></select>
+          </div>
+          <div>
+            <label id="metaLabel">Meta (kg)</label>
+            <input type="number" placeholder="ex.: 5" />
+          </div>
+        </div>
+      </div>
+
+      <label>Restrições / alergias</label>
+      <input placeholder="ex.: lactose, glúten" />
+      <p class="hint">Opcional. A IA considera isso na dieta.</p>
+
+      <div class="actions">
+        <button class="btn btn-ghost" onclick="go(1)">Voltar</button>
+        <button class="btn btn-primary" onclick="go(3)">Gerar Raio X</button>
+      </div>
+    </div>
+
+    <!-- STEP 3 -->
+    <div class="card hidden" id="step3">
+      <h1>Raio X Corporal</h1>
+      <div class="client-meta">
+        <span class="chip">CODE4381</span>
+        <span>Karina · 30 anos · Feminino</span>
+      </div>
+
+      <table class="result">
+        <thead><tr><th>Parâmetro</th><th>Resultado</th><th>Leitura</th></tr></thead>
+        <tbody>
+          <tr><td>IMC</td><td><strong>26,1</strong></td><td><span class="ok-pill">Sobrepeso leve</span></td></tr>
+          <tr><td>Massa magra</td><td><strong>63,2 kg</strong></td><td><small>Dentro da faixa esperada</small></td></tr>
+          <tr><td>% gordura</td><td><strong>18%</strong></td><td><span class="ok-pill">Saudável</span></td></tr>
+          <tr><td>TMB</td><td><strong>1.833 kcal</strong></td><td><small>Gasto em repouso</small></td></tr>
+          <tr><td>GCT</td><td><strong>2.841 kcal</strong></td><td><small>Moderadamente ativo</small></td></tr>
+          <tr><td>Meta calórica</td><td><strong>3.091 kcal</strong></td><td><span class="ok-pill">Superávit +250</span></td></tr>
+          <tr><td>Macros</td><td><strong>P 176g · C 389g · G 79g</strong></td><td><small>Proteína 2,2 g/kg</small></td></tr>
+          <tr><td>Água</td><td><strong>2,8 L/dia</strong></td><td><small>35 ml/kg</small></td></tr>
+        </tbody>
+      </table>
+
+      <div class="actions">
+        <button class="btn btn-primary">Salvar cálculo</button>
+      </div>
+      <div class="actions" style="margin-top:10px">
+        <button class="btn-secondary">Gerar análise completa</button>
+        <button class="btn-secondary">Gerar estratégia macro</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== HISTORY ===== -->
+  <div id="viewHist" class="hidden">
+    <div class="card">
+      <h1 style="margin-bottom:4px">Meus Cálculos</h1>
+      <p class="lede">Clientes que você já avaliou.</p>
+
+      <div class="hist-item">
+        <div>
+          <h3>Karina</h3>
+          <div class="meta">Hipertrofia · 30 anos · 80kg / 175cm · 07/11/2026</div>
+        </div>
+        <button class="btn-del">Apagar</button>
+      </div>
+      <div class="hist-item">
+        <div>
+          <h3>Rose</h3>
+          <div class="meta">Emagrecimento · 42 anos · 68kg / 163cm · 06/11/2026</div>
+        </div>
+        <button class="btn-del">Apagar</button>
+      </div>
+      <div class="hist-item">
+        <div>
+          <h3>Marcos</h3>
+          <div class="meta">Saúde · 35 anos · 88kg / 182cm · 05/11/2026</div>
+        </div>
+        <button class="btn-del">Apagar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>© 2026 Body And Health · Criado por <a href="#">Ueberson Sousa</a></p>
+    <p>Recomendações geradas por IA não substituem aconselhamento médico.</p>
+  </div>
+</div>
+
+<script>
+  function go(n) {
+    for (let i = 1; i <= 3; i++) {
+      const s = document.getElementById('step' + i);
+      const d = document.getElementById('s' + i);
+      s.classList.toggle('hidden', i !== n);
+      d.className = 'step' + (i === n ? ' now' : (i < n ? ' done' : ''));
+    }
+    document.getElementById('l1').className = 'line' + (n > 1 ? ' fill' : '');
+    document.getElementById('l2').className = 'line' + (n > 2 ? ' fill' : '');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  function toggleGoal(v) {
+    document.getElementById('goalExtra').classList.toggle('hidden', !(v === 'hipertrofia' || v === 'emagrecimento'));
+    document.getElementById('metaLabel').textContent =
+      v === 'hipertrofia' ? 'Meta de ganho (kg)' : 'Meta de perda (kg)';
+  }
+  document.getElementById('navApp').onclick = function () {
+    document.getElementById('viewApp').classList.remove('hidden');
+    document.getElementById('viewHist').classList.add('hidden');
+    this.classList.add('active'); document.getElementById('navHist').classList.remove('active');
+  };
+  document.getElementById('navHist').onclick = function () {
+    document.getElementById('viewApp').classList.add('hidden');
+    document.getElementById('viewHist').classList.remove('hidden');
+    this.classList.add('active'); document.getElementById('navApp').classList.remove('active');
+  };
+</script>
+</body>
+</html>
