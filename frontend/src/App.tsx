@@ -857,7 +857,12 @@ export default function App() {
                       : `Faltam ${form.metaKg}kg de massa magra para a sua meta`}
                     {form.prazoMeses ? ` em ${form.prazoMeses} meses` : ''}.
                   </p>
-                  <p className="engage-sub">Descubra o plano de dieta e treino para chegar lá.</p>
+                  <div className="engage-journey">
+                    <span className="engage-now">{form.weight}kg hoje</span>
+                    <span className="engage-arrow">→</span>
+                    <span className="engage-goal">{form.goal === 'emagrecimento' ? form.weight - form.metaKg : form.weight + form.metaKg}kg meta</span>
+                  </div>
+                  <p className="engage-sub">Descubra seu plano personalizado de dieta e treino para chegar lá.</p>
                 </div>
               )}
 
