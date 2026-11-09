@@ -69,6 +69,57 @@ function renderMarkdown(md: string): string {
   return html
 }
 
+// Agrupamento dos parâmetros do Raio X em seções
+const RAIO_X_GROUPS: { title: string; match: RegExp }[] = [
+  { title: 'Composição Corporal', match: /IMC|Massa Magra|Gordura Corporal|PGC/i },
+  { title: 'Metabolismo', match: /Taxa Metabólica|TMB|Gasto Calórico|GCT|Consumo Calórico/i },
+  { title: 'Alimentação e Hidratação', match: /Macros|Água/i },
+  { title: 'Suplementação', match: /Suplement/i },
+  { title: 'Treino', match: /Treino/i },
+  { title: 'Saúde Hormonal', match: /Hormonal/i },
+]
+
+function renderRaioX(md: string): string {
+  const lines = md.split('\n')
+  const headers: string[] = []
+  const rows: string[][] = []
+  let lastRow: string[] | null = null
+  for (const line of lines) {
+    const t = line.trim()
+    if (t.startsWith('|')) {
+      const cells = t.split('|').slice(1, -1).map((c) => c.trim())
+      if (cells.every((c) => /^-+$/.test(c))) continue // linha separadora
+      if (headers.length === 0) { headers.push(...cells); continue }
+      lastRow = cells
+      rows.push(cells)
+    } else if (t && lastRow) {
+      // continuação de linha dentro de uma célula (a IA às vezes quebra linha)
+      lastRow[lastRow.length - 1] += ' ' + t
+    }
+  }
+  if (headers.length === 0 || rows.length === 0) return renderMarkdown(md)
+
+  const esc = (s: string) => s.replace(/"/g, '&quot;')
+  const groups: { title: string; rows: string[][] }[] = []
+  for (const row of rows) {
+    const param = row[0] ?? ''
+    const def = RAIO_X_GROUPS.find((d) => d.match.test(param))
+    const title = def ? def.title : 'Outros'
+    let grp = groups.find((g) => g.title === title)
+    if (!grp) { grp = { title, rows: [] }; groups.push(grp) }
+    grp.rows.push(row)
+  }
+
+  let html = ''
+  for (const grp of groups) {
+    html += `<h3 class="ai-group-title">${grp.title}</h3>`
+    html += `<table class="ai-table"><thead><tr>${headers.map((h) => `<th>${inline(h)}</th>`).join('')}</tr></thead><tbody>`
+    html += grp.rows.map((r) => `<tr>${r.map((c, i) => `<td data-label="${esc(headers[i] ?? '')}">${inline(c)}</td>`).join('')}</tr>`).join('')
+    html += `</tbody></table>`
+  }
+  return html
+}
+
 const emptyForm: ClientData = {
   name: '',
   age: 0,
@@ -803,7 +854,7 @@ export default function App() {
               {aiContent && (
                 <div className="ai-result">
                   <h3 className="ai-title">Análise Completa</h3>
-                  <div dangerouslySetInnerHTML={{ __html: renderMarkdown(aiContent) }} />
+                  <div dangerouslySetInnerHTML={{ __html: renderRaioX(aiContent) }} />
                 </div>
               )}
               {strategyContent && (
@@ -1151,7 +1202,7 @@ export default function App() {
               </table>
             </>
           )}
-          {aiContent && <><h2 style={{ fontSize: 16, borderBottom: '1px solid #ccc', paddingBottom: 4, marginTop: 16 }}>Análise Corporal Completa</h2><div style={{ fontSize: 12 }} dangerouslySetInnerHTML={{ __html: renderMarkdown(aiContent) }} /></>}
+          {aiContent && <><h2 style={{ fontSize: 16, borderBottom: '1px solid #ccc', paddingBottom: 4, marginTop: 16 }}>Análise Corporal Completa</h2><div style={{ fontSize: 12 }} dangerouslySetInnerHTML={{ __html: renderRaioX(aiContent) }} /></>}
           {strategyContent && <><h2 style={{ fontSize: 16, borderBottom: '1px solid #ccc', paddingBottom: 4, marginTop: 16 }}>Estratégia para Meta</h2><div style={{ fontSize: 12 }} dangerouslySetInnerHTML={{ __html: renderMarkdown(strategyContent) }} /></>}
           {training && <><h2 style={{ fontSize: 16, borderBottom: '1px solid #ccc', paddingBottom: 4, marginTop: 16 }}>Roteiro de Treinos</h2>{form.duracaoTreino && <p>Duração: {form.duracaoTreino} min por sessão</p>}{training.days.map((d, i) => <div key={i} style={{ marginTop: 10 }}><h3 style={{ fontSize: 14, margin: '0 0 4px' }}>{d.name}</h3><ul style={{ margin: '0 0 0 18px', padding: 0 }}>{d.exercises.map((e, j) => <li key={j} style={{ margin: '2px 0' }}>{e.name} - {e.sets} séries de {e.reps}{e.rest ? `, descanso ${e.rest}` : ''}</li>)}</ul></div>)}</>}
         </div>

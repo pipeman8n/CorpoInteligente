@@ -141,6 +141,7 @@ table.result td small { color: var(--muted); font-size: 0.8rem; }
 /* Saída da IA */
 .ai-result { margin-top: 16px; overflow-x: auto; }
 .ai-title { margin: 0 0 10px; font-size: 1rem; font-weight: 800; color: var(--accent); }
+.ai-group-title { font-size: 0.9rem; font-weight: 800; color: var(--accent); margin: 16px 0 6px; }
 
 /* Pills de seleção (frequência / duração) */
 .btn-toggle { display: block; width: 100%; text-align: left; padding: 10px 0; margin-top: 8px; border: none; background: transparent; color: var(--accent); font-weight: 700; font-size: 0.9rem; cursor: pointer; font-family: inherit; }
