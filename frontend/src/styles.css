@@ -155,6 +155,9 @@ table.result td small { color: var(--muted); font-size: 0.8rem; }
 }
 .ai-table th { background: var(--accent-soft); color: var(--text); }
 .ai-result p { color: var(--text); font-size: 0.9rem; }
+.engage { background: var(--accent-soft); border: 1px solid var(--accent); border-radius: 12px; padding: 14px 16px; margin: 16px 0 4px; }
+.engage-title { margin: 0 0 4px; font-weight: 800; color: var(--accent-strong); font-size: 0.95rem; }
+.engage-sub { margin: 0; color: var(--text); font-size: 0.88rem; }
 
 /* Histórico */
 .hist-item {

@@ -849,6 +849,18 @@ export default function App() {
                 </tbody>
               </table>
 
+              {(form.goal === 'emagrecimento' || form.goal === 'hipertrofia') && form.metaKg && (
+                <div className="engage">
+                  <p className="engage-title">
+                    {form.goal === 'emagrecimento'
+                      ? `Faltam ${form.metaKg}kg para a sua meta`
+                      : `Faltam ${form.metaKg}kg de massa magra para a sua meta`}
+                    {form.prazoMeses ? ` em ${form.prazoMeses} meses` : ''}.
+                  </p>
+                  <p className="engage-sub">Descubra o plano de dieta e treino para chegar lá.</p>
+                </div>
+              )}
+
               <div className="actions secondary">
                 <button className="btn btn-secondary" onClick={onGenerateAI} disabled={aiLoading}>
                   {aiLoading ? 'Gerando...' : '1 Ver Análise Completa'}
