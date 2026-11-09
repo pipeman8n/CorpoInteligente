@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import {
   calculate,
   activityLabel,
@@ -253,7 +253,9 @@ export default function App() {
   }, [])
 
   // Persistir o fluxo atual (sobrevive ao reload do login via Google/refresh)
+  const firstRender = useRef(true)
   useEffect(() => {
+    if (firstRender.current) { firstRender.current = false; return }
     try {
       localStorage.setItem('bh-flow', JSON.stringify({ form, result, calcCode, aiContent, strategyContent, training, step }))
     } catch { /* ignore */ }
