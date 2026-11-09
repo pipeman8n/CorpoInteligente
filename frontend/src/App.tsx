@@ -252,6 +252,30 @@ export default function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  // Persistir o fluxo atual (sobrevive ao reload do login via Google/refresh)
+  useEffect(() => {
+    try {
+      localStorage.setItem('bh-flow', JSON.stringify({ form, result, calcCode, aiContent, strategyContent, training, step }))
+    } catch { /* ignore */ }
+  }, [form, result, calcCode, aiContent, strategyContent, training, step])
+
+  // Restaurar o fluxo salvo ao carregar a página
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem('bh-flow')
+      if (raw) {
+        const s = JSON.parse(raw)
+        if (s.form) setForm(s.form)
+        if (s.calcCode) setCalcCode(s.calcCode)
+        if (s.aiContent) setAiContent(s.aiContent)
+        if (s.strategyContent) setStrategyContent(s.strategyContent)
+        if (s.training) setTraining(s.training)
+        if (s.result) { setResult(s.result); if (s.step) setStep(s.step) }
+      }
+    } catch { /* ignore */ }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   const set = (k: keyof ClientData, v: unknown) => setForm((f) => ({ ...f, [k]: v }))
 
   const goToStep = (n: 1 | 2 | 3 | 4) => {
@@ -328,9 +352,16 @@ export default function App() {
       setProfileMode(true)
       return
     }
-    if (!strategyContent || !training) {
-      setInfoPopup('Gere a Estratégia para Meta e o treino antes de salvar o roteiro.')
-      return
+    // Auto-gerar estratégia e treino caso ainda não tenham sido gerados
+    let strategy = strategyContent
+    if (!strategy) {
+      strategy = buildStrategy(form.goal, form.activityLevel, form.prazoMeses, form.weight, result, form.frequenciaOverride)
+      setStrategyContent(strategy)
+    }
+    let t = training
+    if (!t) {
+      t = buildTrainingProgram(form.goal, form.activityLevel, form.frequenciaOverride)
+      setTraining(t)
     }
     setSaving(true)
     setSavedMsg('')
@@ -348,10 +379,11 @@ export default function App() {
         calculationCode: calcCode,
         savedAt: new Date().toISOString(),
         results: result,
-        strategy: strategyContent,
-        trainingProgram: training,
+        strategy,
+        trainingProgram: t,
       })
       setSavedMsg('Roteiro salvo!')
+      localStorage.removeItem('bh-flow')
       await loadHistory(user.id)
       await downloadPdf()
     } catch (e) {
