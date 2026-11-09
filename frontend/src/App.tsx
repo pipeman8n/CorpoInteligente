@@ -73,7 +73,7 @@ function renderMarkdown(md: string): string {
 const RAIO_X_GROUPS: { title: string; match: RegExp }[] = [
   { title: 'Composição Corporal', match: /IMC|Massa Magra|Gordura Corporal|PGC/i },
   { title: 'Metabolismo e Saúde', match: /Taxa Metabólica|TMB|Gasto Calórico|GCT|Consumo Calórico|Hormonal/i },
-  { title: 'Alimentação e Suplementação', match: /Macros|Água|Suplement/i },
+  { title: 'Recomendação Nutricional', match: /Macros|Água|Suplement/i },
   { title: 'Treino', match: /Treino/i },
 ]
 
