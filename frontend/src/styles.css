@@ -264,8 +264,8 @@ table.result td small { color: var(--muted); font-size: 0.8rem; }
 
 /* Responsivo (iOS Safari / Android) */
 @media (max-width: 560px) {
-  .topbar { padding: 4px 0 16px; }
-  .brand { font-size: 1rem; }
+  .topbar { padding: 4px 0 16px; flex-wrap: wrap; row-gap: 8px; }
+  .brand { font-size: 1rem; flex: 1 0 100%; }
   .navlink { padding: 7px 11px; font-size: 0.8rem; gap: 5px; }
 
   .stepper { margin: 4px 0 18px; }
@@ -279,7 +279,13 @@ table.result td small { color: var(--muted); font-size: 0.8rem; }
 
   table.result { font-size: 0.82rem; }
   table.result th, table.result td { padding: 9px 8px; }
-  .ai-table { min-width: 560px; }
+  /* Tabelas da IA viram cards empilhados no mobile */
+  .ai-table { min-width: 0; border: none; }
+  .ai-table thead { display: none; }
+  .ai-table tr { display: block; margin: 0 0 12px; border: 1px solid var(--border); border-radius: 10px; padding: 2px 0; }
+  .ai-table td { display: flex; justify-content: space-between; gap: 12px; padding: 8px 12px; border: none; border-bottom: 1px solid var(--border); text-align: right; }
+  .ai-table td:last-child { border-bottom: none; }
+  .ai-table td::before { content: attr(data-label); font-weight: 700; color: var(--muted); text-align: left; flex-shrink: 0; }
 }
 
 /* Dark mode */

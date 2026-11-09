@@ -36,29 +36,36 @@ function renderMarkdown(md: string): string {
   const lines = md.split('\n')
   let html = ''
   let inTable = false
-  let tableHtml = ''
+  let rows: string[] = []
+  let headers: string[] = []
   let lastCells: string[] = []
-  let lastTag = 'td'
+  const esc = (s: string) => s.replace(/"/g, '&quot;')
   for (const line of lines) {
     const t = line.trim()
     if (t.startsWith('|')) {
       const cells = t.split('|').slice(1, -1).map((c) => c.trim())
       if (cells.every((c) => /^-+$/.test(c))) continue // linha separadora
-      if (!inTable) { inTable = true; tableHtml = '<table class="ai-table">' }
-      lastTag = tableHtml.endsWith('</tr>') ? 'td' : 'th'
-      lastCells = cells
-      tableHtml += `<tr>${cells.map((c) => `<${lastTag}>${inline(c)}</${lastTag}>`).join('')}</tr>`
+      if (!inTable) inTable = true
+      if (rows.length === 0) {
+        headers = cells
+        rows.push(`<tr>${cells.map((c) => `<th>${inline(c)}</th>`).join('')}</tr>`)
+      } else {
+        lastCells = cells
+        rows.push(`<tr>${cells.map((c, i) => `<td data-label="${esc(headers[i] ?? '')}">${inline(c)}</td>`).join('')}</tr>`)
+      }
     } else if (inTable && t) {
       // linha de continuação dentro de uma célula (a IA às vezes quebra linha): junta na última célula
       lastCells[lastCells.length - 1] += ' ' + t
-      const idx = tableHtml.lastIndexOf('<tr>')
-      tableHtml = tableHtml.slice(0, idx) + `<tr>${lastCells.map((c) => `<${lastTag}>${inline(c)}</${lastTag}>`).join('')}</tr>`
+      rows[rows.length - 1] = `<tr>${lastCells.map((c, i) => `<td data-label="${esc(headers[i] ?? '')}">${inline(c)}</td>`).join('')}</tr>`
     } else {
-      if (inTable) { html += tableHtml + '</table>'; inTable = false; tableHtml = ''; lastCells = [] }
+      if (inTable) {
+        html += `<table class="ai-table"><thead>${rows[0]}</thead><tbody>${rows.slice(1).join('')}</tbody></table>`
+        inTable = false; rows = []; headers = []; lastCells = []
+      }
       if (t && !t.includes('|')) html += `<p>${inline(t)}</p>`
     }
   }
-  if (inTable) html += tableHtml + '</table>'
+  if (inTable) html += `<table class="ai-table"><thead>${rows[0]}</thead><tbody>${rows.slice(1).join('')}</tbody></table>`
   return html
 }
 
@@ -591,13 +598,19 @@ export default function App() {
                 </div>
               </div>
 
-              <label>Você sabe o % de gordura?</label>
-              <div className="radio-group">
+              <label>% de gordura corporal</label>
+              <div className="radio-group" style={{ flexDirection: 'column', alignItems: 'flex-start' }}>
                 <label className="radio">
-                  <input type="radio" name="knowsFat" checked={knowsBodyFat === 'sim'} onChange={() => setKnowsBodyFat('sim')} /> Sim, sei o valor
+                  <input type="radio" name="fatChoice" checked={knowsBodyFat === 'nao' && form.bodyFatEstimationMethod === 'deurenberg'} onChange={() => { setKnowsBodyFat('nao'); set('bodyFatEstimationMethod', 'deurenberg') }} />
+                  Não sei, estimar pelo IMC
                 </label>
                 <label className="radio">
-                  <input type="radio" name="knowsFat" checked={knowsBodyFat === 'nao'} onChange={() => setKnowsBodyFat('nao')} /> Estimar pra mim
+                  <input type="radio" name="fatChoice" checked={knowsBodyFat === 'nao' && form.bodyFatEstimationMethod === 'pollock3'} onChange={() => { setKnowsBodyFat('nao'); set('bodyFatEstimationMethod', 'pollock3') }} />
+                  Não sei, estimar por dobras cutâneas
+                </label>
+                <label className="radio">
+                  <input type="radio" name="fatChoice" checked={knowsBodyFat === 'sim'} onChange={() => { setKnowsBodyFat('sim'); set('bodyFatEstimationMethod', '') }} />
+                  Sei meu valor
                 </label>
               </div>
 
@@ -613,60 +626,36 @@ export default function App() {
                 </>
               )}
 
-              {knowsBodyFat === 'nao' && (
-                <>
-                  <label>Como estimar o % de gordura?</label>
-                  <div className="radio-group">
-                    <label className="radio">
-                      <input
-                        type="radio"
-                        name="method"
-                        checked={form.bodyFatEstimationMethod === 'deurenberg'}
-                        onChange={() => set('bodyFatEstimationMethod', 'deurenberg')}
-                      /> Pelo IMC
-                    </label>
-                    <label className="radio">
-                      <input
-                        type="radio"
-                        name="method"
-                        checked={form.bodyFatEstimationMethod === 'pollock3'}
-                        onChange={() => set('bodyFatEstimationMethod', 'pollock3')}
-                      /> Dobras cutâneas
-                    </label>
+              {knowsBodyFat === 'nao' && form.bodyFatEstimationMethod === 'pollock3' && (
+                <div className="row">
+                  <div>
+                    <label>{form.gender === 'female' ? 'Tríceps (mm)' : 'Peitoral (mm)'}</label>
+                    <input
+                      type="number"
+                      value={skinfolds.a ?? ''}
+                      onChange={(e) => setSkinfolds((s) => ({ ...s, a: e.target.value === '' ? undefined : Number(e.target.value) }))}
+                      placeholder="10"
+                    />
                   </div>
-
-                  {form.bodyFatEstimationMethod === 'pollock3' && (
-                    <div className="row">
-                      <div>
-                        <label>{form.gender === 'female' ? 'Tríceps (mm)' : 'Peitoral (mm)'}</label>
-                        <input
-                          type="number"
-                          value={skinfolds.a ?? ''}
-                          onChange={(e) => setSkinfolds((s) => ({ ...s, a: e.target.value === '' ? undefined : Number(e.target.value) }))}
-                          placeholder="10"
-                        />
-                      </div>
-                      <div>
-                        <label>{form.gender === 'female' ? 'Suprailíaca (mm)' : 'Abdominal (mm)'}</label>
-                        <input
-                          type="number"
-                          value={skinfolds.b ?? ''}
-                          onChange={(e) => setSkinfolds((s) => ({ ...s, b: e.target.value === '' ? undefined : Number(e.target.value) }))}
-                          placeholder="20"
-                        />
-                      </div>
-                      <div>
-                        <label>Coxa (mm)</label>
-                        <input
-                          type="number"
-                          value={skinfolds.c ?? ''}
-                          onChange={(e) => setSkinfolds((s) => ({ ...s, c: e.target.value === '' ? undefined : Number(e.target.value) }))}
-                          placeholder="15"
-                        />
-                      </div>
-                    </div>
-                  )}
-                </>
+                  <div>
+                    <label>{form.gender === 'female' ? 'Suprailíaca (mm)' : 'Abdominal (mm)'}</label>
+                    <input
+                      type="number"
+                      value={skinfolds.b ?? ''}
+                      onChange={(e) => setSkinfolds((s) => ({ ...s, b: e.target.value === '' ? undefined : Number(e.target.value) }))}
+                      placeholder="20"
+                    />
+                  </div>
+                  <div>
+                    <label>Coxa (mm)</label>
+                    <input
+                      type="number"
+                      value={skinfolds.c ?? ''}
+                      onChange={(e) => setSkinfolds((s) => ({ ...s, c: e.target.value === '' ? undefined : Number(e.target.value) }))}
+                      placeholder="15"
+                    />
+                  </div>
+                </div>
               )}
 
               <div className="actions">
@@ -723,6 +712,7 @@ export default function App() {
                 <option value="moderate">Moderado (3-5x/semana)</option>
                 <option value="active">Ativo (6-7x/semana)</option>
               </select>
+              <p className="hint">Sua rotina atual de exercícios (não o plano).</p>
 
               <label>Restrições / alergias</label>
               <input value={form.restrictions} onChange={(e) => set('restrictions', e.target.value)} placeholder="ex.: lactose, glúten" />
