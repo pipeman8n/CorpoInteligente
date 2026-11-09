@@ -72,11 +72,9 @@ function renderMarkdown(md: string): string {
 // Agrupamento dos parâmetros do Raio X em seções
 const RAIO_X_GROUPS: { title: string; match: RegExp }[] = [
   { title: 'Composição Corporal', match: /IMC|Massa Magra|Gordura Corporal|PGC/i },
-  { title: 'Metabolismo', match: /Taxa Metabólica|TMB|Gasto Calórico|GCT|Consumo Calórico/i },
-  { title: 'Alimentação e Hidratação', match: /Macros|Água/i },
-  { title: 'Suplementação', match: /Suplement/i },
+  { title: 'Metabolismo e Saúde', match: /Taxa Metabólica|TMB|Gasto Calórico|GCT|Consumo Calórico|Hormonal/i },
+  { title: 'Alimentação e Suplementação', match: /Macros|Água|Suplement/i },
   { title: 'Treino', match: /Treino/i },
-  { title: 'Saúde Hormonal', match: /Hormonal/i },
 ]
 
 function renderRaioX(md: string): string {
