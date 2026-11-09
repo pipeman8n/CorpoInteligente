@@ -849,7 +849,31 @@ export default function App() {
                 </tbody>
               </table>
 
-              {(form.goal === 'emagrecimento' || form.goal === 'hipertrofia') && form.metaKg && (
+              {/* Ato 1: engajar o cliente a entender o corpo a fundo */}
+              {!aiContent && (
+                <div className="engage">
+                  <p className="engage-title">Isso é só uma prévia.</p>
+                  <p className="engage-sub">Entenda seu corpo por inteiro — composição corporal, metabolismo, hormônios e o que os números significam para você.</p>
+                </div>
+              )}
+
+              {!aiContent && (
+                <div className="actions secondary">
+                  <button className="btn btn-secondary" onClick={onGenerateAI} disabled={aiLoading}>
+                    {aiLoading ? 'Gerando...' : '1 Ver Análise Completa'}
+                  </button>
+                </div>
+              )}
+
+              {aiContent && (
+                <div className="ai-result">
+                  <h3 className="ai-title">Análise Completa</h3>
+                  <div dangerouslySetInnerHTML={{ __html: renderRaioX(aiContent) }} />
+                </div>
+              )}
+
+              {/* Ato 2: engajar o cliente em direção à meta */}
+              {aiContent && (form.goal === 'emagrecimento' || form.goal === 'hipertrofia') && form.metaKg && (
                 <div className="engage">
                   <p className="engage-title">
                     {form.goal === 'emagrecimento'
@@ -866,21 +890,14 @@ export default function App() {
                 </div>
               )}
 
-              <div className="actions secondary">
-                <button className="btn btn-secondary" onClick={onGenerateAI} disabled={aiLoading}>
-                  {aiLoading ? 'Gerando...' : '1 Ver Análise Completa'}
-                </button>
-                <button className="btn btn-secondary" onClick={onGenerateStrategy}>
-                  2 Gerar Estratégia para Meta
-                </button>
-              </div>
-
               {aiContent && (
-                <div className="ai-result">
-                  <h3 className="ai-title">Análise Completa</h3>
-                  <div dangerouslySetInnerHTML={{ __html: renderRaioX(aiContent) }} />
+                <div className="actions secondary">
+                  <button className="btn btn-secondary" onClick={onGenerateStrategy}>
+                    2 Gerar Estratégia para Meta
+                  </button>
                 </div>
               )}
+
               {strategyContent && (
                 <div className="ai-result">
                   <h3 className="ai-title">Estratégia para Meta</h3>
@@ -894,7 +911,7 @@ export default function App() {
                   3 Criar roteiro de treinos
                 </button>
               </div>
-              {!strategyContent && (
+              {aiContent && !strategyContent && (
                 <p className="hint">Gere a Estratégia para Meta para liberar o roteiro de treinos.</p>
               )}
 
