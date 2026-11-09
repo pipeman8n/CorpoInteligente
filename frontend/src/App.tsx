@@ -74,7 +74,7 @@ const RAIO_X_GROUPS: { title: string; match: RegExp }[] = [
   { title: 'Composição Corporal', match: /IMC|Massa Magra|Gordura Corporal|PGC/i },
   { title: 'Metabolismo e Saúde', match: /Taxa Metabólica|TMB|Gasto Calórico|GCT|Consumo Calórico|Hormonal/i },
   { title: 'Recomendação Nutricional', match: /Macros|Água|Suplement/i },
-  { title: 'Treino', match: /Treino/i },
+  { title: 'Treino Adequado', match: /Treino/i },
 ]
 
 function renderRaioX(md: string): string {
@@ -171,6 +171,8 @@ export default function App() {
   const [history, setHistory] = useState<Calculation[]>([])
   const [loadingHistory, setLoadingHistory] = useState(false)
   const [error, setError] = useState('')
+  const [invalid, setInvalid] = useState<string[]>([])
+  const inv = (f: string) => (invalid.includes(f) ? 'invalid' : '')
   const [training, setTraining] = useState<TrainingProgram | null>(null)
   const [viewing, setViewing] = useState<CatalogExercise | null>(null)
   const [openDay, setOpenDay] = useState<number | null>(0)
@@ -260,39 +262,40 @@ export default function App() {
 
   const validateStep1 = (): boolean => {
     setError('')
-    if (!form.name.trim() || form.age <= 0 || !form.gender || form.weight <= 0 || form.height <= 0) {
-      setError('Preencha nome, idade, sexo, peso e altura.')
+    const missing: string[] = []
+    if (!form.name.trim()) missing.push('name')
+    if (form.age <= 0) missing.push('age')
+    if (!form.gender) missing.push('gender')
+    if (form.weight <= 0) missing.push('weight')
+    if (form.height <= 0) missing.push('height')
+    if (knowsBodyFat === '') missing.push('fatChoice')
+    if (knowsBodyFat === 'sim' && (form.bodyFat == null || form.bodyFat <= 0)) missing.push('bodyFat')
+    if (missing.length) {
+      setInvalid(missing)
+      setError('Preencha os campos destacados.')
+      const el = document.querySelector(`[data-field="${missing[0]}"]`)
+      if (el) el.scrollIntoView({ block: 'center', behavior: 'smooth' })
       return false
     }
-    if (knowsBodyFat === '') {
-      setError('Informe se você sabe o % de gordura.')
-      return false
-    }
-    if (knowsBodyFat === 'sim' && (form.bodyFat == null || form.bodyFat <= 0)) {
-      setError('Informe o % de gordura.')
-      return false
-    }
-    if (knowsBodyFat === 'nao' && !form.bodyFatEstimationMethod) {
-      setError('Escolha como estimar o % de gordura.')
-      return false
-    }
+    setInvalid([])
     return true
   }
 
   const validateStep2 = (): boolean => {
     setError('')
-    if (!form.goal) {
-      setError('Selecione o objetivo principal.')
+    const missing: string[] = []
+    if (!form.goal) missing.push('goal')
+    if (!form.activityLevel) missing.push('activityLevel')
+    if ((form.goal === 'emagrecimento' || form.goal === 'hipertrofia') && !form.prazoMeses) missing.push('prazo')
+    if ((form.goal === 'emagrecimento' || form.goal === 'hipertrofia') && !form.metaKg) missing.push('metaKg')
+    if (missing.length) {
+      setInvalid(missing)
+      setError('Preencha os campos destacados.')
+      const el = document.querySelector(`[data-field="${missing[0]}"]`)
+      if (el) el.scrollIntoView({ block: 'center', behavior: 'smooth' })
       return false
     }
-    if (!form.activityLevel) {
-      setError('Selecione o nível de atividade.')
-      return false
-    }
-    if ((form.goal === 'emagrecimento' || form.goal === 'hipertrofia') && (!form.prazoMeses || !form.metaKg)) {
-      setError('Preencha o prazo e a meta.')
-      return false
-    }
+    setInvalid([])
     return true
   }
 
@@ -616,19 +619,19 @@ export default function App() {
           {step === 1 && (
             <div className="card">
               <h1>Vamos começar</h1>
-              <p className="lede">Conte um pouco sobre o cliente para calcular o Raio X Corporal.</p>
+              <p className="lede">Conte um pouco sobre o cliente para calcular a Análise Corporal Prévia.</p>
 
               <label>Nome</label>
-              <input value={form.name} onChange={(e) => set('name', e.target.value)} placeholder="Nome do cliente" />
+              <input data-field="name" className={inv('name')} value={form.name} onChange={(e) => set('name', e.target.value)} placeholder="Nome do cliente" />
 
               <div className="row">
                 <div>
                   <label>Idade</label>
-                  <input type="number" value={form.age === 0 ? '' : form.age} onChange={(e) => set('age', Number(e.target.value))} placeholder="ex.: 30" />
+                  <input data-field="age" className={inv('age')} type="number" value={form.age === 0 ? '' : form.age} onChange={(e) => set('age', Number(e.target.value))} placeholder="ex.: 30" />
                 </div>
                 <div>
                   <label>Sexo</label>
-                  <select value={form.gender} onChange={(e) => set('gender', e.target.value)}>
+                  <select data-field="gender" className={inv('gender')} value={form.gender} onChange={(e) => set('gender', e.target.value)}>
                     <option value="">Selecione</option>
                     <option value="female">Feminino</option>
                     <option value="male">Masculino</option>
@@ -639,16 +642,16 @@ export default function App() {
               <div className="row">
                 <div>
                   <label>Peso (kg)</label>
-                  <input type="number" value={form.weight === 0 ? '' : form.weight} onChange={(e) => set('weight', Number(e.target.value))} placeholder="ex.: 80" />
+                  <input data-field="weight" className={inv('weight')} type="number" value={form.weight === 0 ? '' : form.weight} onChange={(e) => set('weight', Number(e.target.value))} placeholder="ex.: 80" />
                 </div>
                 <div>
                   <label>Altura (cm)</label>
-                  <input type="number" value={form.height === 0 ? '' : form.height} onChange={(e) => set('height', Number(e.target.value))} placeholder="ex.: 175" />
+                  <input data-field="height" className={inv('height')} type="number" value={form.height === 0 ? '' : form.height} onChange={(e) => set('height', Number(e.target.value))} placeholder="ex.: 175" />
                 </div>
               </div>
 
               <label>% de gordura corporal</label>
-              <div className="radio-group" style={{ flexDirection: 'column', alignItems: 'flex-start' }}>
+              <div data-field="fatChoice" className={`radio-group${invalid.includes('fatChoice') ? ' invalid' : ''}`} style={{ flexDirection: 'column', alignItems: 'flex-start' }}>
                 <label className="radio">
                   <input type="radio" name="fatChoice" checked={knowsBodyFat === 'nao' && form.bodyFatEstimationMethod === 'deurenberg'} onChange={() => { setKnowsBodyFat('nao'); set('bodyFatEstimationMethod', 'deurenberg') }} />
                   Não sei, estimar pelo IMC
@@ -667,6 +670,8 @@ export default function App() {
                 <>
                   <label>% Gordura Corporal</label>
                   <input
+                    data-field="bodyFat"
+                    className={inv('bodyFat')}
                     type="number"
                     value={form.bodyFat ?? ''}
                     onChange={(e) => set('bodyFat', e.target.value === '' ? undefined : Number(e.target.value))}
@@ -719,7 +724,7 @@ export default function App() {
               <p className="lede">Isso define o déficit ou superávit calórico e a duração do plano.</p>
 
               <label>Objetivo principal</label>
-              <select value={form.goal} onChange={(e) => set('goal', e.target.value as Goal)}>
+              <select data-field="goal" className={inv('goal')} value={form.goal} onChange={(e) => set('goal', e.target.value as Goal)}>
                 <option value="">Selecione</option>
                 <option value="hipertrofia">Hipertrofia (ganhar massa)</option>
                 <option value="emagrecimento">Emagrecimento (perder gordura)</option>
@@ -731,6 +736,8 @@ export default function App() {
                   <div>
                     <label>Prazo</label>
                     <select
+                      data-field="prazo"
+                      className={inv('prazo')}
                       value={form.prazoMeses ?? ''}
                       onChange={(e) => set('prazoMeses', e.target.value === '' ? undefined : Number(e.target.value))}
                     >
@@ -744,6 +751,8 @@ export default function App() {
                   <div>
                     <label>{form.goal === 'hipertrofia' ? 'Meta de ganho (kg)' : 'Meta de perda (kg)'}</label>
                     <input
+                      data-field="metaKg"
+                      className={inv('metaKg')}
                       type="number"
                       value={form.metaKg ?? ''}
                       onChange={(e) => set('metaKg', e.target.value === '' ? undefined : Number(e.target.value))}
@@ -754,7 +763,7 @@ export default function App() {
               )}
 
               <label>Nível de atividade</label>
-              <select value={form.activityLevel} onChange={(e) => set('activityLevel', e.target.value as ActivityLevel)}>
+              <select data-field="activityLevel" className={inv('activityLevel')} value={form.activityLevel} onChange={(e) => set('activityLevel', e.target.value as ActivityLevel)}>
                 <option value="">Selecione</option>
                 <option value="sedentary">Sedentário</option>
                 <option value="light">Leve (1-3x/semana)</option>
@@ -776,7 +785,7 @@ export default function App() {
 
           {step === 3 && result && (
             <div className="card">
-              <h1>Raio X Corporal</h1>
+              <h1>Análise Corporal Prévia</h1>
               <div className="client-meta">
                 <span className="chip">{calcCode}</span>
                 <span>{form.name}, {form.age} anos, {form.gender === 'male' ? 'Masculino' : 'Feminino'}</span>
@@ -842,7 +851,7 @@ export default function App() {
 
               <div className="actions secondary">
                 <button className="btn btn-secondary" onClick={onGenerateAI} disabled={aiLoading}>
-                  {aiLoading ? 'Gerando...' : '1 Gerar Análise Corporal Completa'}
+                  {aiLoading ? 'Gerando...' : '1 Ver Análise Completa'}
                 </button>
                 <button className="btn btn-secondary" onClick={onGenerateStrategy}>
                   2 Gerar Estratégia para Meta
@@ -1185,7 +1194,7 @@ export default function App() {
           <p style={{ color: '#555', margin: '0 0 16px' }}>Análise Corporal - {form.name}, {calcCode}, {new Date().toLocaleDateString('pt-BR')}</p>
           {result && (
             <>
-              <h2 style={{ fontSize: 16, borderBottom: '1px solid #ccc', paddingBottom: 4 }}>Raio X Corporal</h2>
+              <h2 style={{ fontSize: 16, borderBottom: '1px solid #ccc', paddingBottom: 4 }}>Análise Corporal Prévia</h2>
               <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                 <tbody>
                   <tr><td style={{ padding: '4px 8px 4px 0', fontWeight: 700, width: 160 }}>IMC</td><td style={{ padding: '4px 0' }}>{result.imc} ({result.imcClass})</td></tr>
