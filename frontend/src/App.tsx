@@ -512,7 +512,7 @@ export default function App() {
             Calculadora
           </button>
           <button className={view === 'meus' ? 'navlink active' : 'navlink'} onClick={() => setView('meus')}>
-            Meus Cálculos <span className="badge">{history.length}</span>
+            Meus Cálculos {history.length > 0 && <span className="badge">{history.length}</span>}
           </button>
           {user ? (
             <>
@@ -574,8 +574,8 @@ export default function App() {
                   <label>Sexo</label>
                   <select value={form.gender} onChange={(e) => set('gender', e.target.value)}>
                     <option value="">Selecione</option>
-                    <option value="male">Masculino</option>
                     <option value="female">Feminino</option>
+                    <option value="male">Masculino</option>
                   </select>
                 </div>
               </div>
@@ -730,7 +730,7 @@ export default function App() {
 
               <div className="actions">
                 <button className="btn btn-ghost" onClick={() => goToStep(1)}>Voltar</button>
-                <button className="btn btn-primary" onClick={onGenerate}>Gerar Raio X</button>
+                <button className="btn btn-primary" onClick={onGenerate}>Continuar</button>
               </div>
             </div>
           )}
@@ -1025,10 +1025,6 @@ export default function App() {
           Criado por{' '}
           <a href="https://www.linkedin.com/in/uebersonlsousa" target="_blank" rel="noopener noreferrer">
             Ueberson Sousa
-          </a>
-          {' · '}
-          <a href="https://www.linkedin.com/in/uebersonlsousa" target="_blank" rel="noopener noreferrer">
-            LinkedIn
           </a>
         </p>
         <p>As recomendações são geradas por IA e não substituem o conselho médico profissional.</p>
