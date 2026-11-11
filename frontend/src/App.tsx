@@ -278,6 +278,15 @@ export default function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  // Título da aba dinâmico por tela
+  useEffect(() => {
+    const base = 'Body & Health'
+    if (view === 'meus') document.title = `Meus Cálculos - ${base}`
+    else if (view === 'cadastro') document.title = `Meu Cadastro - ${base}`
+    else if (step >= 3) document.title = `${base} | Análise`
+    else document.title = `${base} | Análise Corporal Prévia`
+  }, [view, step])
+
   const set = (k: keyof ClientData, v: unknown) => setForm((f) => ({ ...f, [k]: v }))
 
   const goToStep = (n: 1 | 2 | 3 | 4) => {
@@ -887,7 +896,7 @@ export default function App() {
               {!aiContent && (
                 <div className="engage">
                   <p className="engage-title">Isso é só uma prévia.</p>
-                  <p className="engage-sub">Entenda seu corpo por inteiro — composição corporal, metabolismo, hormônios e o que os números significam para você.</p>
+                  <p className="engage-sub">Entenda seu corpo por inteiro: composição corporal, metabolismo, hormônios e o que os números significam para você.</p>
                 </div>
               )}
 
@@ -1146,7 +1155,7 @@ export default function App() {
         <p>As recomendações são geradas por IA e não substituem o conselho médico profissional.</p>
         <p>Estratégias de dieta e treino são sugestões e devem ser adaptadas individualmente, preferencialmente com acompanhamento profissional.</p>
         <p className="version">
-          v{__APP_COMMIT__} · {new Date(__APP_BUILD_TIME__).toLocaleString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' })}
+          v{__APP_COMMIT__} - {new Date(__APP_BUILD_TIME__).toLocaleString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' })}
         </p>
         {visits != null && (
           <p className="version">Acessos: {visits.toLocaleString('pt-BR')}</p>
@@ -1158,7 +1167,7 @@ export default function App() {
           <div className="modal" onClick={(e) => e.stopPropagation()}>
             <button className="modal-close" onClick={() => setViewing(null)} aria-label="Fechar">×</button>
             <h3>{viewing.name}</h3>
-            <p className="tmeta">{viewing.muscle} · {viewing.equipment}</p>
+            <p className="tmeta">{viewing.muscle} / {viewing.equipment}</p>
             <video className="ex-video" src={viewing.video} poster={viewing.thumb} controls autoPlay loop muted playsInline />
             {viewing.instructions && <p className="ex-instructions">{viewing.instructions}</p>}
           </div>
