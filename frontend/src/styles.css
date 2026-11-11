@@ -124,7 +124,7 @@ table.result th {
 }
 table.result td { padding: 11px 10px; border-bottom: 1px solid var(--border); vertical-align: top; }
 table.result tr:last-child td { border-bottom: none; }
-table.result td strong { display: block; }
+table.result td strong { display: block; font-variant-numeric: tabular-nums; }
 table.result td small { color: var(--muted); font-size: 0.8rem; }
 .ok-pill {
   background: var(--ok-soft); color: var(--ok); border-radius: 999px;
@@ -162,6 +162,8 @@ table.result td small { color: var(--muted); font-size: 0.8rem; }
 .engage-now, .engage-goal { font-weight: 700; font-size: 0.85rem; white-space: nowrap; }
 .engage-goal { color: var(--accent-strong); }
 .engage-arrow { color: var(--accent); font-weight: 700; }
+.save-bar { margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border); }
+.save-bar .btn { width: 100%; }
 
 /* Histórico */
 .hist-item {
