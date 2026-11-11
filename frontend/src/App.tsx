@@ -662,7 +662,7 @@ export default function App() {
           {step === 1 && (
             <div className="card">
               <h1>Vamos começar</h1>
-              <p className="lede">Conte um pouco sobre o cliente para calcular a Análise Corporal Prévia.</p>
+              <p className="lede">Descubra a composição corporal, o metabolismo e o plano ideal de dieta e treino.</p>
 
               <label>Nome</label>
               <input data-field="name" className={inv('name')} value={form.name} onChange={(e) => set('name', e.target.value)} placeholder="Nome do cliente" />
@@ -1066,7 +1066,7 @@ export default function App() {
                 </div>
               )}
 
-              <div className="actions">
+              <div className="save-bar">
                 <button className="btn btn-primary" onClick={onSave} disabled={saving || pdfLoading}>
                   {pdfLoading ? 'Gerando PDF...' : saving ? 'Salvando...' : 'Salvar Roteiro'}
                 </button>
