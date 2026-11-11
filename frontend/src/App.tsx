@@ -662,7 +662,7 @@ export default function App() {
           {step === 1 && (
             <div className="card">
               <h1>Vamos começar</h1>
-              <p className="lede">Descubra a composição corporal, o metabolismo e o plano ideal de dieta e treino.</p>
+              <p className="lede">Preencha os dados do cliente para gerar a análise corporal, o plano de dieta e o treino.</p>
 
               <label>Nome</label>
               <input data-field="name" className={inv('name')} value={form.name} onChange={(e) => set('name', e.target.value)} placeholder="Nome do cliente" />
@@ -896,7 +896,7 @@ export default function App() {
               {!aiContent && (
                 <div className="engage">
                   <p className="engage-title">Isso é só uma prévia.</p>
-                  <p className="engage-sub">Entenda seu corpo por inteiro: composição corporal, metabolismo, hormônios e o que os números significam para você.</p>
+                  <p className="engage-sub">Gere a análise completa para ver composição corporal, metabolismo, hormônios e o que os números significam para o cliente.</p>
                 </div>
               )}
 
@@ -920,8 +920,8 @@ export default function App() {
                 <div className="engage">
                   <p className="engage-title">
                     {form.goal === 'emagrecimento'
-                      ? `Faltam ${form.metaKg}kg para a sua meta`
-                      : `Faltam ${form.metaKg}kg de massa magra para a sua meta`}
+                      ? `Faltam ${form.metaKg}kg para a meta do cliente`
+                      : `Faltam ${form.metaKg}kg de massa magra para a meta do cliente`}
                     {form.prazoMeses ? ` em ${form.prazoMeses} meses` : ''}.
                   </p>
                   <div className="engage-journey">
@@ -929,7 +929,7 @@ export default function App() {
                     <span className="engage-arrow">→</span>
                     <span className="engage-goal">{form.goal === 'emagrecimento' ? form.weight - form.metaKg : form.weight + form.metaKg}kg meta</span>
                   </div>
-                  <p className="engage-sub">Descubra seu plano personalizado de dieta e treino para chegar lá.</p>
+                  <p className="engage-sub">Gere a estratégia de dieta e treino para o cliente alcançar a meta.</p>
                 </div>
               )}
 
@@ -967,7 +967,7 @@ export default function App() {
           {step === 4 && (
             <div className="card">
               <h1>Divisão de Treino</h1>
-              <p className="lede">Seu plano semanal de treino, exercício a exercício.</p>
+              <p className="lede">O plano semanal de treino do cliente, exercício a exercício.</p>
 
               <p className="hint">
                 Frequência de treino calculada: <strong>{trainingDays(form.activityLevel, form.frequenciaOverride)}x/semana</strong>
