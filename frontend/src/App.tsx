@@ -398,6 +398,7 @@ export default function App() {
         savedAt: new Date().toISOString(),
         results: result,
         strategy,
+        dieta: dietaContent || null,
         trainingProgram: t,
       })
       setSavedMsg('Roteiro salvo!')
@@ -617,6 +618,7 @@ export default function App() {
     setEffectiveBodyFat(c.bodyFat ?? null)
     setResult(c.results as RaioXResult)
     setStrategyContent(typeof c.strategy === 'string' ? c.strategy : '')
+    setDietaContent(typeof c.dieta === 'string' ? c.dieta : '')
     setTraining(c.trainingProgram)
     setAiContent('')
     setView('app')
@@ -1412,6 +1414,7 @@ export default function App() {
           )}
           {aiContent && <><h2 style={{ fontSize: 16, borderBottom: '1px solid #ccc', paddingBottom: 4, marginTop: 16 }}>Análise Corporal Completa</h2><div style={{ fontSize: 12 }} dangerouslySetInnerHTML={{ __html: renderRaioX(aiContent) }} /></>}
           {strategyContent && <><h2 style={{ fontSize: 16, borderBottom: '1px solid #ccc', paddingBottom: 4, marginTop: 16 }}>Estratégia para Meta</h2><div style={{ fontSize: 12 }} dangerouslySetInnerHTML={{ __html: renderMarkdown(strategyContent) }} /></>}
+          {dietaContent && <><h2 style={{ fontSize: 16, borderBottom: '1px solid #ccc', paddingBottom: 4, marginTop: 16 }}>Roteiro de Dieta</h2><div style={{ fontSize: 12 }} dangerouslySetInnerHTML={{ __html: renderMarkdown(dietaContent) }} /></>}
           {training && <><h2 style={{ fontSize: 16, borderBottom: '1px solid #ccc', paddingBottom: 4, marginTop: 16 }}>Roteiro de Treinos</h2>{form.duracaoTreino && <p>Duração: {form.duracaoTreino} min por sessão</p>}{training.days.map((d, i) => <div key={i} style={{ marginTop: 10 }}><h3 style={{ fontSize: 14, margin: '0 0 4px' }}>{d.name}</h3><ul style={{ margin: '0 0 0 18px', padding: 0 }}>{d.exercises.map((e, j) => <li key={j} style={{ margin: '2px 0' }}>{e.name} - {e.sets} séries de {e.reps}{e.rest ? `, descanso ${e.rest}` : ''}</li>)}</ul></div>)}</>}
         </div>
       </div>

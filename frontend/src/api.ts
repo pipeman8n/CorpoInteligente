@@ -27,6 +27,7 @@ export interface Calculation {
   frequencia_treino: string | null
   duracao_treino: string | null
   strategy: string | null
+  dieta: string | null
   trainingProgram: TrainingProgram | null
   results: any
   savedAt: string
