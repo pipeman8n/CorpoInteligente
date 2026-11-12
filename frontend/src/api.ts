@@ -91,6 +91,9 @@ export interface TrainingProgram {
 export const generateTraining = (data: Record<string, unknown>): Promise<{ program: TrainingProgram }> =>
   a1('generate_training', { data })
 
+export const generateDieta = (data: Record<string, unknown>): Promise<{ content: string }> =>
+  a1('generate_dieta', { data })
+
 export interface Profile {
   id: string
   fullName: string

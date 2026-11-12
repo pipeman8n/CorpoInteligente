@@ -128,6 +128,21 @@ function buildTrainingPrompt(d: any): string {
   return `Monte o programa de treino semanal deste cliente:\n\n!CLIENTE:\n- Sexo: ${gender} | Idade: ${d.age} anos | Peso: ${d.weight} kg | Altura: ${d.height} cm\n- Objetivo: ${goal}\n- Nível de atividade: ${ACT_PT[d.activityLevel] ?? d.activityLevel}\n- Frequência de treino: ${days}x/semana\n- Meta: ${metaTexto(d)}\n\nRegras:\n- Defina uma divisão de treino coerente com o objetivo e a frequência (ex.: Upper/Lower, Push/Pull/Legs ou divisão por grupo muscular).\n- ${days} dias de treino, com 4 a 6 exercícios por dia.\n- Cada exercício: nome (APENAS da lista abaixo, exatamente como escrito), séries, repetições e descanso.\n- Exercícios compostos no início do treino, isoladores no final.\n- Hipertrofia: 3-4 séries de 8-12 reps. Emagrecimento: séries de 10-15 reps e incluir cardio ao final.\n\n!LISTA DE EXERCÍCIOS DISPONÍVEIS (use APENAS estes nomes, exatamente como estão):\n${exerciseList}\n\nResponda SOMENTE com um JSON válido (sem markdown, sem texto antes ou depois), no formato:\n{\n  "split": "nome da divisão (ex.: Superiores/Inferiores 4x)",\n  "days": [\n    { "name": "Dia 1 - Peito e Tríceps", "exercises": [ { "name": "Supino reto com barra", "sets": 4, "reps": "8-10", "rest": "90s" } ] }\n  ]\n}`;
 }
 
+function buildDietaPrompt(d: any): string {
+  const nome = (d.name && String(d.name).trim()) ? d.name : 'cliente';
+  const m = d.macros ?? {};
+  const caneta = d.caneta ?? {};
+  const restrictions = (d.restrictions && String(d.restrictions).trim()) ? d.restrictions : 'nenhuma';
+  const goal = GOAL_PT[d.goal] ?? d.goal;
+  const meta = metaTexto(d);
+
+  const canetaBloco = caneta.usa
+    ? `\n\n!USO DE CANETA EMAGRECEDORA (ANÁLOGO GLP-1/GIP):\n- Substância: ${caneta.substancia ?? ''}\n- Dosagem atual: ${caneta.dosagem ?? ''}\n- Fase do ciclo: ${caneta.ciclo ?? ''}\n\nAPLIQUE A METODOLOGIA CLÍNICA PARA CANETAS:\n1. PROTEÍNA É PRIORIDADE #1: preservar massa magra (25-40% do peso perdido vira músculo sem aporte proteico adequado).\n2. Refeições fracionadas (5-6x/dia) em porções pequenas (200-250g por tomada) — a gastroparesia induzida reduz o volume tolerado.\n3. PERIODIZAÇÃO SEMANAL (canetas semanais): Dias 1-2 pós-aplicação = líquidos/pastosos (shakes proteicos, sopas batidas); Dias 3-4 = sólidos brandos (frango desfiado, peixe cozido, purês); Dias 5-7 = sólido pleno.\n4. Evitar refeições gordurosas (agravam gastroparesia/refluxo) e excesso de fibras insolúveis cruas.\n5. Hidratação obrigatória ${m.aguaMl ?? ''} mL/dia + eletrólitos (500-1000mg sódio, 200-400mg potássio).\n6. Não descer abaixo do piso calórico de ${m.pisoCalorico ?? ''} kcal/dia.\n7. Priorizar fontes proteicas líquidas/semissólidas se houver intolerância a sólidos (whey isolado, clara pasteurizada, iogurte grego desnatado, tofu macio).`
+    : '';
+
+  return `Elabore o ROTEIRO NUTRICIONAL (dieta) deste cliente, associado à meta estabelecida:\n\n!CLIENTE:\n- Nome: ${nome}\n- Objetivo: ${goal}\n- Meta: ${meta}\n- Restrições/alergias: ${restrictions}\n\n!MACROS JÁ CALCULADOS (respeite estes números):\n- Calorias/dia: ${m.calorias ?? '—'} kcal\n- Proteína: ${m.proteinaG ?? '—'} g/dia (${m.proteinaGkg ?? '—'} g/kg)\n- Carboidratos: ${m.carbG ?? '—'} g/dia (${Math.round((m.carbPct ?? 0) * 100)}%)\n- Gorduras: ${m.gorduraG ?? '—'} g/dia (${Math.round((m.gorduraPct ?? 0) * 100)}%)\n- Água: ${m.aguaMl ?? '—'} mL/dia${canetaBloco}\n\n!TAREFA:\nMonte o roteiro de dieta em tabela markdown SEM TÍTULO (comece direto na tabela), com colunas:\n| Refeição | Horário | Alimentos (quantidades) | Proteína | Carbo | Gordura | Observação |\n\nEstruture o dia completo (café da manhã, lanche da manhã, almoço, lanche da tarde, jantar e ceia se necessário).\n\nREGRAS:\n- RESPEITE AS RESTRIÇÕES/ALERGIAS (${restrictions}) — não sugira alimentos proibidos.\n- Distribua a proteína em doses de 25-40g por refeição (gatilho de leucina para preservar massa magra).\n- Os totais do dia devem bater com as macros fornecidas.\n- Use alimentos brasileiros, acessíveis e fáceis de preparar.\n- PERSONALIZE: chame o cliente pelo nome (${nome}) e relacione as refeições à meta (${meta}).\n- NUNCA use conselhos genéricos.\n\nIMPORTANTE: cada refeição em UMA única linha da tabela, sem quebras de linha dentro das células (separe com '•').\n\nResponda SOMENTE com a tabela markdown (sem texto antes ou depois, sem título).`;
+}
+
 Deno.serve(async (req) => {
   if (req.method === 'OPTIONS') return new Response('ok', { headers: corsHeaders });
   try {
@@ -178,6 +193,10 @@ Deno.serve(async (req) => {
         const content = await callDeepSeek(buildTrainingPrompt(body.data ?? {}));
         const program = parseJson(content);
         return json({ program });
+      }
+      case 'generate_dieta': {
+        const content = await callDeepSeek(buildDietaPrompt(body.data ?? {}));
+        return json({ content });
       }
       default:
         return json({ error: 'Unknown action' }, 400);
