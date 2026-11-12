@@ -675,6 +675,10 @@ export default function App() {
 
       {view === 'app' && (
         <>
+          {step === 1 && (
+            <p className="hero-tagline">Saiba como está sua composição corporal, avalie seus resultados e customize seus treinos e sua dieta para o seu dia a dia.</p>
+          )}
+
           <div className="stepper">
             <div className={`step ${step === 1 ? 'now' : step > 1 ? 'done' : ''}`}>
               <div className="dot">1</div>
