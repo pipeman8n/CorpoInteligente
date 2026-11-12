@@ -18,6 +18,7 @@ import {
   generateRaioX,
   saveProfile,
   getProfile,
+  generateDieta,
   type Calculation,
   type TrainingProgram,
   type Profile,
@@ -25,6 +26,7 @@ import {
 import { EXERCISE_CATALOG, type CatalogExercise } from './exerciseCatalog'
 import { buildTrainingProgram } from './trainingPlan'
 import { buildStrategy } from './strategyPlan'
+import { buildDietaMacros, CANETA_DOSES, CANETA_LABELS, type CanetaInfo, type CanetaSubstancia, type CanetaCiclo } from './dietaPlan'
 import { supabase } from './supabase'
 
 // Renderizador mínimo de markdown (tabela + negrito) para a saída da IA
@@ -174,6 +176,11 @@ export default function App() {
   const [invalid, setInvalid] = useState<string[]>([])
   const inv = (f: string) => (invalid.includes(f) ? 'invalid' : '')
   const [training, setTraining] = useState<TrainingProgram | null>(null)
+  const [dietaContent, setDietaContent] = useState('')
+  const [dietaLoading, setDietaLoading] = useState(false)
+  const [caneta, setCaneta] = useState<CanetaInfo>({ usa: false, substancia: '', dosagem: '', ciclo: '' })
+  const [showCaneta, setShowCaneta] = useState(false)
+  const [showRestricao, setShowRestricao] = useState(false)
   const [viewing, setViewing] = useState<CatalogExercise | null>(null)
   const [openDay, setOpenDay] = useState<number | null>(0)
   const [showFrequency, setShowFrequency] = useState(false)
@@ -537,6 +544,35 @@ export default function App() {
     if (!result) return
     setError('')
     setStrategyContent(buildStrategy(form.goal, form.activityLevel, form.prazoMeses, form.weight, result, form.frequenciaOverride))
+  }
+
+  const onGerarDieta = () => {
+    if (!result) return
+    setError('')
+    // Ponto 1: verificação de restrições/alergias antes de gerar o roteiro nutricional
+    setShowRestricao(true)
+  }
+
+  const onConfirmCaneta = async () => {
+    if (!result) return
+    setShowCaneta(false)
+    setDietaLoading(true)
+    setError('')
+    try {
+      const macros = buildDietaMacros(form.goal, form.weight, result, caneta)
+      const res = await generateDieta({
+        ...form,
+        bodyFat: effectiveBodyFat ?? form.bodyFat ?? null,
+        results: result,
+        macros,
+        caneta,
+      })
+      setDietaContent(res.content)
+    } catch (e) {
+      setError((e as Error).message)
+    } finally {
+      setDietaLoading(false)
+    }
   }
 
   const onGoToTraining = () => {
@@ -948,6 +984,21 @@ export default function App() {
                 </div>
               )}
 
+              {strategyContent && (
+                <div className="actions secondary">
+                  <button className="btn btn-secondary" onClick={onGerarDieta} disabled={dietaLoading}>
+                    {dietaLoading ? 'Gerando...' : 'Gerar Roteiro de Dieta'}
+                  </button>
+                </div>
+              )}
+
+              {dietaContent && (
+                <div className="ai-result">
+                  <h3 className="ai-title">Roteiro de Dieta</h3>
+                  <div dangerouslySetInnerHTML={{ __html: renderMarkdown(dietaContent) }} />
+                </div>
+              )}
+
               <div className="actions">
                 <button className="btn btn-ghost" onClick={() => goToStep(2)}>Voltar</button>
                 <button className="btn btn-primary" onClick={onGoToTraining} disabled={!strategyContent}>
@@ -1260,6 +1311,79 @@ export default function App() {
             <p>{infoPopup}</p>
             <div className="actions">
               <button className="btn btn-primary" onClick={() => setInfoPopup('')}>Entendi</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showRestricao && (
+        <div className="modal-overlay" onClick={() => setShowRestricao(false)}>
+          <div className="modal" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close" onClick={() => setShowRestricao(false)} aria-label="Fechar">×</button>
+            <h3>Verificação de Restrições / Alergias</h3>
+            <p className="auth-sub">
+              {form.restrictions && form.restrictions.trim()
+                ? <>Restrições registradas do cliente: <strong>{form.restrictions}</strong></>
+                : <>O cliente <strong>não possui restrições/alergias</strong> registradas.</>}
+            </p>
+            <p className="hint">Essas restrições serão respeitadas na geração do roteiro nutricional.</p>
+            <div className="actions">
+              <button className="btn btn-ghost" onClick={() => { setShowRestricao(false); goToStep(2) }}>Editar restrições</button>
+              <button className="btn btn-primary" onClick={() => { setShowRestricao(false); setShowCaneta(true) }}>Confirmar e continuar</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showCaneta && (
+        <div className="modal-overlay" onClick={() => setShowCaneta(false)}>
+          <div className="modal" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close" onClick={() => setShowCaneta(false)} aria-label="Fechar">×</button>
+            <h3>Uso de Caneta Emagrecedora</h3>
+            <p className="auth-sub">Avaliação para dieta específica de quem usa análogos de GLP-1/GIP.</p>
+
+            <label className="radio">
+              <input type="radio" name="usaCaneta" checked={!caneta.usa} onChange={() => setCaneta((c) => ({ ...c, usa: false }))} />
+              Não usa caneta
+            </label>
+            <label className="radio">
+              <input type="radio" name="usaCaneta" checked={caneta.usa} onChange={() => setCaneta((c) => ({ ...c, usa: true }))} />
+              Usa caneta emagrecedora
+            </label>
+
+            {caneta.usa && (
+              <>
+                <label>Substância</label>
+                <select value={caneta.substancia} onChange={(e) => setCaneta((c) => ({ ...c, substancia: e.target.value as CanetaSubstancia, dosagem: '' }))}>
+                  <option value="">Selecione</option>
+                  <option value="semaglutida">{CANETA_LABELS.semaglutida}</option>
+                  <option value="tirzepatida">{CANETA_LABELS.tirzepatida}</option>
+                  <option value="liraglutida">{CANETA_LABELS.liraglutida}</option>
+                </select>
+
+                {caneta.substancia && (
+                  <>
+                    <label>Dosagem atual</label>
+                    <select value={caneta.dosagem} onChange={(e) => setCaneta((c) => ({ ...c, dosagem: e.target.value }))}>
+                      <option value="">Selecione</option>
+                      {CANETA_DOSES[caneta.substancia].map((d) => <option key={d} value={d}>{d}</option>)}
+                    </select>
+                  </>
+                )}
+
+                <label>Fase do ciclo</label>
+                <select value={caneta.ciclo} onChange={(e) => setCaneta((c) => ({ ...c, ciclo: e.target.value as CanetaCiclo }))}>
+                  <option value="">Selecione</option>
+                  <option value="titulacao">Titulação (subindo dose)</option>
+                  <option value="manutencao">Manutenção (dose alvo)</option>
+                  <option value="desmame">Desmame (reduzindo dose)</option>
+                </select>
+              </>
+            )}
+
+            <div className="actions">
+              <button className="btn btn-ghost" onClick={() => setShowCaneta(false)}>Voltar</button>
+              <button className="btn btn-primary" onClick={onConfirmCaneta}>Gerar Roteiro de Dieta</button>
             </div>
           </div>
         </div>
