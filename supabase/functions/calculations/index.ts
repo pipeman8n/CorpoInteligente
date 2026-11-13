@@ -198,6 +198,17 @@ Deno.serve(async (req) => {
         const content = await callDeepSeek(buildDietaPrompt(body.data ?? {}));
         return json({ content });
       }
+      case 'search_alimentos': {
+        const q = String(body.query ?? '').trim();
+        if (!q) return json({ results: [] });
+        const { data: rows, error } = await db.from('alimentos')
+          .select('id, descricao, categoria, energia_kcal, proteina_g, lipideos_g, carboidrato_g, fibra_g, sodio_mg')
+          .ilike('descricao', `%${q}%`)
+          .order('descricao')
+          .limit(20);
+        if (error) return json({ error: error.message }, 400);
+        return json({ results: rows ?? [] });
+      }
       default:
         return json({ error: 'Unknown action' }, 400);
     }

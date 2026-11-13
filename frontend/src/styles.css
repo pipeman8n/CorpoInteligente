@@ -156,6 +156,18 @@ table.result td small { color: var(--muted); font-size: 0.8rem; }
 }
 .ai-table th { background: var(--accent-soft); color: var(--text); }
 .ai-result p { color: var(--text); font-size: 0.9rem; }
+
+/* Busca de alimentos (TACO) */
+.alimento-search { margin-top: 16px; border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; background: var(--surface); }
+.alimento-search-title { margin: 0 0 10px; font-size: 0.9rem; font-weight: 800; color: var(--text); }
+.alimento-search-row { display: flex; gap: 8px; }
+.alimento-search-row input { flex: 1; }
+.alimento-results { margin-top: 10px; max-height: 320px; overflow-y: auto; border-top: 1px solid var(--border); }
+.alimento-item { padding: 8px 0; border-bottom: 1px solid var(--border); }
+.alimento-item:last-child { border-bottom: none; }
+.alimento-name { font-weight: 700; font-size: 0.88rem; color: var(--text); }
+.alimento-macros { font-size: 0.8rem; color: var(--accent-strong); margin-top: 2px; font-variant-numeric: tabular-nums; }
+.alimento-cat { font-size: 0.72rem; color: var(--muted); margin-top: 2px; }
 .engage { background: var(--accent-soft); border: 1px solid var(--accent); border-radius: 12px; padding: 14px 16px; margin: 16px 0 4px; }
 .engage-title { margin: 0 0 4px; font-weight: 800; color: var(--accent-strong); font-size: 0.95rem; }
 .engage-sub { margin: 0; color: var(--text); font-size: 0.88rem; }
