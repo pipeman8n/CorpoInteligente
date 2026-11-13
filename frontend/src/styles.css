@@ -214,6 +214,10 @@ table.result td small { color: var(--muted); font-size: 0.8rem; }
 .tlist li:last-child { border-bottom: none; }
 .tlist strong { display: block; font-size: 0.9rem; }
 .tmeta { color: var(--muted); font-size: 0.78rem; display: block; }
+.difficulty { display: inline-block; margin-left: 4px; padding: 1px 8px; border-radius: 999px; font-size: 0.68rem; font-weight: 700; vertical-align: middle; }
+.diff-iniciante { background: #dcfce7; color: #15803d; }
+.diff-intermediário { background: #fef9c3; color: #a16207; }
+.diff-avançado { background: #fee2e2; color: #b91c1c; }
 .btn-view {
   padding: 6px 14px; border-radius: 999px; border: 1px solid var(--accent);
   background: var(--accent-soft); color: var(--accent); font-weight: 700;

@@ -1300,17 +1300,22 @@ export default function App() {
         )}
       </footer>
 
-      {viewing && (
-        <div className="modal-overlay" onClick={() => setViewing(null)}>
-          <div className="modal" onClick={(e) => e.stopPropagation()}>
-            <button className="modal-close" onClick={() => setViewing(null)} aria-label="Fechar">×</button>
-            <h3>{viewing.name}</h3>
-            <p className="tmeta">{viewing.muscle} / {viewing.equipment}</p>
-            <video className="ex-video" src={viewing.video} poster={viewing.thumb} controls autoPlay loop muted playsInline />
-            {viewing.instructions && <p className="ex-instructions">{viewing.instructions}</p>}
+      {viewing && (() => {
+        const isFemale = form.gender === 'female'
+        const v = isFemale ? (viewing.videoFemale || viewing.video) : viewing.video
+        const p = isFemale ? (viewing.thumbFemale || viewing.thumb) : viewing.thumb
+        return (
+          <div className="modal-overlay" onClick={() => setViewing(null)}>
+            <div className="modal" onClick={(e) => e.stopPropagation()}>
+              <button className="modal-close" onClick={() => setViewing(null)} aria-label="Fechar">×</button>
+              <h3>{viewing.name}</h3>
+              <p className="tmeta">{viewing.muscle} / {viewing.equipment} <span className={`difficulty diff-${viewing.difficulty.toLowerCase()}`}>{viewing.difficulty}</span></p>
+              <video className="ex-video" src={v} poster={p} controls autoPlay loop muted playsInline />
+              {viewing.instructions && <p className="ex-instructions">{viewing.instructions}</p>}
+            </div>
           </div>
-        </div>
-      )}
+        )
+      })()}
 
       {authMode && (
         <div className="modal-overlay" onClick={() => setAuthMode(null)}>
