@@ -92,7 +92,27 @@ export interface TrainingProgram {
 export const generateTraining = (data: Record<string, unknown>): Promise<{ program: TrainingProgram }> =>
   a1('generate_training', { data })
 
-export const generateDieta = (data: Record<string, unknown>): Promise<{ content: string }> =>
+export interface DietaAlimento {
+  descricao: string
+  quantidade_g: number
+  alimento: { id: number; descricao: string } | null
+  macros: { kcal: number; proteina: number; carbo: number; gordura: number } | null
+}
+export interface DietaRefeicao {
+  nome: string
+  horario: string
+  alimentos: DietaAlimento[]
+  observacao: string
+  totais: { kcal: number; proteina: number; carbo: number; gordura: number }
+}
+export interface DietaPlan {
+  refeicoes: DietaRefeicao[]
+  totais: { kcal: number; proteina: number; carbo: number; gordura: number }
+  meta: { calorias: number | null; proteinaG: number | null; carbG: number | null; gorduraG: number | null }
+  naoEncontrados: string[]
+}
+
+export const generateDieta = (data: Record<string, unknown>): Promise<DietaPlan> =>
   a1('generate_dieta', { data })
 
 export interface Alimento {
