@@ -140,7 +140,88 @@ function buildDietaPrompt(d: any): string {
     ? `\n\n!USO DE CANETA EMAGRECEDORA (ANÁLOGO GLP-1/GIP):\n- Substância: ${caneta.substancia ?? ''}\n- Dosagem atual: ${caneta.dosagem ?? ''}\n- Fase do ciclo: ${caneta.ciclo ?? ''}\n\nAPLIQUE A METODOLOGIA CLÍNICA PARA CANETAS:\n1. PROTEÍNA É PRIORIDADE #1: preservar massa magra (25-40% do peso perdido vira músculo sem aporte proteico adequado).\n2. Refeições fracionadas (5-6x/dia) em porções pequenas (200-250g por tomada) — a gastroparesia induzida reduz o volume tolerado.\n3. PERIODIZAÇÃO SEMANAL (canetas semanais): Dias 1-2 pós-aplicação = líquidos/pastosos (shakes proteicos, sopas batidas); Dias 3-4 = sólidos brandos (frango desfiado, peixe cozido, purês); Dias 5-7 = sólido pleno.\n4. Evitar refeições gordurosas (agravam gastroparesia/refluxo) e excesso de fibras insolúveis cruas.\n5. Hidratação obrigatória ${m.aguaMl ?? ''} mL/dia + eletrólitos (500-1000mg sódio, 200-400mg potássio).\n6. Não descer abaixo do piso calórico de ${m.pisoCalorico ?? ''} kcal/dia.\n7. Priorizar fontes proteicas líquidas/semissólidas se houver intolerância a sólidos (whey isolado, clara pasteurizada, iogurte grego desnatado, tofu macio).`
     : '';
 
-  return `Elabore o ROTEIRO NUTRICIONAL (dieta) deste cliente, associado à meta estabelecida:\n\n!CLIENTE:\n- Nome: ${nome}\n- Objetivo: ${goal}\n- Meta: ${meta}\n- Restrições/alergias: ${restrictions}\n\n!MACROS JÁ CALCULADOS (respeite estes números):\n- Calorias/dia: ${m.calorias ?? '—'} kcal\n- Proteína: ${m.proteinaG ?? '—'} g/dia (${m.proteinaGkg ?? '—'} g/kg)\n- Carboidratos: ${m.carbG ?? '—'} g/dia (${Math.round((m.carbPct ?? 0) * 100)}%)\n- Gorduras: ${m.gorduraG ?? '—'} g/dia (${Math.round((m.gorduraPct ?? 0) * 100)}%)\n- Água: ${m.aguaMl ?? '—'} mL/dia${canetaBloco}\n\n!TAREFA:\nMonte o roteiro de dieta em tabela markdown SEM TÍTULO (comece direto na tabela), com colunas:\n| Refeição | Horário | Alimentos (quantidades) | Proteína | Carbo | Gordura | Observação |\n\nEstruture o dia completo (café da manhã, lanche da manhã, almoço, lanche da tarde, jantar e ceia se necessário).\n\nREGRAS:\n- RESPEITE AS RESTRIÇÕES/ALERGIAS (${restrictions}) — não sugira alimentos proibidos.\n- Distribua a proteína em doses de 25-40g por refeição (gatilho de leucina para preservar massa magra).\n- Os totais do dia devem bater com as macros fornecidas.\n- Use alimentos brasileiros, acessíveis e fáceis de preparar.\n- PERSONALIZE: chame o cliente pelo nome (${nome}) e relacione as refeições à meta (${meta}).\n- NUNCA use conselhos genéricos.\n\nIMPORTANTE: cada refeição em UMA única linha da tabela, sem quebras de linha dentro das células (separe com '•').\n\nResponda SOMENTE com a tabela markdown (sem texto antes ou depois, sem título).`;
+  return `Elabore o ROTEIRO NUTRICIONAL (dieta) deste cliente, associado à meta estabelecida:\n\n!CLIENTE:\n- Nome: ${nome}\n- Objetivo: ${goal}\n- Meta: ${meta}\n- Restrições/alergias: ${restrictions}\n\n!MACROS JÁ CALCULADOS (respeite estes números):\n- Calorias/dia: ${m.calorias ?? '—'} kcal\n- Proteína: ${m.proteinaG ?? '—'} g/dia (${m.proteinaGkg ?? '—'} g/kg)\n- Carboidratos: ${m.carbG ?? '—'} g/dia (${Math.round((m.carbPct ?? 0) * 100)}%)\n- Gorduras: ${m.gorduraG ?? '—'} g/dia (${Math.round((m.gorduraPct ?? 0) * 100)}%)\n- Água: ${m.aguaMl ?? '—'} mL/dia${canetaBloco}\n\n!TAREFA:\nMonte o dia completo (café da manhã, lanche da manhã, almoço, lanche da tarde, jantar e ceia se necessário) como JSON.\n\nREGRAS:\n- RESPEITE AS RESTRIÇÕES/ALERGIAS (${restrictions}) — não sugira alimentos proibidos.\n- Distribua a proteína em doses de 25-40g por refeição (gatilho de leucina para preservar massa magra).\n- Os totais do dia devem se aproximar das macros fornecidas.\n- PERSONALIZE: chame o cliente pelo nome (${nome}) e relacione as refeições à meta (${meta}).\n- NUNCA use conselhos genéricos.\n\n!NOMES DOS ALIMENTOS (IMPORTANTE — os macros serão calculados a partir da tabela TACO):\nUse nomes SIMPLES, ESPECÍFICOS e próximos da nomenclatura de tabela de composição brasileira. Exemplos:\n- \"frango, peito, sem pele, grelhado\" (NÃO \"frango grelhado\")\n- \"arroz, tipo 1, cozido\" (NÃO \"arroz branco\")\n- \"ovo, de galinha, inteiro, cozido\" (NÃO \"ovos mexidos\")\n- \"feijão, carioca, cozido\" (NÃO só \"feijão\")\n- \"batata, doce, cozida\" (NÃO \"batata doce\")\n- \"leite, de vaca, desnatado\" (NÃO \"leite desnatado\")\nInforme a quantidade em gramas (peso do alimento pronto/cozido).\nNÃO liste água, sal ou temperos como alimentos — a hidratação é calculada separadamente.\n\nResponda SOMENTE com JSON válido (sem markdown, sem texto antes ou depois), neste formato:\n{\n  \"refeicoes\": [\n    { \"nome\": \"Café da manhã\", \"horario\": \"07:00\", \"alimentos\": [ { \"descricao\": \"ovo, de galinha, inteiro, cozido\", \"quantidade_g\": 100 } ], \"observacao\": \"...\" }\n  ]\n}`;
+}
+
+function round2(n: number): number {
+  return Math.round(n * 100) / 100;
+}
+
+const STOPWORDS = new Set(['de', 'da', 'do', 'dos', 'das', 'com', 'sem', 'em', 'e', 'a', 'o', 'as', 'os', 'na', 'no', 'ao', 'aos', 'para', 'por']);
+
+const GENDER_MAP: Record<string, string> = {
+  grelhada: 'grelhado', grelhadas: 'grelhado', cozida: 'cozido', cozidas: 'cozido',
+  frita: 'frito', fritas: 'frito', crua: 'cru', cruas: 'cru', assada: 'assado', assadas: 'assado',
+  desnatada: 'desnatado', desnatadas: 'desnatado', inteira: 'inteiro', inteiras: 'inteiro',
+};
+const SYNONYM_MAP: Record<string, string> = {
+  mexido: 'frito', mexidos: 'frito', mexida: 'frito', mexidas: 'frito',
+  ovos: 'ovo', para: 'brasil', file: 'filé',
+};
+
+function canonToken(t: string): string {
+  return SYNONYM_MAP[t] ?? GENDER_MAP[t] ?? t;
+}
+
+function normTxt(s: string): string {
+  return (s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+}
+
+function tokTxt(s: string): string[] {
+  return normTxt(s).split(/[^a-z0-9]+/).filter(Boolean);
+}
+
+function canonTokens(s: string): string[] {
+  return tokTxt(s).map(canonToken).filter((t) => !STOPWORDS.has(t));
+}
+
+function scoreMatch(nome: string, candidato: string): number {
+  const a = canonTokens(nome).filter((t) => t.length > 1);
+  const b = new Set(canonTokens(candidato));
+  let score = 0;
+  for (const t of a) if (b.has(t)) score += t.length;
+  const fa = a[0];
+  const fb = canonTokens(candidato)[0];
+  if (fa && fb && fa === fb) score += 100;
+  return score;
+}
+
+const ALIMENTO_COLS = 'id, descricao, categoria, energia_kcal, proteina_g, lipideos_g, carboidrato_g, fibra_g, sodio_mg';
+
+async function resolveAlimento(nome: string, db: any): Promise<any> {
+  const n = (nome || '').trim();
+  if (!n) return null;
+  const { data: exact, error } = await db.from('alimentos').select(ALIMENTO_COLS).ilike('descricao', `%${n}%`).limit(10);
+  if (!error && exact && exact.length) {
+    return [...exact].sort((x: any, y: any) => scoreMatch(n, y.descricao) - scoreMatch(n, x.descricao))[0];
+  }
+  const toks = canonTokens(n).filter((t) => t.length > 1);
+  if (!toks.length) return null;
+  const seen = new Map<number, any>();
+  for (const t of toks) {
+    const { data: rows } = await db.from('alimentos').select(ALIMENTO_COLS).ilike('descricao', `%${t}%`).limit(10);
+    for (const r of (rows ?? [])) if (!seen.has(r.id)) seen.set(r.id, r);
+  }
+  const all = Array.from(seen.values());
+  if (!all.length) return null;
+  return all.sort((x: any, y: any) => scoreMatch(n, y.descricao) - scoreMatch(n, x.descricao))[0];
+}
+
+function macroDe(alimento: any, qtdG: number) {
+  if (!alimento) return null;
+  const f = qtdG / 100;
+  return {
+    kcal: round2((alimento.energia_kcal ?? 0) * f),
+    proteina: round2((alimento.proteina_g ?? 0) * f),
+    carbo: round2((alimento.carboidrato_g ?? 0) * f),
+    gordura: round2((alimento.lipideos_g ?? 0) * f),
+  };
+}
+
+const NON_FOODS = new Set(['agua', 'sal', 'pimenta', 'tempero', 'temperos', 'oregano']);
+function isNonFood(descricao: string): boolean {
+  const ts = canonTokens(descricao);
+  return ts.length > 0 && ts.every((t) => NON_FOODS.has(t));
 }
 
 Deno.serve(async (req) => {
@@ -196,7 +277,48 @@ Deno.serve(async (req) => {
       }
       case 'generate_dieta': {
         const content = await callDeepSeek(buildDietaPrompt(body.data ?? {}));
-        return json({ content });
+        const parsed = parseJson(content) as any;
+        const refeicoes = Array.isArray(parsed.refeicoes) ? parsed.refeicoes : [];
+        const naoEncontrados: string[] = [];
+        let totK = 0, totP = 0, totC = 0, totG = 0;
+        const outRefeicoes: any[] = [];
+        for (const ref of refeicoes) {
+          const alimentos: any[] = [];
+          let rK = 0, rP = 0, rC = 0, rG = 0;
+          for (const item of (Array.isArray(ref.alimentos) ? ref.alimentos : [])) {
+            const descricao = String(item.descricao ?? '');
+            const qtd = Number(item.quantidade_g) || 0;
+            if (isNonFood(descricao)) continue;
+            const al = await resolveAlimento(descricao, db);
+            const macros = macroDe(al, qtd);
+            if (macros) {
+              rK += macros.kcal; rP += macros.proteina; rC += macros.carbo; rG += macros.gordura;
+            } else if (descricao) {
+              naoEncontrados.push(descricao);
+            }
+            alimentos.push({
+              descricao,
+              quantidade_g: qtd,
+              alimento: al ? { id: al.id, descricao: al.descricao } : null,
+              macros,
+            });
+          }
+          outRefeicoes.push({
+            nome: String(ref.nome ?? ''),
+            horario: String(ref.horario ?? ''),
+            alimentos,
+            observacao: String(ref.observacao ?? ''),
+            totais: { kcal: round2(rK), proteina: round2(rP), carbo: round2(rC), gordura: round2(rG) },
+          });
+          totK += rK; totP += rP; totC += rC; totG += rG;
+        }
+        const m = (body.data ?? {}).macros ?? {};
+        return json({
+          refeicoes: outRefeicoes,
+          totais: { kcal: round2(totK), proteina: round2(totP), carbo: round2(totC), gordura: round2(totG) },
+          meta: { calorias: m.calorias, proteinaG: m.proteinaG, carbG: m.carbG, gorduraG: m.gorduraG },
+          naoEncontrados: Array.from(new Set(naoEncontrados)),
+        });
       }
       case 'search_alimentos': {
         const q = String(body.query ?? '').trim();

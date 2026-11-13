@@ -24,6 +24,7 @@ import {
   type TrainingProgram,
   type Profile,
   type Alimento,
+  type DietaPlan,
 } from './api'
 import { EXERCISE_CATALOG, type CatalogExercise } from './exerciseCatalog'
 import { buildTrainingProgram } from './trainingPlan'
@@ -157,6 +158,38 @@ function bodyFatClass(bf: number, gender: string): string {
 }
 
 const CATALOG_MAP = new Map(EXERCISE_CATALOG.map((e) => [e.name.toLowerCase(), e]))
+
+function dietaToMarkdown(plan: DietaPlan): string {
+  const out: string[] = []
+  for (const r of plan.refeicoes) {
+    out.push(`**${r.nome}${r.horario ? ' — ' + r.horario : ''}**`)
+    out.push('')
+    out.push('| Alimento | Qtd | TACO (base) | Prot | Carbo | Gord | kcal |')
+    out.push('|---|---|---|---|---|---|---|')
+    for (const a of r.alimentos) {
+      const tac = a.alimento ? a.alimento.descricao : '—'
+      const m = a.macros
+      out.push(`| ${a.descricao || '—'} | ${a.quantidade_g}g | ${tac} | ${m ? m.proteina + 'g' : '—'} | ${m ? m.carbo + 'g' : '—'} | ${m ? m.gordura + 'g' : '—'} | ${m ? m.kcal : '—'} |`)
+    }
+    out.push(`| **Total** | | | **${r.totais.proteina}g** | **${r.totais.carbo}g** | **${r.totais.gordura}g** | **${r.totais.kcal}** |`)
+    if (r.observacao) {
+      out.push('')
+      out.push(r.observacao)
+    }
+    out.push('')
+  }
+  out.push('**Totais do dia vs Meta**')
+  out.push('')
+  out.push('| | kcal | Proteína | Carbo | Gordura |')
+  out.push('|---|---|---|---|---|')
+  out.push(`| **Dieta** | ${plan.totais.kcal} | ${plan.totais.proteina}g | ${plan.totais.carbo}g | ${plan.totais.gordura}g |`)
+  out.push(`| **Meta** | ${plan.meta.calorias ?? '—'} | ${plan.meta.proteinaG ?? '—'}g | ${plan.meta.carbG ?? '—'}g | ${plan.meta.gorduraG ?? '—'}g |`)
+  if (plan.naoEncontrados.length) {
+    out.push('')
+    out.push('Alimentos sem correspondência na TACO: ' + plan.naoEncontrados.join(', '))
+  }
+  return out.join('\n')
+}
 
 export default function App() {
   const [view, setView] = useState<'app' | 'meus' | 'cadastro'>('app')
@@ -573,7 +606,7 @@ export default function App() {
         macros,
         caneta,
       })
-      setDietaContent(res.content)
+      setDietaContent(dietaToMarkdown(res))
     } catch (e) {
       setError((e as Error).message)
     } finally {
