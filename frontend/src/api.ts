@@ -95,6 +95,20 @@ export const generateTraining = (data: Record<string, unknown>): Promise<{ progr
 export const generateDieta = (data: Record<string, unknown>): Promise<{ content: string }> =>
   a1('generate_dieta', { data })
 
+export interface Alimento {
+  id: number
+  descricao: string
+  categoria: string | null
+  energia_kcal: number | null
+  proteina_g: number | null
+  lipideos_g: number | null
+  carboidrato_g: number | null
+  fibra_g: number | null
+  sodio_mg: number | null
+}
+export const searchAlimentos = (query: string): Promise<{ results: Alimento[] }> =>
+  a1('search_alimentos', { query })
+
 export interface Profile {
   id: string
   fullName: string

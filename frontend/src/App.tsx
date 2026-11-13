@@ -19,9 +19,11 @@ import {
   saveProfile,
   getProfile,
   generateDieta,
+  searchAlimentos,
   type Calculation,
   type TrainingProgram,
   type Profile,
+  type Alimento,
 } from './api'
 import { EXERCISE_CATALOG, type CatalogExercise } from './exerciseCatalog'
 import { buildTrainingProgram } from './trainingPlan'
@@ -181,6 +183,9 @@ export default function App() {
   const [caneta, setCaneta] = useState<CanetaInfo>({ usa: false, substancia: '', dosagem: '', ciclo: '' })
   const [showCaneta, setShowCaneta] = useState(false)
   const [showRestricao, setShowRestricao] = useState(false)
+  const [alimentoQuery, setAlimentoQuery] = useState('')
+  const [alimentoResults, setAlimentoResults] = useState<Alimento[]>([])
+  const [alimentoSearching, setAlimentoSearching] = useState(false)
   const [viewing, setViewing] = useState<CatalogExercise | null>(null)
   const [openDay, setOpenDay] = useState<number | null>(0)
   const [showFrequency, setShowFrequency] = useState(false)
@@ -573,6 +578,20 @@ export default function App() {
       setError((e as Error).message)
     } finally {
       setDietaLoading(false)
+    }
+  }
+
+  const onSearchAlimentos = async () => {
+    const q = alimentoQuery.trim()
+    if (!q) { setAlimentoResults([]); return }
+    setAlimentoSearching(true)
+    try {
+      const res = await searchAlimentos(q)
+      setAlimentoResults(res.results)
+    } catch (e) {
+      setError((e as Error).message)
+    } finally {
+      setAlimentoSearching(false)
     }
   }
 
@@ -1004,6 +1023,35 @@ export default function App() {
                   <div dangerouslySetInnerHTML={{ __html: renderMarkdown(dietaContent) }} />
                 </div>
               )}
+
+              <div className="alimento-search">
+                <h4 className="alimento-search-title">Buscar alimento (TACO — composição oficial)</h4>
+                <div className="alimento-search-row">
+                  <input
+                    type="text"
+                    value={alimentoQuery}
+                    onChange={(e) => setAlimentoQuery(e.target.value)}
+                    onKeyDown={(e) => { if (e.key === 'Enter') onSearchAlimentos() }}
+                    placeholder="Ex.: frango, arroz, ovo, feijão..."
+                  />
+                  <button className="btn btn-secondary" onClick={onSearchAlimentos} disabled={alimentoSearching}>
+                    {alimentoSearching ? 'Buscando...' : 'Buscar'}
+                  </button>
+                </div>
+                {alimentoResults.length > 0 && (
+                  <div className="alimento-results">
+                    {alimentoResults.map((a) => (
+                      <div key={a.id} className="alimento-item">
+                        <div className="alimento-name">{a.descricao}</div>
+                        <div className="alimento-macros">
+                          {a.energia_kcal != null ? `${a.energia_kcal} kcal` : '—'} · P {a.proteina_g ?? 0}g · C {a.carboidrato_g ?? 0}g · G {a.lipideos_g ?? 0}g
+                        </div>
+                        <div className="alimento-cat">{a.categoria ?? ''}</div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
 
               <div className="actions">
                 <button className="btn btn-ghost" onClick={() => goToStep(2)}>Voltar</button>
