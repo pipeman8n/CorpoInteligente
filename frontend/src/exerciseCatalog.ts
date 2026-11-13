@@ -14,7 +14,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "barra",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/barbell-bench-press.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/barbell-bench-press.jpg",
-  "instructions": "Lie flat on a bench with your feet flat on the ground and your back pressed against the bench. Grasp the barbell with an overhand grip slightly wider than shoulder-width apart. Lift the barbell off the rack and hold it directly above your chest with your arms fully extended. Lower the barbell slowly towards your chest, keeping your elbows tucked in. Pause for a moment when the barbell touches your chest. Push the barbell back up to the starting position by extending your arms. Repeat for the des"
+  "instructions": "Deite-se plano em um banco com os pés apoiados no chão e as costas pressionadas contra o banco. Segure a barra com pegada pronada um pouco mais aberta que a largura dos ombros. Retire a barra do suporte e segure-a diretamente acima do peito com os braços totalmente estendidos. Desça a barra lentamente em direção ao peito, mantendo os cotovelos junto ao corpo. Faça uma pausa por um momento quando a barra tocar o peito. Empurre a barra de volta para a posição inicial estendendo os braços. Repita para o número desejado de repetições."
  },
  {
   "name": "Supino declinado com barra",
@@ -22,7 +22,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "barra",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/barbell-decline-bench-press.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/barbell-decline-bench-press.jpg",
-  "instructions": "Lie on a decline bench with your feet secured and your head lower than your hips. Grasp the barbell with an overhand grip slightly wider than shoulder-width apart. Unrack the barbell and lower it slowly towards your chest, keeping your elbows tucked in. Pause for a moment at the bottom, then push the barbell back up to the starting position. Repeat for the desired number of repetitions."
+  "instructions": "Deite-se em um banco declinado com os pés fixados e a cabeça mais baixa que os quadris. Segure a barra com pegada pronada um pouco mais aberta que a largura dos ombros. Retire a barra do suporte e desça-a lentamente em direção ao peito, mantendo os cotovelos junto ao corpo. Faça uma pausa por um momento na parte de baixo, depois empurre a barra de volta para a posição inicial. Repita para o número desejado de repetições."
  },
  {
   "name": "Supino inclinado com barra",
@@ -30,7 +30,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "barra",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/barbell-incline-bench-press.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/barbell-incline-bench-press.jpg",
-  "instructions": "Set up an incline bench at a 45-degree angle. Lie down on the bench with your feet flat on the ground. Grasp the barbell with an overhand grip, slightly wider than shoulder-width apart. Unrack the barbell and lower it slowly towards your chest, keeping your elbows at a 45-degree angle. Pause for a moment at the bottom, then push the barbell back up to the starting position. Repeat for the desired number of repetitions."
+  "instructions": "Ajuste um banco inclinado em um ângulo de 45 graus. Deite-se no banco com os pés apoiados no chão. Segure a barra com pegada pronada, um pouco mais aberta que a largura dos ombros. Retire a barra do suporte e desça-a lentamente em direção ao peito, mantendo os cotovelos em um ângulo de 45 graus. Faça uma pausa por um momento na parte de baixo, depois empurre a barra de volta para a posição inicial. Repita para o número desejado de repetições."
  },
  {
   "name": "Supino declinado com halteres",
@@ -38,7 +38,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "halteres",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/decline-dumbbell-bench-press-45-degree.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/decline-dumbbell-bench-press-45-degree.jpg",
-  "instructions": "Secure your feet in the decline bench and lie back holding a dumbbell in each hand at chest level. Press the weights up until arms are extended, then lower them until elbows are at about 90 degrees."
+  "instructions": "Fixe os pés no banco declinado e deite-se segurando um haltere em cada mão na altura do peito. Empurre os pesos para cima até os braços ficarem estendidos, depois desça-os até os cotovelos ficarem em cerca de 90 graus."
  },
  {
   "name": "Crucifixo declinado com halteres",
@@ -46,7 +46,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "halteres",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-decline-fly-45-degree-1.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-decline-fly-45-degree-1.jpg",
-  "instructions": "Lay back on a 45-degree decline bench holding a dumbbell in each hand above chest. Lower the weights in an arc to sides until a stretch is felt, then bring them back together, squeezing the chest."
+  "instructions": "Deite-se em um banco declinado a 45 graus segurando um haltere em cada mão acima do peito. Desça os pesos em arco para os lados até sentir um alongamento, depois traga-os de volta juntos, contraindo o peito."
  },
  {
   "name": "Crucifixo reto com halteres",
@@ -54,7 +54,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "halteres",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-fly.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-fly.jpg",
-  "instructions": "Lie flat on a bench with a dumbbell in each hand, palms facing each other. Extend your arms straight up over your chest, with a slight bend in your elbows. Keeping a slight bend in your elbows, lower your arms out to the sides in a wide arc until you feel a stretch in your chest. Pause for a moment, then reverse the movement and bring the dumbbells back up to the starting position. Repeat for the desired number of repetitions."
+  "instructions": "Deite-se plano em um banco com um haltere em cada mão, palmas voltadas uma para a outra. Estenda os braços retos para cima sobre o peito, com uma leve flexão nos cotovelos. Mantendo uma leve flexão nos cotovelos, desça os braços para os lados em um arco amplo até sentir um alongamento no peito. Faça uma pausa por um momento, depois inverta o movimento e traga os halteres de volta para a posição inicial. Repita para o número desejado de repetições."
  },
  {
   "name": "Supino inclinado com halteres",
@@ -62,7 +62,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "halteres",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-incline-bench-press.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-incline-bench-press.jpg",
-  "instructions": "Set up an incline bench at a 45-degree angle. Sit on the bench with your feet flat on the ground and your back pressed firmly against the bench. Hold a dumbbell in each hand, palms facing forward, and lift them to shoulder height. Slowly lower the dumbbells to the sides of your chest, keeping your elbows at a 90-degree angle. Push the dumbbells back up to the starting position, fully extending your arms. Repeat for the desired number of repetitions."
+  "instructions": "Ajuste um banco inclinado em um ângulo de 45 graus. Sente-se no banco com os pés apoiados no chão e as costas firmemente pressionadas contra o banco. Segure um haltere em cada mão, palmas voltadas para frente, e eleve-os até a altura dos ombros. Desça lentamente os halteres para os lados do peito, mantendo os cotovelos em um ângulo de 90 graus. Empurre os halteres de volta para a posição inicial, estendendo totalmente os braços. Repita para o número desejado de repetições."
  },
  {
   "name": "Crucifixo inclinado com halteres",
@@ -70,7 +70,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "halteres",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-incline-fly.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-incline-fly.jpg",
-  "instructions": "Set an incline bench to a 45-degree angle. Sit on the bench with a dumbbell in each hand, palms facing each other. Lie back on the bench and press the dumbbells up to the starting position, directly above your chest. Lower the dumbbells out to the sides in a wide arc until you feel a stretch in your chest. Pause for a moment, then squeeze your chest muscles to bring the dumbbells back up to the starting position. Repeat for the desired number of repetitions."
+  "instructions": "Ajuste um banco inclinado em um ângulo de 45 graus. Sente-se no banco com um haltere em cada mão, palmas voltadas uma para a outra. Deite-se no banco e empurre os halteres para cima até a posição inicial, diretamente acima do peito. Desça os halteres para os lados em um arco amplo até sentir um alongamento no peito. Faça uma pausa por um momento, depois contraia os músculos do peito para trazer os halteres de volta para a posição inicial. Repita para o número desejado de repetições."
  },
  {
   "name": "Supino inclinado neutro com halteres",
@@ -78,7 +78,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "halteres",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-incline-hammer-press.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-incline-hammer-press.jpg",
-  "instructions": "Set an incline bench to a 45-degree angle and sit on it with a dumbbell in each hand, resting on your thighs. Lie back on the bench and position the dumbbells at shoulder level with your palms facing each other. Press the dumbbells up and away from your body until your arms are fully extended. Pause for a moment at the top, then slowly lower the dumbbells back down to the starting position. Repeat for the desired number of repetitions."
+  "instructions": "Ajuste um banco inclinado em um ângulo de 45 graus e sente-se nele com um haltere em cada mão, apoiados nas coxas. Deite-se no banco e posicione os halteres na altura dos ombros com as palmas voltadas uma para a outra. Empurre os halteres para cima e para longe do corpo até os braços ficarem totalmente estendidos. Faça uma pausa por um momento no topo, depois desça lentamente os halteres de volta para a posição inicial. Repita para o número desejado de repetições."
  },
  {
   "name": "Supino reto neutro com halteres",
@@ -86,7 +86,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "halteres",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-lying-hammer-press.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-lying-hammer-press.jpg",
-  "instructions": "Lie flat on a bench with a dumbbell in each hand, palms facing each other and arms extended straight up. Lower the dumbbells to the sides of your chest, keeping your elbows at a 90-degree angle. Press the dumbbells back up to the starting position, fully extending your arms. Repeat for the desired number of repetitions."
+  "instructions": "Deite-se plano em um banco com um haltere em cada mão, palmas voltadas uma para a outra e braços estendidos retos para cima. Desça os halteres para os lados do peito, mantendo os cotovelos em um ângulo de 90 graus. Empurre os halteres de volta para a posição inicial, estendendo totalmente os braços. Repita para o número desejado de repetições."
  },
  {
   "name": "Crucifixo no cabo",
@@ -94,7 +94,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "cabo",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/cable-standing-fly-crossover-fly.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/cable-standing-fly-crossover-fly.jpg",
-  "instructions": "Stand between two cable stacks, grab the D-handles, and take a step forward. With a slight bend in elbows, bring the handles together in front of the chest, then slowly return to the starting position."
+  "instructions": "Fique em pé entre duas torres de polia, pegue as alças em D e dê um passo à frente. Com uma leve flexão nos cotovelos, traga as alças juntas na frente do peito, depois retorne lentamente à posição inicial."
  },
  {
   "name": "Crucifixo no cabo deitado",
@@ -102,7 +102,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "cabo",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/cable-lying-fly-flat-bench-cable-fly.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/cable-lying-fly-flat-bench-cable-fly.jpg",
-  "instructions": "Lie on a flat bench positioned between two low cable pulleys. Grab the handles with arms extended and a slight bend in the elbows, then bring your hands together in a wide arc before returning to the start position."
+  "instructions": "Deite-se em um banco plano posicionado entre duas polias baixas. Pegue as alças com os braços estendidos e uma leve flexão nos cotovelos, depois traga as mãos juntas em um arco amplo antes de retornar à posição inicial."
  },
  {
   "name": "Supino inclinado na máquina",
@@ -110,7 +110,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "máquina",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/lever-incline-hammer-chest-press.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/lever-incline-hammer-chest-press.jpg",
-  "instructions": "Adjust the seat so the handles are level with your upper chest when seated. Grip the handles firmly and press them up and slightly forward, focusing on squeezing your upper chest. Return to the starting position under control after a brief pause."
+  "instructions": "Ajuste o assento para que as alças fiquem na altura da parte superior do peito quando sentado. Segure as alças firmemente e empurre-as para cima e ligeiramente para frente, concentrando-se em contrair a parte superior do peito. Retorne à posição inicial com controle após uma breve pausa."
  },
  {
   "name": "Supino reto na máquina",
@@ -118,7 +118,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "máquina",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/lever-lying-chest-press.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/lever-lying-chest-press.jpg",
-  "instructions": "Lie back on the lever chest press machine, gripping the handles just outside shoulder-width. Press the levers forward and upward by extending your arms fully, focusing on squeezing your chest, then return with control to the starting position."
+  "instructions": "Deite-se na máquina de supino articulada, segurando as alças logo além da largura dos ombros. Empurre as alavancas para frente e para cima estendendo totalmente os braços, concentrando-se em contrair o peito, depois retorne com controle à posição inicial."
  },
  {
   "name": "Encolhimento com barra",
@@ -126,7 +126,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "barra",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/barbell-shrug.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/barbell-shrug.jpg",
-  "instructions": "Stand with your feet shoulder-width apart and hold a barbell in front of you with an overhand grip. Keep your arms straight and your back straight throughout the exercise. Lift your shoulders up towards your ears as high as possible, squeezing your traps at the top. Hold for a moment, then slowly lower your shoulders back down to the starting position. Repeat for the desired number of repetitions."
+  "instructions": "Fique em pé com os pés na largura dos ombros e segure uma barra à sua frente com pegada pronada. Mantenha os braços retos e as costas retas durante todo o exercício. Eleve os ombros em direção às orelhas o mais alto possível, contraindo os trapézios no topo. Segure por um momento, depois desça lentamente os ombros de volta para a posição inicial. Repita para o número desejado de repetições."
  },
  {
   "name": "Remada curvada supinada com barra",
@@ -134,7 +134,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "barra",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/barbell-underhand-bent-over-row.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/barbell-underhand-bent-over-row.jpg",
-  "instructions": "Stand with feet hip-width apart, grasp the barbell with a supinated (underhand) grip. Bend forward at the hips keeping your back flat, bar hanging from extended arms. Pull the bar towards your lower ribs, squeezing shoulder blades, then lower it until arms are straight."
+  "instructions": "Fique em pé com os pés na largura dos quadris e segure a barra com pegada supinada (palmas para cima). Incline o tronco para frente a partir dos quadris, mantendo as costas retas e a barra pendurada pelos braços estendidos. Puxe a barra em direção às costelas inferiores, apertando as escápulas, depois abaixe-a até os braços ficarem estendidos."
  },
  {
   "name": "Remada deitado com barra curva",
@@ -142,7 +142,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "barra",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/cambered-bar-lying-row.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/cambered-bar-lying-row.jpg",
-  "instructions": "Set up a barbell on the floor and lie face down on a bench with your chest just off the edge. Reach down and grab the barbell with an overhand grip, slightly wider than shoulder-width apart. With your legs straight and feet on the ground, lift the barbell off the floor by extending your arms. Pull the barbell towards your chest, squeezing your shoulder blades together. Lower the barbell back down to the starting position and repeat for the desired number of repetitions."
+  "instructions": "Posicione uma barra no chão e deite-se de bruços em um banco com o peito logo na borda. Estenda os braços para baixo e agarre a barra com pegada pronada, um pouco mais aberta que a largura dos ombros. Com as pernas estendidas e os pés no chão, levante a barra do chão estendendo os braços. Puxe a barra em direção ao peito, apertando as escápulas. Abaixe a barra de volta à posição inicial e repita pelo número desejado de repetições."
  },
  {
   "name": "Remada curvada com halteres",
@@ -150,7 +150,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "halteres",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-bent-over-row.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-bent-over-row.jpg",
-  "instructions": "Hold a dumbbell in each hand with feet shoulder-width apart, hinge at the hips while keeping your back flat. Row the weights to your sides by pulling elbows back, then lower the weights slowly."
+  "instructions": "Segure um haltere em cada mão com os pés na largura dos ombros e faça a dobradiça de quadril, mantendo as costas retas. Reme os pesos para os lados puxando os cotovelos para trás, depois abaixe os pesos lentamente."
  },
  {
   "name": "Remada inclinada neutra com halteres",
@@ -158,7 +158,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "halteres",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-hammer-grip-incline-bench-row.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-hammer-grip-incline-bench-row.jpg",
-  "instructions": "Lie face down on an incline bench with a dumbbell in each hand, neutral grip. Row the weights up toward your hips, squeezing your lats, then lower with control."
+  "instructions": "Deite-se de bruços em um banco inclinado com um haltere em cada mão, pegada neutra. Reme os pesos em direção aos quadris, apertando os dorsais, depois abaixe com controle."
  },
  {
   "name": "Remada inclinada com halteres",
@@ -166,7 +166,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "halteres",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-incline-row.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-incline-row.jpg",
-  "instructions": "Set up an incline bench at a 45-degree angle. Grab a dumbbell in each hand and sit on the bench with your chest against the incline. Extend your arms fully, allowing the dumbbells to hang straight down from your shoulders. Pull the dumbbells up towards your chest, squeezing your shoulder blades together. Pause for a moment at the top, then slowly lower the dumbbells back to the starting position. Repeat for the desired number of repetitions."
+  "instructions": "Ajuste um banco inclinado em um ângulo de 45 graus. Pegue um haltere em cada mão e sente-se no banco com o peito apoiado na inclinação. Estenda os braços completamente, deixando os halteres pendurados na vertical a partir dos ombros. Puxe os halteres em direção ao peito, apertando as escápulas. Faça uma pausa por um momento no topo, depois abaixe lentamente os halteres de volta à posição inicial. Repita pelo número desejado de repetições."
  },
  {
   "name": "Encolhimento inclinado com halteres",
@@ -174,7 +174,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "halteres",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-incline-shrug.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-incline-shrug.jpg",
-  "instructions": "Set an incline bench to a 45-degree angle and sit on it with a dumbbell in each hand. Place your feet flat on the ground and let your arms hang straight down with your palms facing your body. Keeping your arms straight, shrug your shoulders up towards your ears as high as possible. Hold the contraction for a moment, then slowly lower your shoulders back down to the starting position. Repeat for the desired number of repetitions."
+  "instructions": "Ajuste um banco inclinado em um ângulo de 45 graus e sente-se nele com um haltere em cada mão. Coloque os pés apoiados no chão e deixe os braços pendurados na vertical com as palmas voltadas para o corpo. Mantendo os braços estendidos, encolha os ombros em direção às orelhas o mais alto possível. Segure a contração por um momento, depois abaixe lentamente os ombros de volta à posição inicial. Repita pelo número desejado de repetições."
  },
  {
   "name": "Remada deitado para deltoide posterior",
@@ -182,7 +182,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "halteres",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-lying-rear-delt-row.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-lying-rear-delt-row.jpg",
-  "instructions": "Lie face down on a flat bench with a dumbbell in each hand, palms facing inwards. Extend your arms straight down towards the floor, keeping a slight bend in your elbows. Engaging your back muscles, lift the dumbbells up towards your chest, squeezing your shoulder blades together. Pause for a moment at the top, then slowly lower the dumbbells back down to the starting position. Repeat for the desired number of repetitions."
+  "instructions": "Deite-se de bruços em um banco plano com um haltere em cada mão, palmas voltadas para dentro. Estenda os braços na vertical em direção ao chão, mantendo uma leve flexão nos cotovelos. Ativando os músculos das costas, levante os halteres em direção ao peito, apertando as escápulas. Faça uma pausa por um momento no topo, depois abaixe lentamente os halteres de volta à posição inicial. Repita pelo número desejado de repetições."
  },
  {
   "name": "Encolhimento com halteres",
@@ -190,7 +190,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "halteres",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-shrug.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-shrug.jpg",
-  "instructions": "Stand with your feet shoulder-width apart and hold a dumbbell in each hand with your palms facing your body. Keep your arms straight and let the dumbbells hang by your sides. Raise your shoulders as high as possible, as if you are trying to touch your ears with your shoulders. Hold the contraction for a second, then slowly lower your shoulders back down to the starting position. Repeat for the desired number of repetitions."
+  "instructions": "Fique em pé com os pés na largura dos ombros e segure um haltere em cada mão com as palmas voltadas para o corpo. Mantenha os braços estendidos e deixe os halteres pendurados ao lado do corpo. Eleve os ombros o mais alto possível, como se estivesse tentando tocar as orelhas com os ombros. Segure a contração por um segundo, depois abaixe lentamente os ombros de volta à posição inicial. Repita pelo número desejado de repetições."
  },
  {
   "name": "Extensão lombar 45°",
@@ -198,7 +198,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "máquina",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/45-degree-hyperextension.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/45-degree-hyperextension.jpg",
-  "instructions": "Set up on a 45-degree hyperextension bench with hips supported and ankles secured. Cross arms over the chest or place hands behind the head. Hinge at the hips, lower your torso toward the floor, then contract lower back and glutes to return to start."
+  "instructions": "Posicione-se em um banco de hiperextensão a 45 graus com os quadris apoiados e os tornozelos fixados. Cruze os braços sobre o peito ou coloque as mãos atrás da cabeça. Faça a dobradiça de quadril, abaixando o tronco em direção ao chão, depois contraia a lombar e os glúteos para retornar à posição inicial."
  },
  {
   "name": "Puxada frente pegada fechada",
@@ -206,7 +206,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "cabo",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/cable-close-grip-front-lat-pulldown.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/cable-close-grip-front-lat-pulldown.jpg",
-  "instructions": "Sit at a lat pulldown machine with a close (V-bar) handle attached. Grasp the handles with palms facing in, keep your torso upright, and pull the handle down to your chest by squeezing your back and bringing elbows down and back, then return the handle under control."
+  "instructions": "Sente-se em uma máquina de puxada alta com uma alça curta (barra V) acoplada. Agarre as alças com as palmas voltadas para dentro, mantenha o tronco ereto e puxe a alça até o peito apertando as costas e levando os cotovelos para baixo e para trás, depois retorne a alça com controle."
  },
  {
   "name": "Puxada unilateral no cabo",
@@ -214,7 +214,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "cabo",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/cable-one-arm-lateral-pulldown.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/cable-one-arm-lateral-pulldown.jpg",
-  "instructions": "Sit or stand at a cable station, grasp the single handle with one hand overhead. Pull the handle down to shoulder level, pausing briefly, then control the return."
+  "instructions": "Sente-se ou fique em pé em uma estação de cabo e agarre a alça única com uma mão acima da cabeça. Puxe a alça para baixo até a altura do ombro, fazendo uma breve pausa, depois controle o retorno."
  },
  {
   "name": "Remada sentado unilateral com rotação",
@@ -222,7 +222,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "cabo",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/cable-one-arm-twisting-seated-row.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/cable-one-arm-twisting-seated-row.jpg",
-  "instructions": "Sit at a cable row station and grasp the handle with one hand. As you row the handle towards your torso, rotate your upper body toward the working side, then reverse the rotation as you extend your arm forward."
+  "instructions": "Sente-se em uma estação de remada no cabo e agarre a alça com uma mão. Ao remar a alça em direção ao tronco, gire a parte superior do corpo em direção ao lado de trabalho, depois inverta a rotação ao estender o braço para frente."
  },
  {
   "name": "Puxada frente no cabo",
@@ -230,7 +230,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "cabo",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/cable-pulldown.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/cable-pulldown.jpg",
-  "instructions": "Adjust the cable pulldown machine so that the seat is at a comfortable height and the knee pad is secured. Sit on the seat with your back straight and your feet flat on the ground. Grasp the cable bar with an overhand grip, slightly wider than shoulder-width apart. Lean back slightly and engage your core. Pull the cable bar down towards your chest, squeezing your shoulder blades together. Pause for a moment at the bottom of the movement, then slowly release the bar back to the starting position."
+  "instructions": "Ajuste a máquina de puxada alta no cabo para que o assento fique em uma altura confortável e o apoio de joelhos esteja firme. Sente-se no assento com as costas retas e os pés apoiados no chão. Agarre a barra do cabo com pegada pronada, um pouco mais aberta que a largura dos ombros. Incline-se levemente para trás e ative o core. Puxe a barra do cabo para baixo em direção ao peito, apertando as escápulas. Faça uma pausa por um momento na parte inferior do movimento, depois solte lentamente a barra de volta à posição inicial."
  },
  {
   "name": "Elevação frontal com barra",
@@ -238,7 +238,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "barra",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/barbell-front-raise.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/barbell-front-raise.jpg",
-  "instructions": "Stand with your feet shoulder-width apart and hold a barbell in front of your thighs with an overhand grip. Keep your arms straight and lift the barbell forward and upward until it reaches shoulder level. Pause for a moment at the top, then slowly lower the barbell back down to the starting position. Repeat for the desired number of repetitions."
+  "instructions": "Fique em pé com os pés na largura dos ombros e segure uma barra à frente das coxas com pegada pronada. Mantenha os braços estendidos e levante a barra para frente e para cima até atingir a altura dos ombros. Faça uma pausa por um momento no topo, depois abaixe lentamente a barra de volta à posição inicial. Repita pelo número desejado de repetições."
  },
  {
   "name": "Elevação posterior com barra",
@@ -246,7 +246,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "barra",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/barbell-rear-delt-raise.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/barbell-rear-delt-raise.jpg",
-  "instructions": "Stand with your feet shoulder-width apart and hold a barbell with an overhand grip, palms facing down. Bend your knees slightly and hinge forward at the hips, keeping your back straight. Raise the barbell out to the sides, keeping your arms straight, until they are parallel to the ground. Pause for a moment at the top, then slowly lower the barbell back to the starting position. Repeat for the desired number of repetitions."
+  "instructions": "Fique em pé com os pés na largura dos ombros e segure uma barra com pegada pronada, palmas voltadas para baixo. Flexione levemente os joelhos e faça a dobradiça de quadril para frente, mantendo as costas retas. Eleve a barra para os lados, mantendo os braços estendidos, até ficarem paralelos ao chão. Faça uma pausa por um momento no topo, depois abaixe lentamente a barra de volta à posição inicial. Repita pelo número desejado de repetições."
  },
  {
   "name": "Desenvolvimento nuca com barra",
@@ -254,7 +254,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "barra",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/barbell-seated-behind-head-military-press.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/barbell-seated-behind-head-military-press.jpg",
-  "instructions": "Sit on a bench with back support and grip the barbell with hands wider than shoulder-width. Lower the barbell slowly behind your head to just below ear level, then press upward until arms are fully extended. Use a spotter and maintain upright posture."
+  "instructions": "Sente-se em um banco com apoio para as costas e segure a barra com as mãos mais afastadas que a largura dos ombros. Abaixe a barra lentamente atrás da cabeça até logo abaixo da altura das orelhas, depois empurre para cima até que os braços estejam totalmente estendidos. Use um ajudante e mantenha a postura ereta."
  },
  {
   "name": "Remada alta com barra",
@@ -262,7 +262,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "barra",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/barbell-upright-row-wide-grip.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/barbell-upright-row-wide-grip.jpg",
-  "instructions": "Stand with feet shoulder-width apart, holding a barbell with a wide grip resting in front of your thighs. Pull the bar straight up toward your chest, lifting elbows high, then lower slowly."
+  "instructions": "Fique em pé com os pés afastados na largura dos ombros, segurando uma barra com pegada aberta apoiada na frente das coxas. Puxe a barra reta para cima em direção ao peito, elevando os cotovelos bem alto, depois abaixe lentamente."
  },
  {
   "name": "Desenvolvimento militar",
@@ -270,7 +270,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "barra",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/military-press.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/military-press.jpg",
-  "instructions": "Stand with feet hip-width apart, holding a barbell at shoulder height with an overhand grip. Press the bar overhead by extending your arms fully, keeping your core tight and avoiding excessive lower back arch. Lower the bar to the starting position under control."
+  "instructions": "Fique em pé com os pés afastados na largura do quadril, segurando uma barra na altura dos ombros com pegada pronada. Empurre a barra acima da cabeça estendendo os braços totalmente, mantendo o core firme e evitando arquear excessivamente a lombar. Abaixe a barra até a posição inicial com controle."
  },
  {
   "name": "Desenvolvimento alternado com halteres",
@@ -278,7 +278,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "halteres",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-alternate-shoulder-press.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-alternate-shoulder-press.jpg",
-  "instructions": "Sit or stand with a dumbbell in each hand at shoulder height. Press one dumbbell overhead while keeping the other stationary, then alternate arms for each repetition."
+  "instructions": "Sente-se ou fique em pé com um haltere em cada mão na altura dos ombros. Empurre um haltere acima da cabeça enquanto mantém o outro parado, depois alterne os braços a cada repetição."
  },
  {
   "name": "Desenvolvimento Arnold",
@@ -286,7 +286,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "halteres",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-arnold-press.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-arnold-press.jpg",
-  "instructions": "Sit on a bench with back support and hold a dumbbell in each hand at shoulder level, palms facing your body and elbows bent. Press the dumbbells upward until your arms are fully extended and your palms are facing forward. Rotate your wrists as you lift, so that your palms are facing forward at the top of the movement. Pause for a moment at the top, then slowly lower the dumbbells back to the starting position. Repeat for the desired number of repetitions."
+  "instructions": "Sente-se em um banco com apoio para as costas e segure um haltere em cada mão na altura dos ombros, com as palmas voltadas para o corpo e os cotovelos flexionados. Empurre os halteres para cima até que os braços estejam totalmente estendidos e as palmas voltadas para frente. Rotacione os punhos enquanto levanta, de modo que as palmas fiquem voltadas para frente no topo do movimento. Faça uma pausa por um momento no topo, depois abaixe lentamente os halteres de volta à posição inicial. Repita pelo número desejado de repetições."
  },
  {
   "name": "Elevação frontal com halteres",
@@ -294,7 +294,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "halteres",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-front-raise.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-front-raise.jpg",
-  "instructions": "Stand with your feet shoulder-width apart, holding a dumbbell in each hand with your palms facing your thighs. Keeping your arms straight, exhale and lift the dumbbells in front of you until they are at shoulder level. Pause for a moment at the top, then inhale and slowly lower the dumbbells back down to the starting position. Repeat for the desired number of repetitions."
+  "instructions": "Fique em pé com os pés afastados na largura dos ombros, segurando um haltere em cada mão com as palmas voltadas para as coxas. Mantendo os braços estendidos, expire e levante os halteres à sua frente até que estejam na altura dos ombros. Faça uma pausa por um momento no topo, depois inspire e abaixe lentamente os halteres de volta à posição inicial. Repita pelo número desejado de repetições."
  },
  {
   "name": "Elevação lateral posterior inclinada",
@@ -302,7 +302,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "halteres",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-incline-rear-lateral-raise.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-incline-rear-lateral-raise.jpg",
-  "instructions": "Set up an incline bench at a 45-degree angle. Sit on the bench with your chest against the backrest and hold a dumbbell in each hand. Extend your arms straight down with your palms facing each other. Keeping a slight bend in your elbows, raise your arms out to the sides until they are parallel to the ground. Pause for a moment at the top, then slowly lower your arms back down to the starting position. Repeat for the desired number of repetitions."
+  "instructions": "Ajuste um banco inclinado em um ângulo de 45 graus. Sente-se no banco com o peito contra o encosto e segure um haltere em cada mão. Estenda os braços retos para baixo com as palmas voltadas uma para a outra. Mantendo uma leve flexão nos cotovelos, eleve os braços para os lados até que fiquem paralelos ao chão. Faça uma pausa por um momento no topo, depois abaixe lentamente os braços de volta à posição inicial. Repita pelo número desejado de repetições."
  },
  {
   "name": "Elevação lateral com halteres",
@@ -310,7 +310,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "halteres",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-lateral-raise.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-lateral-raise.jpg",
-  "instructions": "Stand with your feet shoulder-width apart and hold a dumbbell in each hand, palms facing your body. Keep your back straight and engage your core. Raise your arms out to the sides until they are parallel to the floor, keeping a slight bend in your elbows. Pause for a moment at the top, then slowly lower your arms back down to the starting position. Repeat for the desired number of repetitions."
+  "instructions": "Fique em pé com os pés afastados na largura dos ombros e segure um haltere em cada mão, com as palmas voltadas para o corpo. Mantenha as costas retas e o core firme. Eleve os braços para os lados até que fiquem paralelos ao chão, mantendo uma leve flexão nos cotovelos. Faça uma pausa por um momento no topo, depois abaixe lentamente os braços de volta à posição inicial. Repita pelo número desejado de repetições."
  },
  {
   "name": "Elevação lateral unilateral",
@@ -318,7 +318,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "halteres",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-one-arm-lateral-raise.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-one-arm-lateral-raise.jpg",
-  "instructions": "Stand with your feet shoulder-width apart, holding a dumbbell in one hand with your palm facing your body. Keep your back straight and your core engaged throughout the exercise. Raise the dumbbell to the side, keeping your arm straight and your palm facing down. Continue lifting until your arm is parallel to the ground. Pause for a moment at the top, then slowly lower the dumbbell back to the starting position. Repeat for the desired number of repetitions, then switch to the other arm."
+  "instructions": "Fique em pé com os pés afastados na largura dos ombros, segurando um haltere em uma mão com a palma voltada para o corpo. Mantenha as costas retas e o core firme durante todo o exercício. Eleve o haltere para o lado, mantendo o braço estendido e a palma voltada para baixo. Continue levantando até que o braço fique paralelo ao chão. Faça uma pausa por um momento no topo, depois abaixe lentamente o haltere de volta à posição inicial. Repita pelo número desejado de repetições, depois troque para o outro braço."
  },
  {
   "name": "Remada para deltoide posterior",
@@ -326,7 +326,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "halteres",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-rear-delt-row.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-rear-delt-row.jpg",
-  "instructions": "Stand with your feet shoulder-width apart and knees slightly bent. Hold a dumbbell in each hand with your palms facing your body. Bend forward at the waist, keeping your back straight and your core engaged. Extend your arms straight down towards the floor, with a slight bend in your elbows. Raise the dumbbells out to the sides, squeezing your shoulder blades together. Pause for a moment at the top, then slowly lower the dumbbells back to the starting position. Repeat for the desired number of re"
+  "instructions": "Fique em pé com os pés afastados na largura dos ombros e os joelhos levemente flexionados. Segure um haltere em cada mão com as palmas voltadas para o corpo. Incline o tronco para frente na altura da cintura, mantendo as costas retas e o core firme. Estenda os braços retos para baixo em direção ao chão, com uma leve flexão nos cotovelos. Eleve os halteres para os lados, apertando as escápulas juntas. Faça uma pausa por um momento no topo, depois abaixe lentamente os halteres de volta à posição inicial. Repita pelo número desejado de repetições."
  },
  {
   "name": "Elevação frontal sentado",
@@ -334,7 +334,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "halteres",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-seated-front-raise.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-seated-front-raise.jpg",
-  "instructions": "Sit on a bench with your feet flat on the ground and a dumbbell in each hand, resting on your thighs. Keep your back straight and core engaged. Raise the dumbbells in front of you, with your palms facing down, until they are at shoulder level. Pause for a moment at the top, then slowly lower the dumbbells back down to the starting position. Repeat for the desired number of repetitions."
+  "instructions": "Sente-se em um banco com os pés apoiados no chão e um haltere em cada mão, apoiados nas coxas. Mantenha as costas retas e o core firme. Eleve os halteres à sua frente, com as palmas voltadas para baixo, até que estejam na altura dos ombros. Faça uma pausa por um momento no topo, depois abaixe lentamente os halteres de volta à posição inicial. Repita pelo número desejado de repetições."
  },
  {
   "name": "Elevação lateral sentado",
@@ -342,7 +342,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "halteres",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-seated-lateral-raise.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-seated-lateral-raise.jpg",
-  "instructions": "Sit on a bench with your feet flat on the ground and a dumbbell in each hand, resting on your thighs. Keep your back straight and core engaged. Raise the dumbbells to your sides with a slight bend in your elbows, until your arms are parallel to the ground. Pause for a moment at the top, then slowly lower the dumbbells back down to the starting position. Repeat for the desired number of repetitions."
+  "instructions": "Sente-se em um banco com os pés apoiados no chão e um haltere em cada mão, apoiados nas coxas. Mantenha as costas retas e o core firme. Eleve os halteres para os lados com uma leve flexão nos cotovelos, até que os braços fiquem paralelos ao chão. Faça uma pausa por um momento no topo, depois abaixe lentamente os halteres de volta à posição inicial. Repita pelo número desejado de repetições."
  },
  {
   "name": "Rosca direta com barra",
@@ -350,7 +350,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "barra",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/barbell-curl.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/barbell-curl.jpg",
-  "instructions": "Stand up straight with your feet shoulder-width apart and hold a barbell with an underhand grip, palms facing forward. Keep your elbows close to your torso and exhale as you curl the weights while contracting your biceps. Continue to raise the bar until your biceps are fully contracted and the bar is at shoulder level. Hold the contracted position for a brief pause as you squeeze your biceps. Inhale as you slowly begin to lower the bar back to the starting position. Repeat for the desired number"
+  "instructions": "Fique em pé ereto com os pés afastados na largura dos ombros e segure uma barra com pegada supinada, palmas voltadas para frente. Mantenha os cotovelos próximos ao tronco e expire enquanto flexiona os pesos contraindo o bíceps. Continue elevando a barra até que os bíceps estejam totalmente contraídos e a barra esteja na altura dos ombros. Mantenha a posição contraída por uma breve pausa enquanto aperta os bíceps. Inspire enquanto começa lentamente a abaixar a barra de volta à posição inicial. Repita pelo número desejado de repetições."
  },
  {
   "name": "Rosca arrastada com barra",
@@ -358,7 +358,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "barra",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/barbell-drag-curl.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/barbell-drag-curl.jpg",
-  "instructions": "Stand with your feet shoulder-width apart and hold a barbell with an underhand grip, palms facing up. Let the barbell hang at arm's length in front of your thighs. Keeping your upper arms stationary, curl the barbell up towards your chest by contracting your biceps. Pause for a moment at the top, then slowly lower the barbell back down to the starting position. Repeat for the desired number of repetitions."
+  "instructions": "Fique em pé com os pés afastados na largura dos ombros e segure uma barra com pegada supinada, palmas voltadas para cima. Deixe a barra pendurada com os braços estendidos na frente das coxas. Mantendo os braços superiores parados, flexione a barra em direção ao peito contraindo o bíceps. Faça uma pausa por um momento no topo, depois abaixe lentamente a barra de volta à posição inicial. Repita pelo número desejado de repetições."
  },
  {
   "name": "Rosca inclinada pronada",
@@ -366,7 +366,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "barra",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/barbell-prone-incline-curl.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/barbell-prone-incline-curl.jpg",
-  "instructions": "Set up an incline bench at a 45-degree angle. Lie face down on the bench with your chest and stomach resting against it. Hold a barbell with an underhand grip, shoulder-width apart. Extend your arms fully, allowing the barbell to hang down towards the floor. Keeping your upper arms stationary, exhale and curl the weights while contracting your biceps. Continue to raise the barbell until your biceps are fully contracted and the bar is at shoulder level. Hold the contracted position for a brief pa"
+  "instructions": "Ajuste um banco inclinado em um ângulo de 45 graus. Deite-se de bruços no banco com o peito e o abdômen apoiados sobre ele. Segure uma barra com pegada supinada, na largura dos ombros. Estenda os braços totalmente, permitindo que a barra fique pendurada em direção ao chão. Mantendo os braços superiores parados, expire e flexione os pesos contraindo o bíceps. Continue elevando a barra até que os bíceps estejam totalmente contraídos e a barra esteja na altura dos ombros. Mantenha a posição contraída por uma breve pausa"
  },
  {
   "name": "Rosca alternada com halteres",
@@ -374,7 +374,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "halteres",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-biceps-curl.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-biceps-curl.jpg",
-  "instructions": "Stand up straight with a dumbbell in each hand, palms facing forward and arms fully extended. Keeping your upper arms stationary, exhale and curl the weights while contracting your biceps. Continue to raise the weights until your biceps are fully contracted and the dumbbells are at shoulder level. Hold the contracted position for a brief pause as you squeeze your biceps. Inhale and slowly begin to lower the dumbbells back to the starting position. Repeat for the desired number of repetitions."
+  "instructions": "Fique em pé com um halter em cada mão, palmas voltadas para frente e braços totalmente estendidos. Mantendo os braços superiores parados, expire e faça a rosca com os pesos enquanto contrai o bíceps. Continue levantando os pesos até que o bíceps esteja totalmente contraído e os halteres na altura dos ombros. Segure a posição contraída por uma breve pausa enquanto aperta o bíceps. Inspire e comece lentamente a baixar os halteres de volta à posição inicial. Repita pelo número desejado de repetições."
  },
  {
   "name": "Rosca concentrada",
@@ -382,7 +382,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "halteres",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-concentration-curl.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-concentration-curl.jpg",
-  "instructions": "Sit on a bench with your legs spread apart and a dumbbell in one hand, resting your elbow on the inside of your thigh. Fully extend your arm and hold the dumbbell with an underhand grip. Keeping your upper arm stationary, exhale and curl the weight up towards your shoulder while contracting your biceps. Continue to raise the dumbbell until your biceps are fully contracted and the dumbbell is at shoulder level. Hold the contracted position for a brief pause as you squeeze your biceps. Inhale and "
+  "instructions": "Sente-se em um banco com as pernas afastadas e um halter em uma das mãos, apoiando o cotovelo na parte interna da coxa. Estenda totalmente o braço e segure o halter com pegada supinada. Mantendo o braço superior parado, expire e faça a rosca com o peso em direção ao ombro enquanto contrai o bíceps. Continue levantando o halter até que o bíceps esteja totalmente contraído e o halter na altura do ombro. Segure a posição contraída por uma breve pausa enquanto aperta o bíceps. Inspire e"
  },
  {
   "name": "Rosca martelo cruzada",
@@ -390,7 +390,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "halteres",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-cross-body-hammer-curl.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-cross-body-hammer-curl.jpg",
-  "instructions": "Stand up straight with a dumbbell in each hand, palms facing your body. Keep your elbows close to your torso and your upper arms stationary. Exhale and curl the weights while contracting your biceps, bringing the dumbbells across your body towards your opposite shoulder. Continue to raise the dumbbells until your biceps are fully contracted and the dumbbells are at shoulder level. Hold the contracted position for a brief pause as you squeeze your biceps. Inhale and slowly begin to lower the dumb"
+  "instructions": "Fique em pé com um halter em cada mão, palmas voltadas para o corpo. Mantenha os cotovelos próximos ao tronco e os braços superiores parados. Expire e faça a rosca com os pesos enquanto contrai o bíceps, trazendo os halteres na frente do corpo em direção ao ombro oposto. Continue levantando os halteres até que o bíceps esteja totalmente contraído e os halteres na altura dos ombros. Segure a posição contraída por uma breve pausa enquanto aperta o bíceps. Inspire e comece lentamente a baixar os halt"
  },
  {
   "name": "Rosca inclinada com halteres",
@@ -398,7 +398,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "halteres",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-incline-biceps-curl.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-incline-biceps-curl.jpg",
-  "instructions": "Sit back against an incline bench, holding a dumbbell in each hand with arms hanging straight down. Keeping your upper arms stationary, curl the weights up while contracting your biceps, then lower back to the start."
+  "instructions": "Sente-se encostado em um banco inclinado, segurando um halter em cada mão com os braços pendurados retos para baixo. Mantendo os braços superiores parados, faça a rosca com os pesos para cima enquanto contrai o bíceps, depois baixe de volta à posição inicial."
  },
  {
   "name": "Rosca inclinada",
@@ -406,7 +406,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "halteres",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-incline-curl.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-incline-curl.jpg",
-  "instructions": "Set an incline bench to a 45-degree angle and sit on it with a dumbbell in each hand, palms facing forward. Rest your upper arms on the incline bench and let your elbows hang down, fully extending your arms. Keeping your upper arms stationary, exhale and curl the weights while contracting your biceps. Continue to raise the dumbbells until your biceps are fully contracted and the dumbbells are at shoulder level. Hold the contracted position for a brief pause as you squeeze your biceps. Inhale and"
+  "instructions": "Ajuste um banco inclinado em um ângulo de 45 graus e sente-se nele com um halter em cada mão, palmas voltadas para frente. Apoie os braços superiores no banco inclinado e deixe os cotovelos pendurados para baixo, estendendo totalmente os braços. Mantendo os braços superiores parados, expire e faça a rosca com os pesos enquanto contrai o bíceps. Continue levantando os halteres até que o bíceps esteja totalmente contraído e os halteres na altura dos ombros. Segure a posição contraída por uma breve pausa enquanto aperta o bíceps. Inspire e"
  },
  {
   "name": "Rosca martelo inclinada",
@@ -414,7 +414,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "halteres",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-incline-hammer-curl.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-incline-hammer-curl.jpg",
-  "instructions": "Sit on an incline bench with a dumbbell in each hand, palms facing your torso and arms fully extended. Keep your back against the bench and your feet flat on the floor. While keeping your upper arms stationary, exhale and curl the weights while contracting your biceps. Continue to raise the weights until your biceps are fully contracted and the dumbbells are at shoulder level. Hold the contracted position for a brief pause as you squeeze your biceps. Inhale and slowly begin to lower the dumbbell"
+  "instructions": "Sente-se em um banco inclinado com um halter em cada mão, palmas voltadas para o tronco e braços totalmente estendidos. Mantenha as costas encostadas no banco e os pés apoiados no chão. Mantendo os braços superiores parados, expire e faça a rosca com os pesos enquanto contrai o bíceps. Continue levantando os pesos até que o bíceps esteja totalmente contraído e os halteres na altura dos ombros. Segure a posição contraída por uma breve pausa enquanto aperta o bíceps. Inspire e comece lentamente a baixar o halter"
  },
  {
   "name": "Rosca Zottman unilateral no banco",
@@ -422,7 +422,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "halteres",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-one-arm-zottman-preacher-curl.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-one-arm-zottman-preacher-curl.jpg",
-  "instructions": "Sit on a preacher curl bench and hold a dumbbell in one hand with an underhand grip. Rest your upper arm on the preacher bench pad, allowing your arm to fully extend. Curl the dumbbell up towards your shoulder, keeping your upper arm stationary. At the top of the curl, rotate your wrist so that your palm faces up. Slowly lower the dumbbell back down to the starting position, rotating your wrist back to the starting position. Repeat for the desired number of repetitions, then switch arms."
+  "instructions": "Sente-se em um banco de rosca Scott e segure um halter em uma das mãos com pegada supinada. Apoie o braço superior no apoio do banco Scott, permitindo que o braço se estenda totalmente. Faça a rosca com o halter em direção ao ombro, mantendo o braço superior parado. No topo da rosca, gire o punho para que a palma fique voltada para cima. Baixe lentamente o halter de volta à posição inicial, girando o punho de volta à posição inicial. Repita pelo número desejado de repetições, depois troque de braço."
  },
  {
   "name": "Rosca inclinada pronada com halteres",
@@ -430,7 +430,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "halteres",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-prone-incline-curl.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-prone-incline-curl.jpg",
-  "instructions": "Adjust the bench to a 45-degree incline. Lie face down on the bench with your chest and stomach resting against it. Hold a dumbbell in each hand with your palms facing down and your arms fully extended. Keeping your upper arms stationary, exhale and curl the weights while contracting your biceps. Continue to raise the weights until your biceps are fully contracted and the dumbbells are at shoulder level. Hold the contracted position for a brief pause as you squeeze your biceps. Inhale and slowly"
+  "instructions": "Ajuste o banco para uma inclinação de 45 graus. Deite-se de bruços no banco com o peito e o abdômen apoiados nele. Segure um halter em cada mão com as palmas voltadas para baixo e os braços totalmente estendidos. Mantendo os braços superiores parados, expire e faça a rosca com os pesos enquanto contrai o bíceps. Continue levantando os pesos até que o bíceps esteja totalmente contraído e os halteres na altura dos ombros. Segure a posição contraída por uma breve pausa enquanto aperta o bíceps. Inspire e lentamente"
  },
  {
   "name": "Rosca de punho neutra sentado",
@@ -438,7 +438,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "halteres",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-seated-neutral-wrist-curl.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-seated-neutral-wrist-curl.jpg",
-  "instructions": "Sit on a bench with your feet flat on the ground and hold a dumbbell in each hand, palms facing each other. Rest your forearms on your thighs, allowing the dumbbells to hang down. Keeping your wrists in a neutral position, curl the dumbbells up towards your shoulders. Pause for a moment at the top, then slowly lower the dumbbells back down to the starting position. Repeat for the desired number of repetitions."
+  "instructions": "Sente-se em um banco com os pés apoiados no chão e segure um halter em cada mão, palmas voltadas uma para a outra. Apoie os antebraços nas coxas, deixando os halteres pendurados para baixo. Mantendo os punhos em posição neutra, faça a rosca com os halteres em direção aos ombros. Faça uma pausa por um momento no topo, depois baixe lentamente os halteres de volta à posição inicial. Repita pelo número desejado de repetições."
  },
  {
   "name": "Rosca scott com halteres",
@@ -446,7 +446,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "halteres",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-seated-preacher-curl.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-seated-preacher-curl.jpg",
-  "instructions": "Sit on a preacher curl bench with your feet flat on the floor. Hold a dumbbell in one hand with an underhand grip, resting your upper arm against the preacher pad. Keeping your upper arm stationary, exhale and curl the dumbbell up towards your shoulder. Pause for a moment at the top, then inhale and slowly lower the dumbbell back down to the starting position. Repeat for the desired number of repetitions, then switch arms."
+  "instructions": "Sente-se em um banco de rosca Scott com os pés apoiados no chão. Segure um halter em uma das mãos com pegada supinada, apoiando o braço superior contra o apoio Scott. Mantendo o braço superior parado, expire e faça a rosca com o halter em direção ao ombro. Faça uma pausa por um momento no topo, depois inspire e baixe lentamente o halter de volta à posição inicial. Repita pelo número desejado de repetições, depois troque de braço."
  },
  {
   "name": "Rosca alternada sentado",
@@ -454,7 +454,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "halteres",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-alternate-seated-biceps-curl.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-alternate-seated-biceps-curl.jpg",
-  "instructions": "Sit on a bench with back support holding a dumbbell in each hand at your sides. Curl one dumbbell by flexing the elbow, then lower it and repeat with the opposite arm, keeping your torso stable."
+  "instructions": "Sente-se em um banco com apoio para as costas segurando um halter em cada mão ao lado do corpo. Faça a rosca com um halter flexionando o cotovelo, depois baixe-o e repita com o braço oposto, mantendo o tronco estável."
  },
  {
   "name": "Supino fechado com barra",
@@ -462,7 +462,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "barra",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/barbell-close-grip-bench-press.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/barbell-close-grip-bench-press.jpg",
-  "instructions": "Lie on a bench with feet flat, grip the barbell with hands about shoulder-width apart or slightly narrower. Lower the bar to your lower chest while keeping elbows tucked. Press the bar back up, focusing on extending through your triceps."
+  "instructions": "Deite-se em um banco com os pés apoiados, segure a barra com as mãos na largura dos ombros ou ligeiramente mais fechadas. Baixe a barra até a parte inferior do peito mantendo os cotovelos junto ao corpo. Empurre a barra de volta para cima, focando em estender pelos tríceps."
  },
  {
   "name": "Supino fechado com halteres",
@@ -470,7 +470,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "halteres",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-close-grip-press.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-close-grip-press.jpg",
-  "instructions": "Lie on a bench holding dumbbells together above your chest, palms facing each other. Lower the weights while keeping elbows close to your sides, then press back up by extending the arms."
+  "instructions": "Deite-se em um banco segurando halteres juntos acima do peito, palmas voltadas uma para a outra. Baixe os pesos mantendo os cotovelos próximos ao corpo, depois empurre de volta para cima estendendo os braços."
  },
  {
   "name": "Extensão de tríceps inclinada",
@@ -478,7 +478,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "halteres",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-incline-triceps-extension.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-incline-triceps-extension.jpg",
-  "instructions": "Sit on an incline bench with a dumbbell in each hand, palms facing inwards. Extend your arms fully overhead, keeping your elbows close to your head. Lower the dumbbells behind your head by bending your elbows, keeping your upper arms stationary. Pause for a moment, then raise the dumbbells back to the starting position by extending your arms. Repeat for the desired number of repetitions."
+  "instructions": "Sente-se em um banco inclinado com um halter em cada mão, palmas voltadas para dentro. Estenda totalmente os braços acima da cabeça, mantendo os cotovelos próximos à cabeça. Baixe os halteres atrás da cabeça flexionando os cotovelos, mantendo os braços superiores parados. Faça uma pausa por um momento, depois levante os halteres de volta à posição inicial estendendo os braços. Repita pelo número desejado de repetições."
  },
  {
   "name": "Coice com halteres",
@@ -486,7 +486,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "halteres",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-kickback.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-kickback.jpg",
-  "instructions": "Stand with your feet shoulder-width apart and hold a dumbbell in each hand. Bend your knees slightly and hinge forward at the hips, keeping your back straight. Bring your upper arms close to your sides, with your elbows bent at a 90-degree angle. Extend your arms straight back, squeezing your triceps at the top of the movement. Pause for a moment, then slowly lower the dumbbells back to the starting position. Repeat for the desired number of repetitions."
+  "instructions": "Fique em pé com os pés na largura dos ombros e segure um halter em cada mão. Flexione levemente os joelhos e incline-se para frente pelo quadril, mantendo as costas retas. Traga os braços superiores próximos ao corpo, com os cotovelos flexionados em um ângulo de 90 graus. Estenda os braços retos para trás, contraindo os tríceps no topo do movimento. Faça uma pausa por um momento, depois baixe lentamente os halteres de volta à posição inicial. Repita pelo número desejado de repetições."
  },
  {
   "name": "Extensão de tríceps deitado alternado",
@@ -494,7 +494,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "halteres",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-lying-alternate-extension.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-lying-alternate-extension.jpg",
-  "instructions": "Lie flat on a bench with a dumbbell in each hand, palms facing each other. Extend your arms straight up over your chest, keeping a slight bend in your elbows. Lower one dumbbell down towards your head, bending at the elbow, while keeping the other arm extended. Pause for a moment at the bottom, then raise the dumbbell back up to the starting position. Repeat with the other arm, alternating sides for the desired number of repetitions."
+  "instructions": "Deite-se plano em um banco com um haltere em cada mão, palmas voltadas uma para a outra. Estenda os braços retos para cima sobre o peito, mantendo uma leve flexão nos cotovelos. Abaixe um haltere em direção à cabeça, flexionando o cotovelo, enquanto mantém o outro braço estendido. Faça uma pausa por um momento na parte inferior, depois eleve o haltere de volta à posição inicial. Repita com o outro braço, alternando os lados pelo número desejado de repetições."
  },
  {
   "name": "Extensão de tríceps deitado",
@@ -502,7 +502,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "halteres",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-lying-triceps-extension.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-lying-triceps-extension.jpg",
-  "instructions": "Lie flat on a bench with a dumbbell in each hand, palms facing each other. Extend your arms straight up over your chest, keeping your elbows close to your body. Lower the dumbbells down towards your forehead, bending your elbows. Pause for a moment, then extend your arms back up to the starting position. Repeat for the desired number of repetitions."
+  "instructions": "Deite-se plano em um banco com um haltere em cada mão, palmas voltadas uma para a outra. Estenda os braços retos para cima sobre o peito, mantendo os cotovelos próximos ao corpo. Abaixe os halteres em direção à testa, flexionando os cotovelos. Faça uma pausa por um momento, depois estenda os braços de volta à posição inicial. Repita pelo número desejado de repetições."
  },
  {
   "name": "Extensão de tríceps unilateral",
@@ -510,7 +510,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "halteres",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-one-arm-triceps-extension.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-one-arm-triceps-extension.jpg",
-  "instructions": "Stand or sit holding a dumbbell overhead with one arm fully extended. Lower the dumbbell by bending the elbow, then extend the arm back up to starting position, keeping upper arm still."
+  "instructions": "Fique em pé ou sentado segurando um haltere acima da cabeça com um braço totalmente estendido. Abaixe o haltere flexionando o cotovelo, depois estenda o braço de volta à posição inicial, mantendo o braço superior imóvel."
  },
  {
   "name": "Extensão de tríceps pronada",
@@ -518,7 +518,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "halteres",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-pronate-grip-triceps-extension.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-pronate-grip-triceps-extension.jpg",
-  "instructions": "Sit on a bench or chair with your back straight and feet flat on the ground. Hold a dumbbell with both hands, palms facing down, and extend your arms straight up overhead. Keeping your upper arms close to your head and elbows pointing forward, slowly lower the dumbbell behind your head by bending your elbows. Pause for a moment, then extend your arms back up to the starting position. Repeat for the desired number of repetitions."
+  "instructions": "Sente-se em um banco ou cadeira com as costas retas e os pés apoiados no chão. Segure um haltere com as duas mãos, palmas voltadas para baixo, e estenda os braços retos para cima acima da cabeça. Mantendo os braços superiores próximos à cabeça e os cotovelos apontados para frente, abaixe lentamente o haltere atrás da cabeça flexionando os cotovelos. Faça uma pausa por um momento, depois estenda os braços de volta à posição inicial. Repita pelo número desejado de repetições."
  },
  {
   "name": "Coice sentado",
@@ -526,7 +526,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "halteres",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-seated-kickback.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-seated-kickback.jpg",
-  "instructions": "Sit on a bench with your feet flat on the ground and hold a dumbbell in each hand. Bend your knees slightly and lean forward from your hips, keeping your back straight. Bring your upper arms close to your sides and keep your elbows bent at a 90-degree angle. Extend your arms straight back, squeezing your triceps at the top of the movement. Pause for a moment, then slowly lower the dumbbells back to the starting position. Repeat for the desired number of repetitions."
+  "instructions": "Sente-se em um banco com os pés apoiados no chão e segure um haltere em cada mão. Flexione levemente os joelhos e incline-se para frente a partir do quadril, mantendo as costas retas. Traga os braços superiores próximos às laterais do corpo e mantenha os cotovelos flexionados em um ângulo de 90 graus. Estenda os braços retos para trás, contraindo o tríceps no topo do movimento. Faça uma pausa por um momento, depois abaixe lentamente os halteres de volta à posição inicial. Repita pelo número desejado de repetições."
  },
  {
   "name": "Extensão de tríceps sentado",
@@ -534,7 +534,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "halteres",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-seated-triceps-extension.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-seated-triceps-extension.jpg",
-  "instructions": "Sit on a bench with your back straight and feet flat on the ground. Hold a dumbbell with both hands and extend your arms straight up overhead. Bend your elbows and lower the dumbbell behind your head, keeping your upper arms close to your ears. Pause for a moment, then straighten your arms and return to the starting position. Repeat for the desired number of repetitions."
+  "instructions": "Sente-se em um banco com as costas retas e os pés apoiados no chão. Segure um haltere com as duas mãos e estenda os braços retos para cima acima da cabeça. Flexione os cotovelos e abaixe o haltere atrás da cabeça, mantendo os braços superiores próximos às orelhas. Faça uma pausa por um momento, depois estenda os braços e retorne à posição inicial. Repita pelo número desejado de repetições."
  },
  {
   "name": "Extensão de tríceps deitado no cabo",
@@ -542,7 +542,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "cabo",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/cable-lying-triceps-extension.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/cable-lying-triceps-extension.jpg",
-  "instructions": "Attach a rope handle to a low pulley cable machine. Lie down on a flat bench facing up, with your head towards the cable machine. Grasp the rope handle with both hands, palms facing each other, and extend your arms straight up over your chest. Keeping your upper arms stationary, slowly lower the rope handle towards your forehead by bending your elbows. Pause for a moment at the bottom, then extend your arms back up to the starting position. Repeat for the desired number of repetitions."
+  "instructions": "Prenda uma alça de corda a uma máquina de polia baixa. Deite-se em um banco plano de barriga para cima, com a cabeça voltada para a máquina de polia. Segure a alça de corda com as duas mãos, palmas voltadas uma para a outra, e estenda os braços retos para cima sobre o peito. Mantendo os braços superiores imóveis, abaixe lentamente a alça de corda em direção à testa flexionando os cotovelos. Faça uma pausa por um momento na parte inferior, depois estenda os braços de volta à posição inicial. Repita pelo número desejado de repetições."
  },
  {
   "name": "Extensão de tríceps com corda",
@@ -550,7 +550,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "cabo",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/cable-rope-high-pulley-overhead-triceps-extension.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/cable-rope-high-pulley-overhead-triceps-extension.jpg",
-  "instructions": "Stand or kneel with your back to the high pulley, grasping the rope with both hands. Lean forward slightly, extend your elbows to press the rope forward/upward, then return to start under control."
+  "instructions": "Fique em pé ou ajoelhe-se de costas para a polia alta, segurando a corda com as duas mãos. Incline-se levemente para frente, estenda os cotovelos para empurrar a corda para frente/para cima, depois retorne à posição inicial de forma controlada."
  },
  {
   "name": "Tríceps na corda",
@@ -558,7 +558,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "cabo",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/cable-pushdown-rope-attachment.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/cable-pushdown-rope-attachment.jpg",
-  "instructions": "Stand facing a cable stack with a rope attached to the high pulley. Grasp the rope with both hands, elbows at your sides, and push the rope downward by extending your arms. Control the movement back to the starting position for each rep."
+  "instructions": "Fique em pé de frente para uma pilha de cabos com uma corda presa à polia alta. Segure a corda com as duas mãos, cotovelos junto ao corpo, e empurre a corda para baixo estendendo os braços. Controle o movimento de volta à posição inicial em cada repetição."
  },
  {
   "name": "Tríceps unilateral no cabo",
@@ -566,7 +566,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "cabo",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/cable-standing-one-arm-triceps-extension.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/cable-standing-one-arm-triceps-extension.jpg",
-  "instructions": "Stand with your feet shoulder-width apart, facing the cable machine. Hold the cable handle with your right hand, palm facing down, and position your arm so that it is fully extended and parallel to the ground. Keep your elbow stationary and close to your body. Slowly bend your elbow, lowering the cable handle towards the back of your head. Pause for a moment at the bottom of the movement, then extend your arm back to the starting position. Repeat for the desired number of repetitions, then switc"
+  "instructions": "Fique em pé com os pés afastados na largura dos ombros, de frente para a máquina de cabo. Segure a alça do cabo com a mão direita, palma voltada para baixo, e posicione o braço de modo que fique totalmente estendido e paralelo ao chão. Mantenha o cotovelo imóvel e próximo ao corpo. Flexione lentamente o cotovelo, abaixando a alça do cabo em direção à parte de trás da cabeça. Faça uma pausa por um momento na parte inferior do movimento, depois estenda o braço de volta à posição inicial. Repita pelo número desejado de repetições, depois troque"
  },
  {
   "name": "Agachamento livre",
@@ -574,7 +574,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "barra",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/classic-barbell-squat.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/classic-barbell-squat.jpg",
-  "instructions": "Stand with barbell placed across upper back, feet shoulder-width apart. Lower into a squat by hinging hips and bending knees until your thighs are parallel to the floor. Press through your heels to stand back up, keeping your chest up and back straight."
+  "instructions": "Fique em pé com a barra apoiada sobre a parte superior das costas, pés afastados na largura dos ombros. Desça em um agachamento articulando o quadril e flexionando os joelhos até que as coxas fiquem paralelas ao chão. Empurre pelos calcanhares para se levantar, mantendo o peito erguido e as costas retas."
  },
  {
   "name": "Arremesso e desenvolvimento",
@@ -582,7 +582,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "barra",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/barbell-clean-and-press.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/barbell-clean-and-press.jpg",
-  "instructions": "Stand with your feet shoulder-width apart and the barbell on the floor in front of you. Bend your knees and hinge at the hips to lower down and grip the barbell with an overhand grip, hands slightly wider than shoulder-width apart. Drive through your heels and extend your hips and knees to lift the barbell off the floor, keeping it close to your body. As the barbell reaches your thighs, explosively extend your hips, shrug your shoulders, and pull the barbell up towards your chest. As the barbell"
+  "instructions": "Fique em pé com os pés afastados na largura dos ombros e a barra no chão à sua frente. Flexione os joelhos e articule o quadril para descer e segurar a barra com pegada pronada, mãos um pouco mais afastadas que a largura dos ombros. Impulsione pelos calcanhares e estenda o quadril e os joelhos para levantar a barra do chão, mantendo-a próxima ao corpo. Quando a barra atingir as coxas, estenda o quadril de forma explosiva, encolha os ombros e puxe a barra em direção ao peito. Quando a barra"
  },
  {
   "name": "Agachamento frontal",
@@ -590,7 +590,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "barra",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/barbell-front-chest-squat.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/barbell-front-chest-squat.jpg",
-  "instructions": "Stand upright, barbell resting across front shoulders, elbows high. Descend into a squat while keeping torso upright and elbows elevated. Push through your heels to return to standing, maintaining bar balance throughout."
+  "instructions": "Fique em pé, com a barra apoiada sobre a parte frontal dos ombros, cotovelos elevados. Desça em um agachamento mantendo o tronco ereto e os cotovelos elevados. Empurre pelos calcanhares para retornar à posição em pé, mantendo o equilíbrio da barra durante todo o movimento."
  },
  {
   "name": "Agachamento goblet",
@@ -598,7 +598,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "halteres",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-goblet-squat.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-goblet-squat.jpg",
-  "instructions": "Stand with your feet shoulder-width apart, holding a dumbbell vertically against your chest with both hands. Keeping your chest up and core engaged, lower your body down into a squat position by pushing your hips back and bending your knees. Continue lowering until your thighs are parallel to the ground, or as low as you can comfortably go. Pause for a moment at the bottom, then push through your heels to return to the starting position. Repeat for the desired number of repetitions."
+  "instructions": "Fique em pé com os pés afastados na largura dos ombros, segurando um haltere verticalmente contra o peito com as duas mãos. Mantendo o peito erguido e o core contraído, abaixe o corpo em uma posição de agachamento empurrando o quadril para trás e flexionando os joelhos. Continue descendo até que as coxas fiquem paralelas ao chão, ou o mais baixo que você conseguir confortavelmente. Faça uma pausa por um momento na parte inferior, depois empurre pelos calcanhares para retornar à posição inicial. Repita pelo número desejado de repetições."
  },
  {
   "name": "Leg press pés juntos",
@@ -606,7 +606,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "máquina",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/close-feet-leg-press.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/close-feet-leg-press.jpg",
-  "instructions": "Sit in a leg press machine and place your feet hip-width or closer at the center of the platform. Press the platform away by extending your knees while keeping your back flat, then lower under control."
+  "instructions": "Sente-se em uma máquina de leg press e coloque os pés na largura do quadril ou mais próximos no centro da plataforma. Empurre a plataforma para longe estendendo os joelhos enquanto mantém as costas retas, depois abaixe de forma controlada."
  },
  {
   "name": "Leg press horizontal",
@@ -614,7 +614,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "máquina",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/lever-horizontal-leg-press.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/lever-horizontal-leg-press.jpg",
-  "instructions": "Sit on the leg press machine with your feet hip-width apart on the platform. Press the platform away by extending your legs, but avoid locking your knees, then lower slowly back to the starting position."
+  "instructions": "Sente-se na máquina de leg press com os pés afastados na largura dos quadris sobre a plataforma. Empurre a plataforma para longe estendendo as pernas, mas evite travar os joelhos, depois abaixe lentamente de volta à posição inicial."
  },
  {
   "name": "Cadeira extensora",
@@ -622,7 +622,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "máquina",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/lever-leg-extension.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/lever-leg-extension.jpg",
-  "instructions": "Adjust the seat height and backrest of the machine to fit your body. Sit on the machine with your back against the backrest and your feet on the footpad. Grasp the handles or sidebars for stability. Extend your legs forward by straightening your knees, lifting the weight. Pause for a moment at the top, then slowly lower the weight back to the starting position. Repeat for the desired number of repetitions."
+  "instructions": "Ajuste a altura do assento e do encosto da máquina ao seu corpo. Sente-se na máquina com as costas apoiadas no encosto e os pés na plataforma. Segure as alças ou barras laterais para estabilidade. Estenda as pernas para frente esticando os joelhos, levantando o peso. Faça uma pausa por um momento no topo, depois abaixe lentamente o peso de volta à posição inicial. Repita pelo número desejado de repetições."
  },
  {
   "name": "Leg press 45° aberto",
@@ -630,7 +630,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "máquina",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/sled-45-degree-leg-wide-press.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/sled-45-degree-leg-wide-press.jpg",
-  "instructions": "Sit on a 45-degree leg press machine with feet placed wider than hip-width on the platform. Push the platform up to release the safety handles and slowly lower it toward your chest, then drive through your heels to press the weight back up."
+  "instructions": "Sente-se em uma máquina de leg press de 45 graus com os pés posicionados mais afastados que a largura dos quadris sobre a plataforma. Empurre a plataforma para cima para liberar as travas de segurança e abaixe-a lentamente em direção ao peito, depois empurre com os calcanhares para pressionar o peso de volta para cima."
  },
  {
   "name": "Agachamento no smith",
@@ -638,7 +638,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "smith",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/smith-chair-squat.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/smith-chair-squat.jpg",
-  "instructions": "Adjust the height of the smith machine bar to a comfortable position. Stand with your feet shoulder-width apart, toes slightly turned out. Place the barbell across your upper back, resting it on your traps. Engage your core and keep your chest up as you slowly lower your body by bending your knees and hips. Continue lowering until your thighs are parallel to the ground, or as low as you can comfortably go. Pause for a moment, then push through your heels to return to the starting position. Repea"
+  "instructions": "Ajuste a altura da barra da máquina Smith para uma posição confortável. Fique em pé com os pés afastados na largura dos ombros, com os dedos dos pés levemente virados para fora. Posicione a barra sobre a parte superior das costas, apoiando-a sobre os trapézios. Contraia o core e mantenha o peito erguido enquanto abaixa lentamente o corpo flexionando os joelhos e os quadris. Continue abaixando até que as coxas fiquem paralelas ao chão, ou o mais baixo que você conseguir confortavelmente. Faça uma pausa por um momento, depois empurre com os calcanhares para retornar à posição inicial. Repita"
  },
  {
   "name": "Leg press no smith",
@@ -646,7 +646,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "smith",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/smith-leg-press.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/smith-leg-press.jpg",
-  "instructions": "Lie on the floor or bench under a Smith machine with feet placed on the bar wider than shoulder-width. Unlock the bar and press upwards with your legs, lowering until your knees reach a 90-degree angle before pressing back to the start."
+  "instructions": "Deite-se no chão ou em um banco sob uma máquina Smith com os pés posicionados na barra mais afastados que a largura dos ombros. Destrave a barra e pressione para cima com as pernas, abaixando até que os joelhos atinjam um ângulo de 90 graus antes de pressionar de volta ao início."
  },
  {
   "name": "Agachamento sissy com peso",
@@ -654,7 +654,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "com peso",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/weighted-sissy-squat.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/weighted-sissy-squat.jpg",
-  "instructions": "Stand with your feet shoulder-width apart and your toes pointing slightly outward. Hold a weight in front of your chest with both hands, or place a barbell across your upper back. Keeping your chest up and your core engaged, slowly lower your body down by bending at the knees and hips. Continue lowering until your thighs are parallel to the ground or as low as you can comfortably go. Pause for a moment at the bottom, then push through your heels to return to the starting position. Repeat for the"
+  "instructions": "Fique em pé com os pés afastados na largura dos ombros e os dedos dos pés levemente apontados para fora. Segure um peso à frente do peito com as duas mãos, ou posicione uma barra sobre a parte superior das costas. Mantendo o peito erguido e o core contraído, abaixe lentamente o corpo flexionando os joelhos e os quadris. Continue abaixando até que as coxas fiquem paralelas ao chão ou o mais baixo que você conseguir confortavelmente. Faça uma pausa por um momento na parte de baixo, depois empurre com os calcanhares para retornar à posição inicial. Repita pelo"
  },
  {
   "name": "Subida no banco com salto",
@@ -662,7 +662,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "peso corporal",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/jump-step-up.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/jump-step-up.jpg",
-  "instructions": "Stand in front of a box or platform. Step onto the box with one foot, then explosively jump up, driving through the working leg. Land softly and return to the starting position, alternating legs if desired."
+  "instructions": "Fique em pé em frente a uma caixa ou plataforma. Suba na caixa com um pé, depois salte explosivamente para cima, impulsionando com a perna de trabalho. Aterrisse suavemente e retorne à posição inicial, alternando as pernas se desejar."
  },
  {
   "name": "Agachamento",
@@ -670,7 +670,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "peso corporal",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/squat.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/squat.jpg",
-  "instructions": "Stand with feet shoulder-width apart and toes slightly turned out. Lower your hips back and down as if sitting into a chair, keeping your chest upright, then drive through your heels to stand back up."
+  "instructions": "Fique em pé com os pés afastados na largura dos ombros e os dedos dos pés levemente virados para fora. Abaixe os quadris para trás e para baixo como se fosse sentar em uma cadeira, mantendo o peito ereto, depois empurre com os calcanhares para ficar em pé novamente."
  },
  {
   "name": "Stiff com barra",
@@ -678,7 +678,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "barra",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/barbell-straight-leg-deadlift.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/barbell-straight-leg-deadlift.jpg",
-  "instructions": "Stand with your feet shoulder-width apart and your toes pointing forward. Hold the barbell with an overhand grip, hands slightly wider than shoulder-width apart. Bend at your hips and lower the barbell towards the ground, keeping your back straight and your knees slightly bent. Lower the barbell until you feel a stretch in your hamstrings. Engage your hamstrings and glutes to lift the barbell back up to the starting position. Repeat for the desired number of repetitions."
+  "instructions": "Fique em pé com os pés afastados na largura dos ombros e os dedos dos pés apontados para frente. Segure a barra com pegada pronada, com as mãos um pouco mais afastadas que a largura dos ombros. Flexione os quadris e abaixe a barra em direção ao chão, mantendo as costas retas e os joelhos levemente flexionados. Abaixe a barra até sentir um alongamento nos isquiotibiais. Contraia os isquiotibiais e os glúteos para levantar a barra de volta à posição inicial. Repita pelo número desejado de repetições."
  },
  {
   "name": "Flexora com halteres",
@@ -686,7 +686,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "halteres",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-lying-femoral.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-lying-femoral.jpg",
-  "instructions": "Lie face down on a flat bench with a dumbbell held securely between your feet. Flex your knees to bring the dumbbell up toward your glutes, then lower with control."
+  "instructions": "Deite-se de bruços em um banco plano com um haltere seguro firmemente entre os pés. Flexione os joelhos para trazer o haltere em direção aos glúteos, depois abaixe com controle."
  },
  {
   "name": "Stiff unilateral com halteres",
@@ -694,7 +694,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "halteres",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/single-dumbbell-stiff-leg-deadlift.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/single-dumbbell-stiff-leg-deadlift.jpg",
-  "instructions": "Stand holding a dumbbell with both hands in front of your thighs. With a slight bend at the knees, hinge at the hips to lower the dumbbell until you feel a stretch in your hamstrings and then return to the starting position."
+  "instructions": "Fique em pé segurando um haltere com as duas mãos à frente das coxas. Com uma leve flexão nos joelhos, faça a dobradiça nos quadris para abaixar o haltere até sentir um alongamento nos isquiotibiais e depois retorne à posição inicial."
  },
  {
   "name": "Flexora ajoelhado",
@@ -702,7 +702,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "máquina",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/lever-kneeling-leg-curl.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/lever-kneeling-leg-curl.jpg",
-  "instructions": "Adjust the machine to fit your body and select the desired weight. Kneel on the machine facing downwards, with your knees resting on the pad and your feet secured under the footpads. Grasp the handles or the sides of the machine for stability. Keeping your upper body stationary, exhale and curl your legs up towards your glutes by flexing your knees. Pause for a moment at the top of the movement, squeezing your hamstrings. Inhale and slowly lower your legs back to the starting position, fully ext"
+  "instructions": "Ajuste a máquina ao seu corpo e selecione o peso desejado. Ajoelhe-se na máquina voltado para baixo, com os joelhos apoiados na almofada e os pés fixos sob as plataformas. Segure as alças ou as laterais da máquina para estabilidade. Mantendo a parte superior do corpo parada, expire e flexione as pernas para cima em direção aos glúteos flexionando os joelhos. Faça uma pausa por um momento no topo do movimento, contraindo os isquiotibiais. Inspire e abaixe lentamente as pernas de volta à posição inicial, estendendo totalmente"
  },
  {
   "name": "Flexora deitado",
@@ -710,7 +710,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "máquina",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/lever-lying-leg-curl.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/lever-lying-leg-curl.jpg",
-  "instructions": "Adjust the machine to fit your body and select the desired weight. Lie face down on the machine with your legs straight and your heels against the padded lever. Grasp the handles or the sides of the machine for stability. Keeping your upper body stationary, exhale and curl your legs up as far as possible without lifting your hips off the pad. Hold the contracted position for a brief pause as you squeeze your hamstrings. Inhale and slowly lower the lever back to the starting position. Repeat for "
+  "instructions": "Ajuste a máquina ao seu corpo e selecione o peso desejado. Deite-se de bruços na máquina com as pernas esticadas e os calcanhares contra a alavanca acolchoada. Segure as alças ou as laterais da máquina para estabilidade. Mantendo a parte superior do corpo parada, expire e flexione as pernas para cima o máximo possível sem levantar os quadris da almofada. Mantenha a posição contraída por uma breve pausa enquanto contrai os isquiotibiais. Inspire e abaixe lentamente a alavanca de volta à posição inicial. Repita pelo"
  },
  {
   "name": "Flexora sentado",
@@ -718,7 +718,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "máquina",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/lever-seated-leg-curl.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/lever-seated-leg-curl.jpg",
-  "instructions": "Adjust the machine to fit your body and sit on it with your back against the backrest. Place your lower legs under the padded lever, just above your ankles. Grasp the handles on the sides of the machine for support. Keeping your upper legs stationary, exhale and curl your legs up as far as possible. Hold the contracted position for a brief pause as you squeeze your hamstrings. Inhale and slowly lower the lever back to the starting position. Repeat for the desired number of repetitions."
+  "instructions": "Ajuste a máquina ao seu corpo e sente-se nela com as costas apoiadas no encosto. Posicione as pernas inferiores sob a alavanca acolchoada, logo acima dos tornozelos. Segure as alças nas laterais da máquina para apoio. Mantendo as coxas paradas, expire e flexione as pernas para cima o máximo possível. Mantenha a posição contraída por uma breve pausa enquanto contrai os isquiotibiais. Inspire e abaixe lentamente a alavanca de volta à posição inicial. Repita pelo número desejado de repetições."
  },
  {
   "name": "Afundo com barra",
@@ -726,7 +726,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "barra",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/barbell-lunge.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/barbell-lunge.jpg",
-  "instructions": "Start by standing with your feet shoulder-width apart and a barbell resting on your upper back. Take a step forward with your right foot, keeping your torso upright. Lower your body by bending your right knee until your thigh is parallel to the ground. Push through your right heel to return to the starting position. Repeat with your left leg, alternating legs for the desired number of repetitions."
+  "instructions": "Comece ficando em pé com os pés afastados na largura dos ombros e uma barra apoiada sobre a parte superior das costas. Dê um passo à frente com o pé direito, mantendo o tronco ereto. Abaixe o corpo flexionando o joelho direito até que a coxa fique paralela ao chão. Empurre com o calcanhar direito para retornar à posição inicial. Repita com a perna esquerda, alternando as pernas pelo número desejado de repetições."
  },
  {
   "name": "Levantamento terra com halteres",
@@ -734,7 +734,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "halteres",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-deadlift.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-deadlift.jpg",
-  "instructions": "Stand with your feet shoulder-width apart, toes pointing forward. Hold a dumbbell in each hand, palms facing your body, arms extended downwards. Bend at your hips and knees, lowering the dumbbells towards the ground while keeping your back straight. Push through your heels and extend your hips and knees, lifting the dumbbells back up to the starting position. Repeat for the desired number of repetitions."
+  "instructions": "Fique em pé com os pés afastados na largura dos ombros, com os dedos dos pés apontando para frente. Segure um haltere em cada mão, com as palmas voltadas para o corpo e os braços estendidos para baixo. Flexione os quadris e os joelhos, abaixando os halteres em direção ao chão enquanto mantém as costas retas. Empurre com os calcanhares e estenda os quadris e os joelhos, levantando os halteres de volta à posição inicial. Repita pelo número desejado de repetições."
  },
  {
   "name": "Afundo com halteres",
@@ -742,7 +742,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "halteres",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-lunge.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-lunge.jpg",
-  "instructions": "Stand with your feet shoulder-width apart, holding a dumbbell in each hand. Take a step forward with your right foot, lowering your body into a lunge position. Keep your back straight and your chest up as you lower your body. Push through your right heel to return to the starting position. Repeat with your left leg. Alternate legs for the desired number of repetitions."
+  "instructions": "Fique em pé com os pés afastados na largura dos ombros, segurando um haltere em cada mão. Dê um passo à frente com o pé direito, abaixando o corpo para a posição de afundo. Mantenha as costas retas e o peito erguido enquanto abaixa o corpo. Empurre com o calcanhar direito para retornar à posição inicial. Repita com a perna esquerda. Alterne as pernas pelo número desejado de repetições."
  },
  {
   "name": "Agachamento unilateral com halteres",
@@ -750,7 +750,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "halteres",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-single-leg-squat.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-single-leg-squat.jpg",
-  "instructions": "Stand with your feet shoulder-width apart, holding a dumbbell in each hand. Extend one leg forward and keep it off the ground throughout the exercise. Bend your standing leg and lower your body down as if sitting back into a chair. Keep your chest up and your back straight. Pause for a moment at the bottom, then push through your heel to return to the starting position. Repeat for the desired number of repetitions, then switch legs."
+  "instructions": "Fique em pé com os pés afastados na largura dos ombros, segurando um haltere em cada mão. Estenda uma perna à frente e mantenha-a fora do chão durante todo o exercício. Flexione a perna de apoio e abaixe o corpo como se fosse sentar em uma cadeira. Mantenha o peito erguido e as costas retas. Faça uma pausa por um momento na parte de baixo, depois empurre com o calcanhar para retornar à posição inicial. Repita pelo número desejado de repetições, depois troque de perna."
  },
  {
   "name": "Agachamento com halteres",
@@ -758,7 +758,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "halteres",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-squat.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-squat.jpg",
-  "instructions": "Stand with your feet shoulder-width apart, holding a dumbbell in each hand at your sides. Keeping your chest up and core engaged, lower your body down by bending at the knees and hips, as if sitting back into a chair. Continue lowering until your thighs are parallel to the ground, or as low as you can comfortably go. Pause for a moment at the bottom, then push through your heels to return to the starting position. Repeat for the desired number of repetitions."
+  "instructions": "Fique em pé com os pés afastados na largura dos ombros, segurando um haltere em cada mão ao lado do corpo. Mantendo o peito erguido e o core contraído, abaixe o corpo flexionando os joelhos e os quadris, como se fosse sentar em uma cadeira. Continue abaixando até que as coxas fiquem paralelas ao chão, ou o mais baixo que você conseguir confortavelmente. Faça uma pausa por um momento na parte de baixo, depois empurre com os calcanhares para retornar à posição inicial. Repita pelo número desejado de repetições."
  },
  {
   "name": "Stiff com halteres",
@@ -766,7 +766,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "halteres",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-stiff-leg-deadlift.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-stiff-leg-deadlift.jpg",
-  "instructions": "Stand with your feet shoulder-width apart, holding a dumbbell in each hand with an overhand grip. Keeping your back straight and your core engaged, hinge at the hips and lower the dumbbells towards the ground, allowing a slight bend in your knees. Lower the dumbbells until you feel a stretch in your hamstrings, then squeeze your glutes and push through your heels to return to the starting position. Repeat for the desired number of repetitions."
+  "instructions": "Fique em pé com os pés afastados na largura dos ombros, segurando um haltere em cada mão com pegada pronada. Mantendo as costas retas e o core contraído, faça uma dobradiça de quadril e abaixe os halteres em direção ao chão, permitindo uma leve flexão nos joelhos. Abaixe os halteres até sentir um alongamento nos isquiotibiais, depois contraia os glúteos e empurre com os calcanhares para retornar à posição inicial. Repita pelo número desejado de repetições."
  },
  {
   "name": "Agachamento sumô com halteres",
@@ -774,7 +774,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "halteres",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-bar-grip-sumo-squat.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-bar-grip-sumo-squat.jpg",
-  "instructions": "Stand with feet wider than shoulder-width, toes pointed out, holding a dumbbell vertically with both hands. Squat down by pushing hips back and knees out, then return to standing."
+  "instructions": "Fique em pé com os pés mais afastados que a largura dos ombros, com os dedos dos pés apontados para fora, segurando um haltere verticalmente com as duas mãos. Agache empurrando os quadris para trás e os joelhos para fora, depois retorne à posição em pé."
  },
  {
   "name": "Hiperextensão reversa na máquina",
@@ -782,7 +782,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "máquina",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/lever-reverse-hyperextension.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/lever-reverse-hyperextension.jpg",
-  "instructions": "Adjust the leverage machine to fit your body and secure your feet in the foot pads. Lie face down on the machine with your upper body hanging off the edge and your hips resting on the pad. Cross your arms over your chest or place them behind your head. Engage your glutes and hamstrings to lift your legs upward until they are parallel to the ground. Pause for a moment at the top, then slowly lower your legs back down to the starting position. Repeat for the desired number of repetitions."
+  "instructions": "Ajuste a máquina de alavanca ao seu corpo e fixe os pés nos apoios. Deite-se de bruços na máquina com a parte superior do corpo pendurada na borda e os quadris apoiados no acolchoado. Cruze os braços sobre o peito ou coloque-os atrás da cabeça. Contraia os glúteos e os isquiotibiais para levantar as pernas até que fiquem paralelas ao chão. Faça uma pausa por um momento no topo, depois abaixe lentamente as pernas de volta à posição inicial. Repita pelo número desejado de repetições."
  },
  {
   "name": "Abdutora na máquina",
@@ -790,7 +790,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "máquina",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/lever-seated-hip-abduction.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/lever-seated-hip-abduction.jpg",
-  "instructions": "Adjust the seat height so that your knees are at a 90-degree angle. Sit on the machine with your back against the backrest and your feet on the footrests. Place your hands on the side handles for stability. Engage your abductors and slowly push your legs apart, away from the midline of your body. Pause for a moment at the end of the movement, then slowly bring your legs back together to the starting position. Repeat for the desired number of repetitions."
+  "instructions": "Ajuste a altura do assento para que seus joelhos fiquem em um ângulo de 90 graus. Sente-se na máquina com as costas apoiadas no encosto e os pés nos apoios. Coloque as mãos nas alças laterais para estabilidade. Contraia os abdutores e lentamente afaste as pernas, afastando-as da linha média do corpo. Faça uma pausa por um momento no final do movimento, depois lentamente traga as pernas de volta juntas à posição inicial. Repita pelo número desejado de repetições."
  },
  {
   "name": "Adutora na máquina",
@@ -798,7 +798,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "máquina",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/lever-seated-hip-adduction.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/lever-seated-hip-adduction.jpg",
-  "instructions": "Adjust the seat height and position yourself on the machine with your back against the backrest. Place your feet on the footrests and grasp the handles for stability. Engage your adductor muscles and slowly bring your legs together, squeezing your inner thighs. Pause for a moment at the peak contraction, then slowly return to the starting position. Repeat for the desired number of repetitions."
+  "instructions": "Ajuste a altura do assento e posicione-se na máquina com as costas apoiadas no encosto. Coloque os pés nos apoios e segure as alças para estabilidade. Contraia os músculos adutores e lentamente aproxime as pernas, apertando a parte interna das coxas. Faça uma pausa por um momento no pico da contração, depois retorne lentamente à posição inicial. Repita pelo número desejado de repetições."
  },
  {
   "name": "Extensão de quadril na máquina",
@@ -806,7 +806,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "máquina",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/lever-standing-hip-extension.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/lever-standing-hip-extension.jpg",
-  "instructions": "Position yourself on the standing hip extension machine so one foot is on the lever platform. Brace your core and press the platform straight back using your heel, extending your hip fully. Lower under control and repeat for reps before switching legs."
+  "instructions": "Posicione-se na máquina de extensão de quadril em pé de modo que um pé fique na plataforma da alavanca. Contraia o core e empurre a plataforma para trás usando o calcanhar, estendendo o quadril completamente. Abaixe de forma controlada e repita pelas repetições antes de trocar de perna."
  },
  {
   "name": "Chute para trás na máquina",
@@ -814,7 +814,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "máquina",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/lever-standing-rear-kick.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/lever-standing-rear-kick.jpg",
-  "instructions": "Set up at the rear kick lever machine with your working foot on the platform and your chest against the pad. Push the lever backward by extending your hip, squeezing your glutes at the top, then return to the starting position."
+  "instructions": "Posicione-se na máquina de chute traseiro com o pé de trabalho na plataforma e o peito contra o acolchoado. Empurre a alavanca para trás estendendo o quadril, contraindo os glúteos no topo, depois retorne à posição inicial."
  },
  {
   "name": "Elevação de pernas deitado",
@@ -822,7 +822,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "peso corporal",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/lying-straight-leg-raise.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/lying-straight-leg-raise.jpg",
-  "instructions": "Lie flat on your back with legs extended and arms at your sides. Keeping legs straight and together, lift them to about 90 degrees, then lower under control without letting heels touch the ground."
+  "instructions": "Deite-se de costas com as pernas estendidas e os braços ao lado do corpo. Mantendo as pernas retas e juntas, levante-as até cerca de 90 graus, depois abaixe de forma controlada sem deixar os calcanhares tocarem o chão."
  },
  {
   "name": "Ponte declinada",
@@ -830,7 +830,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "peso corporal",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/rear-decline-bridge.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/rear-decline-bridge.jpg",
-  "instructions": "Lie on your back with your feet flat on the ground and your knees bent. Place your arms by your sides with your palms facing down. Engage your glutes and hamstrings, and lift your hips off the ground until your body forms a straight line from your knees to your shoulders. Hold this position for a few seconds, then slowly lower your hips back down to the starting position. Repeat for the desired number of repetitions."
+  "instructions": "Deite-se de costas com os pés apoiados no chão e os joelhos flexionados. Coloque os braços ao lado do corpo com as palmas voltadas para baixo. Contraia os glúteos e os isquiotibiais e levante os quadris do chão até que seu corpo forme uma linha reta dos joelhos aos ombros. Mantenha esta posição por alguns segundos, depois abaixe lentamente os quadris de volta à posição inicial. Repita pelo número desejado de repetições."
  },
  {
   "name": "Panturrilha sentado com halteres",
@@ -838,7 +838,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "halteres",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-seated-calf-raise.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-seated-calf-raise.jpg",
-  "instructions": "Sit on a bench or chair with your feet flat on the ground and a dumbbell resting on your thighs. Place the balls of your feet on a raised surface such as a step or block, with your heels hanging off the edge. Hold onto the dumbbell for stability. Raise your heels as high as possible, lifting your body weight onto the balls of your feet. Pause for a moment at the top, then slowly lower your heels back down to the starting position. Repeat for the desired number of repetitions."
+  "instructions": "Sente-se em um banco ou cadeira com os pés apoiados no chão e um haltere descansando sobre as coxas. Coloque a parte da frente dos pés em uma superfície elevada, como um degrau ou bloco, com os calcanhares pendurados na borda. Segure o haltere para estabilidade. Levante os calcanhares o mais alto possível, elevando o peso do corpo sobre a parte da frente dos pés. Faça uma pausa por um momento no topo, depois abaixe lentamente os calcanhares de volta à posição inicial. Repita pelo número desejado de repetições."
  },
  {
   "name": "Panturrilha unilateral com halteres",
@@ -846,7 +846,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "halteres",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-single-leg-calf-raise.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-single-leg-calf-raise.jpg",
-  "instructions": "Stand on the edge of a step or platform with your heels hanging off and your toes on the step. Hold a dumbbell in one hand and place your other hand on a wall or railing for support. Raise your heel as high as possible, lifting your body up onto your toes. Pause for a moment at the top, then slowly lower your heel back down below the step. Repeat for the desired number of repetitions, then switch to the other leg."
+  "instructions": "Fique em pé na borda de um degrau ou plataforma com os calcanhares pendurados e os dedos dos pés no degrau. Segure um haltere em uma mão e coloque a outra mão em uma parede ou corrimão para apoio. Levante o calcanhar o mais alto possível, elevando o corpo sobre a ponta dos pés. Faça uma pausa por um momento no topo, depois abaixe lentamente o calcanhar de volta abaixo do degrau. Repita pelo número desejado de repetições, depois troque para a outra perna."
  },
  {
   "name": "Panturrilha em pé com halteres",
@@ -854,7 +854,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "halteres",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-standing-calf-raise.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-standing-calf-raise.jpg",
-  "instructions": "Stand with your feet shoulder-width apart, holding a dumbbell in each hand. Raise your heels off the ground as high as possible, using your calves. Pause for a moment at the top, then slowly lower your heels back down to the starting position. Repeat for the desired number of repetitions."
+  "instructions": "Fique em pé com os pés afastados na largura dos ombros, segurando um halter em cada mão. Eleve os calcanhares do chão o mais alto possível, usando as panturrilhas. Faça uma pausa por um momento no topo, depois abaixe lentamente os calcanhares de volta à posição inicial. Repita pelo número desejado de repetições."
  },
  {
   "name": "Panturrilha sentado na máquina",
@@ -862,7 +862,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "máquina",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/lever-seated-calf-raise.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/lever-seated-calf-raise.jpg",
-  "instructions": "Adjust the seat height so that your knees are slightly bent and your feet are flat on the footplate. Place your toes on the footplate with your heels hanging off the edge. Grasp the handles or the sides of the seat for stability. Push through the balls of your feet to raise your heels as high as possible. Pause for a moment at the top, then slowly lower your heels back down to the starting position. Repeat for the desired number of repetitions."
+  "instructions": "Ajuste a altura do assento para que seus joelhos fiquem levemente flexionados e seus pés fiquem apoiados na plataforma. Coloque os dedos dos pés na plataforma com os calcanhares para fora da borda. Segure as alças ou as laterais do assento para estabilidade. Empurre com a ponta dos pés para elevar os calcanhares o mais alto possível. Faça uma pausa por um momento no topo, depois abaixe lentamente os calcanhares de volta à posição inicial. Repita pelo número desejado de repetições."
  },
  {
   "name": "Panturrilha em pé na máquina",
@@ -870,7 +870,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "máquina",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/lever-standing-calf-raise.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/lever-standing-calf-raise.jpg",
-  "instructions": "Adjust the machine to your height and stand with your feet shoulder-width apart. Place your shoulders under the pads and hold onto the handles for stability. Raise your heels as high as possible by extending your ankles. Pause for a moment at the top, then slowly lower your heels back down to the starting position. Repeat for the desired number of repetitions."
+  "instructions": "Ajuste a máquina à sua altura e fique em pé com os pés afastados na largura dos ombros. Coloque os ombros sob os apoios e segure as alças para estabilidade. Eleve os calcanhares o mais alto possível estendendo os tornozelos. Faça uma pausa por um momento no topo, depois abaixe lentamente os calcanhares de volta à posição inicial. Repita pelo número desejado de repetições."
  },
  {
   "name": "Panturrilha no smith",
@@ -878,7 +878,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "smith",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/smith-calf-raise.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/smith-calf-raise.jpg",
-  "instructions": "Stand upright under the Smith machine bar, with the bar resting across your upper traps and feet shoulder-width apart. Raise your heels to stand on your toes, contract your calves, and slowly lower back to the ground."
+  "instructions": "Fique em pé sob a barra da máquina Smith, com a barra apoiada sobre o trapézio superior e os pés afastados na largura dos ombros. Eleve os calcanhares para ficar na ponta dos pés, contraia as panturrilhas e abaixe lentamente de volta ao chão."
  },
  {
   "name": "Panturrilha burrinho",
@@ -886,7 +886,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "peso corporal",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/donkey-calf-raise.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/donkey-calf-raise.jpg",
-  "instructions": "Stand with your toes on an elevated surface, such as a step or block. Place your hands on a stable support, such as a wall or railing, for balance. Raise your heels as high as possible, lifting your body weight onto the balls of your feet. Pause for a moment at the top, then slowly lower your heels back down to the starting position. Repeat for the desired number of repetitions."
+  "instructions": "Fique em pé com os dedos dos pés sobre uma superfície elevada, como um degrau ou bloco. Coloque as mãos em um apoio estável, como uma parede ou corrimão, para equilíbrio. Eleve os calcanhares o mais alto possível, levantando o peso do corpo sobre a ponta dos pés. Faça uma pausa por um momento no topo, depois abaixe lentamente os calcanhares de volta à posição inicial. Repita pelo número desejado de repetições."
  },
  {
   "name": "Flexão lateral com halteres",
@@ -894,7 +894,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "halteres",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-side-bend.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-side-bend.jpg",
-  "instructions": "Stand up straight with your feet shoulder-width apart and hold a dumbbell in one hand, letting it hang down by your side. Keeping your back straight and your core engaged, slowly bend sideways at the waist towards the opposite side of the dumbbell, lowering the weight as far as you comfortably can. Pause for a moment, then slowly return to the starting position. Repeat for the desired number of repetitions, then switch sides and repeat."
+  "instructions": "Fique em pé com as costas retas e os pés afastados na largura dos ombros, segurando um halter em uma mão, deixando-o pendurado ao lado do corpo. Mantendo as costas retas e o core engajado, flexione lentamente a cintura para o lado oposto ao do halter, abaixando o peso o máximo que conseguir confortavelmente. Faça uma pausa por um momento, depois retorne lentamente à posição inicial. Repita pelo número desejado de repetições, depois troque de lado e repita."
  },
  {
   "name": "Abdominal ajoelhado no cabo",
@@ -902,7 +902,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "cabo",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/cable-kneeling-crunch.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/cable-kneeling-crunch.jpg",
-  "instructions": "Attach a rope handle to a high pulley and kneel down facing away from the machine. Hold the rope handle with both hands and place it behind your head, keeping your elbows out to the sides. Keeping your hips stationary, flex your waist and crunch your torso down towards your thighs. Pause for a moment at the bottom, then slowly return to the starting position. Repeat for the desired number of repetitions."
+  "instructions": "Prenda uma alça de corda a uma polia alta e ajoelhe-se de costas para a máquina. Segure a alça de corda com as duas mãos e coloque-a atrás da cabeça, mantendo os cotovelos para os lados. Mantendo o quadril parado, flexione a cintura e faça a abdominal trazendo o tronco para baixo em direção às coxas. Faça uma pausa por um momento na parte de baixo, depois retorne lentamente à posição inicial. Repita pelo número desejado de repetições."
  },
  {
   "name": "Abdominal em pé no cabo",
@@ -910,7 +910,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "cabo",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/cable-standing-crunch.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/cable-standing-crunch.jpg",
-  "instructions": "Attach a cable handle to a high pulley and stand facing away from the machine. Hold the handle with both hands and place it behind your head, keeping your elbows bent. Stand with your feet shoulder-width apart and your knees slightly bent. Keeping your abs engaged, exhale and crunch your torso down towards your knees, bringing your elbows towards your thighs. Pause for a moment at the bottom of the movement, then slowly return to the starting position. Repeat for the desired number of repetition"
+  "instructions": "Prenda uma alça de cabo a uma polia alta e fique em pé de costas para a máquina. Segure a alça com as duas mãos e coloque-a atrás da cabeça, mantendo os cotovelos flexionados. Fique em pé com os pés afastados na largura dos ombros e os joelhos levemente flexionados. Mantendo o abdômen engajado, expire e faça a abdominal trazendo o tronco para baixo em direção aos joelhos, aproximando os cotovelos das coxas. Faça uma pausa por um momento na parte de baixo do movimento, depois retorne lentamente à posição inicial. Repita pelo número desejado de repetições."
  },
  {
   "name": "Elevação em pé no cabo",
@@ -918,7 +918,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "cabo",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/cable-standing-lift.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/cable-standing-lift.jpg",
-  "instructions": "Stand facing the cable machine with your feet shoulder-width apart. Hold the cable handle with both hands and position it at waist height. Engage your core and maintain a straight back throughout the exercise. Keeping your arms straight, exhale and lift the cable handle up towards your opposite shoulder, rotating your torso. Pause for a moment at the top, then inhale and slowly lower the cable handle back to the starting position. Repeat for the desired number of repetitions, then switch sides."
+  "instructions": "Fique em pé de frente para a máquina de cabo com os pés afastados na largura dos ombros. Segure a alça do cabo com as duas mãos e posicione-a na altura da cintura. Engaje o core e mantenha as costas retas durante todo o exercício. Mantendo os braços estendidos, expire e eleve a alça do cabo em direção ao ombro oposto, rotacionando o tronco. Faça uma pausa por um momento no topo, depois inspire e abaixe lentamente a alça do cabo de volta à posição inicial. Repita pelo número desejado de repetições, depois troque de lado."
  },
  {
   "name": "Torção no cabo",
@@ -926,7 +926,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "cabo",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/cable-twist-up-down.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/cable-twist-up-down.jpg",
-  "instructions": "Stand with your feet shoulder-width apart, facing the cable machine. Hold the cable handle with both hands in front of your chest, keeping your arms slightly bent. Engage your core and slowly rotate your torso to one side, keeping your hips and legs stable. Pause for a moment at the end of the rotation, then slowly return to the starting position. Repeat the rotation to the opposite side. Continue alternating sides for the desired number of repetitions."
+  "instructions": "Fique em pé com os pés afastados na largura dos ombros, de frente para a máquina de cabo. Segure a alça do cabo com as duas mãos à frente do peito, mantendo os braços levemente flexionados. Engaje o core e rotacione lentamente o tronco para um lado, mantendo o quadril e as pernas estáveis. Faça uma pausa por um momento no final da rotação, depois retorne lentamente à posição inicial. Repita a rotação para o lado oposto. Continue alternando os lados pelo número desejado de repetições."
  },
  {
   "name": "Extensão lombar na máquina",
@@ -934,7 +934,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "máquina",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/lever-back-extension.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/lever-back-extension.jpg",
-  "instructions": "Adjust the machine to fit your body size and range of motion. Sit on the machine with your back against the pad and your feet secured. Place your hands on the handles or grip bars. Engage your core and slowly lean forward, allowing your back to round slightly. Pause for a moment at the bottom position, feeling a stretch in your lower back. Using your back muscles, slowly raise your torso back to the starting position. Repeat for the desired number of repetitions."
+  "instructions": "Ajuste a máquina ao tamanho do seu corpo e à sua amplitude de movimento. Sente-se na máquina com as costas apoiadas no encosto e os pés fixos. Coloque as mãos nas alças ou barras de pegada. Engaje o core e incline-se lentamente para frente, permitindo que as costas se arredondem levemente. Faça uma pausa por um momento na posição inferior, sentindo um alongamento na lombar. Usando os músculos das costas, eleve lentamente o tronco de volta à posição inicial. Repita pelo número desejado de repetições."
  },
  {
   "name": "Abdominal sentado na máquina",
@@ -942,7 +942,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "máquina",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/lever-seated-crunch-1.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/lever-seated-crunch-1.jpg",
-  "instructions": "Sit in the lever crunch machine and grasp the handles or position yourself according to machine design. Contract your abs to flex your spine forward, bringing your chest toward your knees, then return slowly to the starting position."
+  "instructions": "Sente-se na máquina de abdominal alavancada e segure as alças ou posicione-se de acordo com o design da máquina. Contraia o abdômen para flexionar a coluna para frente, trazendo o peito em direção aos joelhos, depois retorne lentamente à posição inicial."
  },
  {
   "name": "Abdominal com peso e pernas estendidas",
@@ -950,7 +950,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "com peso",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/weighted-leg-extension-crunch.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/weighted-leg-extension-crunch.jpg",
-  "instructions": "Lie on your back holding a weight at your chest, legs lifted and knees bent. Extend your legs out as you crunch upward, then return to the start position."
+  "instructions": "Deite-se de costas segurando um peso no peito, com as pernas elevadas e os joelhos flexionados. Estenda as pernas enquanto faz a abdominal para cima, depois retorne à posição inicial."
  },
  {
   "name": "Abdominal bicicleta 45°",
@@ -958,7 +958,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "peso corporal",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/45-degree-bycicle-twisting-crunch.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/45-degree-bycicle-twisting-crunch.jpg",
-  "instructions": "Lie flat on your back with hands behind your head and legs raised at a 45-degree angle. Bring your right elbow toward your left knee while extending the opposite leg, then alternate sides in a pedaling motion."
+  "instructions": "Deite-se de costas no chão com as mãos atrás da cabeça e as pernas elevadas em um ângulo de 45 graus. Traga o cotovelo direito em direção ao joelho esquerdo enquanto estende a perna oposta, depois alterne os lados em um movimento de pedalada."
  },
  {
   "name": "Abdominal no banco",
@@ -966,7 +966,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "peso corporal",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/crunch-on-bench.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/crunch-on-bench.jpg",
-  "instructions": "Lie back on a bench with your knees bent and feet on the bench or floor. Cross your arms over your chest or place hands lightly behind your head, engage your abs, and lift your shoulders off the bench before lowering them down under control."
+  "instructions": "Deite-se de costas em um banco com os joelhos flexionados e os pés no banco ou no chão. Cruze os braços sobre o peito ou coloque as mãos levemente atrás da cabeça, engaje o abdômen e eleve os ombros do banco antes de abaixá-los de forma controlada."
  },
  {
   "name": "Elevação de pernas na barra",
@@ -974,7 +974,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "peso corporal",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/hanging-leg-hip-raise.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/hanging-leg-hip-raise.jpg",
-  "instructions": "Hang from a pull-up bar with your arms fully extended and your palms facing away from you. Engage your core and lift your legs up by flexing your hips and knees until your thighs are parallel to the ground. Pause for a moment at the top, then slowly lower your legs back down to the starting position. Repeat for the desired number of repetitions."
+  "instructions": "Pendure-se em uma barra de barra fixa com os braços totalmente estendidos e as palmas das mãos voltadas para longe de você. Contraia o core e eleve as pernas flexionando os quadris e os joelhos até que as coxas fiquem paralelas ao chão. Faça uma pausa por um momento no topo, depois abaixe lentamente as pernas de volta à posição inicial. Repita pelo número desejado de repetições."
  },
  {
   "name": "Elevação de pernas estendidas na barra",
@@ -982,7 +982,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "peso corporal",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/hanging-straight-leg-raise.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/hanging-straight-leg-raise.jpg",
-  "instructions": "Hang from a pull-up bar with an overhand grip, keeping your body steady. Contract your core and raise your legs, keeping them straight, until they're parallel to the ground or higher. Lower your legs with control and repeat."
+  "instructions": "Pendure-se em uma barra de barra fixa com pegada pronada, mantendo o corpo estável. Contraia o core e eleve as pernas, mantendo-as estendidas, até que fiquem paralelas ao chão ou mais alto. Abaixe as pernas com controle e repita."
  },
  {
   "name": "Elevação de pernas inclinado",
@@ -990,7 +990,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "peso corporal",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/incline-leg-hip-raise.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/incline-leg-hip-raise.jpg",
-  "instructions": "Lie on your back on an incline bench and hold the handles or bench for stability. Keeping legs straight, lift them until your hips come off the bench, then lower slowly."
+  "instructions": "Deite-se de costas em um banco inclinado e segure as alças ou o banco para estabilidade. Mantendo as pernas estendidas, eleve-as até que os quadris saiam do banco, depois abaixe lentamente."
  },
  {
   "name": "Elevação de pernas deitado",
@@ -998,7 +998,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "peso corporal",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/lying-floor-leg-raise.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/lying-floor-leg-raise.jpg",
-  "instructions": "Lie flat on your back with your legs extended and arms at your sides or under your hips for support. Keeping legs straight, raise them toward the ceiling until your hips lift slightly off the floor, then lower them back down without touching the ground."
+  "instructions": "Deite-se de costas no chão com as pernas estendidas e os braços ao lado do corpo ou sob os quadris para apoio. Mantendo as pernas estendidas, eleve-as em direção ao teto até que os quadris se levantem levemente do chão, depois abaixe-as de volta sem tocar o chão."
  },
  {
   "name": "Rosca de punho invertida com barra",
@@ -1006,7 +1006,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "barra",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/barbell-reverse-wrist-curl-over-grip.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/barbell-reverse-wrist-curl-over-grip.jpg",
-  "instructions": "Sit on a bench holding a barbell with an overhand grip, forearms resting on your thighs, and wrists hanging over the edge. Extend your wrists upward, lifting the bar, then lower under control."
+  "instructions": "Sente-se em um banco segurando uma barra com pegada pronada, com os antebraços apoiados sobre as coxas e os punhos pendurados na borda. Estenda os punhos para cima, levantando a barra, depois abaixe com controle."
  },
  {
   "name": "Rosca de punho invertida em pé",
@@ -1014,7 +1014,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "barra",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/barbell-standing-back-wrist-curl.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/barbell-standing-back-wrist-curl.jpg",
-  "instructions": "Stand up straight with your feet shoulder-width apart and hold a barbell with an overhand grip. Rest the barbell on the back of your hands with your palms facing down and your fingers pointing towards your body. Keeping your upper arms stationary, exhale and curl your wrists upwards as far as possible. Hold the contracted position for a brief pause, then inhale and slowly lower the barbell back to the starting position. Repeat for the desired number of repetitions."
+  "instructions": "Fique em pé com os pés na largura dos ombros e segure uma barra com pegada pronada. Apoie a barra nas costas das mãos com as palmas voltadas para baixo e os dedos apontando em direção ao corpo. Mantendo os braços superiores parados, expire e flexione os punhos para cima o máximo possível. Segure a posição contraída por uma breve pausa, depois inspire e abaixe lentamente a barra de volta à posição inicial. Repita pelo número desejado de repetições."
  },
  {
   "name": "Rosca de punho atrás das costas",
@@ -1022,7 +1022,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "halteres",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-behind-back-wrist-curl.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-behind-back-wrist-curl.jpg",
-  "instructions": "Stand holding a dumbbell behind your back with your palm facing back. Curl the dumbbell by flexing your wrist, then return to the starting position under control."
+  "instructions": "Fique em pé segurando um halter atrás das costas com a palma da mão voltada para trás. Flexione o halter flexionando o punho, depois retorne à posição inicial com controle."
  },
  {
   "name": "Rosca de punho no banco",
@@ -1030,7 +1030,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "halteres",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/dumbbell-over-bench-wrist-curl.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/dumbbell-over-bench-wrist-curl.jpg",
-  "instructions": "Sit on a bench with your forearms resting on the bench and your palms facing up, holding a dumbbell in each hand. Allow your wrists to hang over the edge of the bench. Slowly curl your wrists upward, squeezing your forearms at the top of the movement. Pause for a moment, then slowly lower your wrists back down to the starting position. Repeat for the desired number of repetitions."
+  "instructions": "Sente-se em um banco com os antebraços apoiados no banco e as palmas das mãos voltadas para cima, segurando um halter em cada mão. Deixe os punhos pendurados na borda do banco. Flexione lentamente os punhos para cima, contraindo os antebraços no topo do movimento. Faça uma pausa por um momento, depois abaixe lentamente os punhos de volta à posição inicial. Repita pelo número desejado de repetições."
  },
  {
   "name": "Elíptico",
@@ -1038,7 +1038,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "máquina",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/elliptical.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/elliptical.jpg",
-  "instructions": "Step onto the elliptical machine and grasp the moving handles. Begin moving feet in an elliptical motion, engaging both the lower and upper body by pushing and pulling the handles as you stride."
+  "instructions": "Suba na máquina elíptica e segure as alças móveis. Comece a mover os pés em um movimento elíptico, engajando tanto a parte inferior quanto a superior do corpo empurrando e puxando as alças enquanto você pedala."
  },
  {
   "name": "Bicicleta ergométrica",
@@ -1046,7 +1046,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "máquina",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/stationary-bike.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/stationary-bike.jpg",
-  "instructions": "Adjust the seat height and handlebar position for comfort and knee alignment. Pedal continuously at your desired intensity, maintaining good posture throughout the workout."
+  "instructions": "Ajuste a altura do selim e a posição do guidão para conforto e alinhamento dos joelhos. Pedale continuamente na intensidade desejada, mantendo uma boa postura durante todo o treino."
  },
  {
   "name": "Esteira (corrida)",
@@ -1054,7 +1054,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "máquina",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/treadmill-running.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/treadmill-running.jpg",
-  "instructions": "Set your desired speed and incline on the treadmill. Start jogging or running, ensuring good posture with a natural stride. Adjust settings as needed for intensity and duration."
+  "instructions": "Defina a velocidade e a inclinação desejadas na esteira. Comece a trotar ou correr, garantindo uma boa postura com uma passada natural. Ajuste as configurações conforme necessário para intensidade e duração."
  },
  {
   "name": "Burpee",
@@ -1062,7 +1062,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "peso corporal",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/burpee.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/burpee.jpg",
-  "instructions": "Start in a standing position with your feet shoulder-width apart. Lower your body into a squat position by bending your knees and placing your hands on the floor in front of you. Kick your feet back into a push-up position. Perform a push-up, keeping your body in a straight line. Jump your feet back into the squat position. Jump up explosively, reaching your arms overhead. Land softly and immediately lower back into a squat position to begin the next repetition."
+  "instructions": "Comece em pé com os pés na largura dos ombros. Abaixe o corpo para a posição de agachamento flexionando os joelhos e colocando as mãos no chão à sua frente. Chute os pés para trás para a posição de flexão. Execute uma flexão, mantendo o corpo em linha reta. Salte com os pés de volta para a posição de agachamento. Salte explosivamente, alcançando os braços acima da cabeça. Aterrisse suavemente e imediatamente abaixe de volta para a posição de agachamento para começar a próxima repetição."
  },
  {
   "name": "Exercício cardiovascular",
@@ -1070,7 +1070,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "peso corporal",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/cardio-exercises.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/cardio-exercises.jpg",
-  "instructions": "Choose a form of movement such as jogging, jumping jacks, or burpees. Perform continuously at a moderate to vigorous intensity for the desired time or repetitions, maintaining proper posture and consistent breathing."
+  "instructions": "Escolha uma forma de movimento como trote, polichinelos ou burpees. Execute continuamente em intensidade moderada a vigorosa pelo tempo ou número de repetições desejado, mantendo a postura adequada e a respiração consistente."
  },
  {
   "name": "Polichinelo",
@@ -1078,7 +1078,7 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "peso corporal",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/jumping-jack.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/jumping-jack.jpg",
-  "instructions": "Begin standing with feet together and arms at sides. Jump feet outward while raising arms overhead, then reverse to starting position in a single fluid motion."
+  "instructions": "Comece em pé com os pés juntos e os braços ao lado do corpo. Salte afastando os pés para fora enquanto eleva os braços acima da cabeça, depois reverta para a posição inicial em um único movimento fluido."
  },
  {
   "name": "Corrida",
@@ -1086,6 +1086,6 @@ export const EXERCISE_CATALOG: CatalogExercise[] = [
   "equipment": "peso corporal",
   "video": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-videos/male/running.mp4",
   "thumb": "https://pub-585d42eb1aa64a67aedf483ec328d3fe.r2.dev/exercise-posters/male/running.jpg",
-  "instructions": "Begin at a comfortable pace, maintaining upright posture and relaxed shoulders. Land lightly on your feet and use a natural arm swing for balance, adjusting speed and distance as fitness improves."
+  "instructions": "Comece em um ritmo confortável, mantendo a postura ereta e os ombros relaxados. Aterrisse levemente sobre os pés e use um balanço natural dos braços para equilíbrio, ajustando a velocidade e a distância conforme o condicionamento melhora."
  }
 ]
