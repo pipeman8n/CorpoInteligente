@@ -389,3 +389,13 @@ table.result td small { color: var(--muted); font-size: 0.8rem; }
 .hub-banner .btn { background: #fff; color: var(--accent-strong); }
 .hub-banner .btn:hover { filter: brightness(0.96); }
 @media (min-width: 640px) { .hub-grid { grid-template-columns: repeat(3, 1fr); } }
+
+/* ===== Abas de resultado (Alt B) ===== */
+.result-tabs { display: flex; gap: 5px; background: #eef2f7; padding: 5px; border-radius: 13px; margin: 20px 0 16px; }
+.rtab { flex: 1; text-align: center; padding: 11px 8px; border-radius: 9px; border: none; background: transparent; color: var(--muted); font-weight: 600; font-size: 0.86rem; cursor: pointer; font-family: inherit; transition: .15s; }
+.rtab.active { background: var(--surface); color: var(--accent-strong); box-shadow: 0 2px 8px rgba(15, 40, 90, 0.08); }
+.rtab.locked { color: #a8b3c4; cursor: not-allowed; }
+@media (prefers-color-scheme: dark) {
+  .result-tabs { background: #1a2129; }
+  .rtab.locked { color: #4a5568; }
+}
