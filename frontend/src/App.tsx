@@ -242,7 +242,7 @@ export default function App() {
   const [pdfLoading, setPdfLoading] = useState(false)
   const [authEmail, setAuthEmail] = useState('')
   const [authPassword, setAuthPassword] = useState('')
-  const [pf, setPf] = useState({ firstName: '', lastName: '', address: '', numero: '', cep: '', neighborhood: '', city: '', uf: '', cpf: '', whatsapp: '', instagram: '', photo: '', termsAccepted: false })
+  const [pf, setPf] = useState({ firstName: '', lastName: '', address: '', numero: '', cep: '', neighborhood: '', city: '', uf: '', cpf: '', whatsapp: '', instagram: '', photo: '', birthDate: '', termsAccepted: false })
 
   const userId = getUserId()
 
@@ -262,7 +262,7 @@ export default function App() {
       const p = await getProfile(id)
       setProfile(p)
       if (p) {
-        setPf({ firstName: (p.fullName || '').split(' ')[0] || '', lastName: (p.fullName || '').split(' ').slice(1).join(' ') || '', address: p.address || '', numero: p.numero || '', cep: p.cep || '', neighborhood: p.neighborhood || '', city: p.city || '', uf: p.uf || '', cpf: p.cpf || '', whatsapp: p.whatsapp || '', instagram: p.instagram || '', photo: p.photo || '', termsAccepted: p.termsAccepted })
+        setPf({ firstName: (p.fullName || '').split(' ')[0] || '', lastName: (p.fullName || '').split(' ').slice(1).join(' ') || '', address: p.address || '', numero: p.numero || '', cep: p.cep || '', neighborhood: p.neighborhood || '', city: p.city || '', uf: p.uf || '', cpf: p.cpf || '', whatsapp: p.whatsapp || '', instagram: p.instagram || '', photo: p.photo || '', birthDate: p.birth_date || '', termsAccepted: p.termsAccepted })
       }
       return p
     } catch {
@@ -578,8 +578,8 @@ export default function App() {
     const uid = data.user?.id
     if (uid) {
       try {
-        const { firstName, lastName, ...restPf } = pf
-        await saveProfile({ id: uid, ...restPf, fullName: `${firstName} ${lastName}`.trim() })
+        const { firstName, lastName, birthDate, ...restPf } = pf
+        await saveProfile({ id: uid, ...restPf, fullName: `${firstName} ${lastName}`.trim(), birth_date: birthDate || null })
         await saveCurrentCalculation(uid)
         localStorage.removeItem('bh-flow')
       } catch { /* o cadastro foi criado; erro de salvar prévia não bloqueia */ }
@@ -588,9 +588,9 @@ export default function App() {
     setAuthEmail('')
     setAuthPassword('')
     if (data.user && !data.session) {
-      setInfoPopup('Conta criada! Enviamos um link de ativação para seu e-mail. Clique no link e depois entre para ver seus dados.')
+      setInfoPopup('Conta criada! Confirme seu e-mail pelo link e entre para ver sua prévia salva.')
     } else {
-      setInfoPopup('Conta criada com sucesso!')
+      setInfoPopup('Conta criada! Sua prévia foi salva.')
     }
     if (!result) { resetFlow(); setView('app') }
   }
@@ -653,13 +653,15 @@ export default function App() {
       return
     }
     try {
-      const { firstName, lastName, ...restPf } = pf
-      const saved = await saveProfile({ id: user.id, ...restPf, fullName: `${firstName} ${lastName}`.trim() })
+      const { firstName, lastName, birthDate, ...restPf } = pf
+      const saved = await saveProfile({ id: user.id, ...restPf, fullName: `${firstName} ${lastName}`.trim(), birth_date: birthDate || null })
       setProfile(saved)
       setProfileMode(false)
       await saveCurrentCalculation(user.id)
+      loadHistory(user.id, user.email)
       localStorage.removeItem('bh-flow')
-      setInfoPopup('Cadastro concluído!')
+      setView('app')
+      setInfoPopup('Cadastro concluído! Sua prévia foi salva.')
     } catch (e) {
       setError((e as Error).message)
     }
@@ -1619,6 +1621,8 @@ export default function App() {
                 <input value={pf.lastName} onChange={(e) => setPf((p) => ({ ...p, lastName: e.target.value }))} placeholder="Seu sobrenome" />
               </div>
             </div>
+            <label>Data de nascimento</label>
+            <input type="date" value={pf.birthDate} onChange={(e) => setPf((p) => ({ ...p, birthDate: e.target.value }))} />
             <label>CEP</label>
             <input value={pf.cep} onChange={(e) => onCepChange(e.target.value)} placeholder="00000-000" />
             <label>Endereço</label>
@@ -1684,6 +1688,8 @@ export default function App() {
                 <input value={pf.lastName} onChange={(e) => setPf((p) => ({ ...p, lastName: e.target.value }))} placeholder="Seu sobrenome" />
               </div>
             </div>
+            <label>Data de nascimento</label>
+            <input type="date" value={pf.birthDate} onChange={(e) => setPf((p) => ({ ...p, birthDate: e.target.value }))} />
             <label>CEP</label>
             <input value={pf.cep} onChange={(e) => onCepChange(e.target.value)} placeholder="00000-000" />
             <label>Endereço</label>

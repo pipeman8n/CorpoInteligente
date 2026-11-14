@@ -143,6 +143,7 @@ export interface Profile {
   instagram: string
   photo: string | null
   termsAccepted: boolean
+  birth_date?: string | null
 }
 
 export const saveProfile = (data: Record<string, unknown>): Promise<Profile> =>
