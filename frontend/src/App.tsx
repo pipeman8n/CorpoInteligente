@@ -156,6 +156,20 @@ function genCode(): string {
   return 'CODE' + Math.floor(1000 + Math.random() * 9000)
 }
 
+function formatPhoneBr(s?: string): string {
+  if (!s) return '—'
+  const d = s.replace(/\D/g, '')
+  if (d.length === 11) return `(${d.slice(0, 2)}) ${d.slice(2, 7)}-${d.slice(7)}`
+  if (d.length === 10) return `(${d.slice(0, 2)}) ${d.slice(2, 6)}-${d.slice(6)}`
+  return s
+}
+
+function formatDateBr(s?: string | null): string {
+  if (!s) return '—'
+  const [y, m, d] = s.split('-')
+  return y && m && d ? `${d}/${m}/${y}` : s
+}
+
 function bodyFatClass(bf: number, gender: string): string {
   if (gender === 'male') {
     if (bf < 10) return 'Atleta'
@@ -976,15 +990,15 @@ export default function App() {
             <div className="admin-list">
               {allProfiles.map((p) => (
                 <div className="admin-item" key={p.id}>
-                  <div>
+                  <div className="admin-head">
                     <strong>{p.fullName || '(sem nome)'}</strong>
-                    <div className="meta">{p.email || '(sem e-mail)'}</div>
+                    <span className="admin-email">{p.email || '—'}</span>
                   </div>
-                  <div className="admin-meta">
-                    {p.birth_date && <span>Nasc. {p.birth_date}</span>}
-                    {p.whatsapp && <span>{p.whatsapp}</span>}
-                    {p.city && <span>{p.city}{p.uf ? ` - ${p.uf}` : ''}</span>}
-                    {p.instagram && <span>@{p.instagram.replace(/^@/, '')}</span>}
+                  <div className="admin-fields">
+                    <div className="admin-field"><span className="admin-label">WhatsApp</span><span>{formatPhoneBr(p.whatsapp)}</span></div>
+                    <div className="admin-field"><span className="admin-label">Nascimento</span><span>{formatDateBr(p.birth_date)}</span></div>
+                    <div className="admin-field"><span className="admin-label">Cidade</span><span>{p.city ? `${p.city} - ${p.uf}` : '—'}</span></div>
+                    <div className="admin-field"><span className="admin-label">Instagram</span><span>{p.instagram ? `@${p.instagram.replace(/^@/, '')}` : '—'}</span></div>
                   </div>
                 </div>
               ))}

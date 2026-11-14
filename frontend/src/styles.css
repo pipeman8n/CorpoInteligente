@@ -203,14 +203,16 @@ table.result td small { color: var(--muted); font-size: 0.8rem; }
 .hist-actions { display: flex; gap: 8px; align-items: center; flex-shrink: 0; }
 
 /* Admin: lista de cadastros */
-.admin-item {
-  display: flex; align-items: flex-start; justify-content: space-between; gap: 14px;
-  padding: 16px 0; border-bottom: 1px solid var(--border); flex-wrap: wrap;
-}
+.admin-item { padding: 16px 0; border-bottom: 1px solid var(--border); }
 .admin-item:last-child { border-bottom: none; }
-.admin-item strong { font-size: 1rem; font-weight: 700; }
-.admin-item .meta { color: var(--muted); font-size: 0.82rem; }
-.admin-meta { display: flex; flex-direction: column; gap: 3px; text-align: right; font-size: 0.8rem; color: var(--muted); }
+.admin-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 10px; flex-wrap: wrap; }
+.admin-head strong { font-size: 1rem; font-weight: 700; }
+.admin-email { color: var(--muted); font-size: 0.82rem; overflow-wrap: anywhere; }
+.admin-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 7px 18px; }
+.admin-field { display: flex; justify-content: space-between; gap: 10px; font-size: 0.85rem; }
+.admin-field > span:last-child { color: var(--text); text-align: right; overflow-wrap: anywhere; }
+.admin-label { color: var(--muted); font-weight: 600; flex-shrink: 0; }
+@media (max-width: 480px) { .admin-fields { grid-template-columns: 1fr; } }
 
 .legal { color: var(--muted); font-size: 0.75rem; margin-top: 12px; }
 .footer { text-align: center; color: var(--muted); font-size: 0.78rem; padding: 28px 0 0; }
