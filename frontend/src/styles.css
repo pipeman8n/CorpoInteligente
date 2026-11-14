@@ -39,7 +39,8 @@ body {
 
 /* Top bar */
 .topbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 4px 0 20px; }
-.brand { font-size: 1.15rem; font-weight: 800; letter-spacing: -0.3px; }
+.brand { display: flex; align-items: center; gap: 9px; font-size: 1.15rem; font-weight: 800; letter-spacing: -0.3px; }
+.brand-mark { width: 30px; height: 30px; flex: none; border-radius: 7px; }
 .brand .shape { color: var(--accent); }
 .navlink {
   display: inline-flex; align-items: center; gap: 7px;
