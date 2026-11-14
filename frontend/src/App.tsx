@@ -102,7 +102,6 @@ function renderRaioX(md: string): string {
   }
   if (headers.length === 0 || rows.length === 0) return renderMarkdown(md)
 
-  const esc = (s: string) => s.replace(/"/g, '&quot;')
   const groups: { title: string; rows: string[][] }[] = []
   for (const row of rows) {
     const param = row[0] ?? ''
@@ -116,9 +115,18 @@ function renderRaioX(md: string): string {
   let html = ''
   for (const grp of groups) {
     html += `<h3 class="ai-group-title">${grp.title}</h3>`
-    html += `<table class="ai-table"><thead><tr>${headers.map((h) => `<th>${inline(h)}</th>`).join('')}</tr></thead><tbody>`
-    html += grp.rows.map((r) => `<tr>${r.map((c, i) => `<td data-label="${esc(headers[i] ?? '')}">${inline(c)}</td>`).join('')}</tr>`).join('')
-    html += `</tbody></table>`
+    for (const r of grp.rows) {
+      const param = r[0] ?? ''
+      const valor = r[1] ?? ''
+      const interp = r[2] ?? ''
+      const obs = r[3] ?? ''
+      html += `<div class="ai-param">`
+      html += `<div class="ai-param-name">${inline(param)}</div>`
+      if (valor) html += `<div class="ai-param-val">${inline(valor)}</div>`
+      if (interp) html += `<p class="ai-param-text">${inline(interp)}</p>`
+      if (obs) html += `<p class="ai-param-obs">${inline(obs)}</p>`
+      html += `</div>`
+    }
   }
   return html
 }
