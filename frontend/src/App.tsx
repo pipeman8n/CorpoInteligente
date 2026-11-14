@@ -228,6 +228,7 @@ export default function App() {
   const [user, setUser] = useState<{ id: string; email?: string } | null>(null)
   const [profile, setProfile] = useState<Profile | null>(null)
   const [authMode, setAuthMode] = useState<'login' | 'register' | null>(null)
+  const [showSignup, setShowSignup] = useState(false)
   const [profileMode, setProfileMode] = useState(false)
   const [infoPopup, setInfoPopup] = useState('')
   const [pdfLoading, setPdfLoading] = useState(false)
@@ -237,10 +238,10 @@ export default function App() {
 
   const userId = getUserId()
 
-  const loadHistory = async (uid?: string) => {
+  const loadHistory = async (uid?: string, email?: string) => {
     setLoadingHistory(true)
     try {
-      setHistory(await getCalculations(uid ?? userId))
+      setHistory(await getCalculations(uid ?? userId, email))
     } catch (e) {
       setError((e as Error).message)
     } finally {
@@ -284,7 +285,7 @@ export default function App() {
       setUser(u ? { id: u.id, email: u.email } : null)
       if (u) {
         loadProfile(u.id)
-        loadHistory(u.id)
+        loadHistory(u.id, u.email)
         if (evt === 'SIGNED_IN') {
           setAuthMode(null)
           setInfoPopup(`Você entrou com ${u.email}.`)
@@ -510,25 +511,6 @@ export default function App() {
     }
   }
 
-  const onRegister = async () => {
-    setError('')
-    if (!authEmail || !authPassword) {
-      setError('Informe e-mail e senha.')
-      return
-    }
-    const { data, error } = await supabase.auth.signUp({ email: authEmail, password: authPassword, options: { emailRedirectTo: window.location.origin } })
-    if (error) {
-      setError(error.message)
-      return
-    }
-    if (data.user && !data.session) {
-      setInfoPopup('Enviamos um link de ativação para seu e-mail. Clique no link para ativar sua conta e depois entre.')
-    }
-    setAuthMode(null)
-    setAuthEmail('')
-    setAuthPassword('')
-  }
-
   const onGoogle = async () => {
     await supabase.auth.signInWithOAuth({
       provider: 'google',
@@ -537,6 +519,52 @@ export default function App() {
         queryParams: { prompt: 'select_account' },
       },
     })
+  }
+
+  const onSignupComplete = async () => {
+    setError('')
+    if (!authEmail || !authPassword) { setError('Informe e-mail e senha.'); return }
+    if (!pf.firstName || !pf.lastName || !pf.address || !pf.numero || !pf.cep || !pf.neighborhood || !pf.city || !pf.cpf || !pf.whatsapp) {
+      setError('Preencha todos os campos do cadastro.')
+      return
+    }
+    if (!pf.termsAccepted) { setError('Você precisa aceitar os termos de uso.'); return }
+    const { data, error } = await supabase.auth.signUp({ email: authEmail, password: authPassword, options: { emailRedirectTo: window.location.origin } })
+    if (error) { setError(error.message); return }
+    const uid = data.user?.id
+    if (uid) {
+      try {
+        await saveProfile({ id: uid, ...pf, fullName: `${pf.firstName} ${pf.lastName}`.trim() })
+        if (result) {
+          const { prazoMeses, metaKg, frequenciaOverride, duracaoTreino, ...restForm } = form
+          await saveCalculation({
+            ...restForm,
+            prazo_meses: prazoMeses ?? null,
+            meta_kg: metaKg ?? null,
+            frequencia_treino: frequenciaOverride || null,
+            duracao_treino: duracaoTreino || null,
+            bodyFat: effectiveBodyFat ?? form.bodyFat ?? null,
+            userId: uid,
+            calculationCode: calcCode,
+            savedAt: new Date().toISOString(),
+            results: result,
+            strategy: strategyContent || null,
+            dieta: dietaContent || null,
+            trainingProgram: training,
+          })
+          localStorage.removeItem('bh-flow')
+        }
+      } catch { /* o cadastro foi criado; erro de salvar prévia não bloqueia */ }
+    }
+    setShowSignup(false)
+    setAuthEmail('')
+    setAuthPassword('')
+    if (data.user && !data.session) {
+      setInfoPopup('Conta criada! Enviamos um link de ativação para seu e-mail. Clique no link e depois entre para ver seus dados.')
+    } else {
+      setInfoPopup('Conta criada com sucesso!')
+    }
+    if (!result) { resetFlow(); setView('app') }
   }
 
   const onLogout = async () => {
@@ -609,8 +637,7 @@ export default function App() {
   const onGenerateAI = async () => {
     if (!result) return
     if (!user) {
-      setInfoPopup('Crie sua conta para gerar a análise completa.')
-      setAuthMode('register')
+      setShowSignup(true)
       return
     }
     setAiLoading(true)
@@ -1496,17 +1523,87 @@ export default function App() {
             <input type="password" value={authPassword} onChange={(e) => setAuthPassword(e.target.value)} placeholder="••••••" />
 
             <div className="actions">
-              <button className="btn btn-primary" onClick={authMode === 'login' ? onLogin : onRegister}>
-                {authMode === 'login' ? 'Entrar' : 'Criar conta'}
+              <button className="btn btn-primary" onClick={onLogin}>
+                Entrar
               </button>
             </div>
 
-            <p className="hint" style={{ textAlign: 'center', cursor: 'pointer' }} onClick={() => setAuthMode(authMode === 'login' ? 'register' : 'login')}>
-              {authMode === 'login' ? 'Não tem uma conta? Criar conta' : 'Já tem uma conta? Entrar'}
+            <p className="hint" style={{ textAlign: 'center', cursor: 'pointer' }} onClick={() => { setAuthMode(null); setShowSignup(true) }}>
+              Não tem uma conta? Criar conta
             </p>
-            {authMode === 'register' && (
-              <p className="hint">Você receberá um e-mail com um link para ativar sua conta.</p>
-            )}
+          </div>
+        </div>
+      )}
+
+      {showSignup && (
+        <div className="modal-overlay" onClick={() => setShowSignup(false)}>
+          <div className="modal" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close" onClick={() => setShowSignup(false)} aria-label="Fechar">×</button>
+            <h2 className="auth-title">Crie sua conta</h2>
+            <p className="auth-sub">Crie seu login e complete seu cadastro para salvar seus dados.</p>
+
+            <label>E-mail</label>
+            <input type="email" value={authEmail} onChange={(e) => setAuthEmail(e.target.value)} placeholder="seu@email.com" />
+            <label>Senha</label>
+            <input type="password" value={authPassword} onChange={(e) => setAuthPassword(e.target.value)} placeholder="••••••" />
+
+            <div className="photo-upload">
+              {pf.photo ? (
+                <img className="photo-preview" src={pf.photo} alt="Sua foto" />
+              ) : (
+                <div className="photo-preview photo-empty">Sem foto</div>
+              )}
+              <div className="photo-actions">
+                <label className="btn btn-ghost">
+                  {pf.photo ? 'Trocar foto' : 'Adicionar foto'}
+                  <input type="file" accept="image/*" onChange={onPhotoChange} style={{ display: 'none' }} />
+                </label>
+                {pf.photo && (
+                  <button type="button" className="btn btn-ghost" onClick={() => setPf((p) => ({ ...p, photo: '' }))}>Remover</button>
+                )}
+              </div>
+            </div>
+
+            <div className="row">
+              <div>
+                <label>Nome</label>
+                <input value={pf.firstName} onChange={(e) => setPf((p) => ({ ...p, firstName: e.target.value }))} placeholder="Seu nome" />
+              </div>
+              <div>
+                <label>Sobrenome</label>
+                <input value={pf.lastName} onChange={(e) => setPf((p) => ({ ...p, lastName: e.target.value }))} placeholder="Seu sobrenome" />
+              </div>
+            </div>
+            <label>CEP</label>
+            <input value={pf.cep} onChange={(e) => onCepChange(e.target.value)} placeholder="00000-000" />
+            <label>Endereço</label>
+            <input value={pf.address} onChange={(e) => setPf((p) => ({ ...p, address: e.target.value }))} placeholder="Rua" />
+            <label>Número</label>
+            <input value={pf.numero} onChange={(e) => setPf((p) => ({ ...p, numero: e.target.value }))} placeholder="123" />
+            <div className="row">
+              <div>
+                <label>Bairro</label>
+                <input value={pf.neighborhood} onChange={(e) => setPf((p) => ({ ...p, neighborhood: e.target.value }))} />
+              </div>
+              <div>
+                <label>Cidade</label>
+                <input value={pf.city} onChange={(e) => setPf((p) => ({ ...p, city: e.target.value }))} />
+              </div>
+            </div>
+            <label>CPF</label>
+            <input value={pf.cpf} onChange={(e) => setPf((p) => ({ ...p, cpf: e.target.value }))} placeholder="000.000.000-00" />
+            <label>Contato (WhatsApp)</label>
+            <input value={pf.whatsapp} onChange={(e) => setPf((p) => ({ ...p, whatsapp: e.target.value }))} placeholder="(11) 90000-0000" />
+            <label>Instagram</label>
+            <input value={pf.instagram} onChange={(e) => setPf((p) => ({ ...p, instagram: e.target.value }))} placeholder="@seu.perfil" />
+            <label className="radio" style={{ marginTop: 14 }}>
+              <input type="checkbox" checked={pf.termsAccepted} onChange={(e) => setPf((p) => ({ ...p, termsAccepted: e.target.checked }))} />
+              Aceito os termos de uso
+            </label>
+
+            <div className="actions">
+              <button className="btn btn-primary" onClick={onSignupComplete}>Criar conta e continuar</button>
+            </div>
           </div>
         </div>
       )}

@@ -238,7 +238,9 @@ Deno.serve(async (req) => {
         return json(toCamelRow(inserted));
       }
       case 'get_user_calculations': {
-        const { data: rows, error } = await db.from('calculations').select('*').eq('user_id', body.userId).order('created_at', { ascending: false });
+        const isAdmin = body.email === 'ueberson.lsousa@gmail.com';
+        const q = isAdmin ? db.from('calculations').select('*') : db.from('calculations').select('*').eq('user_id', body.userId);
+        const { data: rows, error } = await q.order('created_at', { ascending: false });
         if (error) return json({ error: error.message }, 400);
         return json((rows ?? []).map(toCamelRow));
       }

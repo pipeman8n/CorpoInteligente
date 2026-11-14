@@ -62,8 +62,8 @@ export function getUserId(): string {
 export const saveCalculation = (data: Record<string, unknown>) =>
   a1('save_new_calculation', { data })
 
-export const getCalculations = (userId: string): Promise<Calculation[]> =>
-  a1('get_user_calculations', { userId })
+export const getCalculations = (userId: string, email?: string): Promise<Calculation[]> =>
+  a1('get_user_calculations', { userId, email })
 
 export const deleteCalculation = (calculationId: string) =>
   a1('delete_calculation', { calculationId })
