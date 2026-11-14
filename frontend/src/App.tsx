@@ -831,11 +831,6 @@ export default function App() {
             </div>
             <div className="paths">
               <div className="path-card">
-                <h3>Quero me avaliar</h3>
-                <p>Descubra sua composição corporal e receba um plano de dieta e treino personalizado.</p>
-                <span className="path-link" onClick={() => { resetFlow(); setView('app') }}>Começar avaliação →</span>
-              </div>
-              <div className="path-card">
                 <h3>Sou profissional</h3>
                 <p>Monte o perfil do seu cliente, gere análises e roteiros, e receba novos alunos.</p>
                 <span className="path-link" onClick={() => setInfoPopup('Em breve você poderá criar seu perfil profissional e receber clientes.')}>Criar perfil profissional →</span>
