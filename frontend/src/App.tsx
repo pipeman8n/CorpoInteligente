@@ -347,7 +347,7 @@ export default function App() {
 
   // Título da aba dinâmico por tela
   useEffect(() => {
-    const base = 'Body & Health'
+    const base = 'Shape Informa'
     if (view === 'meus') document.title = `Meus Cálculos - ${base}`
     else if (view === 'cadastro') document.title = `Meu Cadastro - ${base}`
     else if (view === 'home') document.title = `${base} | Avaliação Corporal e Profissionais`
@@ -809,7 +809,7 @@ export default function App() {
   return (
     <div className="app">
       <div className="topbar">
-        <div className="brand">Body <b>&</b> Health</div>
+        <div className="brand"><span className="shape">Shape</span> Informa</div>
         <div>
           <button className={view === 'home' ? 'navlink active' : 'navlink'} onClick={() => setView('home')}>
             Início
@@ -1504,7 +1504,7 @@ export default function App() {
       )}
 
       <footer className="footer">
-        <p>© 2026 Body And Health. Todos os direitos reservados.</p>
+        <p>© 2026 Shape Informa. Todos os direitos reservados.</p>
         <p>
           Criado por{' '}
           <a href="https://www.linkedin.com/in/uebersonlsousa" target="_blank" rel="noopener noreferrer">
@@ -1710,7 +1710,7 @@ export default function App() {
               <input type="checkbox" checked={pf.termsAccepted} onChange={(e) => setPf((p) => ({ ...p, termsAccepted: e.target.checked }))} />
               Aceito os termos de uso
             </label>
-            <p className="hint">Ao usar o Body & Health você concorda com os termos de uso e a política de privacidade.</p>
+            <p className="hint">Ao usar o Shape Informa você concorda com os termos de uso e a política de privacidade.</p>
             <div className="actions">
               <button className="btn btn-primary" onClick={onSaveProfile}>{profile ? 'Salvar alterações' : 'Concluir cadastro'}</button>
             </div>
@@ -1804,7 +1804,7 @@ export default function App() {
 
       <div id="pdf-content" className="pdf-hidden" aria-hidden="true">
         <div style={{ fontFamily: 'Sora, sans-serif', color: '#111', fontSize: 13 }}>
-          <h1 style={{ fontSize: 22, margin: '0 0 4px' }}>Body & Health</h1>
+          <h1 style={{ fontSize: 22, margin: '0 0 4px' }}>Shape Informa</h1>
           <p style={{ color: '#555', margin: '0 0 16px' }}>Análise Corporal - {form.name}, {calcCode}, {new Date().toLocaleDateString('pt-BR')}</p>
           {result && (
             <>
