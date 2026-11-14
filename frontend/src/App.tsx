@@ -193,7 +193,8 @@ function dietaToMarkdown(plan: DietaPlan): string {
 
 export default function App() {
   const [view, setView] = useState<'app' | 'meus' | 'cadastro' | 'home' | 'hub'>('home')
-  const [step, setStep] = useState<1 | 2 | 3 | 4>(1)
+  const [step, setStep] = useState<1 | 2 | 3>(1)
+  const [resultTab, setResultTab] = useState<'analises' | 'dieta' | 'treinos'>('analises')
   const [form, setForm] = useState<ClientData>(emptyForm)
   const [result, setResult] = useState<RaioXResult | null>(null)
   const [calcCode, setCalcCode] = useState(genCode())
@@ -336,7 +337,7 @@ export default function App() {
 
   const set = (k: keyof ClientData, v: unknown) => setForm((f) => ({ ...f, [k]: v }))
 
-  const goToStep = (n: 1 | 2 | 3 | 4) => {
+  const goToStep = (n: 1 | 2 | 3) => {
     setError('')
     setStep(n)
     window.scrollTo({ top: 0 })
@@ -563,6 +564,11 @@ export default function App() {
 
   const onGenerateAI = async () => {
     if (!result) return
+    if (!user) {
+      setInfoPopup('Crie sua conta para gerar a análise completa.')
+      setAuthMode('register')
+      return
+    }
     setAiLoading(true)
     setAiContent('')
     setError('')
@@ -635,7 +641,7 @@ export default function App() {
       setError('Gere a Estratégia para Meta antes de criar o roteiro de treinos.')
       return
     }
-    goToStep(4)
+    setResultTab('treinos')
   }
 
   const onDelete = async (id: string) => {
@@ -677,6 +683,7 @@ export default function App() {
     setAiContent('')
     setView('app')
     setStep(3)
+    setResultTab('analises')
     setError('')
   }
 
@@ -809,7 +816,7 @@ export default function App() {
               <p>Plano alimentar com macros reais (TACO).</p>
               <span className="hub-open">Abrir</span>
             </button>
-            <button className="hub-card" onClick={() => { setView('app'); setStep(4) }}>
+            <button className="hub-card" onClick={() => { setView('app'); setStep(3); setResultTab('treinos') }}>
               <div className="hub-badge tr">T</div>
               <h3>Treinos</h3>
               <p>Divisão semanal com vídeos por exercício.</p>
@@ -840,14 +847,9 @@ export default function App() {
               <div className="step-label">Objetivo</div>
             </div>
             <div className={`line ${step > 2 ? 'fill' : ''}`} />
-            <div className={`step ${step === 3 ? 'now' : step > 3 ? 'done' : ''}`}>
+            <div className={`step ${step === 3 ? 'now' : ''}`}>
               <div className="dot">3</div>
               <div className="step-label">Resultado</div>
-            </div>
-            <div className={`line ${step > 3 ? 'fill' : ''}`} />
-            <div className={`step ${step === 4 ? 'now' : ''}`}>
-              <div className="dot">4</div>
-              <div className="step-label">Treino</div>
             </div>
           </div>
 
@@ -1007,10 +1009,6 @@ export default function App() {
               </select>
               <p className="hint">Sua rotina atual de exercícios (não o plano).</p>
 
-              <label>Restrições / alergias</label>
-              <input value={form.restrictions} onChange={(e) => set('restrictions', e.target.value)} placeholder="ex.: lactose, glúten" />
-              <p className="hint">Opcional. A IA considera isso na dieta.</p>
-
               <div className="actions">
                 <button className="btn btn-ghost" onClick={() => goToStep(1)}>Voltar</button>
                 <button className="btn btn-primary" onClick={onGenerate}>Continuar</button>
@@ -1084,6 +1082,14 @@ export default function App() {
                 </tbody>
               </table>
 
+              <div className="result-tabs">
+                <button className={`rtab${resultTab === 'analises' ? ' active' : ''}`} onClick={() => setResultTab('analises')}>Análises</button>
+                <button className={`rtab${resultTab === 'dieta' ? ' active' : ''}${aiContent ? '' : ' locked'}`} onClick={() => { if (aiContent) setResultTab('dieta') }}>Dieta</button>
+                <button className={`rtab${resultTab === 'treinos' ? ' active' : ''}${strategyContent ? '' : ' locked'}`} onClick={() => { if (strategyContent) setResultTab('treinos') }}>Treinos</button>
+              </div>
+
+              {resultTab === 'analises' && (
+              <>
               {/* Ato 1: engajar o cliente a entender o corpo a fundo */}
               {!aiContent && (
                 <div className="engage">
@@ -1139,13 +1145,20 @@ export default function App() {
                   <div dangerouslySetInnerHTML={{ __html: renderMarkdown(strategyContent) }} />
                 </div>
               )}
+              </>
+              )}
 
+              {resultTab === 'dieta' && (
+              <>
               {strategyContent && (
                 <div className="actions secondary">
                   <button className="btn btn-secondary" onClick={onGerarDieta} disabled={dietaLoading}>
                     {dietaLoading ? 'Gerando...' : 'Gerar Roteiro de Dieta'}
                   </button>
                 </div>
+              )}
+              {!strategyContent && (
+                <p className="hint">Gere a Estratégia para Meta para liberar a dieta.</p>
               )}
 
               {dietaContent && (
@@ -1155,6 +1168,7 @@ export default function App() {
                 </div>
               )}
 
+              {dietaContent && (
               <div className="alimento-search">
                 <h4 className="alimento-search-title">Buscar alimento (TACO — composição oficial)</h4>
                 <div className="alimento-search-row">
@@ -1183,27 +1197,13 @@ export default function App() {
                   </div>
                 )}
               </div>
-
-              <div className="actions">
-                <button className="btn btn-ghost" onClick={() => goToStep(2)}>Voltar</button>
-                <button className="btn btn-primary" onClick={onGoToTraining} disabled={!strategyContent}>
-                  3 Criar roteiro de treinos
-                </button>
-              </div>
-              {aiContent && !strategyContent && (
-                <p className="hint">Gere a Estratégia para Meta para liberar o roteiro de treinos.</p>
+              )}
+              </>
               )}
 
-              <p className="legal">
-                * Resultados gerados a partir de fórmulas padrão. Consulte um nutricionista ou médico antes de iniciar qualquer dieta.
-              </p>
-            </div>
-          )}
-
-          {step === 4 && (
-            <div className="card">
-              <h1>Divisão de Treino</h1>
-              <p className="lede">O plano semanal de treino do cliente, exercício a exercício.</p>
+              {resultTab === 'treinos' && (
+              <>
+              <h3 className="ai-title">Divisão de Treino</h3>
 
               <p className="hint">
                 Frequência de treino calculada: <strong>{trainingDays(form.activityLevel, form.frequenciaOverride)}x/semana</strong>
@@ -1308,13 +1308,20 @@ export default function App() {
                 </button>
               </div>
               {savedMsg && <div className="ok">{savedMsg}</div>}
+              </>
+              )}
 
               <div className="actions">
-                <button className="btn btn-ghost" onClick={() => goToStep(3)}>Voltar</button>
+                <button className="btn btn-ghost" onClick={() => goToStep(2)}>Voltar</button>
               </div>
+
+              <p className="legal">
+                * Resultados gerados a partir de fórmulas padrão. Consulte um nutricionista ou médico antes de iniciar qualquer dieta.
+              </p>
             </div>
           )}
-        </>
+
+                  </>
       )}
 
       {view === 'meus' && (
@@ -1511,14 +1518,12 @@ export default function App() {
           <div className="modal" onClick={(e) => e.stopPropagation()}>
             <button className="modal-close" onClick={() => setShowRestricao(false)} aria-label="Fechar">×</button>
             <h3>Verificação de Restrições / Alergias</h3>
-            <p className="auth-sub">
-              {form.restrictions && form.restrictions.trim()
-                ? <>Restrições registradas do cliente: <strong>{form.restrictions}</strong></>
-                : <>O cliente <strong>não possui restrições/alergias</strong> registradas.</>}
-            </p>
-            <p className="hint">Essas restrições serão respeitadas na geração do roteiro nutricional.</p>
+            <p className="auth-sub">Informe as restrições do cliente para que a dieta as respeite.</p>
+            <label>Restrições / alergias</label>
+            <input value={form.restrictions} onChange={(e) => set('restrictions', e.target.value)} placeholder="ex.: lactose, glúten, amendoim" />
+            <p className="hint">Deixe em branco se o cliente não tiver restrições.</p>
             <div className="actions">
-              <button className="btn btn-ghost" onClick={() => { setShowRestricao(false); goToStep(2) }}>Editar restrições</button>
+              <button className="btn btn-ghost" onClick={() => setShowRestricao(false)}>Cancelar</button>
               <button className="btn btn-primary" onClick={() => { setShowRestricao(false); setShowCaneta(true) }}>Confirmar e continuar</button>
             </div>
           </div>
