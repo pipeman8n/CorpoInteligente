@@ -821,7 +821,18 @@ export default function App() {
               <button className="btn btn-primary" onClick={() => { resetFlow(); setView('app') }}>Avaliar meu corpo</button>
               <button className="btn btn-ghost" onClick={() => setAuthMode('login')}>Entrar</button>
             </div>
-            <p className="pro-link">É profissional? Em breve você poderá criar seu perfil e receber clientes.</p>
+            <div className="paths">
+              <div className="path-card">
+                <h3>Quero me avaliar</h3>
+                <p>Descubra sua composição corporal e receba um plano de dieta e treino personalizado.</p>
+                <span className="path-link" onClick={() => { resetFlow(); setView('app') }}>Começar avaliação →</span>
+              </div>
+              <div className="path-card">
+                <h3>Sou profissional</h3>
+                <p>Monte o perfil do seu cliente, gere análises e roteiros, e receba novos alunos.</p>
+                <span className="path-link" onClick={() => setInfoPopup('Em breve você poderá criar seu perfil profissional e receber clientes.')}>Criar perfil profissional →</span>
+              </div>
+            </div>
           </div>
 
           <div className="pro-section">
@@ -840,7 +851,7 @@ export default function App() {
                 </div>
                 <p className="pro-spec">Emagrecimento e reeducação alimentar. Atende presencial e online.</p>
                 <div className="pro-meta"><span>4,9 (120 avaliações)</span><b>R$ 180/sessão</b></div>
-                <div className="pro-cta">Ver perfil</div>
+                <div className="pro-soon">Perfil completo em breve</div>
               </div>
               <div className="pro-card">
                 <div className="pro-top">
@@ -852,7 +863,7 @@ export default function App() {
                 </div>
                 <p className="pro-spec">Hipertrofia e performance. Treinos presenciais em SP.</p>
                 <div className="pro-meta"><span>4,8 (96 avaliações)</span><b>R$ 120/sessão</b></div>
-                <div className="pro-cta">Ver perfil</div>
+                <div className="pro-soon">Perfil completo em breve</div>
               </div>
               <div className="pro-card">
                 <div className="pro-top">
@@ -864,7 +875,7 @@ export default function App() {
                 </div>
                 <p className="pro-spec">Performance e hipertrofia. Consultas online.</p>
                 <div className="pro-meta"><span>5,0 (74 avaliações)</span><b>R$ 220/sessão</b></div>
-                <div className="pro-cta">Ver perfil</div>
+                <div className="pro-soon">Perfil completo em breve</div>
               </div>
             </div>
           </div>
@@ -905,7 +916,7 @@ export default function App() {
       {view === 'app' && (
         <>
           {step === 1 && (
-            <p className="hero-tagline">Saiba como está sua composição corporal, avalie seus resultados e customize seus treinos e sua dieta para o seu dia a dia.</p>
+            <p className="hero-tagline">Avalie a composição corporal, gere o plano de dieta e o treino personalizado.</p>
           )}
 
           <div className="stepper">
@@ -1757,7 +1768,7 @@ export default function App() {
         </div>
       )}
 
-      <div id="pdf-content" className="pdf-hidden">
+      <div id="pdf-content" className="pdf-hidden" aria-hidden="true">
         <div style={{ fontFamily: 'Sora, sans-serif', color: '#111', fontSize: 13 }}>
           <h1 style={{ fontSize: 22, margin: '0 0 4px' }}>Body & Health</h1>
           <p style={{ color: '#555', margin: '0 0 16px' }}>Análise Corporal - {form.name}, {calcCode}, {new Date().toLocaleDateString('pt-BR')}</p>
