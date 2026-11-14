@@ -541,6 +541,27 @@ export default function App() {
     })
   }
 
+  // Salva a prévia/análise atual (form + results + estratégia/dieta/treino) para o usuário
+  const saveCurrentCalculation = async (uid: string) => {
+    if (!result) return
+    const { prazoMeses, metaKg, frequenciaOverride, duracaoTreino, ...restForm } = form
+    await saveCalculation({
+      ...restForm,
+      prazo_meses: prazoMeses ?? null,
+      meta_kg: metaKg ?? null,
+      frequencia_treino: frequenciaOverride || null,
+      duracao_treino: duracaoTreino || null,
+      bodyFat: effectiveBodyFat ?? form.bodyFat ?? null,
+      userId: uid,
+      calculationCode: calcCode,
+      savedAt: new Date().toISOString(),
+      results: result,
+      strategy: strategyContent || null,
+      dieta: dietaContent || null,
+      trainingProgram: training,
+    })
+  }
+
   const onSignupComplete = async () => {
     setError('')
     if (!authEmail || !authPassword) { setError('Informe e-mail e senha.'); return }
@@ -559,25 +580,8 @@ export default function App() {
       try {
         const { firstName, lastName, ...restPf } = pf
         await saveProfile({ id: uid, ...restPf, fullName: `${firstName} ${lastName}`.trim() })
-        if (result) {
-          const { prazoMeses, metaKg, frequenciaOverride, duracaoTreino, ...restForm } = form
-          await saveCalculation({
-            ...restForm,
-            prazo_meses: prazoMeses ?? null,
-            meta_kg: metaKg ?? null,
-            frequencia_treino: frequenciaOverride || null,
-            duracao_treino: duracaoTreino || null,
-            bodyFat: effectiveBodyFat ?? form.bodyFat ?? null,
-            userId: uid,
-            calculationCode: calcCode,
-            savedAt: new Date().toISOString(),
-            results: result,
-            strategy: strategyContent || null,
-            dieta: dietaContent || null,
-            trainingProgram: training,
-          })
-          localStorage.removeItem('bh-flow')
-        }
+        await saveCurrentCalculation(uid)
+        localStorage.removeItem('bh-flow')
       } catch { /* o cadastro foi criado; erro de salvar prévia não bloqueia */ }
     }
     setShowSignup(false)
@@ -653,6 +657,8 @@ export default function App() {
       const saved = await saveProfile({ id: user.id, ...restPf, fullName: `${firstName} ${lastName}`.trim() })
       setProfile(saved)
       setProfileMode(false)
+      await saveCurrentCalculation(user.id)
+      localStorage.removeItem('bh-flow')
       setInfoPopup('Cadastro concluído!')
     } catch (e) {
       setError((e as Error).message)
