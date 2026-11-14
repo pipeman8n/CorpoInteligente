@@ -192,7 +192,7 @@ function dietaToMarkdown(plan: DietaPlan): string {
 }
 
 export default function App() {
-  const [view, setView] = useState<'app' | 'meus' | 'cadastro'>('app')
+  const [view, setView] = useState<'app' | 'meus' | 'cadastro' | 'home' | 'hub'>('home')
   const [step, setStep] = useState<1 | 2 | 3 | 4>(1)
   const [form, setForm] = useState<ClientData>(emptyForm)
   const [result, setResult] = useState<RaioXResult | null>(null)
@@ -328,6 +328,8 @@ export default function App() {
     const base = 'Body & Health'
     if (view === 'meus') document.title = `Meus Cálculos - ${base}`
     else if (view === 'cadastro') document.title = `Meu Cadastro - ${base}`
+    else if (view === 'home') document.title = `${base} | Avaliação Corporal e Profissionais`
+    else if (view === 'hub') document.title = `${base} | Meu Painel`
     else if (step >= 3) document.title = `${base} | Análise`
     else document.title = `${base} | Análise Corporal Prévia`
   }, [view, step])
@@ -700,8 +702,14 @@ export default function App() {
       <div className="topbar">
         <div className="brand">Body <b>&</b> Health</div>
         <div>
+          <button className={view === 'home' ? 'navlink active' : 'navlink'} onClick={() => setView('home')}>
+            Início
+          </button>
           <button className={view === 'app' ? 'navlink active' : 'navlink'} onClick={() => setView('app')}>
             Calculadora
+          </button>
+          <button className={view === 'hub' ? 'navlink active' : 'navlink'} onClick={() => setView('hub')}>
+            Painel
           </button>
           <button className={view === 'meus' ? 'navlink active' : 'navlink'} onClick={() => setView('meus')}>
             Meus Cálculos {history.length > 0 && <span className="badge">{history.length}</span>}
@@ -724,6 +732,96 @@ export default function App() {
       </div>
 
       {error && <div className="error">{error}</div>}
+
+      {view === 'home' && (
+        <>
+          <div className="home-hero">
+            <h1>Conheça seu corpo.<br />Conecte-se a <span>quem entende</span>.</h1>
+            <p>Faça sua avaliação corporal gratuita e, se quiser acompanhamento, encontre um personal ou nutricionista que combina com seu objetivo.</p>
+            <div className="home-cta">
+              <button className="btn btn-primary" onClick={() => setView('app')}>Avaliar meu corpo</button>
+              <button className="btn btn-ghost" onClick={() => setAuthMode('login')}>Entrar</button>
+            </div>
+            <p className="pro-link">É profissional? Em breve você poderá criar seu perfil e receber clientes.</p>
+          </div>
+
+          <div className="pro-section">
+            <div className="pro-head">
+              <h2>Profissionais perto de você</h2>
+              <span className="pro-ver">Prévia</span>
+            </div>
+            <div className="pro-grid">
+              <div className="pro-card">
+                <div className="pro-top">
+                  <div className="ava a1">CR</div>
+                  <div>
+                    <div className="pro-nm">Camila Rocha</div>
+                    <div className="pro-cred">Nutricionista, CRN 6-43210</div>
+                  </div>
+                </div>
+                <p className="pro-spec">Emagrecimento e reeducação alimentar. Atende presencial e online.</p>
+                <div className="pro-meta"><span>4,9 (120 avaliações)</span><b>R$ 180/sessão</b></div>
+                <div className="pro-cta">Ver perfil</div>
+              </div>
+              <div className="pro-card">
+                <div className="pro-top">
+                  <div className="ava a2">RT</div>
+                  <div>
+                    <div className="pro-nm">Rafael Tavares</div>
+                    <div className="pro-cred">Personal, CREF 045678-G/SP</div>
+                  </div>
+                </div>
+                <p className="pro-spec">Hipertrofia e performance. Treinos presenciais em SP.</p>
+                <div className="pro-meta"><span>4,8 (96 avaliações)</span><b>R$ 120/sessão</b></div>
+                <div className="pro-cta">Ver perfil</div>
+              </div>
+              <div className="pro-card">
+                <div className="pro-top">
+                  <div className="ava a3">BN</div>
+                  <div>
+                    <div className="pro-nm">Beatriz Nunes</div>
+                    <div className="pro-cred">Nutricionista esportiva, CRN 3-98120</div>
+                  </div>
+                </div>
+                <p className="pro-spec">Performance e hipertrofia. Consultas online.</p>
+                <div className="pro-meta"><span>5,0 (74 avaliações)</span><b>R$ 220/sessão</b></div>
+                <div className="pro-cta">Ver perfil</div>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
+
+      {view === 'hub' && (
+        <div className="card">
+          <p className="lede">{result ? `Painel de ${form.name}` : 'Seu painel'}</p>
+          <h1>Seu plano completo</h1>
+          <div className="hub-grid">
+            <button className="hub-card" onClick={() => { setView('app'); setStep(3) }}>
+              <div className="hub-badge an">A</div>
+              <h3>Análises</h3>
+              <p>Composição corporal, metabolismo e hormônios.</p>
+              <span className="hub-open">Abrir</span>
+            </button>
+            <button className="hub-card" onClick={() => { setView('app'); setStep(3) }}>
+              <div className="hub-badge di">D</div>
+              <h3>Dieta</h3>
+              <p>Plano alimentar com macros reais (TACO).</p>
+              <span className="hub-open">Abrir</span>
+            </button>
+            <button className="hub-card" onClick={() => { setView('app'); setStep(4) }}>
+              <div className="hub-badge tr">T</div>
+              <h3>Treinos</h3>
+              <p>Divisão semanal com vídeos por exercício.</p>
+              <span className="hub-open">Abrir</span>
+            </button>
+          </div>
+          <div className="hub-banner">
+            <div><b>Quer acompanhamento de verdade?</b><span>Conecte-se a um personal ou nutricionista que entende seu plano.</span></div>
+            <button className="btn btn-primary" onClick={() => setView('home')}>Encontrar profissional</button>
+          </div>
+        </div>
+      )}
 
       {view === 'app' && (
         <>
