@@ -141,6 +141,7 @@ export interface Profile {
   cpf: string
   whatsapp: string
   instagram: string
+  photo: string | null
   termsAccepted: boolean
 }
 
