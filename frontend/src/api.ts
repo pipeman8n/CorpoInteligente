@@ -151,3 +151,18 @@ export const saveProfile = (data: Record<string, unknown>): Promise<Profile> =>
 
 export const getProfile = (id: string): Promise<Profile | null> =>
   a1('get_profile', { id })
+
+export interface AdminProfile {
+  id: string
+  fullName: string
+  email?: string | null
+  birth_date?: string | null
+  whatsapp?: string
+  city?: string
+  uf?: string
+  instagram?: string
+  created_at?: string
+}
+
+export const getAllProfiles = (): Promise<AdminProfile[]> =>
+  a1('get_all_profiles', {})
