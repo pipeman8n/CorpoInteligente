@@ -18,6 +18,7 @@ import {
   generateRaioX,
   saveProfile,
   getProfile,
+  getAllProfiles,
   generateDieta,
   searchAlimentos,
   type Calculation,
@@ -25,12 +26,15 @@ import {
   type Profile,
   type Alimento,
   type DietaPlan,
+  type AdminProfile,
 } from './api'
 import { EXERCISE_CATALOG, type CatalogExercise } from './exerciseCatalog'
 import { buildTrainingProgram } from './trainingPlan'
 import { buildStrategy } from './strategyPlan'
 import { buildDietaMacros, CANETA_DOSES, CANETA_LABELS, type CanetaInfo, type CanetaSubstancia, type CanetaCiclo } from './dietaPlan'
 import { supabase } from './supabase'
+
+const ADMIN_EMAIL = 'ueberson.lsousa@gmail.com'
 
 // Renderizador mínimo de markdown (tabela + negrito) para a saída da IA
 function inline(s: string): string {
@@ -200,7 +204,7 @@ function dietaToMarkdown(plan: DietaPlan): string {
 }
 
 export default function App() {
-  const [view, setView] = useState<'app' | 'meus' | 'cadastro' | 'home' | 'hub'>('home')
+  const [view, setView] = useState<'app' | 'meus' | 'cadastro' | 'home' | 'hub' | 'admin'>('home')
   const [step, setStep] = useState<1 | 2 | 3>(1)
   const [resultTab, setResultTab] = useState<'analises' | 'dieta' | 'treinos'>('analises')
   const [form, setForm] = useState<ClientData>(emptyForm)
@@ -235,6 +239,8 @@ export default function App() {
   const [visits, setVisits] = useState<number | null>(null)
   const [user, setUser] = useState<{ id: string; email?: string } | null>(null)
   const [profile, setProfile] = useState<Profile | null>(null)
+  const [allProfiles, setAllProfiles] = useState<AdminProfile[]>([])
+  const [adminLoading, setAdminLoading] = useState(false)
   const [authMode, setAuthMode] = useState<'login' | 'register' | null>(null)
   const [showSignup, setShowSignup] = useState(false)
   const [profileMode, setProfileMode] = useState(false)
@@ -245,6 +251,17 @@ export default function App() {
   const [pf, setPf] = useState({ firstName: '', lastName: '', address: '', numero: '', cep: '', neighborhood: '', city: '', uf: '', cpf: '', whatsapp: '', instagram: '', photo: '', birthDate: '', termsAccepted: false })
 
   const userId = getUserId()
+
+  const loadAllProfiles = async () => {
+    setAdminLoading(true)
+    try {
+      setAllProfiles(await getAllProfiles())
+    } catch (e) {
+      setError((e as Error).message)
+    } finally {
+      setAdminLoading(false)
+    }
+  }
 
   const loadHistory = async (uid?: string, email?: string) => {
     setLoadingHistory(true)
@@ -352,6 +369,7 @@ export default function App() {
     else if (view === 'cadastro') document.title = `Meu Cadastro - ${base}`
     else if (view === 'home') document.title = `${base} | Avaliação Corporal e Profissionais`
     else if (view === 'hub') document.title = `${base} | Meu Painel`
+    else if (view === 'admin') document.title = `Cadastros - ${base}`
     else if (step >= 3) document.title = `${base} | Análise`
     else document.title = `${base} | Análise Corporal Prévia`
   }, [view, step])
@@ -825,6 +843,11 @@ export default function App() {
           <button className={view === 'meus' ? 'navlink active' : 'navlink'} onClick={() => setView('meus')}>
             Meus Cálculos {history.length > 0 && <span className="badge">{history.length}</span>}
           </button>
+          {user?.email === ADMIN_EMAIL && (
+            <button className={view === 'admin' ? 'navlink active' : 'navlink'} onClick={() => { setView('admin'); loadAllProfiles() }}>
+              Cadastros
+            </button>
+          )}
           {user ? (
             <>
               <button className="navlink user-chip" onClick={() => { if (profile) setView('cadastro'); else setProfileMode(true) }} title="Meu Cadastro">
@@ -938,6 +961,35 @@ export default function App() {
             <div><b>Quer acompanhamento de verdade?</b><span>Conecte-se a um personal ou nutricionista que entende seu plano.</span></div>
             <button className="btn btn-primary" onClick={() => setView('home')}>Encontrar profissional</button>
           </div>
+        </div>
+      )}
+
+      {view === 'admin' && (
+        <div className="card">
+          <h1>Cadastros</h1>
+          <p className="lede">Todos os usuários cadastrados no ShapeInForma ({allProfiles.length}).</p>
+          {adminLoading ? (
+            <div className="skeleton skeleton-row" />
+          ) : allProfiles.length === 0 ? (
+            <p className="placeholder">Nenhum cadastro ainda.</p>
+          ) : (
+            <div className="admin-list">
+              {allProfiles.map((p) => (
+                <div className="admin-item" key={p.id}>
+                  <div>
+                    <strong>{p.fullName || '(sem nome)'}</strong>
+                    <div className="meta">{p.email || '(sem e-mail)'}</div>
+                  </div>
+                  <div className="admin-meta">
+                    {p.birth_date && <span>Nasc. {p.birth_date}</span>}
+                    {p.whatsapp && <span>{p.whatsapp}</span>}
+                    {p.city && <span>{p.city}{p.uf ? ` - ${p.uf}` : ''}</span>}
+                    {p.instagram && <span>@{p.instagram.replace(/^@/, '')}</span>}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       )}
 

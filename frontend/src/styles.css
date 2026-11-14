@@ -202,6 +202,16 @@ table.result td small { color: var(--muted); font-size: 0.8rem; }
 .btn-del:hover { background: var(--danger-soft); border-color: var(--danger); }
 .hist-actions { display: flex; gap: 8px; align-items: center; flex-shrink: 0; }
 
+/* Admin: lista de cadastros */
+.admin-item {
+  display: flex; align-items: flex-start; justify-content: space-between; gap: 14px;
+  padding: 16px 0; border-bottom: 1px solid var(--border); flex-wrap: wrap;
+}
+.admin-item:last-child { border-bottom: none; }
+.admin-item strong { font-size: 1rem; font-weight: 700; }
+.admin-item .meta { color: var(--muted); font-size: 0.82rem; }
+.admin-meta { display: flex; flex-direction: column; gap: 3px; text-align: right; font-size: 0.8rem; color: var(--muted); }
+
 .legal { color: var(--muted); font-size: 0.75rem; margin-top: 12px; }
 .footer { text-align: center; color: var(--muted); font-size: 0.78rem; padding: 28px 0 0; }
 .footer p { margin: 5px 0; }

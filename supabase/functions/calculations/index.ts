@@ -264,6 +264,16 @@ Deno.serve(async (req) => {
         if (error) return json({ error: error.message }, 400);
         return json(row ? toCamelRow(row) : null);
       }
+      case 'get_all_profiles': {
+        const { data: profiles, error } = await db.from('profiles').select('*').order('created_at', { ascending: false });
+        if (error) return json({ error: error.message }, 400);
+        const emailById: Record<string, string> = {};
+        try {
+          const { data: users } = await supabase.auth.admin.listUsers({ page: 1, perPage: 1000 });
+          for (const u of (users?.users ?? [])) emailById[u.id] = u.email ?? '';
+        } catch { /* e-mail opcional */ }
+        return json((profiles ?? []).map((p: any) => ({ ...toCamelRow(p), email: emailById[p.id] ?? null })));
+      }
       case 'generate_raio_x': {
         const content = await callDeepSeek(buildRaioXPrompt(body.data ?? {}));
         return json({ content });
