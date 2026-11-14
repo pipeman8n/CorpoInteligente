@@ -809,7 +809,7 @@ export default function App() {
   return (
     <div className="app">
       <div className="topbar">
-        <div className="brand"><span className="shape">Shape</span> Informa</div>
+        <div className="brand"><img className="brand-mark" src="/favicon.svg" alt="Shape Informa" /><span><span className="shape">Shape</span> Informa</span></div>
         <div>
           <button className={view === 'home' ? 'navlink active' : 'navlink'} onClick={() => setView('home')}>
             Início
