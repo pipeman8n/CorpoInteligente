@@ -233,7 +233,7 @@ export default function App() {
   const [pdfLoading, setPdfLoading] = useState(false)
   const [authEmail, setAuthEmail] = useState('')
   const [authPassword, setAuthPassword] = useState('')
-  const [pf, setPf] = useState({ fullName: '', address: '', numero: '', cep: '', neighborhood: '', city: '', uf: '', cpf: '', whatsapp: '', instagram: '', photo: '', termsAccepted: false })
+  const [pf, setPf] = useState({ firstName: '', lastName: '', address: '', numero: '', cep: '', neighborhood: '', city: '', uf: '', cpf: '', whatsapp: '', instagram: '', photo: '', termsAccepted: false })
 
   const userId = getUserId()
 
@@ -253,7 +253,7 @@ export default function App() {
       const p = await getProfile(id)
       setProfile(p)
       if (p) {
-        setPf({ fullName: p.fullName || '', address: p.address || '', numero: p.numero || '', cep: p.cep || '', neighborhood: p.neighborhood || '', city: p.city || '', uf: p.uf || '', cpf: p.cpf || '', whatsapp: p.whatsapp || '', instagram: p.instagram || '', photo: p.photo || '', termsAccepted: p.termsAccepted })
+        setPf({ firstName: (p.fullName || '').split(' ')[0] || '', lastName: (p.fullName || '').split(' ').slice(1).join(' ') || '', address: p.address || '', numero: p.numero || '', cep: p.cep || '', neighborhood: p.neighborhood || '', city: p.city || '', uf: p.uf || '', cpf: p.cpf || '', whatsapp: p.whatsapp || '', instagram: p.instagram || '', photo: p.photo || '', termsAccepted: p.termsAccepted })
       }
     } catch {
       setProfile(null)
@@ -588,7 +588,7 @@ export default function App() {
   const onSaveProfile = async () => {
     setError('')
     if (!user) return
-    if (!pf.fullName || !pf.address || !pf.numero || !pf.cep || !pf.neighborhood || !pf.city || !pf.cpf || !pf.whatsapp) {
+    if (!pf.firstName || !pf.lastName || !pf.address || !pf.numero || !pf.cep || !pf.neighborhood || !pf.city || !pf.cpf || !pf.whatsapp) {
       setError('Preencha todos os campos do cadastro.')
       return
     }
@@ -597,7 +597,7 @@ export default function App() {
       return
     }
     try {
-      const saved = await saveProfile({ id: user.id, ...pf })
+      const saved = await saveProfile({ id: user.id, ...pf, fullName: `${pf.firstName} ${pf.lastName}`.trim() })
       setProfile(saved)
       setProfileMode(false)
       setInfoPopup('Cadastro concluído!')
@@ -1422,7 +1422,7 @@ export default function App() {
                 <p><strong>Cidade:</strong> {profile.city}{profile.uf ? ` - ${profile.uf}` : ''}</p>
                 <p><strong>CPF:</strong> {profile.cpf}</p>
                 <p><strong>WhatsApp:</strong> {profile.whatsapp}</p>
-                {profile.instagram && <p><strong>Instagram:</strong> @{profile.instagram.replace(/^@/, '')}</p>}
+                {profile.instagram && <p><strong>Instagram:</strong> <a href={`https://instagram.com/${profile.instagram.replace(/^@/, '')}`} target="_blank" rel="noopener noreferrer">@{profile.instagram.replace(/^@/, '')}</a></p>}
               </div>
               <div className="actions">
                 <button className="btn btn-primary" onClick={() => setProfileMode(true)}>Editar cadastro</button>
@@ -1532,8 +1532,16 @@ export default function App() {
                 )}
               </div>
             </div>
-            <label>Nome completo</label>
-            <input value={pf.fullName} onChange={(e) => setPf((p) => ({ ...p, fullName: e.target.value }))} placeholder="Seu nome completo" />
+            <div className="row">
+              <div>
+                <label>Nome</label>
+                <input value={pf.firstName} onChange={(e) => setPf((p) => ({ ...p, firstName: e.target.value }))} placeholder="Seu nome" />
+              </div>
+              <div>
+                <label>Sobrenome</label>
+                <input value={pf.lastName} onChange={(e) => setPf((p) => ({ ...p, lastName: e.target.value }))} placeholder="Seu sobrenome" />
+              </div>
+            </div>
             <label>CEP</label>
             <input value={pf.cep} onChange={(e) => onCepChange(e.target.value)} placeholder="00000-000" />
             <label>Endereço</label>
