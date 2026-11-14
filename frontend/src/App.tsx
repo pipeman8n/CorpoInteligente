@@ -544,17 +544,21 @@ export default function App() {
   const onSignupComplete = async () => {
     setError('')
     if (!authEmail || !authPassword) { setError('Informe e-mail e senha.'); return }
-    if (!pf.firstName || !pf.lastName || !pf.address || !pf.numero || !pf.cep || !pf.neighborhood || !pf.city || !pf.cpf || !pf.whatsapp) {
-      setError('Preencha todos os campos do cadastro.')
+    if (!pf.firstName || !pf.lastName || !pf.address || !pf.numero || !pf.cep || !pf.neighborhood || !pf.city || !pf.whatsapp) {
+      setError('Preencha os campos obrigatórios do cadastro.')
       return
     }
-    if (!pf.termsAccepted) { setError('Você precisa aceitar os termos de uso.'); return }
+    if (!pf.termsAccepted) {
+      setError('Você precisa aceitar os termos de uso.')
+      return
+    }
     const { data, error } = await supabase.auth.signUp({ email: authEmail, password: authPassword, options: { emailRedirectTo: window.location.origin } })
     if (error) { setError(error.message); return }
     const uid = data.user?.id
     if (uid) {
       try {
-        await saveProfile({ id: uid, ...pf, fullName: `${pf.firstName} ${pf.lastName}`.trim() })
+        const { firstName, lastName, ...restPf } = pf
+        await saveProfile({ id: uid, ...restPf, fullName: `${firstName} ${lastName}`.trim() })
         if (result) {
           const { prazoMeses, metaKg, frequenciaOverride, duracaoTreino, ...restForm } = form
           await saveCalculation({
@@ -636,8 +640,8 @@ export default function App() {
   const onSaveProfile = async () => {
     setError('')
     if (!user) return
-    if (!pf.firstName || !pf.lastName || !pf.address || !pf.numero || !pf.cep || !pf.neighborhood || !pf.city || !pf.cpf || !pf.whatsapp) {
-      setError('Preencha todos os campos do cadastro.')
+    if (!pf.firstName || !pf.lastName || !pf.address || !pf.numero || !pf.cep || !pf.neighborhood || !pf.city || !pf.whatsapp) {
+      setError('Preencha os campos obrigatórios do cadastro.')
       return
     }
     if (!pf.termsAccepted) {
@@ -645,7 +649,8 @@ export default function App() {
       return
     }
     try {
-      const saved = await saveProfile({ id: user.id, ...pf, fullName: `${pf.firstName} ${pf.lastName}`.trim() })
+      const { firstName, lastName, ...restPf } = pf
+      const saved = await saveProfile({ id: user.id, ...restPf, fullName: `${firstName} ${lastName}`.trim() })
       setProfile(saved)
       setProfileMode(false)
       setInfoPopup('Cadastro concluído!')
@@ -1624,11 +1629,11 @@ export default function App() {
                 <input value={pf.city} onChange={(e) => setPf((p) => ({ ...p, city: e.target.value }))} />
               </div>
             </div>
-            <label>CPF</label>
+            <label>CPF (opcional)</label>
             <input value={pf.cpf} onChange={(e) => setPf((p) => ({ ...p, cpf: e.target.value }))} placeholder="000.000.000-00" />
             <label>Contato (WhatsApp)</label>
             <input value={pf.whatsapp} onChange={(e) => setPf((p) => ({ ...p, whatsapp: e.target.value }))} placeholder="(11) 90000-0000" />
-            <label>Instagram</label>
+            <label>Instagram (opcional)</label>
             <input value={pf.instagram} onChange={(e) => setPf((p) => ({ ...p, instagram: e.target.value }))} placeholder="@seu.perfil" />
             <label className="radio" style={{ marginTop: 14 }}>
               <input type="checkbox" checked={pf.termsAccepted} onChange={(e) => setPf((p) => ({ ...p, termsAccepted: e.target.checked }))} />
@@ -1689,11 +1694,11 @@ export default function App() {
                 <input value={pf.city} onChange={(e) => setPf((p) => ({ ...p, city: e.target.value }))} />
               </div>
             </div>
-            <label>CPF</label>
+            <label>CPF (opcional)</label>
             <input value={pf.cpf} onChange={(e) => setPf((p) => ({ ...p, cpf: e.target.value }))} placeholder="000.000.000-00" />
             <label>Contato (WhatsApp)</label>
             <input value={pf.whatsapp} onChange={(e) => setPf((p) => ({ ...p, whatsapp: e.target.value }))} placeholder="(11) 90000-0000" />
-            <label>Instagram</label>
+            <label>Instagram (opcional)</label>
             <input value={pf.instagram} onChange={(e) => setPf((p) => ({ ...p, instagram: e.target.value }))} placeholder="@seu.perfil" />
             <label className="radio" style={{ marginTop: 14 }}>
               <input type="checkbox" checked={pf.termsAccepted} onChange={(e) => setPf((p) => ({ ...p, termsAccepted: e.target.checked }))} />
