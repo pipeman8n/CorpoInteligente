@@ -233,7 +233,7 @@ export default function App() {
   const [pdfLoading, setPdfLoading] = useState(false)
   const [authEmail, setAuthEmail] = useState('')
   const [authPassword, setAuthPassword] = useState('')
-  const [pf, setPf] = useState({ fullName: '', address: '', numero: '', cep: '', neighborhood: '', city: '', uf: '', cpf: '', whatsapp: '', instagram: '', termsAccepted: false })
+  const [pf, setPf] = useState({ fullName: '', address: '', numero: '', cep: '', neighborhood: '', city: '', uf: '', cpf: '', whatsapp: '', instagram: '', photo: '', termsAccepted: false })
 
   const userId = getUserId()
 
@@ -253,7 +253,7 @@ export default function App() {
       const p = await getProfile(id)
       setProfile(p)
       if (p) {
-        setPf({ fullName: p.fullName || '', address: p.address || '', numero: p.numero || '', cep: p.cep || '', neighborhood: p.neighborhood || '', city: p.city || '', uf: p.uf || '', cpf: p.cpf || '', whatsapp: p.whatsapp || '', instagram: p.instagram || '', termsAccepted: p.termsAccepted })
+        setPf({ fullName: p.fullName || '', address: p.address || '', numero: p.numero || '', cep: p.cep || '', neighborhood: p.neighborhood || '', city: p.city || '', uf: p.uf || '', cpf: p.cpf || '', whatsapp: p.whatsapp || '', instagram: p.instagram || '', photo: p.photo || '', termsAccepted: p.termsAccepted })
       }
     } catch {
       setProfile(null)
@@ -336,6 +336,26 @@ export default function App() {
   }, [view, step])
 
   const set = (k: keyof ClientData, v: unknown) => setForm((f) => ({ ...f, [k]: v }))
+
+  const resetFlow = () => {
+    try { localStorage.removeItem('bh-flow') } catch { /* ignore */ }
+    setForm(emptyForm)
+    setStep(1)
+    setResultTab('analises')
+    setResult(null)
+    setAiContent('')
+    setStrategyContent('')
+    setDietaContent('')
+    setTraining(null)
+    setKnowsBodyFat('')
+    setEffectiveBodyFat(null)
+    setSkinfolds({})
+    setCaneta({ usa: false, substancia: '', dosagem: '', ciclo: '' })
+    setInvalid([])
+    setError('')
+    setAlimentoQuery('')
+    setAlimentoResults([])
+  }
 
   const goToStep = (n: 1 | 2 | 3) => {
     setError('')
@@ -541,6 +561,30 @@ export default function App() {
     }
   }
 
+  const onPhotoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+    const reader = new FileReader()
+    reader.onload = () => {
+      const img = new Image()
+      img.onload = () => {
+        const max = 240
+        const scale = Math.min(1, max / Math.max(img.width, img.height))
+        const w = Math.round(img.width * scale)
+        const h = Math.round(img.height * scale)
+        const canvas = document.createElement('canvas')
+        canvas.width = w
+        canvas.height = h
+        const ctx = canvas.getContext('2d')
+        if (!ctx) return
+        ctx.drawImage(img, 0, 0, w, h)
+        setPf((p) => ({ ...p, photo: canvas.toDataURL('image/jpeg', 0.85) }))
+      }
+      img.src = String(reader.result)
+    }
+    reader.readAsDataURL(file)
+  }
+
   const onSaveProfile = async () => {
     setError('')
     if (!user) return
@@ -724,6 +768,7 @@ export default function App() {
           {user ? (
             <>
               <button className="navlink user-chip" onClick={() => { if (profile) setView('cadastro'); else setProfileMode(true) }} title="Meu Cadastro">
+                {profile?.photo ? <img className="user-avatar" src={profile.photo} alt="" /> : null}
                 {profile?.fullName || user.email}
               </button>
               <button className="navlink" onClick={onLogout}>
@@ -746,7 +791,7 @@ export default function App() {
             <h1>Conheça seu corpo.<br />Conecte-se a <span>quem entende</span>.</h1>
             <p>Faça sua avaliação corporal gratuita e, se quiser acompanhamento, encontre um personal ou nutricionista que combina com seu objetivo.</p>
             <div className="home-cta">
-              <button className="btn btn-primary" onClick={() => setView('app')}>Avaliar meu corpo</button>
+              <button className="btn btn-primary" onClick={() => { resetFlow(); setView('app') }}>Avaliar meu corpo</button>
               <button className="btn btn-ghost" onClick={() => setAuthMode('login')}>Entrar</button>
             </div>
             <p className="pro-link">É profissional? Em breve você poderá criar seu perfil e receber clientes.</p>
@@ -1353,6 +1398,12 @@ export default function App() {
               </div>
             ))
           )}
+
+          {user && (
+            <div className="dev-contact">
+              <a className="btn btn-ghost" href="https://wa.me/5511967756822" target="_blank" rel="noopener noreferrer">Fale com desenvolvedor</a>
+            </div>
+          )}
         </div>
       )}
 
@@ -1362,6 +1413,7 @@ export default function App() {
           {profile ? (
             <>
               <p className="lede">Seus dados cadastrais.</p>
+              {profile.photo && <img className="profile-photo" src={profile.photo} alt={profile.fullName} />}
               <div className="profile-view">
                 <p><strong>Nome:</strong> {profile.fullName}</p>
                 <p><strong>Endereço:</strong> {profile.address}{profile.numero ? `, ${profile.numero}` : ''}</p>
@@ -1464,6 +1516,22 @@ export default function App() {
           <div className="modal" onClick={(e) => e.stopPropagation()}>
             <button className="modal-close" onClick={() => setProfileMode(false)} aria-label="Fechar">×</button>
             <h3>{profile ? 'Meus dados' : 'Complete seu cadastro'}</h3>
+            <div className="photo-upload">
+              {pf.photo ? (
+                <img className="photo-preview" src={pf.photo} alt="Sua foto" />
+              ) : (
+                <div className="photo-preview photo-empty">Sem foto</div>
+              )}
+              <div className="photo-actions">
+                <label className="btn btn-ghost">
+                  {pf.photo ? 'Trocar foto' : 'Adicionar foto'}
+                  <input type="file" accept="image/*" onChange={onPhotoChange} style={{ display: 'none' }} />
+                </label>
+                {pf.photo && (
+                  <button type="button" className="btn btn-ghost" onClick={() => setPf((p) => ({ ...p, photo: '' }))}>Remover</button>
+                )}
+              </div>
+            </div>
             <label>Nome completo</label>
             <input value={pf.fullName} onChange={(e) => setPf((p) => ({ ...p, fullName: e.target.value }))} placeholder="Seu nome completo" />
             <label>CEP</label>

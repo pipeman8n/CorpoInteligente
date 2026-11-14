@@ -399,3 +399,16 @@ table.result td small { color: var(--muted); font-size: 0.8rem; }
   .result-tabs { background: #1a2129; }
   .rtab.locked { color: #4a5568; }
 }
+
+/* Contato desenvolvedor */
+.dev-contact { margin-top: 16px; }
+.dev-contact a { display: flex; justify-content: center; text-decoration: none; width: 100%; }
+
+/* Foto de perfil */
+.user-avatar { width: 22px; height: 22px; border-radius: 999px; object-fit: cover; flex: none; }
+.profile-photo { width: 64px; height: 64px; border-radius: 16px; object-fit: cover; margin-bottom: 12px; display: block; }
+.photo-upload { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+.photo-preview { width: 64px; height: 64px; border-radius: 16px; object-fit: cover; border: 1px solid var(--border); }
+.photo-empty { display: grid; place-items: center; background: var(--bg); color: var(--muted); font-size: 0.7rem; text-align: center; }
+.photo-actions { display: flex; flex-direction: column; gap: 6px; }
+.photo-actions label { cursor: pointer; }
