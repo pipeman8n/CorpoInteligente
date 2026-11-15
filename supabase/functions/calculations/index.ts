@@ -2,9 +2,10 @@
 import { createClient } from 'npm:@supabase/supabase-js@2';
 
 const SUPABASE_URL = 'https://ylmwwwtnqhqjtufqmctf.supabase.co';
-const SERVICE_ROLE = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? '[REDACTED]';
+const SERVICE_ROLE = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? '';
 
-const DEEPSEEK_KEY = atob('[REDACTED]');
+const DEEPSEEK_KEY = Deno.env.get('DEEPSEEK_API_KEY') ?? '';
+const ADMIN_EMAIL = 'ueberson.lsousa@gmail.com';
 
 const SYSTEM_PROMPT = 'Você é um excelente nutrólogo esportivo com vasto conhecimento em hipertrofia, emagrecimento, condicionamento físico e reposição hormonal, além de preparador físico de atletas. Você entrega informações relevantes com alta clareza. Responda SEMPRE em português do Brasil.';
 
@@ -224,47 +225,71 @@ function isNonFood(descricao: string): boolean {
   return ts.length > 0 && ts.every((t) => NON_FOODS.has(t));
 }
 
+async function getAuthUser(supabase: any, authHeader: string | null) {
+  const token = authHeader?.replace(/^Bearer\s+/i, '');
+  if (!token) return null;
+  try {
+    const { data, error } = await supabase.auth.getUser(token);
+    if (error || !data?.user) return null;
+    return { id: data.user.id as string, email: (data.user.email ?? null) as string | null };
+  } catch {
+    return null;
+  }
+}
+
 Deno.serve(async (req) => {
   if (req.method === 'OPTIONS') return new Response('ok', { headers: corsHeaders });
   try {
     const body = await req.json();
+    const authHeader = req.headers.get('Authorization');
     const supabase = createClient(SUPABASE_URL, SERVICE_ROLE, { auth: { persistSession: false } });
     const db = supabase.schema('corpointeligente');
+    const authUser = await getAuthUser(supabase, authHeader);
+    const uid = authUser?.id ?? null;
+    const isAdmin = authUser?.email === ADMIN_EMAIL;
 
     switch (body.action) {
       case 'save_new_calculation': {
-        const { data: inserted, error } = await db.from('calculations').insert(toDbRow(body.data ?? {})).select().single();
+        if (!uid) return json({ error: 'Não autenticado' }, 401);
+        const row = { ...toDbRow(body.data ?? {}), user_id: uid };
+        const { data: inserted, error } = await db.from('calculations').insert(row).select().single();
         if (error) return json({ error: error.message }, 400);
         return json(toCamelRow(inserted));
       }
       case 'get_user_calculations': {
-        const isAdmin = body.email === 'ueberson.lsousa@gmail.com';
-        const q = isAdmin ? db.from('calculations').select('*') : db.from('calculations').select('*').eq('user_id', body.userId);
+        if (!uid) return json({ error: 'Não autenticado' }, 401);
+        const q = isAdmin ? db.from('calculations').select('*') : db.from('calculations').select('*').eq('user_id', uid);
         const { data: rows, error } = await q.order('created_at', { ascending: false });
         if (error) return json({ error: error.message }, 400);
         return json((rows ?? []).map(toCamelRow));
       }
       case 'update_calculation': {
-        const { data: updated, error } = await db.from('calculations').update(toDbRow(body.data ?? {})).eq('id', body.calculationId).select().single();
+        if (!uid) return json({ error: 'Não autenticado' }, 401);
+        const { data: updated, error } = await db.from('calculations').update(toDbRow(body.data ?? {})).eq('id', body.calculationId).eq('user_id', uid).select().single();
         if (error) return json({ error: error.message }, 400);
         return json(toCamelRow(updated));
       }
       case 'delete_calculation': {
-        const { error } = await db.from('calculations').delete().eq('id', body.calculationId);
+        if (!uid) return json({ error: 'Não autenticado' }, 401);
+        const { error } = await db.from('calculations').delete().eq('id', body.calculationId).eq('user_id', uid);
         if (error) return json({ error: error.message }, 400);
         return json({ success: true });
       }
       case 'save_profile': {
-        const { data: upserted, error } = await db.from('profiles').upsert(toDbRow(body.data ?? {}), { onConflict: 'id' }).select().single();
+        if (!uid) return json({ error: 'Não autenticado' }, 401);
+        const row = { ...toDbRow(body.data ?? {}), id: uid };
+        const { data: upserted, error } = await db.from('profiles').upsert(row, { onConflict: 'id' }).select().single();
         if (error) return json({ error: error.message }, 400);
         return json(toCamelRow(upserted));
       }
       case 'get_profile': {
-        const { data: row, error } = await db.from('profiles').select('*').eq('id', body.id).maybeSingle();
+        if (!uid) return json({ error: 'Não autenticado' }, 401);
+        const { data: row, error } = await db.from('profiles').select('*').eq('id', uid).maybeSingle();
         if (error) return json({ error: error.message }, 400);
         return json(row ? toCamelRow(row) : null);
       }
       case 'get_all_profiles': {
+        if (!isAdmin) return json({ error: 'Forbidden' }, 403);
         const { data: profiles, error } = await db.from('profiles').select('*').order('created_at', { ascending: false });
         if (error) return json({ error: error.message }, 400);
         const emailById: Record<string, string> = {};

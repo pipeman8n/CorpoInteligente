@@ -33,12 +33,24 @@ export interface Calculation {
   savedAt: string
 }
 
+// Token do usuário logado (lê a sessão do supabase-js no localStorage); cai pro ANON se anônimo.
+function getAccessToken(): string {
+  try {
+    const raw = localStorage.getItem('sb-ylmwwwtnqhqjtufqmctf-auth-token');
+    if (!raw) return ANON;
+    const parsed = JSON.parse(raw);
+    return parsed?.access_token || ANON;
+  } catch {
+    return ANON;
+  }
+}
+
 async function a1(action: string, params: Record<string, unknown>): Promise<any> {
   const res = await fetch(EDGE_URL, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${ANON}`,
+      Authorization: `Bearer ${getAccessToken()}`,
       apikey: ANON,
     },
     body: JSON.stringify({ action, ...params }),
