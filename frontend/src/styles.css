@@ -365,11 +365,11 @@ table.result td small { color: var(--muted); font-size: 0.8rem; }
 }
 
 /* ===== Home (Fase 1) ===== */
-.home-hero { padding: 16px 0 24px; }
+.home-hero { padding: 16px 0 24px; text-align: center; }
 .home-hero h1 { font-size: 1.75rem; font-weight: 800; letter-spacing: -0.5px; line-height: 1.15; margin: 0 0 12px; }
 .home-hero h1 span { color: var(--accent); }
-.home-hero p { color: var(--muted); font-size: 0.98rem; line-height: 1.6; margin: 0 0 20px; max-width: 560px; }
-.home-cta { display: flex; gap: 10px; flex-wrap: wrap; }
+.home-hero p { color: var(--muted); font-size: 0.98rem; line-height: 1.6; margin: 0 auto 20px; max-width: 560px; }
+.home-cta { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
 .home-cta .btn { padding: 13px 24px; font-size: 0.98rem; }
 .paths { display: grid; grid-template-columns: 1fr; gap: 12px; margin-top: 22px; }
 .path-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card); padding: 18px; }
@@ -380,6 +380,12 @@ table.result td small { color: var(--muted); font-size: 0.8rem; }
 @media (max-width: 560px) { .paths { grid-template-columns: 1fr; } }
 
 .pro-section { margin-top: 28px; }
+
+/* Faixa dark (tema Tech Innovation) */
+.home-band { background: #1e1e1e; color: #fff; border-radius: var(--radius-card); padding: 32px 24px; margin-top: 28px; text-align: center; }
+.home-band h2 { font-size: 1.3rem; font-weight: 800; margin: 0 0 8px; letter-spacing: -0.3px; }
+.home-band p { color: #a9b3c2; font-size: 0.95rem; line-height: 1.6; margin: 0 0 18px; }
+.home-band-chip { display: inline-block; background: #00ffff; color: #0b1220; font-weight: 800; padding: 7px 18px; border-radius: 999px; font-size: 0.85rem; }
 .pro-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 14px; }
 .pro-head h2 { font-size: 1.1rem; font-weight: 700; letter-spacing: -0.2px; margin: 0; }
 .pro-ver { color: var(--muted); font-size: 0.8rem; font-weight: 600; }

@@ -900,6 +900,12 @@ export default function App() {
             </div>
           </div>
 
+          <div className="home-band">
+            <h2>Raio X Corporal em segundos</h2>
+            <p>IMC, massa magra, TMB, macros, água e saúde hormonal — gerados por IA.</p>
+            <span className="home-band-chip">11 parâmetros · IA</span>
+          </div>
+
           <div className="pro-section">
             <div className="pro-head">
               <h2>Profissionais perto de você</h2>
