@@ -278,9 +278,14 @@ export default function App() {
   }
 
   const loadHistory = async (uid?: string, email?: string) => {
+    const effectiveId = uid ?? user?.id
+    if (!effectiveId) {
+      setHistory([])
+      return
+    }
     setLoadingHistory(true)
     try {
-      setHistory(await getCalculations(uid ?? userId, email))
+      setHistory(await getCalculations(effectiveId, email))
     } catch (e) {
       setError((e as Error).message)
     } finally {
@@ -343,7 +348,7 @@ export default function App() {
         }
       } else {
         setProfile(null)
-        loadHistory()
+        setHistory([])
       }
     })
     return () => sub.subscription.unsubscribe()
