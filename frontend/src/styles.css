@@ -267,6 +267,7 @@ table.result td small { color: var(--muted); font-size: 0.8rem; }
 
 /* Login (estilo Supabase Auth) */
 .auth-modal { max-width: 400px; }
+.register-prompt { max-width: 440px; }
 .auth-title { font-size: 1.45rem; font-weight: 800; margin: 0 30px 4px 0; }
 .auth-sub { color: var(--muted); font-size: 0.88rem; margin: 0 0 20px; }
 .auth-social { display: flex; flex-direction: column; gap: 10px; }

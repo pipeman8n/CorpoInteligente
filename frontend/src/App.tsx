@@ -257,6 +257,7 @@ export default function App() {
   const [adminLoading, setAdminLoading] = useState(false)
   const [authMode, setAuthMode] = useState<'login' | 'register' | null>(null)
   const [showSignup, setShowSignup] = useState(false)
+  const [showRegisterPrompt, setShowRegisterPrompt] = useState(false)
   const [profileMode, setProfileMode] = useState(false)
   const [infoPopup, setInfoPopup] = useState('')
   const [pdfLoading, setPdfLoading] = useState(false)
@@ -707,7 +708,11 @@ export default function App() {
   const onGenerateAI = async () => {
     if (!result) return
     if (!user) {
-      setShowSignup(true)
+      setShowRegisterPrompt(true)
+      return
+    }
+    if (history.length > 0) {
+      setView('meus')
       return
     }
     setAiLoading(true)
@@ -1809,6 +1814,19 @@ export default function App() {
             <p>{infoPopup}</p>
             <div className="actions">
               <button className="btn btn-primary" onClick={() => setInfoPopup('')}>Entendi</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showRegisterPrompt && (
+        <div className="modal-overlay" onClick={() => setShowRegisterPrompt(false)}>
+          <div className="modal register-prompt" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close" onClick={() => setShowRegisterPrompt(false)} aria-label="Fechar">×</button>
+            <h3 className="auth-title">Cadastre-se para liberar a análise completa</h3>
+            <p className="auth-sub">A análise completa com IA fica salva na sua conta, para você consultar e reusar quando quiser. Leva menos de um minuto.</p>
+            <div className="actions">
+              <button className="btn btn-primary" onClick={() => { setShowRegisterPrompt(false); setShowSignup(true) }}>Criar conta</button>
             </div>
           </div>
         </div>
