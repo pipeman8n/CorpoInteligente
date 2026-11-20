@@ -1632,13 +1632,13 @@ export default function App() {
                             const cat = lookup(ex.name)
                             return (
                               <li key={ei}>
-                                <div>
-                                  <strong>{ex.name}</strong>
-                                  <span className="tmeta">
-                                    {ex.sets} séries de {ex.reps} reps{ex.rest ? `, descanso ${ex.rest}` : ''}
-                                  </span>
-                                </div>
-                                <div className="tex-actions">
+                                <div className="tex-head">
+                                  <div className="tex-info">
+                                    <strong>{ex.name}</strong>
+                                    <span className="tmeta">
+                                      {ex.sets} séries de {ex.reps} reps{ex.rest ? `, descanso ${ex.rest}` : ''}
+                                    </span>
+                                  </div>
                                   <button
                                     className="btn-view"
                                     disabled={!cat}
@@ -1647,8 +1647,8 @@ export default function App() {
                                   >
                                     Ver
                                   </button>
-                                  <SetTimer />
                                 </div>
+                                <SetTimer sets={ex.sets} />
                               </li>
                             )
                           })}
