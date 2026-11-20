@@ -274,6 +274,7 @@ table.result td small { color: var(--muted); font-size: 0.8rem; }
 .set-dot { width: 9px; height: 9px; border-radius: 999px; border: 1.5px solid var(--accent); background: transparent; transition: background 0.15s, border-color 0.15s; }
 .set-dot.active { background: var(--accent); }
 .set-dot.done { background: var(--ok); border-color: var(--ok); }
+.set-count { font-size: 0.8rem; font-weight: 700; color: var(--accent); font-variant-numeric: tabular-nums; }
 
 /* botão finalizar série */
 .set-timer-finish { color: var(--ok); border-color: var(--ok); background: transparent; }

@@ -46,6 +46,7 @@ export default function SetTimer({ sets }: { sets: number }) {
           return <span key={n} className={cls} />
         })}
       </span>
+      <span className="set-count">{currentSet}/{total}</span>
       <span className="set-timer-time">{mm}:{ss}</span>
       <button type="button" className="set-timer-btn" title={isRunning ? 'Pausar' : 'Iniciar'} onClick={() => (isRunning ? pause() : start())}>
         {isRunning ? '⏸' : '▶'}
