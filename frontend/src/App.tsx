@@ -1052,17 +1052,24 @@ export default function App() {
       {view === 'home' && (
         <>
           <div className="home-hero">
-            <h1>Conheça seu corpo.<br />Conecte-se a <span>quem entende</span>.</h1>
-            <p>Faça sua avaliação corporal gratuita e, se quiser acompanhamento, encontre um personal ou nutricionista que combina com seu objetivo.</p>
-            <div className="home-cta">
-              <button className="btn btn-primary" onClick={() => { resetFlow(); setView('app') }}>Avaliar meu corpo</button>
-              <button className="btn btn-ghost" onClick={() => setAuthMode('login')}>Entrar</button>
+            <div className="home-copy">
+              <h1>Conheça seu corpo.<br />Conecte-se a <span>quem entende</span>.</h1>
+              <p>Faça sua avaliação corporal gratuita e, se quiser acompanhamento, encontre um personal ou nutricionista que combina com seu objetivo.</p>
+              <div className="home-cta">
+                <button className="btn btn-primary" onClick={() => { resetFlow(); setView('app') }}>Avaliar meu corpo</button>
+                <button className="btn btn-ghost" onClick={() => setAuthMode('login')}>Entrar</button>
+              </div>
+              <span className="path-link" onClick={() => setInfoPopup('Em breve você poderá criar seu perfil profissional e receber clientes.')}>Sou profissional → criar perfil</span>
             </div>
-            <div className="paths">
-              <div className="path-card">
-                <h3>Sou profissional</h3>
-                <p>Monte o perfil do seu cliente, gere análises e roteiros, e receba novos alunos.</p>
-                <span className="path-link" onClick={() => setInfoPopup('Em breve você poderá criar seu perfil profissional e receber clientes.')}>Criar perfil profissional →</span>
+            <div className="home-visual">
+              <span className="home-visual-chip">11 parâmetros · IA</span>
+              <div className="home-visual-card">
+                <div className="home-visual-title">Análise Corporal Prévia</div>
+                <div className="home-visual-row"><span>IMC</span><b>23,4</b></div>
+                <div className="home-visual-row"><span>Massa magra</span><b>45,2 kg</b></div>
+                <div className="home-visual-row"><span>TMB</span><b>1.610 kcal</b></div>
+                <div className="home-visual-row"><span>Gordura corporal</span><b>19,8%</b></div>
+                <div className="home-visual-row"><span>Água</span><b>54,3%</b></div>
               </div>
             </div>
           </div>
