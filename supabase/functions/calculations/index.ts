@@ -279,7 +279,9 @@ Deno.serve(async (req) => {
           if (existing) clientCode = existing;
         }
         const row = { ...toDbRow(d), user_id: uid, calculation_code: clientCode };
-        const { data: inserted, error } = await db.from('calculations').insert(row).select().single();
+        const { data: inserted, error } = await db.from('calculations')
+          .upsert(row, { onConflict: 'user_id,calculation_code' })
+          .select().single();
         if (error) return json({ error: error.message }, 400);
         return json(toCamelRow(inserted));
       }

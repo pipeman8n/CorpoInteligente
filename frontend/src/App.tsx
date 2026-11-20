@@ -499,6 +499,42 @@ export default function App() {
     goToStep(3)
   }
 
+  const doSave = async (strategy: string | null, t: TrainingProgram | null, dieta: string | null, analise: string | null): Promise<void> => {
+    const { prazoMeses, metaKg, frequenciaOverride, duracaoTreino, ...restForm } = form
+    const saved = await saveCalculation({
+      ...restForm,
+      prazo_meses: prazoMeses ?? null,
+      meta_kg: metaKg ?? null,
+      frequencia_treino: frequenciaOverride || null,
+      duracao_treino: duracaoTreino || null,
+      bodyFat: effectiveBodyFat ?? form.bodyFat ?? null,
+      userId: user!.id,
+      calculationCode: calcCode,
+      savedAt: new Date().toISOString(),
+      results: result,
+      strategy,
+      dieta,
+      trainingProgram: t,
+      analise,
+    })
+    if (saved?.calculationCode) setCalcCode(saved.calculationCode)
+  }
+
+  // Salva automaticamente (upsert por cliente) após gerar análise/dieta/treino — economiza tokens.
+  const autoSave = async (fresh?: { analise?: string; strategy?: string; dieta?: string; training?: TrainingProgram | null }) => {
+    if (!result || !user || !profile) return
+    try {
+      const analise = fresh?.analise !== undefined ? fresh.analise : aiContent || null
+      const strategy = fresh?.strategy !== undefined ? fresh.strategy : strategyContent || null
+      const dieta = fresh?.dieta !== undefined ? fresh.dieta : dietaContent || null
+      const t = fresh?.training !== undefined ? fresh.training : training
+      await doSave(strategy, t, dieta, analise)
+      await loadHistory(user.id)
+    } catch {
+      /* falha silenciosa — não interrompe a geração */
+    }
+  }
+
   const onSave = async () => {
     if (!result) return
     if (!user) {
@@ -526,23 +562,7 @@ export default function App() {
     setSavedMsg('')
     setError('')
     try {
-      const { prazoMeses, metaKg, frequenciaOverride, duracaoTreino, ...restForm } = form
-      const saved = await saveCalculation({
-        ...restForm,
-        prazo_meses: prazoMeses ?? null,
-        meta_kg: metaKg ?? null,
-        frequencia_treino: frequenciaOverride || null,
-        duracao_treino: duracaoTreino || null,
-        bodyFat: effectiveBodyFat ?? form.bodyFat ?? null,
-        userId: user.id,
-        calculationCode: calcCode,
-        savedAt: new Date().toISOString(),
-        results: result,
-        strategy,
-        dieta: dietaContent || null,
-        trainingProgram: t,
-      })
-      if (saved?.calculationCode) setCalcCode(saved.calculationCode)
+      await doSave(strategy, t, dietaContent || null, aiContent || null)
       setSavedMsg('Roteiro salvo!')
       localStorage.removeItem('bh-flow')
       await loadHistory(user.id)
@@ -619,6 +639,7 @@ export default function App() {
       strategy: strategyContent || null,
       dieta: dietaContent || null,
       trainingProgram: training,
+      analise: aiContent || null,
     })
   }
 
@@ -744,6 +765,7 @@ export default function App() {
         results: result,
       })
       setAiContent(res.content)
+      autoSave({ analise: res.content })
     } catch (e) {
       setError((e as Error).message)
     } finally {
@@ -754,7 +776,9 @@ export default function App() {
   const onGenerateStrategy = () => {
     if (!result) return
     setError('')
-    setStrategyContent(buildStrategy(form.goal, form.activityLevel, form.prazoMeses, form.weight, result, form.frequenciaOverride))
+    const s = buildStrategy(form.goal, form.activityLevel, form.prazoMeses, form.weight, result, form.frequenciaOverride)
+    setStrategyContent(s)
+    autoSave({ strategy: s })
   }
 
   const onGerarDieta = () => {
@@ -778,7 +802,9 @@ export default function App() {
         macros,
         caneta,
       })
-      setDietaContent(dietaToMarkdown(res))
+      const md = dietaToMarkdown(res)
+      setDietaContent(md)
+      autoSave({ dieta: md })
     } catch (e) {
       setError((e as Error).message)
     } finally {
@@ -844,7 +870,7 @@ export default function App() {
     setStrategyContent(typeof c.strategy === 'string' ? c.strategy : '')
     setDietaContent(typeof c.dieta === 'string' ? c.dieta : '')
     setTraining(c.trainingProgram)
-    setAiContent('')
+    setAiContent(typeof c.analise === 'string' ? c.analise : '')
     setView('app')
     setStep(3)
     setResultTab('analises')
@@ -854,7 +880,9 @@ export default function App() {
   const onGenerateTraining = () => {
     if (!result) return
     setError('')
-    setTraining(buildTrainingProgram(form.goal, form.activityLevel, form.frequenciaOverride))
+    const t = buildTrainingProgram(form.goal, form.activityLevel, form.frequenciaOverride)
+    setTraining(t)
+    autoSave({ training: t })
   }
 
   const lookup = (name: string): CatalogExercise | undefined => {

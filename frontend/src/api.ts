@@ -28,6 +28,7 @@ export interface Calculation {
   duracao_treino: string | null
   strategy: string | null
   dieta: string | null
+  analise: string | null
   trainingProgram: TrainingProgram | null
   results: any
   savedAt: string
