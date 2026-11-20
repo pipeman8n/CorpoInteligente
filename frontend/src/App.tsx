@@ -279,6 +279,8 @@ export default function App() {
   const [authMode, setAuthMode] = useState<'login' | 'register' | null>(null)
   const [showSignup, setShowSignup] = useState(false)
   const [showRegisterPrompt, setShowRegisterPrompt] = useState(false)
+  const [showTrainingPrompt, setShowTrainingPrompt] = useState(false)
+  const [pendingTrainingCalc, setPendingTrainingCalc] = useState<Calculation | null>(null)
   const [profileMode, setProfileMode] = useState(false)
   const [infoPopup, setInfoPopup] = useState('')
   const [pdfLoading, setPdfLoading] = useState(false)
@@ -299,17 +301,20 @@ export default function App() {
     }
   }
 
-  const loadHistory = async (uid?: string, email?: string) => {
+  const loadHistory = async (uid?: string, email?: string): Promise<Calculation[]> => {
     const effectiveId = uid ?? user?.id
     if (!effectiveId) {
       setHistory([])
-      return
+      return []
     }
     setLoadingHistory(true)
     try {
-      setHistory(await getCalculations(effectiveId, email))
+      const list = await getCalculations(effectiveId, email)
+      setHistory(list)
+      return list
     } catch (e) {
       setError((e as Error).message)
+      return []
     } finally {
       setLoadingHistory(false)
     }
@@ -352,7 +357,16 @@ export default function App() {
       const u = session?.user
       setUser(u ? { id: u.id, email: u.email } : null)
       if (u) {
-        loadHistory(u.id, u.email)
+        loadHistory(u.id, u.email).then((list) => {
+          // Ao (re)entrar: avisa se há cliente com meta definida mas sem roteiro de treino
+          if (evt === 'SIGNED_IN' || evt === 'INITIAL_SESSION') {
+            const pending = list.find((c) => c.strategy && !c.trainingProgram)
+            if (pending) {
+              setPendingTrainingCalc(pending)
+              setShowTrainingPrompt(true)
+            }
+          }
+        })
         if (evt === 'SIGNED_IN') {
           setAuthMode(null)
           setShowSignup(false)
@@ -779,6 +793,7 @@ export default function App() {
     const s = buildStrategy(form.goal, form.activityLevel, form.prazoMeses, form.weight, result, form.frequenciaOverride)
     setStrategyContent(s)
     autoSave({ strategy: s })
+    setShowTrainingPrompt(true)
   }
 
   const onGerarDieta = () => {
@@ -883,6 +898,19 @@ export default function App() {
     const t = buildTrainingProgram(form.goal, form.activityLevel, form.frequenciaOverride)
     setTraining(t)
     autoSave({ training: t })
+  }
+
+  const onTrainingPromptAction = () => {
+    setShowTrainingPrompt(false)
+    if (result) {
+      // em sessão: gera o treino agora e abre a aba Treinos
+      onGenerateTraining()
+      setResultTab('treinos')
+    } else if (pendingTrainingCalc) {
+      // vindo do login: abre o cliente pendente no wizard
+      onLoadCalc(pendingTrainingCalc)
+    }
+    setPendingTrainingCalc(null)
   }
 
   const lookup = (name: string): CatalogExercise | undefined => {
@@ -2051,6 +2079,19 @@ export default function App() {
             <p className="auth-sub">A análise completa com IA fica salva na sua conta, para você consultar e reusar quando quiser. Leva menos de um minuto.</p>
             <div className="actions">
               <button className="btn btn-primary" onClick={() => { setShowRegisterPrompt(false); setShowSignup(true) }}>Criar conta</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showTrainingPrompt && (
+        <div className="modal-overlay" onClick={() => setShowTrainingPrompt(false)}>
+          <div className="modal register-prompt" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close" onClick={() => setShowTrainingPrompt(false)} aria-label="Fechar">×</button>
+            <h3 className="auth-title">Gere o roteiro de treinos</h3>
+            <p className="auth-sub">A meta do cliente está definida. Gere o treino semanal para concluir o plano completo.</p>
+            <div className="actions">
+              <button className="btn btn-primary" onClick={onTrainingPromptAction}>Gerar roteiro de treinos</button>
             </div>
           </div>
         </div>
