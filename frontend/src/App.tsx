@@ -163,7 +163,10 @@ const emptyForm: ClientData = {
 }
 
 function genCode(): string {
-  return 'CODE' + Math.floor(1000 + Math.random() * 9000)
+  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'
+  let s = ''
+  for (let i = 0; i < 6; i++) s += chars[Math.floor(Math.random() * chars.length)]
+  return 'SI-' + s
 }
 
 function formatPhoneBr(s?: string): string {
@@ -524,7 +527,7 @@ export default function App() {
     setError('')
     try {
       const { prazoMeses, metaKg, frequenciaOverride, duracaoTreino, ...restForm } = form
-      await saveCalculation({
+      const saved = await saveCalculation({
         ...restForm,
         prazo_meses: prazoMeses ?? null,
         meta_kg: metaKg ?? null,
@@ -539,6 +542,7 @@ export default function App() {
         dieta: dietaContent || null,
         trainingProgram: t,
       })
+      if (saved?.calculationCode) setCalcCode(saved.calculationCode)
       setSavedMsg('Roteiro salvo!')
       localStorage.removeItem('bh-flow')
       await loadHistory(user.id)
@@ -729,10 +733,6 @@ export default function App() {
       setShowRegisterPrompt(true)
       return
     }
-    if (history.length > 0) {
-      setView('meus')
-      return
-    }
     setAiLoading(true)
     setAiContent('')
     setError('')
@@ -874,8 +874,8 @@ export default function App() {
     setPerfErr('')
     try {
       const [days, meas] = await Promise.all([
-        getTrainingDays(form.name.trim()),
-        getMeasurements(form.name.trim()),
+        getTrainingDays(calcCode),
+        getMeasurements(calcCode),
       ])
       setPerfDays(days)
       setPerfMeas(meas)
@@ -891,7 +891,7 @@ export default function App() {
       loadPerf()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [resultTab, user?.id])
+  }, [resultTab, user?.id, calcCode])
 
   const onRegisterToday = async () => {
     if (!form.name.trim()) return
@@ -900,7 +900,7 @@ export default function App() {
     setPerfErr('')
     try {
       const today = new Date().toISOString().slice(0, 10)
-      await saveTrainingDay(form.name.trim(), today)
+      await saveTrainingDay(calcCode, form.name.trim(), today)
       setPerfMsg('Treino de hoje registrado!')
       await loadPerf()
     } catch {
@@ -918,6 +918,7 @@ export default function App() {
     setPerfErr('')
     try {
       await saveMeasurement({
+        clientCode: calcCode,
         clientName: form.name.trim(),
         measuredDate: measDate,
         weight: Number(measWeight),
@@ -1313,7 +1314,7 @@ export default function App() {
             <div className="card">
               <h1>Análise Corporal Prévia</h1>
               <div className="client-meta">
-                <span className="chip">{calcCode}</span>
+                <span className="client-code">Nº de cadastro: {calcCode}</span>
                 <span>{form.name}, {form.age} anos, {form.gender === 'male' ? 'Masculino' : 'Feminino'}</span>
               </div>
 
@@ -1699,6 +1700,7 @@ export default function App() {
             history.map((c) => (
               <div className="hist-item" key={c.id}>
                 <div>
+                  <span className="hist-code">Nº {c.calculationCode}</span>
                   <h3>{c.name}</h3>
                   <div className="meta">
                     {c.goal === 'emagrecimento' ? 'Emagrecimento' : c.goal === 'hipertrofia' ? 'Hipertrofia' : 'Saúde'}

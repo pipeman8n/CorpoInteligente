@@ -36,6 +36,7 @@ const CAMEL_TO_SNAKE: Record<string, string> = {
   savedAt: 'created_at', trainingProgram: 'training_program',
   fullName: 'full_name', termsAccepted: 'terms_accepted',
   clientName: 'client_name', trainedDate: 'trained_date', measuredDate: 'measured_date',
+  clientCode: 'client_code',
 };
 const SNAKE_TO_CAMEL: Record<string, string> = {
   user_id: 'userId', calculation_code: 'calculationCode', body_fat: 'bodyFat',
@@ -43,6 +44,7 @@ const SNAKE_TO_CAMEL: Record<string, string> = {
   created_at: 'savedAt', training_program: 'trainingProgram',
   full_name: 'fullName', terms_accepted: 'termsAccepted',
   client_name: 'clientName', trained_date: 'trainedDate', measured_date: 'measuredDate',
+  client_code: 'clientCode',
 };
 const toDbRow = (o: Record<string, unknown>) => {
   const out: Record<string, unknown> = {};
@@ -265,7 +267,18 @@ Deno.serve(async (req) => {
     switch (body.action) {
       case 'save_new_calculation': {
         if (!uid) return json({ error: 'Não autenticado' }, 401);
-        const row = { ...toDbRow(body.data ?? {}), user_id: uid };
+        const d = (body.data ?? {}) as Record<string, unknown>;
+        let clientCode = String(d.calculationCode ?? '').trim();
+        const clientName = String(d.name ?? '').trim();
+        // reutiliza o código de cadastro existente do cliente (chave estável por nome)
+        if (clientName) {
+          const { data: prev } = await db.from('calculations')
+            .select('calculation_code').eq('user_id', uid).eq('name', clientName)
+            .order('created_at', { ascending: false }).limit(1);
+          const existing = prev?.[0]?.calculation_code as string | undefined;
+          if (existing) clientCode = existing;
+        }
+        const row = { ...toDbRow(d), user_id: uid, calculation_code: clientCode };
         const { data: inserted, error } = await db.from('calculations').insert(row).select().single();
         if (error) return json({ error: error.message }, 400);
         return json(toCamelRow(inserted));
@@ -394,21 +407,22 @@ Deno.serve(async (req) => {
       }
       case 'save_training_day': {
         if (!uid) return json({ error: 'Não autenticado' }, 401);
+        const clientCode = String(body.clientCode ?? '').trim();
         const clientName = String(body.clientName ?? '').trim();
-        if (!clientName) return json({ error: 'Nome do cliente é obrigatório' }, 400);
+        if (!clientCode) return json({ error: 'Código do cliente é obrigatório' }, 400);
         const trainedDate = String(body.trainedDate ?? '').slice(0, 10);
         if (!trainedDate) return json({ error: 'Data é obrigatória' }, 400);
         const { data: inserted, error } = await db.from('training_days')
-          .upsert({ user_id: uid, client_name: clientName, trained_date: trainedDate }, { onConflict: 'user_id,client_name,trained_date' })
+          .upsert({ user_id: uid, client_code: clientCode, client_name: clientName, trained_date: trainedDate }, { onConflict: 'user_id,client_code,trained_date' })
           .select().single();
         if (error) return json({ error: error.message }, 400);
         return json(toCamelRow(inserted));
       }
       case 'get_training_days': {
         if (!uid) return json({ error: 'Não autenticado' }, 401);
-        const clientName = String(body.clientName ?? '').trim();
+        const clientCode = String(body.clientCode ?? '').trim();
         let q = db.from('training_days').select('*').eq('user_id', uid);
-        if (clientName) q = q.eq('client_name', clientName);
+        if (clientCode) q = q.eq('client_code', clientCode);
         const { data: rows, error } = await q.order('trained_date', { ascending: false });
         if (error) return json({ error: error.message }, 400);
         return json((rows ?? []).map(toCamelRow));
@@ -416,23 +430,24 @@ Deno.serve(async (req) => {
       case 'save_measurement': {
         if (!uid) return json({ error: 'Não autenticado' }, 401);
         const d = (body.data ?? {}) as Record<string, unknown>;
+        const clientCode = String(d.clientCode ?? '').trim();
         const clientName = String(d.clientName ?? '').trim();
-        if (!clientName) return json({ error: 'Nome do cliente é obrigatório' }, 400);
+        if (!clientCode) return json({ error: 'Código do cliente é obrigatório' }, 400);
         const measuredDate = String(d.measuredDate ?? '').slice(0, 10);
         const weight = Number(d.weight);
         if (!measuredDate || !Number.isFinite(weight) || weight <= 0) return json({ error: 'Data e peso são obrigatórios' }, 400);
         const bodyFat = d.bodyFat == null || d.bodyFat === '' ? null : Number(d.bodyFat);
         const { data: inserted, error } = await db.from('measurements')
-          .upsert({ user_id: uid, client_name: clientName, measured_date: measuredDate, weight, body_fat: bodyFat }, { onConflict: 'user_id,client_name,measured_date' })
+          .upsert({ user_id: uid, client_code: clientCode, client_name: clientName, measured_date: measuredDate, weight, body_fat: bodyFat }, { onConflict: 'user_id,client_code,measured_date' })
           .select().single();
         if (error) return json({ error: error.message }, 400);
         return json(toCamelRow(inserted));
       }
       case 'get_measurements': {
         if (!uid) return json({ error: 'Não autenticado' }, 401);
-        const clientName = String(body.clientName ?? '').trim();
+        const clientCode = String(body.clientCode ?? '').trim();
         let q = db.from('measurements').select('*').eq('user_id', uid);
-        if (clientName) q = q.eq('client_name', clientName);
+        if (clientCode) q = q.eq('client_code', clientCode);
         const { data: rows, error } = await q.order('measured_date', { ascending: true });
         if (error) return json({ error: error.message }, 400);
         return json((rows ?? []).map(toCamelRow));

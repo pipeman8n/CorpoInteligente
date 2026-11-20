@@ -184,6 +184,7 @@ export const getAllProfiles = (): Promise<AdminProfile[]> =>
 export interface TrainingDayRecord {
   id: string
   userId: string
+  clientCode?: string
   clientName: string
   trainedDate: string // YYYY-MM-DD
 }
@@ -191,19 +192,21 @@ export interface TrainingDayRecord {
 export interface Measurement {
   id: string
   userId: string
+  clientCode?: string
   clientName: string
   measuredDate: string // YYYY-MM-DD
   weight: number
   bodyFat: number | null
 }
 
-export const saveTrainingDay = (clientName: string, trainedDate: string): Promise<TrainingDayRecord> =>
-  a1('save_training_day', { clientName, trainedDate })
+export const saveTrainingDay = (clientCode: string, clientName: string, trainedDate: string): Promise<TrainingDayRecord> =>
+  a1('save_training_day', { clientCode, clientName, trainedDate })
 
-export const getTrainingDays = (clientName: string): Promise<TrainingDayRecord[]> =>
-  a1('get_training_days', { clientName })
+export const getTrainingDays = (clientCode: string): Promise<TrainingDayRecord[]> =>
+  a1('get_training_days', { clientCode })
 
 export const saveMeasurement = (data: {
+  clientCode: string
   clientName: string
   measuredDate: string
   weight: number
@@ -211,5 +214,5 @@ export const saveMeasurement = (data: {
 }): Promise<Measurement> =>
   a1('save_measurement', { data })
 
-export const getMeasurements = (clientName: string): Promise<Measurement[]> =>
-  a1('get_measurements', { clientName })
+export const getMeasurements = (clientCode: string): Promise<Measurement[]> =>
+  a1('get_measurements', { clientCode })
