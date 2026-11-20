@@ -109,7 +109,7 @@ input:focus, select:focus { outline: none; border-color: var(--accent); backgrou
 }
 .btn:disabled { opacity: 0.6; cursor: not-allowed; }
 .btn-primary { background: var(--accent); color: #fff; }
-.btn-primary:hover:not(:disabled) { background: var(--accent-strong); box-shadow: 0 0 0 3px rgba(0, 255, 255, 0.35); }
+.btn-primary:hover:not(:disabled) { background: var(--accent-strong); box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.35); }
 .btn-secondary { background: var(--accent-soft); color: var(--accent); }
 .btn-secondary:hover:not(:disabled) { background: #dfe8fe; }
 .btn-ghost { background: transparent; color: var(--muted); border: 1.5px solid var(--border); }
@@ -452,7 +452,7 @@ table.result td small { color: var(--muted); font-size: 0.8rem; }
 .home-band { background: #1e1e1e; color: #fff; border-radius: var(--radius-card); padding: 32px 24px; margin-top: 28px; text-align: center; }
 .home-band h2 { font-size: 1.3rem; font-weight: 800; margin: 0 0 8px; letter-spacing: -0.3px; }
 .home-band p { color: #a9b3c2; font-size: 0.95rem; line-height: 1.6; margin: 0 0 18px; }
-.home-band-chip { display: inline-block; background: #00ffff; color: #0b1220; font-weight: 800; padding: 7px 18px; border-radius: 999px; font-size: 0.85rem; }
+.home-band-chip { display: inline-block; background: var(--accent); color: #fff; font-weight: 800; padding: 7px 18px; border-radius: 999px; font-size: 0.85rem; }
 .pro-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 14px; }
 .pro-head h2 { font-size: 1.1rem; font-weight: 700; letter-spacing: -0.2px; margin: 0; }
 .pro-ver { color: var(--muted); font-size: 0.8rem; font-weight: 600; }

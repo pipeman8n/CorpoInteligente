@@ -88,7 +88,7 @@ function renderMarkdown(md: string): string {
   return html
 }
 
-// Agrupamento dos parâmetros do Raio X em seções
+// Agrupamento dos parâmetros da Análise Corporal Prévia em seções
 const RAIO_X_GROUPS: { title: string; match: RegExp }[] = [
   { title: 'Composição Corporal', match: /IMC|Massa Magra|Gordura Corporal|PGC/i },
   { title: 'Metabolismo e Saúde', match: /Taxa Metabólica|TMB|Gasto Calórico|GCT|Consumo Calórico|Hormonal/i },
@@ -201,7 +201,7 @@ const CATALOG_MAP = new Map(EXERCISE_CATALOG.map((e) => [e.name.toLowerCase(), e
 function dietaToMarkdown(plan: DietaPlan): string {
   const out: string[] = []
   for (const r of plan.refeicoes) {
-    out.push(`**${r.nome}${r.horario ? ' — ' + r.horario : ''}**`)
+    out.push(`**${r.nome}${r.horario ? ' - ' + r.horario : ''}**`)
     out.push('')
     out.push('| Alimento | Qtd | TACO (base) | Prot | Carbo | Gord | kcal |')
     out.push('|---|---|---|---|---|---|---|')
@@ -860,7 +860,7 @@ export default function App() {
 
   const onLoadCalc = (c: Calculation) => {
     if (!c.results) {
-      setError('Este roteiro não tem dados de Raio X.')
+      setError('Este roteiro não tem dados de Análise Corporal Prévia.')
       return
     }
     setForm({
@@ -1068,8 +1068,8 @@ export default function App() {
           </div>
 
           <div className="home-band">
-            <h2>Raio X Corporal em segundos</h2>
-            <p>IMC, massa magra, TMB, macros, água e saúde hormonal — gerados por IA.</p>
+            <h2>Análise Corporal Prévia em segundos</h2>
+            <p>IMC, massa magra, TMB, macros, água e saúde hormonal: gerados por IA.</p>
             <span className="home-band-chip">11 parâmetros · IA</span>
           </div>
 
@@ -1521,7 +1521,7 @@ export default function App() {
 
               {dietaContent && (
               <div className="alimento-search">
-                <h4 className="alimento-search-title">Buscar alimento (TACO — composição oficial)</h4>
+                <h4 className="alimento-search-title">Buscar alimento (TACO: composição oficial)</h4>
                 <div className="alimento-search-row">
                   <input
                     type="text"
