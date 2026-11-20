@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useStopwatch } from 'react-timer-hook'
 
 // Cronômetro por série com acompanhamento de sets (bolinhas) e botão de finalizar.
-export default function SetTimer({ sets }: { sets: number }) {
+export default function SetTimer({ sets, onDone }: { sets: number; onDone?: () => void }) {
   const total = Math.max(1, sets || 1)
   const { seconds, minutes, isRunning, start, pause, reset } = useStopwatch({ autoStart: false })
   const [currentSet, setCurrentSet] = useState(1) // 1-based
@@ -13,6 +13,7 @@ export default function SetTimer({ sets }: { sets: number }) {
     reset()
     if (currentSet >= total) {
       setCompleted(true)
+      onDone?.()
     } else {
       setCurrentSet((s) => s + 1)
     }

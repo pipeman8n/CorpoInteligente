@@ -262,6 +262,7 @@ export default function App() {
   const [alimentoSearching, setAlimentoSearching] = useState(false)
   const [viewing, setViewing] = useState<CatalogExercise | null>(null)
   const [openDay, setOpenDay] = useState<number | null>(0)
+  const [doneExercises, setDoneExercises] = useState<Set<string>>(new Set())
   const [leadForm, setLeadForm] = useState({ name: '', email: '', area: 'Nutrição', registro: '', precoSessao: '' })
   const [leadSending, setLeadSending] = useState(false)
   const [leadDone, setLeadDone] = useState(false)
@@ -1704,15 +1705,22 @@ export default function App() {
                         <ul className="tlist">
                           {day.exercises.map((ex, ei) => {
                             const cat = lookup(ex.name)
+                            const done = doneExercises.has(`${di}:${ei}`)
                             return (
-                              <li key={ei}>
-                                <div className="tex-head">
-                                  <div className="tex-info">
-                                    <strong>{ex.name}</strong>
-                                    <span className="tmeta">
-                                      {ex.sets} séries de {ex.reps} reps{ex.rest ? `, descanso ${ex.rest}` : ''}
-                                    </span>
-                                  </div>
+                              <li className="tex-row" key={ei}>
+                                {cat && (
+                                  <img
+                                    className="tex-thumb"
+                                    src={form.gender === 'female' && cat.thumbFemale ? cat.thumbFemale : cat.thumb}
+                                    alt={ex.name}
+                                    loading="lazy"
+                                  />
+                                )}
+                                <div className="tex-body">
+                                  <div className="tex-name">{ex.name}{cat && <span className="tex-muscle">{cat.muscle}</span>}</div>
+                                  <div className="tex-meta">{ex.sets} séries × {ex.reps} reps{ex.rest ? ` · ${ex.rest}` : ''}</div>
+                                </div>
+                                <div className="tex-right">
                                   <button
                                     className="btn-view"
                                     disabled={!cat}
@@ -1721,8 +1729,9 @@ export default function App() {
                                   >
                                     Ver
                                   </button>
+                                  <SetTimer sets={ex.sets} onDone={() => setDoneExercises((s) => new Set(s).add(`${di}:${ei}`))} />
+                                  <span className={`status${done ? ' done' : ' pending'}`}>{done ? '✓' : ''}</span>
                                 </div>
-                                <SetTimer sets={ex.sets} />
                               </li>
                             )
                           })}

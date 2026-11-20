@@ -231,10 +231,19 @@ table.result td small { color: var(--muted); font-size: 0.8rem; }
 .tday h3 { margin: 0 0 6px; font-size: 0.92rem; font-weight: 700; }
 .tlist { list-style: none; margin: 0; padding: 0; }
 .tlist li {
-  display: flex; flex-direction: column; align-items: stretch; gap: 8px;
-  padding: 10px 0; border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 11px;
+  padding: 11px 0; border-bottom: 1px solid var(--border);
 }
 .tlist li:last-child { border-bottom: none; }
+.tex-thumb { flex: none; width: 44px; height: 44px; border-radius: 9px; object-fit: cover; background: var(--accent-soft); }
+.tex-body { flex: 1; min-width: 0; }
+.tex-name { font-weight: 700; font-size: 0.92rem; display: flex; align-items: center; gap: 7px; }
+.tex-muscle { background: var(--accent-soft); color: var(--accent); font-weight: 700; font-size: 0.68rem; padding: 2px 8px; border-radius: 999px; flex-shrink: 0; }
+.tex-meta { color: var(--muted); font-size: 0.78rem; margin-top: 1px; }
+.tex-right { display: flex; align-items: center; gap: 8px; flex: none; }
+.status { flex: none; width: 20px; height: 20px; border-radius: 50%; display: grid; place-items: center; font-size: 0.72rem; font-weight: 800; }
+.status.done { background: var(--ok); color: #fff; }
+.status.pending { border: 2px solid var(--border); }
 .tlist strong { display: block; font-size: 0.9rem; }
 .tmeta { color: var(--muted); font-size: 0.78rem; display: block; }
 .difficulty { display: inline-block; margin-left: 4px; padding: 1px 8px; border-radius: 999px; font-size: 0.68rem; font-weight: 700; vertical-align: middle; }
