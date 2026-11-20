@@ -216,7 +216,7 @@ table.result td small { color: var(--muted); font-size: 0.8rem; }
 .admin-label { color: var(--muted); font-weight: 600; flex-shrink: 0; }
 @media (max-width: 480px) { .admin-fields { grid-template-columns: 1fr; } }
 
-.legal { color: var(--muted); font-size: 0.75rem; margin-top: 12px; }
+.legal { color: var(--muted); font-size: 0.8rem; margin-top: 12px; line-height: 1.5; }
 .footer { text-align: center; color: var(--muted); font-size: 0.78rem; padding: 28px 0 0; }
 .footer p { margin: 5px 0; }
 .version { font-size: 0.72rem; opacity: 0.75; }
@@ -247,6 +247,7 @@ table.result td small { color: var(--muted); font-size: 0.8rem; }
   cursor: pointer; font-family: inherit; font-size: 0.8rem; white-space: nowrap; flex-shrink: 0;
 }
 .btn-view:hover { background: #dfe8fe; }
+.btn-view:disabled { opacity: 0.45; cursor: not-allowed; border-color: var(--border); background: transparent; color: var(--muted); }
 
 /* Cronômetro por série + aba Performance */
 .tex-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
@@ -280,6 +281,9 @@ table.result td small { color: var(--muted); font-size: 0.8rem; }
 .perf-chart { margin-top: 6px; }
 .perf-heat { overflow-x: auto; padding: 4px 0; }
 .muted { color: var(--muted); font-size: 0.8rem; }
+.perf-empty { display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; padding: 18px 12px; color: var(--muted); }
+.perf-empty svg { opacity: 0.55; flex-shrink: 0; }
+.perf-empty .muted { margin: 0; }
 
 .react-calendar-heatmap .heat-0 { fill: #e8edf5; }
 .react-calendar-heatmap .heat-1 { fill: #c7d9ff; }

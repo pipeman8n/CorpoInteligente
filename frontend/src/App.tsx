@@ -1611,11 +1611,14 @@ export default function App() {
                                   </span>
                                 </div>
                                 <div className="tex-actions">
-                                  {cat && (
-                                    <button className="btn-view" onClick={() => setViewing(cat)}>
-                                      Ver
-                                    </button>
-                                  )}
+                                  <button
+                                    className="btn-view"
+                                    disabled={!cat}
+                                    title={cat ? 'Ver vídeo e instruções' : 'Sem vídeo disponível'}
+                                    onClick={() => cat && setViewing(cat)}
+                                  >
+                                    Ver
+                                  </button>
                                   <SetTimer />
                                 </div>
                               </li>
@@ -1663,7 +1666,17 @@ export default function App() {
                         />
                       </div>
                     ) : (
-                      <p className="muted">Nenhum treino registrado. Toque em "Registrar treino de hoje" para começar.</p>
+                      <div className="perf-empty">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" width="34" height="34" aria-hidden="true">
+                          <rect x="3" y="5" width="18" height="16" rx="2" />
+                          <line x1="8" y1="3" x2="8" y2="7" />
+                          <line x1="16" y1="3" x2="16" y2="7" />
+                          <line x1="3" y1="10" x2="21" y2="10" />
+                          <rect x="7" y="14" width="2.5" height="2.5" rx="0.5" />
+                          <rect x="13" y="14" width="2.5" height="2.5" rx="0.5" />
+                        </svg>
+                        <p className="muted">Nenhum treino registrado. Toque em "Registrar treino de hoje" para começar.</p>
+                      </div>
                     )}
                   </div>
 
@@ -1700,7 +1713,13 @@ export default function App() {
                         </ResponsiveContainer>
                       </div>
                     ) : (
-                      <p className="muted">Registre o peso para visualizar o gráfico de evolução.</p>
+                      <div className="perf-empty">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" width="34" height="34" aria-hidden="true">
+                          <path d="M3 3v18h18" />
+                          <path d="M7 15l3-4 3 2 4-6" />
+                        </svg>
+                        <p className="muted">Registre o peso para visualizar o gráfico de evolução.</p>
+                      </div>
                     )}
                   </div>
                   {perfMsg && <div className="ok">{perfMsg}</div>}
