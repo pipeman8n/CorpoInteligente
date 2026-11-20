@@ -1701,42 +1701,59 @@ export default function App() {
                         <h3>{day.name}</h3>
                         <span className="tday-toggle">{openDay === di ? '▾' : '▸'}</span>
                       </button>
-                      {openDay === di && (
-                        <ul className="tlist">
-                          {day.exercises.map((ex, ei) => {
-                            const cat = lookup(ex.name)
-                            const done = doneExercises.has(`${di}:${ei}`)
-                            return (
-                              <li className="tex-row" key={ei}>
-                                {cat && (
-                                  <img
-                                    className="tex-thumb"
-                                    src={form.gender === 'female' && cat.thumbFemale ? cat.thumbFemale : cat.thumb}
-                                    alt={ex.name}
-                                    loading="lazy"
-                                  />
-                                )}
-                                <div className="tex-body">
-                                  <div className="tex-name">{ex.name}{cat && <span className="tex-muscle">{cat.muscle}</span>}</div>
-                                  <div className="tex-meta">{ex.sets} séries × {ex.reps} reps{ex.rest ? ` · ${ex.rest}` : ''}</div>
+                      {openDay === di && (() => {
+                        const keys = day.exercises.map((_, ei) => `${di}:${ei}`)
+                        const currentIdx = keys.findIndex((k) => !doneExercises.has(k))
+                        const current = currentIdx >= 0 ? day.exercises[currentIdx] : null
+                        const curCat = current ? lookup(current.name) : null
+                        const doneRows = currentIdx > 0 ? day.exercises.slice(0, currentIdx) : []
+                        const proxRows = currentIdx >= 0 ? day.exercises.slice(currentIdx + 1) : []
+                        const renderRow = (ex: { name: string; sets: number; reps: string; rest?: string }, idx: number, isDone: boolean) => {
+                          const cat = lookup(ex.name)
+                          return (
+                            <li className="tex-row" key={idx}>
+                              {cat && (
+                                <img className="tex-thumb" src={form.gender === 'female' && cat.thumbFemale ? cat.thumbFemale : cat.thumb} alt={ex.name} loading="lazy" />
+                              )}
+                              <div className="tex-body">
+                                <div className="tex-name">{ex.name}{cat && <span className="tex-muscle">{cat.muscle}</span>}</div>
+                                <div className="tex-meta">{ex.sets} séries × {ex.reps} reps{ex.rest ? ` · ${ex.rest}` : ''}</div>
+                              </div>
+                              <div className="tex-right">
+                                <button className="btn-view" disabled={!cat} title={cat ? 'Ver vídeo e instruções' : 'Sem vídeo disponível'} onClick={() => cat && setViewing(cat)}>Ver</button>
+                                <span className={`status${isDone ? ' done' : ' pending'}`}>{isDone ? '✓' : ''}</span>
+                              </div>
+                            </li>
+                          )
+                        }
+                        return (
+                          <div className="tday-body">
+                            {doneRows.length > 0 && (
+                              <ul className="tlist">{doneRows.map((ex, i) => renderRow(ex, i, true))}</ul>
+                            )}
+                            {current && (
+                              <div className="current">
+                                <div className="current-head">
+                                  {curCat && <img className="current-thumb" src={form.gender === 'female' && curCat.thumbFemale ? curCat.thumbFemale : curCat.thumb} alt={current.name} />}
+                                  <div className="current-info">
+                                    <div className="current-name">{current.name}</div>
+                                    <div className="current-tags"><span className="tex-muscle">{curCat?.muscle}</span><span className="current-meta">{current.sets} séries × {current.reps} reps{current.rest ? ` · ${current.rest}` : ''}</span></div>
+                                  </div>
                                 </div>
-                                <div className="tex-right">
-                                  <button
-                                    className="btn-view"
-                                    disabled={!cat}
-                                    title={cat ? 'Ver vídeo e instruções' : 'Sem vídeo disponível'}
-                                    onClick={() => cat && setViewing(cat)}
-                                  >
-                                    Ver
-                                  </button>
-                                  <SetTimer sets={ex.sets} onDone={() => setDoneExercises((s) => new Set(s).add(`${di}:${ei}`))} />
-                                  <span className={`status${done ? ' done' : ' pending'}`}>{done ? '✓' : ''}</span>
+                                <div className="current-timer">
+                                  <SetTimer sets={current.sets} onDone={() => setDoneExercises((s) => new Set(s).add(`${di}:${currentIdx}`))} />
                                 </div>
-                              </li>
-                            )
-                          })}
-                        </ul>
-                      )}
+                              </div>
+                            )}
+                            {proxRows.length > 0 && (
+                              <div className="queue">
+                                <div className="queue-label">Próximos</div>
+                                <ul className="tlist">{proxRows.map((ex, i) => renderRow(ex, currentIdx + 1 + i, false))}</ul>
+                              </div>
+                            )}
+                          </div>
+                        )
+                      })()}
                     </div>
                   ))}
                 </div>

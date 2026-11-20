@@ -244,6 +244,18 @@ table.result td small { color: var(--muted); font-size: 0.8rem; }
 .status { flex: none; width: 20px; height: 20px; border-radius: 50%; display: grid; place-items: center; font-size: 0.72rem; font-weight: 800; }
 .status.done { background: var(--ok); color: #fff; }
 .status.pending { border: 2px solid var(--border); }
+.tday-body { padding: 4px 0 2px; }
+.current { padding: 2px 0; }
+.current-head { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+.current-thumb { flex: none; width: 64px; height: 64px; border-radius: 12px; object-fit: cover; background: var(--accent-soft); }
+.current-info { flex: 1; min-width: 0; }
+.current-name { font-size: 1.05rem; font-weight: 800; letter-spacing: -0.2px; }
+.current-tags { display: flex; align-items: center; gap: 7px; margin-top: 4px; flex-wrap: wrap; }
+.current-meta { color: var(--muted); font-size: 0.8rem; }
+.current-timer { background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 12px; margin: 4px 0; }
+.current-timer .set-timer { justify-content: space-between; }
+.queue { margin-top: 2px; }
+.queue-label { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); margin: 8px 0 2px; }
 .tlist strong { display: block; font-size: 0.9rem; }
 .tmeta { color: var(--muted); font-size: 0.78rem; display: block; }
 .difficulty { display: inline-block; margin-left: 4px; padding: 1px 8px; border-radius: 999px; font-size: 0.68rem; font-weight: 700; vertical-align: middle; }
