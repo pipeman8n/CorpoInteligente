@@ -262,7 +262,7 @@ export default function App() {
   const [alimentoSearching, setAlimentoSearching] = useState(false)
   const [viewing, setViewing] = useState<CatalogExercise | null>(null)
   const [openDay, setOpenDay] = useState<number | null>(0)
-  const [leadForm, setLeadForm] = useState({ name: '', email: '', area: 'Nutrição', registro: '' })
+  const [leadForm, setLeadForm] = useState({ name: '', email: '', area: 'Nutrição', registro: '', precoSessao: '' })
   const [leadSending, setLeadSending] = useState(false)
   const [leadDone, setLeadDone] = useState(false)
   const [showFrequency, setShowFrequency] = useState(false)
@@ -1177,7 +1177,6 @@ export default function App() {
                     <select value={leadForm.area} onChange={(e) => setLeadForm({ ...leadForm, area: e.target.value })}>
                       <option>Nutrição</option>
                       <option>Educação física</option>
-                      <option>Outra</option>
                     </select>
                   </div>
                   <div>
@@ -1185,6 +1184,8 @@ export default function App() {
                     <input type="text" placeholder="00000-G/SP" value={leadForm.registro} onChange={(e) => setLeadForm({ ...leadForm, registro: e.target.value })} />
                   </div>
                 </div>
+                <label>Valor da sessão (R$)</label>
+                <input type="text" placeholder="ex.: 180" value={leadForm.precoSessao} onChange={(e) => setLeadForm({ ...leadForm, precoSessao: e.target.value })} />
                 <button className="btn btn-primary" type="submit" disabled={leadSending}>{leadSending ? 'Enviando...' : 'Entrar na lista de espera'}</button>
                 <p className="lead-note">O cadastro profissional abre em breve. Deixe seu contato para ser um dos primeiros.</p>
               </form>
@@ -1219,7 +1220,7 @@ export default function App() {
           </div>
           <div className="hub-banner">
             <div><b>Quer acompanhamento de verdade?</b><span>Conecte-se a um personal ou nutricionista que entende seu plano.</span></div>
-            <button className="btn btn-primary" onClick={() => { setView('home'); setTimeout(() => document.getElementById('profissionais')?.scrollIntoView({ behavior: 'smooth' }), 50) }}>Encontrar profissional</button>
+            <button className="btn btn-primary" onClick={() => setView('profissional')}>Encontrar profissional</button>
           </div>
         </div>
       )}

@@ -223,5 +223,6 @@ export const saveProfessionalLead = (data: {
   email: string
   area: string
   registro?: string
+  precoSessao?: string
 }): Promise<{ success: boolean; id: string }> =>
   a1('save_professional_lead', { data })

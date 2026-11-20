@@ -294,13 +294,19 @@ Deno.serve(async (req) => {
       }
       case 'update_calculation': {
         if (!uid) return json({ error: 'Não autenticado' }, 401);
-        const { data: updated, error } = await db.from('calculations').update(toDbRow(body.data ?? {})).eq('id', body.calculationId).eq('user_id', uid).select().single();
+        const uq = isAdmin
+          ? db.from('calculations').update(toDbRow(body.data ?? {})).eq('id', body.calculationId)
+          : db.from('calculations').update(toDbRow(body.data ?? {})).eq('id', body.calculationId).eq('user_id', uid);
+        const { data: updated, error } = await uq.select().single();
         if (error) return json({ error: error.message }, 400);
         return json(toCamelRow(updated));
       }
       case 'delete_calculation': {
         if (!uid) return json({ error: 'Não autenticado' }, 401);
-        const { error } = await db.from('calculations').delete().eq('id', body.calculationId).eq('user_id', uid);
+        const q = isAdmin
+          ? db.from('calculations').delete().eq('id', body.calculationId)
+          : db.from('calculations').delete().eq('id', body.calculationId).eq('user_id', uid);
+        const { error } = await q;
         if (error) return json({ error: error.message }, 400);
         return json({ success: true });
       }
@@ -462,8 +468,9 @@ Deno.serve(async (req) => {
         if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return json({ error: 'E-mail inválido' }, 400);
         const area = String(d.area ?? 'Nutrição').trim() || 'Nutrição';
         const registro = d.registro ? String(d.registro).trim() : null;
+        const precoSessao = d.precoSessao ? String(d.precoSessao).trim() : null;
         const { data: inserted, error } = await db.from('professional_leads')
-          .upsert({ name, email, area, registro }, { onConflict: 'email' })
+          .upsert({ name, email, area, registro, preco_sessao: precoSessao }, { onConflict: 'email' })
           .select().single();
         if (error) return json({ error: error.message }, 400);
         return json({ success: true, id: inserted.id });
