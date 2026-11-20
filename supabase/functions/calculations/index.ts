@@ -5,7 +5,19 @@ const SUPABASE_URL = 'https://ylmwwwtnqhqjtufqmctf.supabase.co';
 const SERVICE_ROLE = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? '';
 
 const DEEPSEEK_KEY = Deno.env.get('DEEPSEEK_API_KEY') ?? '';
+const OMNIR_KEY = Deno.env.get('OMNIROUTE_API_KEY') ?? '';
 const ADMIN_EMAIL = 'ueberson.lsousa@gmail.com';
+
+async function embedQuery(text: string): Promise<number[]> {
+  const res = await fetch('https://omniroute.holofoti.com/v1/embeddings', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + OMNIR_KEY },
+    body: JSON.stringify({ model: 'gemini/gemini-embedding-2', input: [text] }),
+  });
+  if (!res.ok) throw new Error('embed ' + res.status);
+  const data = await res.json();
+  return data.data[0].embedding;
+}
 
 const SYSTEM_PROMPT = 'Você é um excelente nutrólogo esportivo com vasto conhecimento em hipertrofia, emagrecimento, condicionamento físico e reposição hormonal, além de preparador físico de atletas. Você entrega informações relevantes com alta clareza. Responda SEMPRE em português do Brasil.';
 
@@ -23,12 +35,14 @@ const CAMEL_TO_SNAKE: Record<string, string> = {
   bodyFatEstimationMethod: 'body_fat_estimation_method', activityLevel: 'activity_level',
   savedAt: 'created_at', trainingProgram: 'training_program',
   fullName: 'full_name', termsAccepted: 'terms_accepted',
+  clientName: 'client_name', trainedDate: 'trained_date', measuredDate: 'measured_date',
 };
 const SNAKE_TO_CAMEL: Record<string, string> = {
   user_id: 'userId', calculation_code: 'calculationCode', body_fat: 'bodyFat',
   body_fat_estimation_method: 'bodyFatEstimationMethod', activity_level: 'activityLevel',
   created_at: 'savedAt', training_program: 'trainingProgram',
   full_name: 'fullName', terms_accepted: 'termsAccepted',
+  client_name: 'clientName', trained_date: 'trainedDate', measured_date: 'measuredDate',
 };
 const toDbRow = (o: Record<string, unknown>) => {
   const out: Record<string, unknown> = {};
@@ -360,6 +374,16 @@ Deno.serve(async (req) => {
       case 'search_alimentos': {
         const q = String(body.query ?? '').trim();
         if (!q) return json({ results: [] });
+        // 1) busca semântica (embedding + pgvector)
+        if (OMNIR_KEY) {
+          try {
+            const emb = await embedQuery(q);
+            const vstr = '[' + emb.map((x) => x.toFixed(6)).join(',') + ']';
+            const { data: rows, error } = await db.rpc('match_alimentos', { query_embedding: vstr, match_count: 20 });
+            if (!error && rows && rows.length) return json({ results: rows });
+          } catch { /* cai pro ilike */ }
+        }
+        // 2) fallback: substring
         const { data: rows, error } = await db.from('alimentos')
           .select('id, descricao, categoria, energia_kcal, proteina_g, lipideos_g, carboidrato_g, fibra_g, sodio_mg')
           .ilike('descricao', `%${q}%`)
@@ -367,6 +391,51 @@ Deno.serve(async (req) => {
           .limit(20);
         if (error) return json({ error: error.message }, 400);
         return json({ results: rows ?? [] });
+      }
+      case 'save_training_day': {
+        if (!uid) return json({ error: 'Não autenticado' }, 401);
+        const clientName = String(body.clientName ?? '').trim();
+        if (!clientName) return json({ error: 'Nome do cliente é obrigatório' }, 400);
+        const trainedDate = String(body.trainedDate ?? '').slice(0, 10);
+        if (!trainedDate) return json({ error: 'Data é obrigatória' }, 400);
+        const { data: inserted, error } = await db.from('training_days')
+          .upsert({ user_id: uid, client_name: clientName, trained_date: trainedDate }, { onConflict: 'user_id,client_name,trained_date' })
+          .select().single();
+        if (error) return json({ error: error.message }, 400);
+        return json(toCamelRow(inserted));
+      }
+      case 'get_training_days': {
+        if (!uid) return json({ error: 'Não autenticado' }, 401);
+        const clientName = String(body.clientName ?? '').trim();
+        let q = db.from('training_days').select('*').eq('user_id', uid);
+        if (clientName) q = q.eq('client_name', clientName);
+        const { data: rows, error } = await q.order('trained_date', { ascending: false });
+        if (error) return json({ error: error.message }, 400);
+        return json((rows ?? []).map(toCamelRow));
+      }
+      case 'save_measurement': {
+        if (!uid) return json({ error: 'Não autenticado' }, 401);
+        const d = (body.data ?? {}) as Record<string, unknown>;
+        const clientName = String(d.clientName ?? '').trim();
+        if (!clientName) return json({ error: 'Nome do cliente é obrigatório' }, 400);
+        const measuredDate = String(d.measuredDate ?? '').slice(0, 10);
+        const weight = Number(d.weight);
+        if (!measuredDate || !Number.isFinite(weight) || weight <= 0) return json({ error: 'Data e peso são obrigatórios' }, 400);
+        const bodyFat = d.bodyFat == null || d.bodyFat === '' ? null : Number(d.bodyFat);
+        const { data: inserted, error } = await db.from('measurements')
+          .upsert({ user_id: uid, client_name: clientName, measured_date: measuredDate, weight, body_fat: bodyFat }, { onConflict: 'user_id,client_name,measured_date' })
+          .select().single();
+        if (error) return json({ error: error.message }, 400);
+        return json(toCamelRow(inserted));
+      }
+      case 'get_measurements': {
+        if (!uid) return json({ error: 'Não autenticado' }, 401);
+        const clientName = String(body.clientName ?? '').trim();
+        let q = db.from('measurements').select('*').eq('user_id', uid);
+        if (clientName) q = q.eq('client_name', clientName);
+        const { data: rows, error } = await q.order('measured_date', { ascending: true });
+        if (error) return json({ error: error.message }, 400);
+        return json((rows ?? []).map(toCamelRow));
       }
       default:
         return json({ error: 'Unknown action' }, 400);

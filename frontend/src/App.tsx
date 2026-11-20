@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, type FormEvent } from 'react'
 import {
   calculate,
   activityLabel,
@@ -27,11 +27,21 @@ import {
   type Alimento,
   type DietaPlan,
   type AdminProfile,
+  saveTrainingDay,
+  getTrainingDays,
+  saveMeasurement,
+  getMeasurements,
+  type TrainingDayRecord,
+  type Measurement,
 } from './api'
 import { EXERCISE_CATALOG, type CatalogExercise } from './exerciseCatalog'
 import { buildTrainingProgram } from './trainingPlan'
 import { buildStrategy } from './strategyPlan'
 import { buildDietaMacros, CANETA_DOSES, CANETA_LABELS, type CanetaInfo, type CanetaSubstancia, type CanetaCiclo } from './dietaPlan'
+import SetTimer from './SetTimer'
+import CalendarHeatmap from 'react-calendar-heatmap'
+import 'react-calendar-heatmap/dist/styles.css'
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
 import { supabase } from './supabase'
 
 const ADMIN_EMAIL = 'ueberson.lsousa@gmail.com'
@@ -220,7 +230,7 @@ function dietaToMarkdown(plan: DietaPlan): string {
 export default function App() {
   const [view, setView] = useState<'app' | 'meus' | 'cadastro' | 'home' | 'hub' | 'admin'>('home')
   const [step, setStep] = useState<1 | 2 | 3>(1)
-  const [resultTab, setResultTab] = useState<'analises' | 'dieta' | 'treinos'>('analises')
+  const [resultTab, setResultTab] = useState<'analises' | 'dieta' | 'treinos' | 'performance'>('analises')
   const [form, setForm] = useState<ClientData>(emptyForm)
   const [result, setResult] = useState<RaioXResult | null>(null)
   const [calcCode, setCalcCode] = useState(genCode())
@@ -249,6 +259,13 @@ export default function App() {
   const [viewing, setViewing] = useState<CatalogExercise | null>(null)
   const [openDay, setOpenDay] = useState<number | null>(0)
   const [showFrequency, setShowFrequency] = useState(false)
+  const [perfDays, setPerfDays] = useState<TrainingDayRecord[]>([])
+  const [perfMeas, setPerfMeas] = useState<Measurement[]>([])
+  const [perfLoading, setPerfLoading] = useState(false)
+  const [perfMsg, setPerfMsg] = useState('')
+  const [measDate, setMeasDate] = useState(() => new Date().toISOString().slice(0, 10))
+  const [measWeight, setMeasWeight] = useState('')
+  const [measBodyFat, setMeasBodyFat] = useState('')
   const [showDuration, setShowDuration] = useState(false)
   const [visits, setVisits] = useState<number | null>(null)
   const [user, setUser] = useState<{ id: string; email?: string } | null>(null)
@@ -848,6 +865,85 @@ export default function App() {
     return undefined
   }
 
+  // --- Performance: calendário de treino + medidas ---
+  const loadPerf = async () => {
+    if (!form.name.trim()) return
+    setPerfLoading(true)
+    setPerfMsg('')
+    try {
+      const [days, meas] = await Promise.all([
+        getTrainingDays(form.name.trim()),
+        getMeasurements(form.name.trim()),
+      ])
+      setPerfDays(days)
+      setPerfMeas(meas)
+    } catch {
+      setPerfMsg('Não foi possível carregar os dados de performance.')
+    } finally {
+      setPerfLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    if (resultTab === 'performance' && form.name.trim()) {
+      loadPerf()
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [resultTab])
+
+  const onRegisterToday = async () => {
+    if (!form.name.trim()) return
+    setPerfLoading(true)
+    setPerfMsg('')
+    try {
+      const today = new Date().toISOString().slice(0, 10)
+      await saveTrainingDay(form.name.trim(), today)
+      setPerfMsg('Treino de hoje registrado!')
+      await loadPerf()
+    } catch {
+      setPerfMsg('Erro ao registrar o treino.')
+    } finally {
+      setPerfLoading(false)
+    }
+  }
+
+  const onSaveMeasure = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    if (!form.name.trim() || !measWeight) return
+    setPerfLoading(true)
+    setPerfMsg('')
+    try {
+      await saveMeasurement({
+        clientName: form.name.trim(),
+        measuredDate: measDate,
+        weight: Number(measWeight),
+        bodyFat: measBodyFat === '' ? null : Number(measBodyFat),
+      })
+      setMeasWeight('')
+      setMeasBodyFat('')
+      setPerfMsg('Medida salva!')
+      await loadPerf()
+    } catch {
+      setPerfMsg('Erro ao salvar a medida.')
+    } finally {
+      setPerfLoading(false)
+    }
+  }
+
+  // derivados p/ heatmap e gráfico
+  const heatValues = perfDays.map((d) => ({ date: d.trainedDate, count: 1 }))
+  const heatStart = (() => {
+    const s = new Date()
+    s.setFullYear(s.getFullYear() - 1)
+    return s
+  })()
+  const chartData = perfMeas.map((m) => ({
+    date: m.measuredDate.slice(5),
+    weight: m.weight,
+    bodyFat: m.bodyFat ?? null,
+  }))
+  const hasBodyFat = perfMeas.some((m) => m.bodyFat != null)
+
   const leanPct = result && form.weight > 0 ? Math.round((result.leanMass / form.weight) * 100) : null
 
   return (
@@ -1279,6 +1375,7 @@ export default function App() {
                 <button className={`rtab${resultTab === 'analises' ? ' active' : ''}`} onClick={() => setResultTab('analises')}>Análises</button>
                 <button className={`rtab${resultTab === 'dieta' ? ' active' : ''}${aiContent ? '' : ' locked'}`} onClick={() => { if (aiContent) setResultTab('dieta') }}>Dieta</button>
                 <button className={`rtab${resultTab === 'treinos' ? ' active' : ''}${strategyContent ? '' : ' locked'}`} onClick={() => { if (strategyContent) setResultTab('treinos') }}>Treinos</button>
+                <button className={`rtab${resultTab === 'performance' ? ' active' : ''}`} onClick={() => setResultTab('performance')}>Performance</button>
               </div>
 
               {resultTab === 'analises' && (
@@ -1480,11 +1577,14 @@ export default function App() {
                                     {ex.sets} séries de {ex.reps} reps{ex.rest ? `, descanso ${ex.rest}` : ''}
                                   </span>
                                 </div>
-                                {cat && (
-                                  <button className="btn-view" onClick={() => setViewing(cat)}>
-                                    Ver
-                                  </button>
-                                )}
+                                <div className="tex-actions">
+                                  {cat && (
+                                    <button className="btn-view" onClick={() => setViewing(cat)}>
+                                      Ver
+                                    </button>
+                                  )}
+                                  <SetTimer />
+                                </div>
                               </li>
                             )
                           })}
@@ -1502,6 +1602,67 @@ export default function App() {
               </div>
               {savedMsg && <div className="ok">{savedMsg}</div>}
               </>
+              )}
+
+              {resultTab === 'performance' && (
+                <>
+                  <h3 className="ai-title">Performance do Cliente</h3>
+                  <p className="hint">
+                    Registre os dias de treino e as medidas do cliente para acompanhar a evolução ao longo do tempo.
+                  </p>
+
+                  <div className="perf-card">
+                    <div className="perf-head">
+                      <h4>Calendário de Treino</h4>
+                      <button className="btn btn-primary" onClick={onRegisterToday} disabled={perfLoading}>
+                        Registrar treino de hoje
+                      </button>
+                    </div>
+                    {perfDays.length > 0 ? (
+                      <div className="perf-heat">
+                        <CalendarHeatmap
+                          startDate={heatStart}
+                          endDate={new Date()}
+                          values={heatValues}
+                          classForValue={(v: { count?: number } | null) => (v && v.count ? `heat-${Math.min(v.count, 4)}` : 'heat-0')}
+                          showWeekdayLabels
+                          gutterSize={3}
+                        />
+                      </div>
+                    ) : (
+                      <p className="muted">Nenhum treino registrado. Toque em "Registrar treino de hoje" para começar.</p>
+                    )}
+                  </div>
+
+                  <div className="perf-card">
+                    <h4>Acompanhamento de Peso e Medidas</h4>
+                    <form className="perf-form" onSubmit={onSaveMeasure}>
+                      <input type="date" value={measDate} max={new Date().toISOString().slice(0, 10)} onChange={(e) => setMeasDate(e.target.value)} />
+                      <input type="number" step="0.1" min="1" placeholder="Peso (kg)" value={measWeight} onChange={(e) => setMeasWeight(e.target.value)} required />
+                      <input type="number" step="0.1" min="1" max="80" placeholder="% gordura (opcional)" value={measBodyFat} onChange={(e) => setMeasBodyFat(e.target.value)} />
+                      <button className="btn btn-primary" type="submit" disabled={perfLoading}>
+                        Salvar medida
+                      </button>
+                    </form>
+                    {perfMeas.length > 0 ? (
+                      <div className="perf-chart">
+                        <ResponsiveContainer width="100%" height={220}>
+                          <LineChart data={chartData}>
+                            <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+                            <XAxis dataKey="date" tick={{ fontSize: 11 }} />
+                            <YAxis width={44} tick={{ fontSize: 11 }} />
+                            <Tooltip />
+                            <Line type="monotone" dataKey="weight" name="Peso (kg)" stroke="#0066ff" strokeWidth={2} dot={{ r: 3 }} />
+                            {hasBodyFat && <Line type="monotone" dataKey="bodyFat" name="Gordura (%)" stroke="#f59e0b" strokeWidth={2} dot={{ r: 3 }} />}
+                          </LineChart>
+                        </ResponsiveContainer>
+                      </div>
+                    ) : (
+                      <p className="muted">Registre o peso para visualizar o gráfico de evolução.</p>
+                    )}
+                  </div>
+                  {perfMsg && <div className="ok">{perfMsg}</div>}
+                </>
               )}
 
               <div className="actions">

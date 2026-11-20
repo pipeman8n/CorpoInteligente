@@ -178,3 +178,38 @@ export interface AdminProfile {
 
 export const getAllProfiles = (): Promise<AdminProfile[]> =>
   a1('get_all_profiles', {})
+
+// --- Performance (calendário de treino + medidas) ---
+
+export interface TrainingDayRecord {
+  id: string
+  userId: string
+  clientName: string
+  trainedDate: string // YYYY-MM-DD
+}
+
+export interface Measurement {
+  id: string
+  userId: string
+  clientName: string
+  measuredDate: string // YYYY-MM-DD
+  weight: number
+  bodyFat: number | null
+}
+
+export const saveTrainingDay = (clientName: string, trainedDate: string): Promise<TrainingDayRecord> =>
+  a1('save_training_day', { clientName, trainedDate })
+
+export const getTrainingDays = (clientName: string): Promise<TrainingDayRecord[]> =>
+  a1('get_training_days', { clientName })
+
+export const saveMeasurement = (data: {
+  clientName: string
+  measuredDate: string
+  weight: number
+  bodyFat: number | null
+}): Promise<Measurement> =>
+  a1('save_measurement', { data })
+
+export const getMeasurements = (clientName: string): Promise<Measurement[]> =>
+  a1('get_measurements', { clientName })
