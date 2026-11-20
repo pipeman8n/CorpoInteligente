@@ -217,3 +217,11 @@ export const saveMeasurement = (data: {
 
 export const getMeasurements = (clientCode: string): Promise<Measurement[]> =>
   a1('get_measurements', { clientCode })
+
+export const saveProfessionalLead = (data: {
+  name: string
+  email: string
+  area: string
+  registro?: string
+}): Promise<{ success: boolean; id: string }> =>
+  a1('save_professional_lead', { data })

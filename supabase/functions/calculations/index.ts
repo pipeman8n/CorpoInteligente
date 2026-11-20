@@ -454,6 +454,20 @@ Deno.serve(async (req) => {
         if (error) return json({ error: error.message }, 400);
         return json((rows ?? []).map(toCamelRow));
       }
+      case 'save_professional_lead': {
+        const d = (body.data ?? {}) as Record<string, unknown>;
+        const name = String(d.name ?? '').trim();
+        const email = String(d.email ?? '').trim().toLowerCase();
+        if (!name) return json({ error: 'Nome é obrigatório' }, 400);
+        if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return json({ error: 'E-mail inválido' }, 400);
+        const area = String(d.area ?? 'Nutrição').trim() || 'Nutrição';
+        const registro = d.registro ? String(d.registro).trim() : null;
+        const { data: inserted, error } = await db.from('professional_leads')
+          .upsert({ name, email, area, registro }, { onConflict: 'email' })
+          .select().single();
+        if (error) return json({ error: error.message }, 400);
+        return json({ success: true, id: inserted.id });
+      }
       default:
         return json({ error: 'Unknown action' }, 400);
     }

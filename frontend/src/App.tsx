@@ -31,6 +31,7 @@ import {
   getTrainingDays,
   saveMeasurement,
   getMeasurements,
+  saveProfessionalLead,
   type TrainingDayRecord,
   type Measurement,
 } from './api'
@@ -231,7 +232,7 @@ function dietaToMarkdown(plan: DietaPlan): string {
 }
 
 export default function App() {
-  const [view, setView] = useState<'app' | 'meus' | 'cadastro' | 'home' | 'hub' | 'admin'>('home')
+  const [view, setView] = useState<'app' | 'meus' | 'cadastro' | 'home' | 'hub' | 'admin' | 'profissional'>('home')
   const [step, setStep] = useState<1 | 2 | 3>(1)
   const [resultTab, setResultTab] = useState<'analises' | 'dieta' | 'treinos' | 'performance'>('analises')
   const [form, setForm] = useState<ClientData>(emptyForm)
@@ -261,6 +262,9 @@ export default function App() {
   const [alimentoSearching, setAlimentoSearching] = useState(false)
   const [viewing, setViewing] = useState<CatalogExercise | null>(null)
   const [openDay, setOpenDay] = useState<number | null>(0)
+  const [leadForm, setLeadForm] = useState({ name: '', email: '', area: 'Nutrição', registro: '' })
+  const [leadSending, setLeadSending] = useState(false)
+  const [leadDone, setLeadDone] = useState(false)
   const [showFrequency, setShowFrequency] = useState(false)
   const [perfDays, setPerfDays] = useState<TrainingDayRecord[]>([])
   const [perfMeas, setPerfMeas] = useState<Measurement[]>([])
@@ -423,6 +427,7 @@ export default function App() {
     if (view === 'meus') document.title = `Meus Cálculos - ${base}`
     else if (view === 'cadastro') document.title = `Meu Cadastro - ${base}`
     else if (view === 'home') document.title = `${base} | Avaliação Corporal e Profissionais`
+    else if (view === 'profissional') document.title = `${base} | Para profissionais`
     else if (view === 'hub') document.title = `${base} | Meu Painel`
     else if (view === 'admin') document.title = `Cadastros - ${base}`
     else if (step >= 3) document.title = `${base} | Análise`
@@ -430,6 +435,20 @@ export default function App() {
   }, [view, step])
 
   const set = (k: keyof ClientData, v: unknown) => setForm((f) => ({ ...f, [k]: v }))
+
+  const submitLead = async (e: FormEvent) => {
+    e.preventDefault()
+    if (!leadForm.name.trim() || !leadForm.email.trim()) return
+    setLeadSending(true)
+    try {
+      await saveProfessionalLead(leadForm)
+      setLeadDone(true)
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Não foi possível enviar. Tente de novo.')
+    } finally {
+      setLeadSending(false)
+    }
+  }
 
   const resetFlow = () => {
     try { localStorage.removeItem('bh-flow') } catch { /* ignore */ }
@@ -1059,7 +1078,7 @@ export default function App() {
                 <button className="btn btn-primary" onClick={() => { resetFlow(); setView('app') }}>Avaliar meu corpo</button>
                 <button className="btn btn-ghost" onClick={() => setAuthMode('login')}>Entrar</button>
               </div>
-              <span className="path-link" onClick={() => setInfoPopup('Em breve você poderá criar seu perfil profissional e receber clientes.')}>Sou profissional → criar perfil</span>
+              <span className="path-link" onClick={() => setView('profissional')}>Sou profissional → criar perfil</span>
             </div>
             <div className="home-visual">
               <span className="home-visual-chip">11 parâmetros · IA</span>
@@ -1080,7 +1099,7 @@ export default function App() {
             <span className="home-band-chip">11 parâmetros · IA</span>
           </div>
 
-          <div className="pro-section">
+          <div className="pro-section" id="profissionais">
             <div className="pro-head">
               <h2>Profissionais perto de você</h2>
               <span className="pro-ver">Prévia</span>
@@ -1123,8 +1142,58 @@ export default function App() {
                 <div className="pro-soon">Perfil completo em breve</div>
               </div>
             </div>
+            <div className="pro-cta">
+              <span>Você é profissional?</span>
+              <button className="btn btn-primary" onClick={() => setView('profissional')}>Cadastre seu interesse</button>
+            </div>
           </div>
         </>
+      )}
+
+      {view === 'profissional' && (
+        <div className="card pro-lead">
+          <button className="back-link" onClick={() => setView('home')}>← Voltar</button>
+          <h1>Divulgue seu trabalho no ShapeInForma</h1>
+          <p className="lede">Crie seu perfil profissional e receba pedidos de acompanhamento de quem busca um especialista.</p>
+          {leadDone ? (
+            <div className="lead-done">
+              <div className="lead-check">✓</div>
+              <h3>Você está na lista!</h3>
+              <p>Avisaremos por e-mail quando o cadastro profissional abrir.</p>
+              <button className="btn btn-primary" onClick={() => { setLeadDone(false); setView('home') }}>Voltar ao início</button>
+            </div>
+          ) : (
+            <>
+              <div className="lead-benefits">
+                <div className="lead-benefit"><div className="lead-num">1</div><div><b>Perfil público</b><span>Apareça para quem procura personal ou nutricionista, com seu CRN ou CREF à vista.</span></div></div>
+                <div className="lead-benefit"><div className="lead-num">2</div><div><b>Receba alunos</b><span>Quem faz a avaliação chega até você quando seu perfil combina com o objetivo dele.</span></div></div>
+                <div className="lead-benefit"><div className="lead-num">3</div><div><b>Gestão de alunos</b><span>Acompanhe análise, dieta e treino de cada cliente em um painel só seu.</span></div></div>
+              </div>
+              <form onSubmit={submitLead}>
+                <label>Nome</label>
+                <input type="text" placeholder="Seu nome completo" value={leadForm.name} onChange={(e) => setLeadForm({ ...leadForm, name: e.target.value })} required />
+                <label>E-mail</label>
+                <input type="email" placeholder="voce@exemplo.com" value={leadForm.email} onChange={(e) => setLeadForm({ ...leadForm, email: e.target.value })} required />
+                <div className="lead-row">
+                  <div>
+                    <label>Área</label>
+                    <select value={leadForm.area} onChange={(e) => setLeadForm({ ...leadForm, area: e.target.value })}>
+                      <option>Nutrição</option>
+                      <option>Educação física</option>
+                      <option>Outra</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label>CRN ou CREF (opcional)</label>
+                    <input type="text" placeholder="00000-G/SP" value={leadForm.registro} onChange={(e) => setLeadForm({ ...leadForm, registro: e.target.value })} />
+                  </div>
+                </div>
+                <button className="btn btn-primary" type="submit" disabled={leadSending}>{leadSending ? 'Enviando...' : 'Entrar na lista de espera'}</button>
+                <p className="lead-note">O cadastro profissional abre em breve. Deixe seu contato para ser um dos primeiros.</p>
+              </form>
+            </>
+          )}
+        </div>
       )}
 
       {view === 'hub' && (
@@ -1153,7 +1222,7 @@ export default function App() {
           </div>
           <div className="hub-banner">
             <div><b>Quer acompanhamento de verdade?</b><span>Conecte-se a um personal ou nutricionista que entende seu plano.</span></div>
-            <button className="btn btn-primary" onClick={() => setView('home')}>Encontrar profissional</button>
+            <button className="btn btn-primary" onClick={() => { setView('home'); setTimeout(() => document.getElementById('profissionais')?.scrollIntoView({ behavior: 'smooth' }), 50) }}>Encontrar profissional</button>
           </div>
         </div>
       )}

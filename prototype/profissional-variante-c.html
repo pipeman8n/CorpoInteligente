@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Profissional - Variante C (modal)</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; background:#f5f7fb; color:#1a1a1a; }
+  .wrap { max-width:720px; margin:0 auto; padding:0 20px 40px; }
+  .topbar { display:flex; align-items:center; justify-content:space-between; padding:18px 0; }
+  .brand { display:flex; align-items:center; gap:9px; font-weight:800; font-size:1.1rem; letter-spacing:-0.3px; }
+  .brand-mark { width:28px; height:28px; border-radius:7px; background:linear-gradient(135deg,#0066ff,#4d94ff); }
+  .brand .shape { color:#0066ff; }
+  .nav { display:flex; gap:6px; }
+  .nav a { text-decoration:none; color:#5b6572; font-weight:600; font-size:0.85rem; padding:7px 13px; border-radius:999px; }
+  .nav a.on { background:#0066ff; color:#fff; }
+  .login { border:1px solid #dbe2ee; color:#1a1a1a; padding:8px 16px; border-radius:999px; font-weight:600; font-size:0.85rem; }
+  /* fundo desfocado atrás do modal */
+  .backdrop { position:fixed; inset:0; background:rgba(20,30,50,0.45); display:flex; align-items:center; justify-content:center; padding:20px; }
+  .modal { background:#fff; border-radius:16px; width:100%; max-width:460px; padding:26px 24px; max-height:92vh; overflow:auto; }
+  .modal h1 { font-size:1.35rem; font-weight:800; letter-spacing:-0.4px; line-height:1.15; margin:0 0 8px; }
+  .modal .lede { color:#5b6572; font-size:0.92rem; line-height:1.5; margin:0 0 16px; }
+  .checks { display:flex; flex-direction:column; gap:8px; margin:0 0 16px; }
+  .checks div { display:flex; gap:9px; align-items:center; font-size:0.85rem; font-weight:600; color:#3a4552; }
+  .checks div::before { content:"✓"; color:#0066ff; font-weight:800; }
+  label { display:block; font-size:0.82rem; font-weight:700; color:#3a4552; margin:0 0 5px; }
+  input, select { width:100%; font-size:1rem; padding:11px 13px; border:1px solid #dbe2ee; border-radius:12px; margin-bottom:12px; color:#1a1a1a; background:#fff; }
+  .row2 { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .btn { display:block; width:100%; font-weight:700; font-size:1rem; padding:13px; border-radius:12px; border:none; cursor:pointer; }
+  .btn-p { background:#0066ff; color:#fff; }
+  .note { color:#8a94a3; font-size:0.78rem; text-align:center; margin-top:10px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar">
+    <div class="brand"><span class="brand-mark"></span><span><span class="shape">Shape</span>InForma</span></div>
+    <div class="nav"><a class="on" href="#">Início</a><a href="#">Calculadora</a><a href="#">Painel</a></div>
+    <span class="login">Entrar</span>
+  </div>
+</div>
+<div class="backdrop">
+  <div class="modal">
+    <h1>Divulgue seu trabalho no ShapeInForma</h1>
+    <p class="lede">Crie seu perfil profissional e receba pedidos de acompanhamento de quem busca um especialista.</p>
+    <div class="checks">
+      <div>Perfil público com seu CRN ou CREF</div>
+      <div>Receba alunos que combinam com seu objetivo</div>
+      <div>Gestão de análise, dieta e treino por cliente</div>
+    </div>
+    <label>Nome</label>
+    <input type="text" placeholder="Seu nome completo">
+    <label>E-mail</label>
+    <input type="email" placeholder="voce@exemplo.com">
+    <div class="row2">
+      <div><label>Área</label><select><option>Nutrição</option><option>Educação física</option><option>Outra</option></select></div>
+      <div><label>CRN ou CREF (opcional)</label><input type="text" placeholder="00000-G/SP"></div>
+    </div>
+    <button class="btn btn-p">Entrar na lista de espera</button>
+    <p class="note">O cadastro profissional abre em breve. Deixe seu contato para ser um dos primeiros.</p>
+  </div>
+</div>
+</body>
+</html>
