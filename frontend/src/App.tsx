@@ -1102,7 +1102,7 @@ export default function App() {
           <div className="pro-section" id="profissionais">
             <div className="pro-head">
               <h2>Profissionais perto de você</h2>
-              <span className="pro-ver">Prévia</span>
+              <span className="pro-ver">Exemplos</span>
             </div>
             <div className="pro-grid">
               <div className="pro-card">
@@ -1115,7 +1115,6 @@ export default function App() {
                 </div>
                 <p className="pro-spec">Emagrecimento e reeducação alimentar. Atende presencial e online.</p>
                 <div className="pro-meta"><span>4,9 (120 avaliações)</span><b>R$ 180/sessão</b></div>
-                <div className="pro-soon">Perfil completo em breve</div>
               </div>
               <div className="pro-card">
                 <div className="pro-top">
@@ -1127,7 +1126,6 @@ export default function App() {
                 </div>
                 <p className="pro-spec">Hipertrofia e performance. Treinos presenciais em SP.</p>
                 <div className="pro-meta"><span>4,8 (96 avaliações)</span><b>R$ 120/sessão</b></div>
-                <div className="pro-soon">Perfil completo em breve</div>
               </div>
               <div className="pro-card">
                 <div className="pro-top">
@@ -1139,7 +1137,6 @@ export default function App() {
                 </div>
                 <p className="pro-spec">Performance e hipertrofia. Consultas online.</p>
                 <div className="pro-meta"><span>5,0 (74 avaliações)</span><b>R$ 220/sessão</b></div>
-                <div className="pro-soon">Perfil completo em breve</div>
               </div>
             </div>
             <div className="pro-cta">
