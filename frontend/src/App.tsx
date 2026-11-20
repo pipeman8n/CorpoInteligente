@@ -967,7 +967,7 @@ export default function App() {
   const heatValues = perfDays.map((d) => ({ date: d.trainedDate, count: 1 }))
   const heatStart = (() => {
     const s = new Date()
-    s.setFullYear(s.getFullYear() - 1)
+    s.setMonth(s.getMonth() - 6)
     return s
   })()
   const chartData = perfMeas.map((m) => ({
@@ -1670,10 +1670,19 @@ export default function App() {
                   <div className="perf-card">
                     <h4>Acompanhamento de Peso e Medidas</h4>
                     <form className="perf-form" onSubmit={onSaveMeasure}>
-                      <input type="date" value={measDate} max={new Date().toISOString().slice(0, 10)} onChange={(e) => setMeasDate(e.target.value)} />
-                      <input type="number" step="0.1" min="1" placeholder="Peso (kg)" value={measWeight} onChange={(e) => setMeasWeight(e.target.value)} required />
-                      <input type="number" step="0.1" min="1" max="80" placeholder="% gordura (opcional)" value={measBodyFat} onChange={(e) => setMeasBodyFat(e.target.value)} />
-                      <button className="btn btn-primary" type="submit" disabled={perfLoading}>
+                      <div className="perf-field">
+                        <label htmlFor="meas-date">Data</label>
+                        <input id="meas-date" type="date" value={measDate} max={new Date().toISOString().slice(0, 10)} onChange={(e) => setMeasDate(e.target.value)} />
+                      </div>
+                      <div className="perf-field">
+                        <label htmlFor="meas-weight">Peso (kg)</label>
+                        <input id="meas-weight" type="number" step="0.1" min="1" inputMode="decimal" value={measWeight} onChange={(e) => setMeasWeight(e.target.value)} required />
+                      </div>
+                      <div className="perf-field">
+                        <label htmlFor="meas-bodyfat">% Gordura <span className="perf-opt">(opcional)</span></label>
+                        <input id="meas-bodyfat" type="number" step="0.1" min="1" max="80" inputMode="decimal" value={measBodyFat} onChange={(e) => setMeasBodyFat(e.target.value)} />
+                      </div>
+                      <button className="btn btn-primary perf-submit" type="submit" disabled={perfLoading}>
                         Salvar medida
                       </button>
                     </form>

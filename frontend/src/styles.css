@@ -251,26 +251,32 @@ table.result td small { color: var(--muted); font-size: 0.8rem; }
 /* Cronômetro por série + aba Performance */
 .tex-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
 
-.set-timer { display: inline-flex; align-items: center; gap: 4px; flex-shrink: 0; }
+.set-timer { display: inline-flex; align-items: center; gap: 6px; flex-shrink: 0; }
 .set-timer-time {
   font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
-  font-size: 0.82rem; font-weight: 700; color: var(--accent);
-  min-width: 38px; text-align: center; font-variant-numeric: tabular-nums;
+  font-size: 0.85rem; font-weight: 700; color: var(--accent);
+  min-width: 42px; text-align: center; font-variant-numeric: tabular-nums;
 }
 .set-timer-btn {
-  width: 26px; height: 26px; border-radius: 999px; border: 1px solid var(--accent);
+  width: 40px; height: 40px; border-radius: 999px; border: 1px solid var(--accent);
   background: var(--accent-soft); color: var(--accent); cursor: pointer;
-  font-size: 0.72rem; line-height: 1; padding: 0;
+  font-size: 0.95rem; line-height: 1; padding: 0;
   display: inline-flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
 }
 .set-timer-btn:hover { background: #dfe8fe; }
+.set-timer-btn:active { background: var(--accent); color: #fff; }
 
 .perf-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card); padding: 16px; margin-top: 14px; }
 .perf-card h4 { margin: 0 0 10px; font-size: 0.92rem; font-weight: 800; color: var(--accent); }
 .perf-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
 .perf-head h4 { margin: 0; }
-.perf-form { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
-.perf-form input { flex: 1 1 130px; width: auto; }
+.perf-form { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 12px; align-items: flex-end; }
+.perf-field { display: flex; flex-direction: column; gap: 4px; flex: 1 1 130px; min-width: 120px; }
+.perf-field label { font-size: 0.78rem; font-weight: 600; color: var(--text); }
+.perf-field input { width: 100%; }
+.perf-opt { color: var(--muted); font-weight: 400; }
+.perf-submit { align-self: flex-end; flex-shrink: 0; }
 .perf-chart { margin-top: 6px; }
 .perf-heat { overflow-x: auto; padding: 4px 0; }
 .muted { color: var(--muted); font-size: 0.8rem; }
