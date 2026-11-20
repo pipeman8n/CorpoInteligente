@@ -263,6 +263,7 @@ export default function App() {
   const [perfMeas, setPerfMeas] = useState<Measurement[]>([])
   const [perfLoading, setPerfLoading] = useState(false)
   const [perfMsg, setPerfMsg] = useState('')
+  const [perfErr, setPerfErr] = useState('')
   const [measDate, setMeasDate] = useState(() => new Date().toISOString().slice(0, 10))
   const [measWeight, setMeasWeight] = useState('')
   const [measBodyFat, setMeasBodyFat] = useState('')
@@ -870,6 +871,7 @@ export default function App() {
     if (!form.name.trim()) return
     setPerfLoading(true)
     setPerfMsg('')
+    setPerfErr('')
     try {
       const [days, meas] = await Promise.all([
         getTrainingDays(form.name.trim()),
@@ -878,30 +880,31 @@ export default function App() {
       setPerfDays(days)
       setPerfMeas(meas)
     } catch {
-      setPerfMsg('Não foi possível carregar os dados de performance.')
+      setPerfErr('Não foi possível carregar os dados de performance.')
     } finally {
       setPerfLoading(false)
     }
   }
 
   useEffect(() => {
-    if (resultTab === 'performance' && form.name.trim()) {
+    if (resultTab === 'performance' && form.name.trim() && user?.id) {
       loadPerf()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [resultTab])
+  }, [resultTab, user?.id])
 
   const onRegisterToday = async () => {
     if (!form.name.trim()) return
     setPerfLoading(true)
     setPerfMsg('')
+    setPerfErr('')
     try {
       const today = new Date().toISOString().slice(0, 10)
       await saveTrainingDay(form.name.trim(), today)
       setPerfMsg('Treino de hoje registrado!')
       await loadPerf()
     } catch {
-      setPerfMsg('Erro ao registrar o treino.')
+      setPerfErr('Erro ao registrar o treino.')
     } finally {
       setPerfLoading(false)
     }
@@ -912,6 +915,7 @@ export default function App() {
     if (!form.name.trim() || !measWeight) return
     setPerfLoading(true)
     setPerfMsg('')
+    setPerfErr('')
     try {
       await saveMeasurement({
         clientName: form.name.trim(),
@@ -924,7 +928,7 @@ export default function App() {
       setPerfMsg('Medida salva!')
       await loadPerf()
     } catch {
-      setPerfMsg('Erro ao salvar a medida.')
+      setPerfErr('Erro ao salvar a medida.')
     } finally {
       setPerfLoading(false)
     }
@@ -1662,6 +1666,7 @@ export default function App() {
                     )}
                   </div>
                   {perfMsg && <div className="ok">{perfMsg}</div>}
+                  {perfErr && <div className="error">{perfErr}</div>}
                 </>
               )}
 
